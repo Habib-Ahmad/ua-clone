@@ -1,18 +1,18 @@
 import { Image, ImageBackground, Platform, StatusBar, StyleSheet, Text, View } from "react-native";
-import Button from "../components/Button";
-import { colors } from "../utils/colors";
+import Button from "../../components/Button";
+import { colors } from "../../utils/colors";
 
-const SplashScreen = () => {
+const SplashScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={colors.black} />
       <ImageBackground
-        source={require("../assets/splash-screen.png")}
+        source={require("../../assets/splash-screen.png")}
         resizeMode="cover"
         style={styles.background}
       >
         <View style={styles.logoWrapper}>
-          <Image style={styles.logo} source={require("../assets/logo-white.png")} />
+          <Image style={styles.logo} source={require("../../assets/logo-white.png")} />
         </View>
         <View style={styles.textWrapper}>
           <Text style={styles.heading}>Take control of your finances</Text>
@@ -22,8 +22,12 @@ const SplashScreen = () => {
           </Text>
         </View>
 
-        <Button title="Get Started" />
-        <Button title="I already have an account" backgroundColor={colors.blackTransparent} />
+        <Button title="Get Started" onPress={() => navigation.navigate("GetStarted")} />
+        <Button
+          title="I already have an account"
+          backgroundColor={colors.blackTransparent}
+          onPress={() => navigation.navigate("LoginScreen")}
+        />
       </ImageBackground>
     </View>
   );
@@ -34,9 +38,8 @@ export default SplashScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.black,
     paddingTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
-    color: "#fff",
+    backgroundColor: colors.black,
   },
   background: {
     flex: 1,
