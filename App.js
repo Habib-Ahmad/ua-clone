@@ -1,22 +1,18 @@
-import { StyleSheet, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
+import ContextProvider from "./src/context/context";
+import AuthStackScreen from "./src/stacks/AuthStack";
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ContextProvider>
+      <StatusBar style="dark" backgroundColor="#fff" />
+
+      <NavigationContainer>
+        <AuthStackScreen />
+      </NavigationContainer>
+    </ContextProvider>
   );
 };
 
 export default App;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
