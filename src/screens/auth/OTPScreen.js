@@ -10,10 +10,10 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import Button from "../components/input/Button";
-import DigitInput from "../components/input/DigitInput";
-import ScreenHeader from "../components/ScreenHeader";
-import { colors } from "../utils/colors";
+import Button from "../../components/input/Button";
+import DigitInput from "../../components/input/DigitInput";
+import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
+import { colors } from "../../utils/colors";
 
 const OTPScreen = ({ route, navigation }) => {
   const phone = route.params["phone"];
@@ -62,7 +62,7 @@ const OTPScreen = ({ route, navigation }) => {
     <View style={styles.container}>
       <View style={styles.content}>
         <ScrollView style={styles.content}>
-          <ScreenHeader {...navigation} heading="OTP Verification" />
+          <ScreenHeaderWithLogo {...navigation} heading="OTP Verification" />
 
           <Text style={styles.text}>Code has been sent to {phone}</Text>
 

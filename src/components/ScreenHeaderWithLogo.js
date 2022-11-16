@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import BackArrow from "../assets/BackArrow";
 
-const ScreenHeader = ({ heading, goBack }) => {
+const ScreenHeaderWithLogo = ({ heading, goBack }) => {
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
@@ -21,7 +21,7 @@ const ScreenHeader = ({ heading, goBack }) => {
   );
 };
 
-export default ScreenHeader;
+export default ScreenHeaderWithLogo;
 
 const styles = StyleSheet.create({
   container: {

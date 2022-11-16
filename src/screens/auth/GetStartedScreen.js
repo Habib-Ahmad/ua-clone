@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Platform, ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import PhoneInput from "react-native-phone-input";
 import Button from "../../components/input/Button";
-import ScreenHeader from "../../components/ScreenHeader";
+import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
 import { colors } from "../../utils/colors";
 
 const GetStarted = ({ navigation }) => {
@@ -16,7 +16,7 @@ const GetStarted = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.content}>
         <ScrollView style={styles.content}>
-          <ScreenHeader {...navigation} heading="Get Started" />
+          <ScreenHeaderWithLogo {...navigation} heading="Get Started" />
 
           <Text style={styles.welcome}>
             Welcome to ultra,{"\n"}please verify your phone number to continue
