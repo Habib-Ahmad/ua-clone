@@ -1,11 +1,16 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { colors } from "../../utils/colors";
 
-const Input = ({ label, ...others }) => {
+const Input = ({ label, icon, onIconPress, ...others }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
       <TextInput style={styles.input} {...others} />
+      {icon && (
+        <TouchableOpacity activeOpacity={1} style={styles.icon} onPress={onIconPress}>
+          {icon}
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -38,5 +43,16 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     padding: 20,
+  },
+  icon: {
+    backgroundColor: colors.bg,
+    borderRadius: 10,
+    paddingHorizontal: 5,
+    zIndex: 100,
+    position: "absolute",
+    right: 5,
+    top: 5,
+    bottom: 5,
+    justifyContent: "center",
   },
 });
