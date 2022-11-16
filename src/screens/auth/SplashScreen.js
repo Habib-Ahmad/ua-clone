@@ -1,5 +1,5 @@
 import { Image, ImageBackground, Platform, StatusBar, StyleSheet, Text, View } from "react-native";
-import Button from "../../components/Button";
+import Button from "../../components/input/Button";
 import { colors } from "../../utils/colors";
 
 const SplashScreen = ({ navigation }) => {
