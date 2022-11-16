@@ -1,11 +1,11 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { colors } from "../../utils/colors";
 
-const Input = (props) => {
+const Input = ({ label, ...others }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Input</Text>
-      <TextInput style={styles.input} {...props} />
+      <Text style={styles.label}>{label}</Text>
+      <TextInput style={styles.input} {...others} />
     </View>
   );
 };
@@ -24,11 +24,11 @@ const styles = StyleSheet.create({
   },
   label: {
     position: "absolute",
-    top: -10,
+    top: -12,
     left: "5%",
     justifyContent: "center",
     alignItems: "center",
-    width: 70,
+    paddingHorizontal: 10,
     height: 20,
     backgroundColor: colors.bg,
     color: colors.primary,

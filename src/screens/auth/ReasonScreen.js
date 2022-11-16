@@ -38,8 +38,8 @@ const ReasonScreen = ({ navigation }) => {
     });
   };
 
-  const verfy = () => {
-    navigation.navigate("SignUpScreen");
+  const verify = () => {
+    navigation.navigate("SignupScreen");
   };
 
   return (
@@ -65,12 +65,12 @@ const ReasonScreen = ({ navigation }) => {
           ))}
 
           <View style={styles.inputWrapper}>
-            <Input placeholder="Other reason, specify" />
+            <Input label="Other" />
           </View>
         </ScrollView>
       </View>
 
-      <Button title="Continue" onPress={verfy} />
+      <Button title="Continue" onPress={verify} />
     </View>
   );
 };
