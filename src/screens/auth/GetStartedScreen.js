@@ -1,16 +1,15 @@
 import { useState } from "react";
 import { Platform, ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import PhoneInput from "react-native-phone-input";
-import Button from "../../components/Button";
+import Button from "../../components/input/Button";
 import ScreenHeader from "../../components/ScreenHeader";
 import { colors } from "../../utils/colors";
 
 const GetStarted = ({ navigation }) => {
-  const [phone, setPhone] = useState("Useless Text");
+  const [phone, setPhone] = useState("");
 
   const sendOTP = async () => {
-    // eslint-disable-next-line no-console
-    console.log(phone);
+    navigation.navigate("OTPScreen", { phone: phone });
   };
 
   return (
@@ -23,12 +22,15 @@ const GetStarted = ({ navigation }) => {
             Welcome to ultra,{"\n"}please verify your phone number to continue
           </Text>
 
-          <PhoneInput
-            style={styles.input}
-            initialCountry="ng"
-            textStyle={{ color: colors.textLight }}
-            onChangePhoneNumber={(e) => setPhone(e)}
-          />
+          <View style={styles.inputWrapper}>
+            <Text style={styles.label}>Phone</Text>
+            <PhoneInput
+              style={styles.input}
+              initialCountry="ng"
+              textStyle={{ color: colors.textLight }}
+              onChangePhoneNumber={(e) => setPhone(e)}
+            />
+          </View>
 
           <Text style={styles.policy}>
             By continuing you accept our<Text style={styles.link}> Privacy Policy </Text>and
@@ -61,6 +63,19 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     marginBottom: 50,
   },
+  inputWrapper: {
+    position: "relative",
+  },
+  label: {
+    position: "absolute",
+    zIndex: 100,
+    top: -15,
+    left: "10%",
+    backgroundColor: "#f2f2f2",
+    color: colors.primary,
+    paddingHorizontal: 10,
+    textAlign: "center",
+  },
   input: {
     height: 60,
     marginHorizontal: 20,
@@ -81,5 +96,6 @@ const styles = StyleSheet.create({
   },
   link: {
     color: colors.primary,
+    textDecorationLine: "underline",
   },
 });
