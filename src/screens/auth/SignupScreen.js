@@ -16,25 +16,25 @@ import { colors } from "../../utils/colors";
 
 const SignupScreen = ({ navigation }) => {
   const handleSubmit = () => {
-    navigation.navigate("SignUpScreen");
+    navigation.navigate("GenderScreen");
   };
 
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollView}>
-        <ScreenHeaderWithLogo {...navigation} heading="Reason" />
+        <ScreenHeaderWithLogo {...navigation} heading="Create account" />
 
         <Text style={styles.text}>This is the name we will use to address you</Text>
 
         <Formik
           initialValues={{ firstName: "", lastName: "", email: "" }}
           validationSchema={Yup.object().shape({
-            firstName: Yup.string().trim().required("This field cannot be empty"),
-            lastName: Yup.string().trim().required("This field cannot be empty"),
-            email: Yup.string()
-              .trim()
-              .required("This field cannot be empty")
-              .email("This is not a valid email"),
+            // firstName: Yup.string().trim().required("This field cannot be empty"),
+            // lastName: Yup.string().trim().required("This field cannot be empty"),
+            // email: Yup.string()
+            //   .trim()
+            //   .required("This field cannot be empty")
+            //   .email("This is not a valid email"),
           })}
           onSubmit={handleSubmit}
         >

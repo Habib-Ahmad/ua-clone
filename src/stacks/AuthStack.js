@@ -1,4 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
+import GenderScreen from "../screens/auth/GenderScreen";
 import GetStarted from "../screens/auth/GetStartedScreen";
 import OTPScreen from "../screens/auth/OTPScreen";
 import ReasonScreen from "../screens/auth/ReasonScreen";
@@ -15,6 +16,7 @@ const AuthStackScreen = () => {
       <AuthStack.Screen name="OTPScreen" component={OTPScreen} />
       <AuthStack.Screen name="ReasonScreen" component={ReasonScreen} />
       <AuthStack.Screen name="SignupScreen" component={SignupScreen} />
+      <AuthStack.Screen name="GenderScreen" component={GenderScreen} />
     </AuthStack.Navigator>
   );
 };
