@@ -7,4 +7,5 @@ export const colors = {
   white: "#ffffff",
   black: "#000000",
   blackTransparent: "#e9f0ff26",
+  greyLight: "#D3D3D3",
 };
