@@ -9,17 +9,24 @@ const SignupScreen = ({ navigation }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
-  const filledAllFields = firstName && lastName && email;
+  const filledAllFields = firstName && lastName && email && password && confirmPassword;
 
   const handlePress = () => {
     // eslint-disable-next-line no-useless-escape
-    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     if (reg.test(email) === false) {
-      setError("Email is Not Correct");
+      setError("Email is Not Valid");
       return;
     }
+    if (password !== confirmPassword) {
+      setError("Passwords must match");
+      return;
+    }
+
     navigation.navigate("GenderScreen");
   };
 
@@ -28,25 +35,35 @@ const SignupScreen = ({ navigation }) => {
       <ScrollView>
         <ScreenHeaderWithLogo {...navigation} heading="Create account" />
 
-        <Text style={styles.text}>This is the name we will use to address you</Text>
-
         <View style={styles.wrapper}>
           <View style={styles.flex}>
-            <View style={styles.input}>
-              <Input label="First name" onChangeText={setFirstName} value={firstName} />
-            </View>
+            <Input label="First name" onChangeText={setFirstName} value={firstName} />
 
-            <View style={styles.input}>
-              <Input label="Last name" onChangeText={setLastName} value={lastName} />
-            </View>
+            <View style={styles.space} />
 
-            <View style={styles.input}>
-              <Input label="E-mail" onChangeText={setEmail} value={email} />
-              {email && error ? <Text style={styles.error}>This email is invalid</Text> : null}
-            </View>
+            <Input label="Last name" onChangeText={setLastName} value={lastName} />
+
+            <View style={styles.space} />
+
+            <Input label="E-mail" onChangeText={setEmail} value={email} />
+
+            <View style={styles.space} />
+
+            <Input label="Password" secureTextEntry onChangeText={setPassword} value={password} />
+
+            <View style={styles.space} />
+
+            <Input
+              label="Confirm password"
+              secureTextEntry
+              onChangeText={setConfirmPassword}
+              value={confirmPassword}
+            />
           </View>
         </View>
       </ScrollView>
+
+      {email && error ? <Text style={styles.error}>{error}</Text> : null}
       <Button title="Continue" onPress={handlePress} disabled={!filledAllFields} />
     </View>
   );
@@ -60,14 +77,6 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
     paddingBottom: 20,
   },
-  text: {
-    textAlign: "center",
-    fontSize: 16,
-    color: colors.textLight,
-    paddingHorizontal: "5%",
-    lineHeight: 24,
-    marginBottom: 50,
-  },
   wrapper: {
     flex: 1,
     paddingHorizontal: 20,
@@ -75,11 +84,13 @@ const styles = StyleSheet.create({
   flex: {
     flex: 1,
   },
-  input: {
-    marginBottom: 30,
+  space: {
+    width: 30,
+    height: 30,
   },
   error: {
     color: colors.red,
-    marginLeft: 15,
+    marginVertical: 15,
+    textAlign: "center",
   },
 });
