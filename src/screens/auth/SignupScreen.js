@@ -1,91 +1,53 @@
-import {
-  ActivityIndicator,
-  Platform,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-import { Formik } from "formik";
-import * as Yup from "yup";
+import { useState } from "react";
+import { Platform, ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import Button from "../../components/input/Button";
 import Input from "../../components/input/Input";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
 import { colors } from "../../utils/colors";
 
 const SignupScreen = ({ navigation }) => {
-  const handleSubmit = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+
+  const filledAllFields = firstName && lastName && email;
+
+  const handlePress = () => {
+    // eslint-disable-next-line no-useless-escape
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    if (reg.test(email) === false) {
+      setError("Email is Not Correct");
+      return;
+    }
     navigation.navigate("GenderScreen");
   };
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
+      <ScrollView>
         <ScreenHeaderWithLogo {...navigation} heading="Create account" />
 
         <Text style={styles.text}>This is the name we will use to address you</Text>
 
-        <Formik
-          initialValues={{ firstName: "", lastName: "", email: "" }}
-          validationSchema={Yup.object().shape({
-            // firstName: Yup.string().trim().required("This field cannot be empty"),
-            // lastName: Yup.string().trim().required("This field cannot be empty"),
-            // email: Yup.string()
-            //   .trim()
-            //   .required("This field cannot be empty")
-            //   .email("This is not a valid email"),
-          })}
-          onSubmit={handleSubmit}
-        >
-          {({ handleSubmit, handleChange, handleBlur, values, touched, errors, isSubmitting }) => (
-            <View style={styles.wrapper}>
-              <View style={styles.flex}>
-                <View style={styles.input}>
-                  <Input
-                    label="First name"
-                    onChangeText={handleChange("firstName")}
-                    onBlur={handleBlur("firstName")}
-                    value={values.firstName}
-                  />
-                  {touched.firstName && errors.firstName ? (
-                    <Text style={styles.error}>{errors.firstName}</Text>
-                  ) : null}
-                </View>
-
-                <View style={styles.input}>
-                  <Input
-                    label="Last name"
-                    onChangeText={handleChange("lastName")}
-                    onBlur={handleBlur("lastName")}
-                    value={values.lastName}
-                  />
-                  {touched.lastName && errors.lastName ? (
-                    <Text style={styles.error}>{errors.lastName}</Text>
-                  ) : null}
-                </View>
-
-                <View style={styles.input}>
-                  <Input
-                    label="E-mail"
-                    onChangeText={handleChange("email")}
-                    onBlur={handleBlur("email")}
-                    value={values.email}
-                  />
-                  {touched.email && errors.email ? (
-                    <Text style={styles.error}>{errors.email}</Text>
-                  ) : null}
-                </View>
-              </View>
-
-              <Button
-                title={isSubmitting ? <ActivityIndicator /> : "Continue"}
-                onPress={handleSubmit}
-              />
+        <View style={styles.wrapper}>
+          <View style={styles.flex}>
+            <View style={styles.input}>
+              <Input label="First name" onChangeText={setFirstName} value={firstName} />
             </View>
-          )}
-        </Formik>
+
+            <View style={styles.input}>
+              <Input label="Last name" onChangeText={setLastName} value={lastName} />
+            </View>
+
+            <View style={styles.input}>
+              <Input label="E-mail" onChangeText={setEmail} value={email} />
+              {email && error ? <Text style={styles.error}>This email is invalid</Text> : null}
+            </View>
+          </View>
+        </View>
       </ScrollView>
+      <Button title="Continue" onPress={handlePress} disabled={!filledAllFields} />
     </View>
   );
 };
@@ -105,9 +67,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: "5%",
     lineHeight: 24,
     marginBottom: 50,
-  },
-  scrollView: {
-    flex: 1,
   },
   wrapper: {
     flex: 1,
