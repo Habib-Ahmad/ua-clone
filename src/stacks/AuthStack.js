@@ -8,6 +8,7 @@ import OTPScreen from "../screens/auth/OTPScreen";
 import ReasonScreen from "../screens/auth/ReasonScreen";
 import SignupScreen from "../screens/auth/SignupScreen";
 import SplashScreen from "../screens/auth/SplashScreen";
+import WelcomeBack from "../screens/auth/WelcomeBack";
 
 const AuthStack = createStackNavigator();
 
@@ -23,6 +24,7 @@ const AuthStackScreen = () => {
       <AuthStack.Screen name="DOBScreen" component={DOBScreen} />
       <AuthStack.Screen name="CreatePINScreen" component={CreatePINScreen} />
       <AuthStack.Screen name="ConfirmPINScreen" component={ConfirmPINScreen} />
+      <AuthStack.Screen name="WelcomeBack" component={WelcomeBack} />
     </AuthStack.Navigator>
   );
 };
