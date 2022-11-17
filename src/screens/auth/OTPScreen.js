@@ -1,7 +1,5 @@
 import { createRef, useEffect, useState } from "react";
 import {
-  Dimensions,
-  Keyboard,
   Platform,
   ScrollView,
   StatusBar,
@@ -11,7 +9,7 @@ import {
   View,
 } from "react-native";
 import Button from "../../components/input/Button";
-import DigitInput from "../../components/input/DigitInput";
+import FourDigitInput from "../../components/input/FourDigitInput";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
 import { colors } from "../../utils/colors";
 
@@ -19,10 +17,16 @@ const OTPScreen = ({ route, navigation }) => {
   const phone = route.params["phone"];
 
   const [timer, setTimer] = useState(30);
-  const [input1, setInput1] = useState();
-  const [input2, setInput2] = useState();
-  const [input3, setInput3] = useState();
-  const [input4, setInput4] = useState();
+  const [digit1, setDigit1] = useState();
+  const [digit2, setDigit2] = useState();
+  const [digit3, setDigit3] = useState();
+  const [digit4, setDigit4] = useState();
+  const otp = digit1 + digit2 + digit3 + digit4;
+
+  const ref1 = createRef();
+  const ref2 = createRef();
+  const ref3 = createRef();
+  const ref4 = createRef();
 
   useEffect(() => {
     let interval = setInterval(() => {
@@ -34,27 +38,11 @@ const OTPScreen = ({ route, navigation }) => {
     return () => clearInterval(interval);
   }, []);
 
-  const ref_input1 = createRef();
-  const ref_input2 = createRef();
-  const ref_input3 = createRef();
-  const ref_input4 = createRef();
-
-  const handleChange = (value, setState, nextRef) => {
-    setState(value);
-    if (value) {
-      if (nextRef) {
-        nextRef.current.focus();
-      } else {
-        Keyboard.dismiss();
-      }
-    }
-  };
-
   const resend = () => {
     setTimer(30);
   };
 
-  const verify = () => {
+  const handlePress = () => {
     navigation.navigate("ReasonScreen");
   };
 
@@ -66,28 +54,22 @@ const OTPScreen = ({ route, navigation }) => {
 
           <Text style={styles.text}>Code has been sent to {phone}</Text>
 
-          <View style={styles.inputWrapper}>
-            <DigitInput
-              sref={ref_input1}
-              value={input1}
-              onChangeText={(value) => handleChange(value, setInput1, ref_input2)}
-            />
-            <DigitInput
-              sref={ref_input2}
-              value={input2}
-              onChangeText={(value) => handleChange(value, setInput2, ref_input3)}
-            />
-            <DigitInput
-              sref={ref_input3}
-              value={input3}
-              onChangeText={(value) => handleChange(value, setInput3, ref_input4)}
-            />
-            <DigitInput
-              sref={ref_input4}
-              value={input4}
-              onChangeText={(value) => handleChange(value, setInput4)}
-            />
-          </View>
+          <FourDigitInput
+            {...{
+              digit1,
+              digit2,
+              digit3,
+              digit4,
+              setDigit1,
+              setDigit2,
+              setDigit3,
+              setDigit4,
+              ref1,
+              ref2,
+              ref3,
+              ref4,
+            }}
+          />
 
           <View style={styles.timer}>
             <TouchableOpacity style={styles.resend} onPress={resend}>
@@ -100,7 +82,7 @@ const OTPScreen = ({ route, navigation }) => {
         </ScrollView>
       </View>
 
-      <Button title="Continue" onPress={verify} />
+      <Button title="Continue" onPress={handlePress} disabled={otp.length !== 4} />
     </View>
   );
 };
@@ -123,14 +105,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: "10%",
     lineHeight: 24,
     marginBottom: 50,
-  },
-  inputWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: Dimensions.get("window").width,
-    paddingHorizontal: "5%",
-    marginBottom: 40,
   },
   timer: {
     flexDirection: "row",

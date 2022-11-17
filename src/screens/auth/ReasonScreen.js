@@ -29,6 +29,9 @@ const ReasonScreen = ({ navigation }) => {
       isChecked: false,
     },
   ]);
+  const [otherReason, setOtherReason] = useState("");
+
+  const answer = reasons.find((item) => item.isChecked === true) || otherReason;
 
   const handleChange = (e, index) => {
     setReasons((prev) => {
@@ -38,39 +41,37 @@ const ReasonScreen = ({ navigation }) => {
     });
   };
 
-  const verify = () => {
+  const onPress = () => {
     navigation.navigate("SignupScreen");
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.content}>
-        <ScrollView style={styles.scrollView}>
-          <ScreenHeaderWithLogo {...navigation} heading="Reason" />
+      <ScrollView contentContainerStyle={styles.content}>
+        <ScreenHeaderWithLogo {...navigation} heading="Reason" />
 
-          <Text style={styles.text}>
-            We want to provide you with the best experience according to your need
-          </Text>
+        <Text style={styles.text}>
+          We want to provide you with the best experience according to your need
+        </Text>
 
-          {reasons.map((reason, idx) => (
-            <View key={idx} style={styles.section}>
-              <Checkbox
-                style={styles.checkbox}
-                value={reason.isChecked}
-                onValueChange={(e) => handleChange(e, idx)}
-                color={reason.isChecked ? colors.primary : undefined}
-              />
-              <Text style={styles.reasonText}>{reason.reason}</Text>
-            </View>
-          ))}
-
-          <View style={styles.inputWrapper}>
-            <Input label="Other" />
+        {reasons.map((reason, idx) => (
+          <View key={idx} style={styles.section}>
+            <Checkbox
+              style={styles.checkbox}
+              value={reason.isChecked}
+              onValueChange={(e) => handleChange(e, idx)}
+              color={reason.isChecked ? colors.primary : undefined}
+            />
+            <Text style={styles.reasonText}>{reason.reason}</Text>
           </View>
-        </ScrollView>
-      </View>
+        ))}
 
-      <Button title="Continue" onPress={verify} />
+        <View style={styles.inputWrapper}>
+          <Input label="Other" value={otherReason} onChangeText={setOtherReason} />
+        </View>
+      </ScrollView>
+
+      <Button title="Continue" onPress={onPress} disabled={!answer} />
     </View>
   );
 };
