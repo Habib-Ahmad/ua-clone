@@ -26,7 +26,7 @@ const SplashScreen = ({ navigation }) => {
         <Button
           title="I already have an account"
           backgroundColor={colors.blackTransparent}
-          onPress={() => navigation.navigate("LoginScreen")}
+          onPress={() => navigation.navigate("SigninScreen")}
         />
       </ImageBackground>
     </View>

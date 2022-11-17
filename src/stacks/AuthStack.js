@@ -6,6 +6,7 @@ import GenderScreen from "../screens/auth/GenderScreen";
 import GetStarted from "../screens/auth/GetStartedScreen";
 import OTPScreen from "../screens/auth/OTPScreen";
 import ReasonScreen from "../screens/auth/ReasonScreen";
+import SigninScreen from "../screens/auth/SigninScreen";
 import SignupScreen from "../screens/auth/SignupScreen";
 import SplashScreen from "../screens/auth/SplashScreen";
 import WelcomeBack from "../screens/auth/WelcomeBack";
@@ -25,6 +26,7 @@ const AuthStackScreen = () => {
       <AuthStack.Screen name="CreatePINScreen" component={CreatePINScreen} />
       <AuthStack.Screen name="ConfirmPINScreen" component={ConfirmPINScreen} />
       <AuthStack.Screen name="WelcomeBack" component={WelcomeBack} />
+      <AuthStack.Screen name="SigninScreen" component={SigninScreen} />
     </AuthStack.Navigator>
   );
 };
