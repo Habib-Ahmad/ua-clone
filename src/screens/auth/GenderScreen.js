@@ -61,7 +61,7 @@ const GenderScreen = ({ navigation }) => {
         </ScrollView>
       </View>
 
-      <Button title="Continue" onPress={handlePress} />
+      <Button title="Continue" onPress={handlePress} disabled={!gender} />
     </View>
   );
 };

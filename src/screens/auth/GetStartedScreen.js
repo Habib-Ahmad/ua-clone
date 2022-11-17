@@ -8,7 +8,7 @@ import { colors } from "../../utils/colors";
 const GetStarted = ({ navigation }) => {
   const [phone, setPhone] = useState("");
 
-  const sendOTP = async () => {
+  const handlePress = async () => {
     navigation.navigate("OTPScreen", { phone: phone });
   };
 
@@ -39,7 +39,7 @@ const GetStarted = ({ navigation }) => {
         </ScrollView>
       </View>
 
-      <Button title="Send OTP" onPress={sendOTP} />
+      <Button title="Send OTP" onPress={handlePress} disabled={!phone.length} />
     </View>
   );
 };

@@ -1,13 +1,13 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from "../../utils/colors";
 
-const Button = ({ title, backgroundColor, ...others }) => {
+const Button = ({ title, disabled, backgroundColor, ...others }) => {
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.8} {...others}>
+    <TouchableOpacity style={styles.container} activeOpacity={0.8} disabled={disabled} {...others}>
       <View
         style={[
           styles.button,
-          { backgroundColor: backgroundColor ? backgroundColor : colors.primary },
+          { backgroundColor: disabled ? colors.greyLight : backgroundColor || colors.primary },
         ]}
       >
         <Text style={styles.text}>{title}</Text>
