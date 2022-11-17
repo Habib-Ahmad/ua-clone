@@ -8,13 +8,15 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useNavigationState } from "@react-navigation/native";
 import Button from "../../components/input/Button";
 import FourDigitInput from "../../components/input/FourDigitInput";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
 import { colors } from "../../utils/colors";
 
 const OTPScreen = ({ route, navigation }) => {
-  const phone = route.params["phone"];
+  const phone = route.params?.["phone"];
+  const prevRoute = useNavigationState((state) => state.routes[state.routes.length - 2]).name;
 
   const [timer, setTimer] = useState(30);
   const [digit1, setDigit1] = useState();
@@ -43,16 +45,20 @@ const OTPScreen = ({ route, navigation }) => {
   };
 
   const handlePress = () => {
-    navigation.navigate("ReasonScreen");
+    if (prevRoute === "ResetPINScreen") {
+      navigation.navigate("CreatePINScreen");
+    } else {
+      navigation.navigate("ReasonScreen");
+    }
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <ScrollView style={styles.content}>
+        <ScrollView>
           <ScreenHeaderWithLogo {...navigation} heading="OTP Verification" />
 
-          <Text style={styles.text}>Code has been sent to {phone}</Text>
+          {phone && <Text style={styles.text}>Code has been sent to {phone}</Text>}
 
           <FourDigitInput
             {...{

@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Platform, ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  Platform,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Button from "../../components/input/Button";
 import Input from "../../components/input/Input";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
@@ -30,6 +38,12 @@ const SigninScreen = ({ navigation }) => {
 
           <Input label="Password" secureTextEntry onChangeText={setPassword} value={password} />
 
+          <TouchableOpacity
+            style={styles.forgot}
+            onPress={() => navigation.navigate("ResetPINScreen")}
+          >
+            <Text style={styles.forgotText}>Forgot pin?</Text>
+          </TouchableOpacity>
           {email && error ? <Text style={styles.error}>This email is invalid</Text> : null}
         </View>
       </ScrollView>
@@ -65,5 +79,13 @@ const styles = StyleSheet.create({
   error: {
     color: colors.red,
     marginLeft: 15,
+  },
+  forgot: {
+    marginTop: 20,
+    alignItems: "flex-end",
+    marginRight: 20,
+  },
+  forgotText: {
+    color: colors.primaryDark,
   },
 });
