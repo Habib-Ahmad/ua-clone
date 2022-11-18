@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Platform, ScrollView, StatusBar, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import Button from "../../components/input/Button";
 import Input from "../../components/input/Input";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
@@ -37,7 +37,6 @@ export default ResetPINScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
     paddingBottom: 20,
   },
   content: {

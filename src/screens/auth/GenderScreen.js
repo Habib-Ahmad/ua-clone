@@ -1,13 +1,5 @@
 import { useState } from "react";
-import {
-  Platform,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Female from "../../assets/Female";
 import Male from "../../assets/Male";
 import Button from "../../components/input/Button";
@@ -71,7 +63,6 @@ export default GenderScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
     paddingBottom: 20,
   },
   content: {

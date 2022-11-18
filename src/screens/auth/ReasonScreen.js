@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Platform, ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import Checkbox from "expo-checkbox";
 import Button from "../../components/input/Button";
 import Input from "../../components/input/Input";
@@ -81,7 +81,6 @@ export default ReasonScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
     paddingBottom: 20,
   },
   section: {

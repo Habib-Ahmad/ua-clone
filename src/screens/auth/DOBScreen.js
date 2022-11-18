@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Platform, ScrollView, StatusBar, StyleSheet, View } from "react-native";
+import { Platform, ScrollView, StyleSheet, View } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Calendar from "../../assets/Calendar";
 import Button from "../../components/input/Button";
@@ -72,7 +72,6 @@ export default DOBScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
     paddingBottom: 20,
   },
   content: {

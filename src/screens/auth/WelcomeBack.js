@@ -61,7 +61,7 @@ export default WelcomeBack;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
+
     paddingBottom: 20,
   },
   content: {

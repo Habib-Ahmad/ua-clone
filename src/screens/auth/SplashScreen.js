@@ -1,11 +1,14 @@
-import { Image, ImageBackground, Platform, StatusBar, StyleSheet, Text, View } from "react-native";
+import { Image, ImageBackground, StatusBar, StyleSheet, Text, View } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
 import Button from "../../components/input/Button";
 import { colors } from "../../utils/colors";
 
 const SplashScreen = ({ navigation }) => {
+  const isFocused = useIsFocused();
+
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor={colors.black} />
+      {isFocused && <StatusBar barStyle="light-content" backgroundColor={colors.black} />}
       <ImageBackground
         source={require("../../assets/splash-screen.png")}
         resizeMode="cover"
@@ -38,7 +41,6 @@ export default SplashScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
     backgroundColor: colors.black,
   },
   background: {
