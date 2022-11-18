@@ -16,11 +16,11 @@ const GetStarted = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.content}>
         <ScrollView style={styles.content}>
-          <ScreenHeaderWithLogo {...navigation} heading="Get Started" />
-
-          <Text style={styles.welcome}>
-            Welcome to ultra,{"\n"}please verify your phone number to continue
-          </Text>
+          <ScreenHeaderWithLogo
+            {...navigation}
+            heading="Get Started"
+            paragraph={`Welcome to ultra,${"\n"}please verify your phone number to continue`}
+          />
 
           <View style={styles.inputWrapper}>
             <Text style={styles.label}>Phone</Text>
@@ -54,14 +54,6 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-  },
-  welcome: {
-    textAlign: "center",
-    fontSize: 16,
-    color: colors.textLight,
-    paddingHorizontal: "10%",
-    lineHeight: 24,
-    marginBottom: 50,
   },
   inputWrapper: {
     position: "relative",

@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { Platform, ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { Platform, ScrollView, StatusBar, StyleSheet, View } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Calendar from "../../assets/Calendar";
 import Button from "../../components/input/Button";
 import Input from "../../components/input/Input";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
-import { colors } from "../../utils/colors";
 
 const DOBScreen = ({ navigation }) => {
   const [date, setDate] = useState(new Date());
@@ -37,9 +36,11 @@ const DOBScreen = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.content}>
         <ScrollView style={styles.scrollView}>
-          <ScreenHeaderWithLogo {...navigation} heading="Date of birth" />
-
-          <Text style={styles.text}>Please provide your date of birth</Text>
+          <ScreenHeaderWithLogo
+            {...navigation}
+            heading="Date of birth"
+            paragraph="Please provide your date of birth"
+          />
 
           <View style={styles.inputWrapper}>
             <Input
@@ -76,14 +77,6 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-  },
-  text: {
-    textAlign: "center",
-    fontSize: 16,
-    color: colors.textLight,
-    paddingHorizontal: "10%",
-    lineHeight: 24,
-    marginBottom: 50,
   },
   inputWrapper: {
     paddingHorizontal: 20,

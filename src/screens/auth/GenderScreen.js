@@ -25,11 +25,11 @@ const GenderScreen = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.content}>
         <ScrollView style={styles.scrollView}>
-          <ScreenHeaderWithLogo {...navigation} heading="Gender" />
-
-          <Text style={styles.text}>
-            To give you a better experience we need to know your gender
-          </Text>
+          <ScreenHeaderWithLogo
+            {...navigation}
+            heading="Gender"
+            paragraph="To give you a better experience we need to know your gender"
+          />
 
           <View style={styles.genderWrapper}>
             <TouchableOpacity activeOpacity={1} onPress={() => setGender("male")}>
@@ -76,14 +76,6 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-  },
-  text: {
-    textAlign: "center",
-    fontSize: 16,
-    color: colors.textLight,
-    paddingHorizontal: "10%",
-    lineHeight: 24,
-    marginBottom: 50,
   },
   genderWrapper: {
     alignItems: "center",

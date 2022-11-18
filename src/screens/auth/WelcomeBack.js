@@ -1,9 +1,8 @@
 import { createRef, useState } from "react";
-import { Platform, ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { Platform, ScrollView, StatusBar, StyleSheet, View } from "react-native";
 import Button from "../../components/input/Button";
 import FourDigitInput from "../../components/input/FourDigitInput";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
-import { colors } from "../../utils/colors";
 
 const WelcomeBack = ({ navigation }) => {
   const [digit1, setDigit1] = useState();
@@ -25,9 +24,11 @@ const WelcomeBack = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.content}>
         <ScrollView style={styles.scrollView}>
-          <ScreenHeaderWithLogo {...navigation} heading="Welcome back" />
-
-          <Text style={styles.text}>Enter your pin to log in to your account</Text>
+          <ScreenHeaderWithLogo
+            {...navigation}
+            heading="Welcome back"
+            paragraph="Enter your pin to log in to your account"
+          />
 
           <View style={styles.space} />
 
@@ -65,14 +66,6 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-  },
-  text: {
-    textAlign: "center",
-    fontSize: 16,
-    color: colors.textLight,
-    paddingHorizontal: "10%",
-    lineHeight: 24,
-    marginBottom: 50,
   },
   space: {
     width: 30,
