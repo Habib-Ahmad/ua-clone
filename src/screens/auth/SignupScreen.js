@@ -37,27 +37,39 @@ const SignupScreen = ({ navigation }) => {
 
         <View style={styles.wrapper}>
           <View style={styles.flex}>
-            <Input label="First name" onChangeText={setFirstName} value={firstName} />
+            <Input label="First name" onChangeText={setFirstName} value={firstName.trim()} />
 
             <View style={styles.space} />
 
-            <Input label="Last name" onChangeText={setLastName} value={lastName} />
+            <Input label="Last name" onChangeText={setLastName} value={lastName.trim()} />
 
             <View style={styles.space} />
 
-            <Input label="E-mail" onChangeText={setEmail} value={email} />
+            <Input
+              label="E-mail"
+              autoCapitalize="none"
+              onChangeText={setEmail}
+              value={email.trim()}
+            />
 
             <View style={styles.space} />
 
-            <Input label="Password" secureTextEntry onChangeText={setPassword} value={password} />
+            <Input
+              label="Password"
+              autoCapitalize="none"
+              secureTextEntry
+              onChangeText={setPassword}
+              value={password.trim()}
+            />
 
             <View style={styles.space} />
 
             <Input
               label="Confirm password"
+              autoCapitalize="none"
               secureTextEntry
               onChangeText={setConfirmPassword}
-              value={confirmPassword}
+              value={confirmPassword.trim()}
             />
           </View>
         </View>

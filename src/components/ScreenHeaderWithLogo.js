@@ -1,7 +1,8 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import BackArrow from "../assets/BackArrow";
+import { colors } from "../utils/colors";
 
-const ScreenHeaderWithLogo = ({ heading, goBack }) => {
+const ScreenHeaderWithLogo = ({ heading, goBack, paragraph }) => {
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
@@ -17,6 +18,8 @@ const ScreenHeaderWithLogo = ({ heading, goBack }) => {
       <View style={styles.logoWrapper}>
         <Image style={styles.logo} source={require("../assets/logo.png")} />
       </View>
+
+      {paragraph && <Text style={styles.paragraph}>{paragraph}</Text>}
     </View>
   );
 };
@@ -56,5 +59,13 @@ const styles = StyleSheet.create({
     width: "35%",
     height: "100%",
     resizeMode: "contain",
+  },
+  paragraph: {
+    textAlign: "center",
+    fontSize: 16,
+    color: colors.textLight,
+    paddingHorizontal: "10%",
+    lineHeight: 24,
+    marginBottom: 50,
   },
 });

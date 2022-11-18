@@ -47,12 +47,12 @@ const ReasonScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.content}>
-        <ScreenHeaderWithLogo {...navigation} heading="Reason" />
-
-        <Text style={styles.text}>
-          We want to provide you with the best experience according to your need
-        </Text>
+      <ScrollView>
+        <ScreenHeaderWithLogo
+          {...navigation}
+          heading="Reason"
+          paragraph="We want to provide you with the best experience according to your need"
+        />
 
         {reasons.map((reason, idx) => (
           <View key={idx} style={styles.section}>
@@ -83,17 +83,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
     paddingBottom: 20,
-  },
-  content: {
-    flex: 1,
-  },
-  text: {
-    textAlign: "center",
-    fontSize: 16,
-    color: colors.textLight,
-    paddingHorizontal: "10%",
-    lineHeight: 24,
-    marginBottom: 50,
   },
   section: {
     borderWidth: 1,

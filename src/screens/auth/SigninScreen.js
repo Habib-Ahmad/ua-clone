@@ -27,9 +27,11 @@ const SigninScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <ScreenHeaderWithLogo {...navigation} heading="Sign In" />
-
-        <Text style={styles.text}>This is the name we will use to address you</Text>
+        <ScreenHeaderWithLogo
+          {...navigation}
+          heading="Sign In"
+          paragraph="This is the name we will use to address you"
+        />
 
         <View style={styles.wrapper}>
           <Input label="E-mail" onChangeText={setEmail} value={email} />
@@ -59,14 +61,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
     paddingBottom: 20,
-  },
-  text: {
-    textAlign: "center",
-    fontSize: 16,
-    color: colors.textLight,
-    paddingHorizontal: "5%",
-    lineHeight: 24,
-    marginBottom: 50,
   },
   wrapper: {
     flex: 1,

@@ -56,9 +56,11 @@ const OTPScreen = ({ route, navigation }) => {
     <View style={styles.container}>
       <View style={styles.content}>
         <ScrollView>
-          <ScreenHeaderWithLogo {...navigation} heading="OTP Verification" />
-
-          {phone && <Text style={styles.text}>Code has been sent to {phone}</Text>}
+          <ScreenHeaderWithLogo
+            {...navigation}
+            heading="OTP Verification"
+            paragraph={phone && `Code has been sent to ${phone}`}
+          />
 
           <FourDigitInput
             {...{
@@ -103,14 +105,6 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-  },
-  text: {
-    textAlign: "center",
-    fontSize: 16,
-    color: colors.textLight,
-    paddingHorizontal: "10%",
-    lineHeight: 24,
-    marginBottom: 50,
   },
   timer: {
     flexDirection: "row",

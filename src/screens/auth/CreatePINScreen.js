@@ -1,9 +1,8 @@
 import { createRef, useState } from "react";
-import { Platform, ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { Platform, ScrollView, StatusBar, StyleSheet, View } from "react-native";
 import Button from "../../components/input/Button";
 import FourDigitInput from "../../components/input/FourDigitInput";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
-import { colors } from "../../utils/colors";
 
 const CreatePINScreen = ({ navigation }) => {
   const [digit1, setDigit1] = useState();
@@ -24,9 +23,11 @@ const CreatePINScreen = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.content}>
         <ScrollView style={styles.scrollView}>
-          <ScreenHeaderWithLogo {...navigation} heading="Create new pin" />
-
-          <Text style={styles.text}>Add a unique pin number to make your payment more secure</Text>
+          <ScreenHeaderWithLogo
+            {...navigation}
+            heading="Create new pin"
+            paragraph="Add a unique pin number to make your payment more secure"
+          />
 
           <FourDigitInput
             {...{
@@ -62,13 +63,5 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-  },
-  text: {
-    textAlign: "center",
-    fontSize: 16,
-    color: colors.textLight,
-    paddingHorizontal: "10%",
-    lineHeight: 24,
-    marginBottom: 50,
   },
 });

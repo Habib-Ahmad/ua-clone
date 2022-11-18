@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Platform, ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { Platform, ScrollView, StatusBar, StyleSheet, View } from "react-native";
 import Button from "../../components/input/Button";
 import Input from "../../components/input/Input";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
-import { colors } from "../../utils/colors";
 
 const ResetPINScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -16,9 +15,11 @@ const ResetPINScreen = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.content}>
         <ScrollView>
-          <ScreenHeaderWithLogo {...navigation} heading="Reset pin" />
-
-          <Text style={styles.text}>Add a unique pin number to make your payment more secure</Text>
+          <ScreenHeaderWithLogo
+            {...navigation}
+            heading="Reset pin"
+            paragraph="Add a unique pin number to make your payment more secure"
+          />
 
           <View style={styles.inputWrapper}>
             <Input label="E-mail" value={email} onChangeText={setEmail} />
@@ -41,14 +42,6 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-  },
-  text: {
-    textAlign: "center",
-    fontSize: 16,
-    color: colors.textLight,
-    paddingHorizontal: "10%",
-    lineHeight: 24,
-    marginBottom: 50,
   },
   inputWrapper: {
     paddingHorizontal: 20,
