@@ -1,12 +1,13 @@
+import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 import ContextProvider from "./src/context/context";
 import AuthStackScreen from "./src/stacks/AuthStack";
+import { colors } from "./src/utils/colors";
 
 const App = () => {
   return (
     <ContextProvider>
-      <StatusBar style="dark" backgroundColor="#fff" />
+      <StatusBar barStyle="dark-content" backgroundColor={colors.bg} />
 
       <NavigationContainer>
         <AuthStackScreen />

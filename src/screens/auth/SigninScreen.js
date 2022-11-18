@@ -1,13 +1,5 @@
 import { useState } from "react";
-import {
-  Platform,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Button from "../../components/input/Button";
 import Input from "../../components/input/Input";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
@@ -16,6 +8,7 @@ import { colors } from "../../utils/colors";
 const SigninScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState("");
 
   const filledAllFields = email && password;
@@ -59,7 +52,6 @@ export default SigninScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
     paddingBottom: 20,
   },
   wrapper: {

@@ -1,13 +1,5 @@
 import { createRef, useEffect, useState } from "react";
-import {
-  Platform,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useNavigationState } from "@react-navigation/native";
 import Button from "../../components/input/Button";
 import FourDigitInput from "../../components/input/FourDigitInput";
@@ -100,7 +92,6 @@ export default OTPScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
     paddingBottom: 20,
   },
   content: {
