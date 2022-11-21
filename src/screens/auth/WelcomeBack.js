@@ -1,5 +1,5 @@
 import { createRef, useState } from "react";
-import { Platform, ScrollView, StatusBar, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import Button from "../../components/input/Button";
 import FourDigitInput from "../../components/input/FourDigitInput";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
@@ -23,7 +23,7 @@ const WelcomeBack = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <ScrollView style={styles.scrollView}>
+        <ScrollView>
           <ScreenHeaderWithLogo
             {...navigation}
             heading="Welcome back"
@@ -61,7 +61,6 @@ export default WelcomeBack;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     paddingBottom: 20,
   },
   content: {
