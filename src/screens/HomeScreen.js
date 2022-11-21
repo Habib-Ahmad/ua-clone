@@ -1,13 +1,13 @@
 import {
   Dimensions,
   Image,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useIsFocused } from "@react-navigation/native";
 import LeftArrow from "../assets/LeftArrow";
 import Notification from "../assets/Notification";
@@ -15,12 +15,15 @@ import RightArrow from "../assets/RightArrow";
 import Share from "../assets/Share";
 import Wave from "../assets/Wave";
 import { colors } from "../utils/colors";
+import CryptoScreen from "./CryptoScreen";
+import MoneyScreen from "./MoneyScreen";
 
 const HomeScreen = () => {
   const isFocused = useIsFocused();
+  const Tab = createMaterialTopTabNavigator();
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       {isFocused && <StatusBar barStyle="light-content" backgroundColor={colors.primary} />}
 
       <View style={styles.waveWrapper}>
@@ -58,7 +61,21 @@ const HomeScreen = () => {
           <Wave />
         </View>
       </View>
-    </ScrollView>
+
+      <Tab.Navigator
+        screenOptions={{
+          tabBarStyle: styles.tabBarStyle,
+          tabBarLabelStyle: styles.tabBarLabelStyle,
+          tabBarIndicatorStyle: styles.tabBarIndicatorStyle,
+          tabBarInactiveTintColor: colors.greyLight,
+          tabBarActiveTintColor: colors.primary,
+          tabBarPressColor: colors.bg,
+        }}
+      >
+        <Tab.Screen name="Money" component={MoneyScreen} />
+        <Tab.Screen name="Crypto" component={CryptoScreen} />
+      </Tab.Navigator>
+    </View>
   );
 };
 
@@ -68,20 +85,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  header: {
-    backgroundColor: colors.primary,
-    paddingHorizontal: 20,
-    paddingBottom: 10,
-    height: "100%",
-  },
   waveWrapper: {
     paddingBottom: 100,
     position: "relative",
     minHeight: Dimensions.get("screen").height / 3,
   },
+  header: {
+    backgroundColor: colors.primary,
+    paddingHorizontal: 20,
+    paddingBottom: 10,
+    height: 200,
+  },
   wave: {
     position: "absolute",
-    bottom: 5,
+    bottom: 10,
     left: 0,
     right: 0,
   },
@@ -119,5 +136,26 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontWeight: "200",
     textAlign: "center",
+  },
+  tabBarStyle: {
+    backgroundColor: colors.bg,
+    elevation: 0,
+    marginBottom: 20,
+  },
+  tabBarLabelStyle: {
+    textTransform: "capitalize",
+    fontWeight: "500",
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  tabBarIndicatorStyle: {
+    height: 3,
+    borderRadius: 8,
+    width: Dimensions.get("screen").width / 4,
+    alignSelf: "center",
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: Dimensions.get("screen").width / 8,
   },
 });
