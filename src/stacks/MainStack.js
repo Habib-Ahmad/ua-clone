@@ -4,7 +4,9 @@ import History from "../assets/History";
 import Home from "../assets/Home";
 import Profile from "../assets/Profile";
 import { colors } from "../utils/colors";
+import HistoryStack from "./HistoryStack";
 import HomeStack from "./HomeStack";
+import ProfileStack from "./ProfileStack";
 
 const BottomTab = createMaterialBottomTabNavigator();
 
@@ -28,7 +30,7 @@ const MainStackScreen = () => {
       />
       <BottomTab.Screen
         name="History"
-        component={HomeStack}
+        component={HistoryStack}
         options={{
           tabBarIcon: ({ color }) => <History color={color} />,
           tabBarLabel: "History",
@@ -37,7 +39,7 @@ const MainStackScreen = () => {
       />
       <BottomTab.Screen
         name="Profile"
-        component={HomeStack}
+        component={ProfileStack}
         options={{
           tabBarIcon: ({ color }) => <Profile color={color} />,
           tabBarLabel: "Profile",
