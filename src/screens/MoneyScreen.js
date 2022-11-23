@@ -1,7 +1,15 @@
+import { useEffect } from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from "../utils/colors";
 
-const MoneyScreen = ({ wallets, setActive }) => {
+const MoneyScreen = ({ wallets, setActive, setActiveTab, isFocused }) => {
+  useEffect(() => {
+    if (isFocused) {
+      setActiveTab("money");
+      setActive();
+    }
+  }, [isFocused, setActive, setActiveTab]);
+
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>

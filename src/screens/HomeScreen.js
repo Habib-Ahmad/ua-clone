@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import {
   Animated,
-  Dimensions,
   Image,
   LayoutAnimation,
   Platform,
@@ -12,18 +11,15 @@ import {
   UIManager,
   View,
 } from "react-native";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useIsFocused } from "@react-navigation/native";
 import BackArrowDark from "../assets/BackArrowDark";
 import Notification from "../assets/Notification";
 import Share from "../assets/Share";
-import Topup from "../assets/Topup";
-import Transfer from "../assets/Transfer";
 import Wave from "../assets/Wave";
-import Withdraw from "../assets/Withdraw";
+import CryptoActions from "../components/CryptoActions";
+import MoneyActions from "../components/MoneyActions";
+import HomeTabs from "../stacks/HomeTabs";
 import { colors } from "../utils/colors";
-import CryptoScreen from "./CryptoScreen";
-import MoneyScreen from "./MoneyScreen";
 
 if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -31,25 +27,20 @@ if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental
 
 const HomeScreen = () => {
   const [active, setActive] = useState();
+  const [activeTab, setActiveTab] = useState("money");
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     if (!active) {
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
       setExpanded(false);
     } else {
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
       setExpanded(true);
     }
   }, [active]);
 
-  const total = moneyWalllets.reduce(
-    (accumulator, currentValue) => accumulator + Number(currentValue.balance),
-    0
-  );
-
+  const total = 50000000;
   const isFocused = useIsFocused();
-  const Tab = createMaterialTopTabNavigator();
 
   return (
     <View style={styles.container}>
@@ -87,40 +78,15 @@ const HomeScreen = () => {
 
         {expanded && (
           <Animated.View style={styles.headerBottom}>
-            <TouchableOpacity activeOpacity={0.6} onPress={() => {}}>
-              <Topup />
-              <Text style={styles.actionText}>Topup</Text>
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.6} onPress={() => {}}>
-              <Transfer />
-              <Text style={styles.actionText}>Transfer</Text>
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.6} onPress={() => {}}>
-              <Withdraw />
-              <Text style={styles.actionText}>Withdraw</Text>
-            </TouchableOpacity>
+            {activeTab === "crypto" ? <CryptoActions /> : <MoneyActions />}
           </Animated.View>
         )}
       </View>
       <View style={styles.wave}>
-        <Wave />
+        <Wave fill={colors.primary} />
       </View>
 
-      <Tab.Navigator
-        screenOptions={{
-          tabBarStyle: styles.tabBarStyle,
-          tabBarLabelStyle: styles.tabBarLabelStyle,
-          tabBarIndicatorStyle: styles.tabBarIndicatorStyle,
-          tabBarInactiveTintColor: colors.greyLight,
-          tabBarActiveTintColor: colors.primary,
-          tabBarPressColor: colors.bg,
-        }}
-      >
-        <Tab.Screen name="Money">
-          {() => <MoneyScreen wallets={moneyWalllets} setActive={setActive} />}
-        </Tab.Screen>
-        <Tab.Screen name="Crypto" component={CryptoScreen} />
-      </Tab.Navigator>
+      <HomeTabs {...{ setActive, setActiveTab }} />
     </View>
   );
 };
@@ -132,8 +98,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    backgroundColor: colors.primary,
     paddingHorizontal: 20,
+    backgroundColor: colors.primary,
   },
   wave: {
     bottom: 5,
@@ -168,12 +134,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: "10%",
+    paddingHorizontal: "8%",
     paddingTop: 30,
-  },
-  actionText: {
-    color: colors.white,
-    marginTop: 5,
   },
   balance: {
     color: colors.white,
@@ -187,58 +149,4 @@ const styles = StyleSheet.create({
     fontWeight: "200",
     textAlign: "center",
   },
-  tabBarStyle: {
-    backgroundColor: colors.bg,
-    elevation: 0,
-    marginBottom: 20,
-  },
-  tabBarLabelStyle: {
-    textTransform: "capitalize",
-    fontWeight: "500",
-    fontSize: 16,
-    marginBottom: 5,
-  },
-  tabBarIndicatorStyle: {
-    height: 3,
-    borderRadius: 8,
-    width: Dimensions.get("screen").width / 4,
-    alignSelf: "center",
-    alignContent: "center",
-    alignItems: "center",
-    justifyContent: "center",
-    marginHorizontal: Dimensions.get("screen").width / 8,
-  },
 });
-
-const moneyWalllets = [
-  {
-    wallet: "Naira (NGN)",
-    symbol: "₦‎",
-    balance: "5221008",
-    percentage: "2.2%",
-  },
-  {
-    wallet: "Pounds (GBP)",
-    symbol: "£",
-    balance: "5221008",
-    percentage: "2.2%",
-  },
-  {
-    wallet: "Canadian Dollars (CAD)",
-    symbol: "$",
-    balance: "5221008",
-    percentage: "2.2%",
-  },
-  {
-    wallet: "Euros (EUR)",
-    symbol: "€",
-    balance: "5221008",
-    percentage: "2.2%",
-  },
-  {
-    wallet: "Dollars (USD)",
-    symbol: "$",
-    balance: "5221008",
-    percentage: "2.2%",
-  },
-];
