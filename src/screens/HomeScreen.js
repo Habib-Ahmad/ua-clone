@@ -25,10 +25,14 @@ if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation}) => {
   const [active, setActive] = useState();
   const [activeTab, setActiveTab] = useState("money");
   const [expanded, setExpanded] = useState(false);
+
+  const handleNotification = () => {
+    navigation.navigate("NotificationScreen");
+  };
 
   useEffect(() => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -61,7 +65,7 @@ const HomeScreen = () => {
               <Share />
             </TouchableOpacity>
             <View style={styles.space} />
-            <TouchableOpacity activeOpacity={0.6} onPress={() => {}}>
+            <TouchableOpacity activeOpacity={0.6} onPress={handleNotification}>
               <Notification />
             </TouchableOpacity>
           </View>

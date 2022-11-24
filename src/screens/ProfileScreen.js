@@ -1,9 +1,21 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
+import ProfileHeader from "../components/ProfileHeader";
+import ScreenHeaderWithoutLogo from "../components/ScreenHeaderWithoutLogo";
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation}) => {
   return (
     <View style={styles.container}>
-      <Text>ProfileScreen</Text>
+      <ScrollView>
+        <ScreenHeaderWithoutLogo
+          {...navigation}
+          heading="Profile"
+        />
+
+        <ProfileHeader
+          heading="Savannah Nguyen"
+          paragraph="SavannahNguyen180"
+        />
+      </ScrollView>
     </View>
   );
 };
@@ -11,5 +23,8 @@ const ProfileScreen = () => {
 export default ProfileScreen;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+    paddingBottom: 20,
+  },
 });
