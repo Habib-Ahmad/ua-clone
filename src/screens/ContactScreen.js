@@ -20,8 +20,6 @@ export default ContactScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingBottom: 20
     },
-    // wrapper: {
-    //     alignItems: "center"
-    // }
 });

@@ -1,14 +1,11 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from "../../utils/colors";
 
-const ImageButton = ({ title, disabled, backgroundColor, ...others }) => {
+const ImageButton = ({ title, disabled, ...others }) => {
   return (
     <TouchableOpacity style={styles.container} activeOpacity={0.8} disabled={disabled} {...others}>
       <View
-        style={[
-          styles.button,
-          { backgroundColor: disabled ? colors.greyLight : backgroundColor || colors.primary },
-        ]}
+        style={styles.button}
       >
         <Text style={styles.text}>{title}</Text>
       </View>
@@ -30,6 +27,7 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
     borderRadius: 40,
     borderWidth: 1,
+    borderColor: colors.primaryDark,
     backgroundColor: colors.white,
   },
   text: {

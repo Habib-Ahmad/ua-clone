@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         elevation:2,
         height:100,
         width:100,
-        backgroundColor:colors.grey,
+        backgroundColor:colors.white,
         position:"relative",
         borderRadius:999,
         overflow:"hidden",

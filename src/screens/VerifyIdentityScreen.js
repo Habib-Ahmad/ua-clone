@@ -12,7 +12,7 @@ const VerifyIdentityScreen = ({ navigation }) => {
         />
 
         <View style={styles.wrapper}>
-            <Text>Welcome here</Text>
+            <Text>Welcome heres</Text>
         </View>
         
       </ScrollView>
