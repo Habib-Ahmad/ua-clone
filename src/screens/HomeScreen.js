@@ -25,13 +25,17 @@ if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-const HomeScreen = ({ navigation}) => {
+const HomeScreen = ({ navigation }) => {
   const [active, setActive] = useState();
   const [activeTab, setActiveTab] = useState("money");
   const [expanded, setExpanded] = useState(false);
 
   const handleNotification = () => {
     navigation.navigate("NotificationScreen");
+  };
+
+  const handleQuickShare = () => {
+    navigation.navigate("QuickShare");
   };
 
   useEffect(() => {
@@ -61,7 +65,7 @@ const HomeScreen = ({ navigation}) => {
           )}
 
           <View style={styles.icons}>
-            <TouchableOpacity activeOpacity={0.6} onPress={() => {}}>
+            <TouchableOpacity activeOpacity={0.6} onPress={handleQuickShare}>
               <Share />
             </TouchableOpacity>
             <View style={styles.space} />

@@ -5,7 +5,7 @@ const Input = ({ label, icon, onIconPress, placeholder, ...others }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-      <TextInput style={styles.input} {...others} placeholder={placeholder}/>
+      <TextInput style={styles.input} {...others} placeholder={placeholder} />
       {icon && (
         <TouchableOpacity activeOpacity={1} style={styles.icon} onPress={onIconPress}>
           {icon}

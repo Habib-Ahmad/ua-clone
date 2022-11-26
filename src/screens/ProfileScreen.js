@@ -26,22 +26,20 @@ const ProfileScreen = ({ navigation }) => {
     navigation.navigate("PolicyScreen");
   };
 
+  const handleBanks = () => {
+    navigation.navigate("ManageBanks");
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView>
-        <ScreenHeaderWithoutLogo
-          {...navigation}
-          heading="Profile"
-        />
+        <ScreenHeaderWithoutLogo {...navigation} heading="Profile" />
 
-        <ProfileHeader
-          heading="Savannah Nguyen"
-          paragraph="SavannahNguyen180"
-        />
+        <ProfileHeader heading="Savannah Nguyen" paragraph="SavannahNguyen180" />
 
         <TouchableOpacity style={styles.card} onPress={handlePersonalInfo} activeOpacity={0.9}>
           <Icon name="account-outline" size={24} color={colors.black} />
-          
+
           <Text style={styles.textName}>Personal Info</Text>
 
           <View style={styles.iconWrapper}>
@@ -51,7 +49,7 @@ const ProfileScreen = ({ navigation }) => {
 
         <TouchableOpacity style={styles.card} onPress={handleContact} activeOpacity={0.9}>
           <Icon name="account-multiple-outline" size={24} color={colors.black} />
-          
+
           <Text style={styles.textName}>Contacts</Text>
 
           <View style={styles.iconWrapper}>
@@ -59,9 +57,9 @@ const ProfileScreen = ({ navigation }) => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.card} activeOpacity={0.9}>
+        <TouchableOpacity style={styles.card} activeOpacity={0.9} onPress={handleBanks}>
           <Icon name="credit-card-outline" size={24} color={colors.black} />
-          
+
           <Text style={styles.textName}>Bank and Cards</Text>
 
           <View style={styles.iconWrapper}>
@@ -71,7 +69,7 @@ const ProfileScreen = ({ navigation }) => {
 
         <TouchableOpacity style={styles.card} onPress={handleNotification} activeOpacity={0.9}>
           <Icon name="bell-outline" size={24} color={colors.black} />
-          
+
           <Text style={styles.textName}>Notification</Text>
 
           <View style={styles.iconWrapper}>
@@ -81,7 +79,7 @@ const ProfileScreen = ({ navigation }) => {
 
         <TouchableOpacity style={styles.card} onPress={handleColor} activeOpacity={0.9}>
           <Icon name="vector-triangle" size={24} color={colors.black} />
-          
+
           <Text style={styles.textName}>Colour Settings</Text>
 
           <View style={styles.iconWrapper}>
@@ -91,7 +89,7 @@ const ProfileScreen = ({ navigation }) => {
 
         <TouchableOpacity style={styles.card} activeOpacity={0.9}>
           <Icon name="shield-check-outline" size={24} color={colors.black} />
-          
+
           <Text style={styles.textName}>Change Pin</Text>
 
           <View style={styles.iconWrapper}>
@@ -101,7 +99,7 @@ const ProfileScreen = ({ navigation }) => {
 
         <TouchableOpacity style={styles.card} onPress={handlePolicy} activeOpacity={0.9}>
           <Icon name="shield-check-outline" size={24} color={colors.black} />
-          
+
           <Text style={styles.textName}>Privacy Policy</Text>
 
           <View style={styles.iconWrapper}>
@@ -111,7 +109,7 @@ const ProfileScreen = ({ navigation }) => {
 
         <TouchableOpacity style={styles.card} activeOpacity={0.9}>
           <Icon name="account-group-outline" size={24} color={colors.black} />
-          
+
           <Text style={styles.textName}>Invite Friends</Text>
 
           <View style={styles.iconWrapper}>
@@ -127,7 +125,7 @@ const ProfileScreen = ({ navigation }) => {
 
         <TouchableOpacity style={styles.card}>
           <Icon name="logout" size={24} color={colors.red} />
-          
+
           <Text style={styles.textName}>Log Out</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -159,14 +157,14 @@ const styles = StyleSheet.create({
     width: 30,
   },
   line: {
-    flex: 1, 
+    flex: 1,
     height: 1,
-    marginTop: 10, 
-    backgroundColor: colors.greyLight
+    marginTop: 10,
+    backgroundColor: colors.greyLight,
   },
   versionText: {
     alignItems: "center",
     marginTop: 20,
     marginBottom: 20,
-  }
+  },
 });

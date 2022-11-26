@@ -10,7 +10,7 @@ const ScreenHeaderWithoutLogo = ({ heading, goBack, paragraph }) => {
           <BackArrow />
         </TouchableOpacity>
 
-        <View style={styles.headingWrapper}> 
+        <View style={styles.headingWrapper}>
           <Text style={styles.heading}>{heading}</Text>
         </View>
       </View>

@@ -1,17 +1,22 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from "../../utils/colors";
 
-const ImageButton = ({ title, disabled, ...others }) => {
+const ButtonLight = ({ title, disabled, backgroundColor, ...others }) => {
   return (
     <TouchableOpacity style={styles.container} activeOpacity={0.8} disabled={disabled} {...others}>
-      <View style={styles.button}>
+      <View
+        style={[
+          styles.button,
+          { backgroundColor: disabled ? colors.greyLight : backgroundColor || colors.primary },
+        ]}
+      >
         <Text style={styles.text}>{title}</Text>
       </View>
     </TouchableOpacity>
   );
 };
 
-export default ImageButton;
+export default ButtonLight;
 
 const styles = StyleSheet.create({
   container: {
@@ -24,12 +29,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 7,
     borderRadius: 40,
-    borderWidth: 1,
-    borderColor: colors.primaryDark,
-    backgroundColor: colors.white,
+    backgroundColor: colors.primaryDark,
   },
   text: {
-    color: colors.primaryDark,
+    color: colors.primary,
     fontSize: 15,
     textAlign: "center",
     height: "100%",

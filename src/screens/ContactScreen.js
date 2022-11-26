@@ -1,15 +1,11 @@
-import { SafeAreaView, ScrollView, StyleSheet} from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
 import ScreenHeaderWithoutLogo from "../components/ScreenHeaderWithoutLogo";
 
 const ContactScreen = ({ navigation }) => {
   return (
     <SafeAreaView styles={styles.container}>
       <ScrollView>
-        <ScreenHeaderWithoutLogo
-            {...navigation}
-            heading="Contacts"
-        />
-        
+        <ScreenHeaderWithoutLogo {...navigation} heading="Contacts" />
       </ScrollView>
     </SafeAreaView>
   );
@@ -18,8 +14,8 @@ const ContactScreen = ({ navigation }) => {
 export default ContactScreen;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingBottom: 20
-    },
+  container: {
+    flex: 1,
+    paddingBottom: 20,
+  },
 });
