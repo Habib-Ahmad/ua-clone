@@ -18,8 +18,8 @@ export default function FluentBuildingBank({ width, height, type }) {
         </Svg>
       ) : (
         <Svg
-          width="23"
-          height="25"
+          width={width ? width : "23"}
+          height={height ? height : "25"}
           viewBox="0 0 23 25"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

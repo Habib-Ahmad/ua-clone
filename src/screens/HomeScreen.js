@@ -35,7 +35,7 @@ const HomeScreen = ({ navigation }) => {
   };
 
   const handleQuickShare = () => {
-    navigation.navigate("QuickShare");
+    navigation.navigate("QuickShareScreen");
   };
 
   useEffect(() => {

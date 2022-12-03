@@ -1,10 +1,9 @@
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import Topup from "../assets/Topup";
 import Transfer from "../assets/Transfer";
 import Withdraw from "../assets/Withdraw";
 import { colors } from "../utils/colors";
-
-import { useNavigation } from "@react-navigation/native";
 
 const MoneyActions = () => {
   const navigation = useNavigation();
@@ -13,7 +12,7 @@ const MoneyActions = () => {
   };
 
   const handleTopup = () => {
-    navigation.navigate("Topup");
+    navigation.navigate("TopupScreen");
   };
 
   return (

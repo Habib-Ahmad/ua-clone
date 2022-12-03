@@ -1,5 +1,5 @@
+import { View, Text, StyleSheet } from "react-native";
 import React from "react";
-import { StyleSheet, View } from "react-native";
 import Mark from "../../assets/Mark";
 import { colors } from "../../utils/colors";
 

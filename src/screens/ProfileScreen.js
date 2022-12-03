@@ -27,9 +27,12 @@ const ProfileScreen = ({ navigation }) => {
   };
 
   const handleBanks = () => {
-    navigation.navigate("ManageBanks");
+    navigation.navigate("ManageBanksScreen");
   };
 
+  const handleVerification = () => {
+    navigation.navigate("KYCVerificationScreen");
+  };
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -101,6 +104,16 @@ const ProfileScreen = ({ navigation }) => {
           <Icon name="shield-check-outline" size={24} color={colors.black} />
 
           <Text style={styles.textName}>Privacy Policy</Text>
+
+          <View style={styles.iconWrapper}>
+            <AntDesign name="right" size={20} color={colors.black} />
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.card} onPress={handleVerification} activeOpacity={0.9}>
+          <Icon name="shield-check-outline" size={24} color={colors.black} />
+
+          <Text style={styles.textName}>KYC Verification</Text>
 
           <View style={styles.iconWrapper}>
             <AntDesign name="right" size={20} color={colors.black} />

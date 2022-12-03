@@ -3,10 +3,10 @@ import { StyleSheet, View } from "react-native";
 import FluentBuildingBank from "../../assets/FluentBuildingBank";
 import { colors } from "../../utils/colors";
 
-export default function Icon({ width, height, type }) {
+export default function Icon({ width, height, type, iconName }) {
   return (
     <View style={styles.wrapper}>
-      <FluentBuildingBank width={width} height={height} type={type} />
+      {iconName ? iconName : <FluentBuildingBank width={width} height={height} type={type} />}
     </View>
   );
 }

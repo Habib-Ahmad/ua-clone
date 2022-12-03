@@ -1,11 +1,12 @@
 import React from "react";
 import { Dimensions, StyleSheet, Text, View } from "react-native";
 import Button from "../components/input/Button";
+import ButtonLight from "../components/input/ButtonLight";
 import MarkIcon from "../components/withdraw/MarkIcon";
 import { colors } from "../utils/colors";
 
 export default function SuccessfulScreen({ route }) {
-  const { amount, type } = route.params;
+  const { amount, type, crypto, cryptoValue } = route?.params || {};
 
   const handePress = () => {};
   return (
@@ -13,20 +14,51 @@ export default function SuccessfulScreen({ route }) {
       <View style={styles.container}>
         <View style={styles.centeredBox}>
           <MarkIcon width="50" height="50" />
-          {type === "withdraw" ? (
+
+          {crypto === "btc" && (
+            <View>
+              <Text style={styles.amountStyle}>{cryptoValue}</Text>
+              <Text style={styles.successMessage}>have been successfully {"\n"} purchased</Text>
+            </View>
+          )}
+
+          {type === "withdraw" && (
             <View>
               <Text style={styles.amountStyle}>${amount}</Text>
               <Text style={styles.successMessage}>have been successfully {"\n"} withdrawn</Text>
             </View>
-          ) : (
+          )}
+
+          {type === "topup" && (
             <View>
               <Text style={[styles.successMessage, styles.bankAdded]}>Bank Added Succesfully</Text>
+            </View>
+          )}
+
+          {type === "verification" && (
+            <View>
+              <Text style={styles.successText}>Success</Text>
+              <Text style={styles.successMessage}>Your account has been {"\n"} verified</Text>
+            </View>
+          )}
+
+          {type === "swap" && (
+            <View>
+              <Text style={styles.successText}>0.234 BTC</Text>
+              <Text style={styles.successMessage}>have been successfully {"\n"} Swaped</Text>
             </View>
           )}
         </View>
       </View>
 
       <View style={styles.okBtn}>
+        {type === "swap" && (
+          <ButtonLight
+            title="View Details"
+            onPress={handePress}
+            backgroundColor={colors.primaryLight}
+          />
+        )}
         <Button title="Ok, thanks" onPress={handePress} />
       </View>
     </View>
@@ -66,5 +98,12 @@ const styles = StyleSheet.create({
   },
   bankAdded: {
     marginVertical: 30,
+  },
+  successText: {
+    fontSize: 24,
+    fontWeight: "700",
+    textAlign: "center",
+    marginVertical: "10%",
+    color: colors.primary,
   },
 });
