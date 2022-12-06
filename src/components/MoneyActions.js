@@ -4,10 +4,10 @@ import Transfer from "../assets/Transfer";
 import Withdraw from "../assets/Withdraw";
 import { colors } from "../utils/colors";
 
-const MoneyActions = () => {
+const MoneyActions = ({ navigate }) => {
   return (
     <>
-      <TouchableOpacity activeOpacity={0.6} onPress={() => {}}>
+      <TouchableOpacity activeOpacity={0.6} onPress={() => navigate("TopupScreen")}>
         <Topup />
         <Text style={styles.text}>Topup</Text>
       </TouchableOpacity>

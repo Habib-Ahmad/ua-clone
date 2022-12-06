@@ -25,7 +25,7 @@ if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const [active, setActive] = useState();
   const [activeTab, setActiveTab] = useState("money");
   const [expanded, setExpanded] = useState(false);
@@ -78,7 +78,11 @@ const HomeScreen = () => {
 
         {expanded && (
           <Animated.View style={styles.headerBottom}>
-            {activeTab === "crypto" ? <CryptoActions /> : <MoneyActions />}
+            {activeTab === "crypto" ? (
+              <CryptoActions {...navigation} />
+            ) : (
+              <MoneyActions {...navigation} />
+            )}
           </Animated.View>
         )}
       </View>
