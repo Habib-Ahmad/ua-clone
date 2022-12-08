@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import BTC from "../assets/BTC";
 import SwapIcon from "../assets/Swap";
 import { colors } from "../utils/colors";
-import BTCIcon from "./currency/BTCIcon";
 import ButtonTransparent from "./input/ButtonTransparent";
 import Icon from "./withdraw/Icon";
 
@@ -38,7 +38,7 @@ export default function Swap() {
 
                 <TouchableOpacity style={styles.buttonRow} activeOpacity={0.6}>
                   <View style={styles.flexTwo}>
-                    <BTCIcon width={20} height={20} />
+                    <BTC width={"50"} height={"50"} />
                   </View>
                   <View style={styles.flexThree}>
                     <Text style={styles.flexThreeText}>BTC</Text>
@@ -50,7 +50,9 @@ export default function Swap() {
               </View>
               <Text style={styles.balance}>Balance: 59.42 BTC</Text>
             </View>
+
             <ToggleButton />
+
             <View>
               <Text style={styles.heading}>You get</Text>
 
@@ -61,7 +63,7 @@ export default function Swap() {
 
                 <TouchableOpacity style={styles.buttonRow} activeOpacity={0.6}>
                   <View style={styles.flexTwo}>
-                    <Icon width={20} height={20} />
+                    <Icon width={50} height={50} />
                   </View>
                   <View style={styles.flexThree}>
                     <Text style={styles.flexThreeText}>NGN</Text>
@@ -86,7 +88,7 @@ export default function Swap() {
 
                 <TouchableOpacity style={styles.buttonRow} activeOpacity={0.6}>
                   <View style={styles.flexTwo}>
-                    <Icon width={20} height={20} />
+                    <Icon width={50} height={50} />
                   </View>
                   <View style={styles.flexThree}>
                     <Text style={styles.flexThreeText}>NGN</Text>
@@ -110,7 +112,7 @@ export default function Swap() {
 
                 <TouchableOpacity style={styles.buttonRow} activeOpacity={0.6}>
                   <View style={styles.flexTwo}>
-                    <BTCIcon width={20} height={20} />
+                    <BTC width={"50"} height={"50"} />
                   </View>
                   <View style={styles.flexThree}>
                     <Text style={styles.flexThreeText}>BTC</Text>

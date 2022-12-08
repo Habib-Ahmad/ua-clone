@@ -2,28 +2,33 @@ import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import BTCIcon from "../components/currency/BTCIcon";
+import BTC from "../assets/BTC";
 import Button from "../components/input/Button";
-import ScreenHeaderWithoutLogo from "../components/ScreenHeaderWithoutLogo";
+import ScreenHeader from "../components/ScreenHeader";
 import Icon from "../components/withdraw/Icon";
 import { colors } from "../utils/colors";
 
 export default function SwapDetailsScreen() {
   const navigation = useNavigation();
 
+  // const handleConfirm = () => {
+  //   navigation.navigate("SuccessfulScreen", {
+  //     type: "swap",
+  //   });
+  // };
+
   const handleConfirm = () => {
-    navigation.navigate("SuccessfulScreen", {
-      type: "swap",
-    });
+    navigation.navigate("EnterPinScreen");
   };
+
   return (
     <View style={styles.container}>
-      <ScreenHeaderWithoutLogo heading={"Swap"} {...navigation} />
+      <ScreenHeader heading={"Swap"} {...navigation} />
       <ScrollView>
         <View style={styles.wrapper}>
           <View style={styles.flexRow}>
             <View>
-              <BTCIcon width={40} height={40} />
+              <BTC width={60} height={60} />
             </View>
             <View style={styles.flexTwo}>
               <Text style={styles.heading}>0.234 BTC</Text>
@@ -37,7 +42,7 @@ export default function SwapDetailsScreen() {
 
           <View style={styles.flexRow}>
             <View>
-              <Icon width={30} height={30} />
+              <Icon width={60} height={60} />
             </View>
             <View style={styles.flexTwo}>
               <Text style={styles.heading}>₦124,338.79</Text>
@@ -71,6 +76,7 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     paddingHorizontal: "5%",
+    paddingTop: "5%",
   },
   flexRow: {
     flexDirection: "row",
@@ -85,7 +91,7 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     fontSize: 14,
-    fontWeight: "700",
+    fontWeight: "400",
     color: colors.textLight,
   },
   arrowDownStyle: {

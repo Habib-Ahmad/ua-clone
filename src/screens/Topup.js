@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import Checkbox from "expo-checkbox";
 import Button from "../components/input/Button";
 import Input from "../components/input/Input";
-import ScreenHeaderWithoutLogo from "../components/ScreenHeaderWithoutLogo";
+import ScreenHeader from "../components/ScreenHeader";
 import Icon from "../components/withdraw/Icon";
 import { colors } from "../utils/colors";
 
@@ -20,7 +20,7 @@ export default function Topup() {
   };
   return (
     <View style={styles.container}>
-      <ScreenHeaderWithoutLogo {...navigation} heading="Add Bank" />
+      <ScreenHeader {...navigation} heading="Add Bank" />
 
       <ScrollView>
         <Icon width="80" height="80" type="bank" />

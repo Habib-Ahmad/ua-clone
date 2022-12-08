@@ -1,17 +1,25 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
-import ScreenHeaderWithoutLogo from "../components/ScreenHeaderWithoutLogo";
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
+import Input from "../components/input/Input";
+import ScreenHeader from "../components/ScreenHeader";
+import ContactTabs from "../stacks/ContactTabs";
+import { colors } from "../utils/colors";
 
 const TransferScreen = ({ navigation }) => {
   return (
-    <SafeAreaView styles={styles.container}>
-      <ScrollView>
-        <ScreenHeaderWithoutLogo {...navigation} heading="Transfer" />
+    <View style={styles.container}>
+      <ScreenHeader {...navigation} heading="Transfer" />
 
-        <View style={styles.wrapper}>
-          <Text>Welcome here</Text>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+      <View style={styles.inputStyle}>
+        <Input
+          label="Search"
+          placeholder="Search name, username, email"
+          icon={<FontAwesome name="microphone" size={24} color={colors.primary} />}
+        />
+      </View>
+      <ContactTabs transfer={true} />
+    </View>
   );
 };
 
@@ -21,7 +29,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  wrapper: {
-    alignItems: "center",
+  inputStyle: {
+    paddingHorizontal: "5%",
+    marginVertical: "5%",
   },
 });

@@ -1,14 +1,24 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import BTC from "../../assets/BTC";
+import ETH from "../../assets/ETH";
 import QuickShareIcon from "../../assets/QuickShare";
+import USDT from "../../assets/USDT";
+import Wallet from "../../assets/Wallet";
 import Icon from "../withdraw/Icon";
 
-export default function QuickShareCard({ name, info }) {
+export default function QuickShareCard({ name, info, type }) {
   return (
     <View>
       <View style={styles.flexRow}>
         <View>
-          <Icon width={"30"} height={"30"} />
+          {type === "ultra" && <Icon width={"50"} height={"50"} />}
+
+          {type === "topup" && <Wallet width={"50"} height={"50"} />}
+
+          {type === "btc" && <BTC width={"50"} height={"50"} />}
+          {type === "eth" && <ETH width={"50"} height={"50"} />}
+          {type === "usdt" && <USDT width={"50"} height={"50"} />}
         </View>
         <View style={styles.flexTwo}>
           <Text style={styles.heading}>{name} </Text>

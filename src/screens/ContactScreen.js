@@ -1,13 +1,26 @@
-import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
-import ScreenHeaderWithoutLogo from "../components/ScreenHeaderWithoutLogo";
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
+import Input from "../components/input/Input";
+import ScreenHeader from "../components/ScreenHeader";
+import ContactTabs from "../stacks/ContactTabs";
+import { colors } from "../utils/colors";
 
 const ContactScreen = ({ navigation }) => {
   return (
-    <SafeAreaView styles={styles.container}>
-      <ScrollView>
-        <ScreenHeaderWithoutLogo {...navigation} heading="Contacts" />
-      </ScrollView>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <ScreenHeader {...navigation} heading="Contacts" />
+
+      <View style={styles.inputStyle}>
+        <Input
+          label="Search"
+          placeholder="Search name, username, email"
+          icon={<FontAwesome name="microphone" size={24} color={colors.primary} />}
+        />
+      </View>
+
+      <ContactTabs />
+    </View>
   );
 };
 
@@ -16,6 +29,9 @@ export default ContactScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingBottom: 20,
+  },
+  inputStyle: {
+    paddingHorizontal: "5%",
+    marginVertical: "5%",
   },
 });

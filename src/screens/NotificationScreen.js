@@ -1,8 +1,7 @@
-import {} from "react";
 import { FlatList, SafeAreaView, StyleSheet, View } from "react-native";
 import EmptyNotification from "../components/notification/EmptyNotification";
 import NotificationPanel from "../components/notification/NotificationPanel";
-import ScreenHeaderWithoutLogo from "../components/ScreenHeaderWithoutLogo";
+import ScreenHeader from "../components/ScreenHeader";
 
 const DATA = [
   {
@@ -42,7 +41,7 @@ const NotificationScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView styles={styles.container}>
-      <ScreenHeaderWithoutLogo {...navigation} heading="Notification" />
+      <ScreenHeader {...navigation} heading="Notification" />
       <View style={styles.wrapper}>
         <FlatList
           data={DATA}

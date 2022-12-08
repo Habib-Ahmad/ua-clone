@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import IDCard from "../assets/IDCard";
 import Button from "../components/input/Button";
 import Input from "../components/input/Input";
-import ScreenHeaderWithoutLogo from "../components/ScreenHeaderWithoutLogo";
+import ScreenHeader from "../components/ScreenHeader";
 import { colors } from "../utils/colors";
 
 export default function KYCVerificationScreen() {
@@ -18,7 +18,7 @@ export default function KYCVerificationScreen() {
   };
   return (
     <View style={styles.container}>
-      <ScreenHeaderWithoutLogo {...navigation} heading="Verify Identity" />
+      <ScreenHeader {...navigation} heading="Verify Identity" />
 
       <View style={styles.idCardBox}>
         <IDCard backgroundColor={colors.primaryLight} />

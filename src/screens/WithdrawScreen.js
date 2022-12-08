@@ -3,7 +3,7 @@ import { Dimensions, ScrollView, StyleSheet, Switch, Text, View } from "react-na
 import { useNavigation } from "@react-navigation/native";
 import Button from "../components/input/Button";
 import Input from "../components/input/Input";
-import ScreenHeaderWithoutLogo from "../components/ScreenHeaderWithoutLogo";
+import ScreenHeader from "../components/ScreenHeader";
 import Icon from "../components/withdraw/Icon";
 import { colors } from "../utils/colors";
 
@@ -14,11 +14,14 @@ export default function WithdrawScreen() {
   const toggleSwitch = () => setIsEnabled(!isEnabled);
 
   const handlePress = () => {
-    navigation.navigate("ReviewSummaryScreen");
+    navigation.navigate("ReviewSummaryScreen", {
+      withdraw: "true",
+    });
   };
+  
   return (
     <View style={styles.container}>
-      <ScreenHeaderWithoutLogo {...navigation} heading="Withdraw" />
+      <ScreenHeader {...navigation} heading="Withdraw" />
 
       <ScrollView>
         <Icon width="80" height="80" type="bank" />
@@ -32,6 +35,16 @@ export default function WithdrawScreen() {
           />
 
           <View style={styles.space} />
+
+          <Input
+            label="Choose Bank"
+            placeholder="Access bank"
+            // onChangeText={setUsername}
+            // value={username}
+          />
+
+          <View style={styles.space} />
+
           <Input
             label="Account Number"
             placeholder="Enter Account Number"

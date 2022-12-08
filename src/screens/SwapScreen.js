@@ -2,7 +2,7 @@ import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Button from "../components/input/Button";
-import ScreenHeaderWithoutLogo from "../components/ScreenHeaderWithoutLogo";
+import ScreenHeader from "../components/ScreenHeader";
 import Swap from "../components/Swap";
 import { colors } from "../utils/colors";
 
@@ -14,7 +14,7 @@ export default function SwapScreen() {
   };
   return (
     <View style={styles.container}>
-      <ScreenHeaderWithoutLogo heading={"Swap"} {...navigation} />
+      <ScreenHeader heading={"Swap"} {...navigation} />
       <ScrollView>
         <View style={styles.wrapper}>
           <Swap />

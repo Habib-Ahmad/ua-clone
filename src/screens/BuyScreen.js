@@ -2,29 +2,29 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
-import BTCIcon from "../components/currency/BTCIcon";
+import BTC from "../assets/BTC";
 import Button from "../components/input/Button";
 import Input from "../components/input/Input";
-import ScreenHeaderWithoutLogo from "../components/ScreenHeaderWithoutLogo";
+import ScreenHeader from "../components/ScreenHeader";
 import { colors } from "../utils/colors";
 
 export default function BuyScreen() {
   const navigation = useNavigation();
 
   const handleContinue = () => {
-    navigation.navigate("ReviewSummaryScreen", { newIcon: true, crypto: "btc" });
+    navigation.navigate("ReviewSummaryScreen", { crypto: "btc" });
   };
 
   return (
     <View style={styles.container}>
-      <ScreenHeaderWithoutLogo {...navigation} heading={"Buy"} />
+      <ScreenHeader {...navigation} heading={"Buy"} />
 
       <View style={styles.wrapper}>
         <TouchableOpacity activeOpacity={0.6} style={styles.currencyButton}>
           <Text style={styles.currencyText}>USD</Text>
         </TouchableOpacity>
         <View style={styles.currencyBox}>
-          <BTCIcon width={"50"} height={"50"} />
+          <BTC width={"100"} height={"100"} />
         </View>
         <Text style={styles.balance}>≈1.285 BTC</Text>
         <Text style={styles.price}>$20,000</Text>
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 14,
-    fontWeight: "500",
+    fontWeight: "300",
     textAlign: "center",
   },
   inputBox: {

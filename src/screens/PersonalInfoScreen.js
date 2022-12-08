@@ -4,7 +4,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import moment from "moment";
 import Button from "../components/input/Button";
 import Input from "../components/input/Input";
-import ScreenHeaderWithoutLogo from "../components/ScreenHeaderWithoutLogo";
+import ScreenHeader from "../components/ScreenHeader";
 import UploadImage from "../components/UploadImage";
 import { colors } from "../utils/colors";
 
@@ -33,7 +33,7 @@ const ProfileInfoScreen = ({ navigation }) => {
   return (
     <SafeAreaView styles={styles.container}>
       <ScrollView>
-        <ScreenHeaderWithoutLogo {...navigation} heading="Personal Information" />
+        <ScreenHeader {...navigation} heading="Personal Information" />
 
         <View style={styles.editImageWrapper}>
           <UploadImage />
@@ -98,7 +98,12 @@ const ProfileInfoScreen = ({ navigation }) => {
 
           <View style={styles.space} />
 
-          <Input label="Gender" placeholder="Male" onChangeText={setGender} value={gender} />
+          <Input 
+            label="Gender" 
+            placeholder="Male" 
+            onChangeText={setGender} 
+            value={gender} 
+          />
         </View>
 
         <View style={styles.dateWrapper}>

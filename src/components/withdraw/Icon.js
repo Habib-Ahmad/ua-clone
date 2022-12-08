@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import FluentBuildingBank from "../../assets/FluentBuildingBank";
-import { colors } from "../../utils/colors";
 
 export default function Icon({ width, height, type, iconName }) {
   return (
@@ -14,8 +13,5 @@ export default function Icon({ width, height, type, iconName }) {
 const styles = StyleSheet.create({
   wrapper: {
     alignSelf: "center",
-    backgroundColor: colors.blueTransparent,
-    padding: 10,
-    borderRadius: 50,
   },
 });

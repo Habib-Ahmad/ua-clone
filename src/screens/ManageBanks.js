@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import EmptyBank from "../components/bank/EmptyBank";
 import ManageBankCard from "../components/bank/ManageBankCard";
 import ButtonLight from "../components/input/ButtonLight";
-import ScreenHeaderWithoutLogo from "../components/ScreenHeaderWithoutLogo";
+import ScreenHeader from "../components/ScreenHeader";
 import { colors } from "../utils/colors";
 
 const DATA = [
@@ -30,7 +30,7 @@ export default function ManageBanks() {
   };
   return (
     <View style={styles.wrapper}>
-      <ScreenHeaderWithoutLogo {...navigation} heading="Manage Banks" />
+      <ScreenHeader {...navigation} heading="Manage Banks" />
 
       <View style={styles.container}>
         <FlatList

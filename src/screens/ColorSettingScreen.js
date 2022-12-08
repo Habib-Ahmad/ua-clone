@@ -1,11 +1,11 @@
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
-import ScreenHeaderWithoutLogo from "../components/ScreenHeaderWithoutLogo";
+import ScreenHeader from "../components/ScreenHeader";
 
 const ColorSettingScreen = ({ navigation }) => {
   return (
     <SafeAreaView styles={styles.container}>
       <ScrollView>
-        <ScreenHeaderWithoutLogo {...navigation} heading="Colour Settings" />
+        <ScreenHeader {...navigation} heading="Colour Settings" />
 
         <View style={styles.wrapper}>
           <Text>Welcome here</Text>

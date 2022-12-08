@@ -1,11 +1,11 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { colors } from "../../utils/colors";
 
-const Input = ({ label, icon, onIconPress, placeholder, ...others }) => {
+const Input = ({ label, icon, onIconPress, ...others }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-      <TextInput style={styles.input} {...others} placeholder={placeholder} />
+      <TextInput style={styles.input} {...others} />
       {icon && (
         <TouchableOpacity activeOpacity={1} style={styles.icon} onPress={onIconPress}>
           {icon}

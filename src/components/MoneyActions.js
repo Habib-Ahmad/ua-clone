@@ -15,13 +15,17 @@ const MoneyActions = () => {
     navigation.navigate("TopupScreen");
   };
 
+  const handleTransfer = () => {
+    navigation.navigate("TransferScreen");
+  };
+
   return (
     <>
       <TouchableOpacity activeOpacity={0.6} onPress={handleTopup}>
         <Topup />
         <Text style={styles.text}>Topup</Text>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.6} onPress={() => {}}>
+      <TouchableOpacity activeOpacity={0.6} onPress={handleTransfer}>
         <Transfer />
         <Text style={styles.text}>Transfer</Text>
       </TouchableOpacity>

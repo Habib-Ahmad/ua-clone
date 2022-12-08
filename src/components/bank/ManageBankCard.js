@@ -9,7 +9,7 @@ export default function ManageBankCard({ bank, accountNumber }) {
     <View style={styles.wrapper}>
       <View style={styles.flex}>
         <View>
-          <Icon width={"30"} height={"30"} type="bank" />
+          <Icon width={"50"} height={"50"} type="bank" />
         </View>
         <View style={styles.bankInfo}>
           <Text style={styles.bankStyle}>{bank}</Text>
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   bankInfo: {
     marginLeft: "3%",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     flex: 1,
   },
   bankStyle: {

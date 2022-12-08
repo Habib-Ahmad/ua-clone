@@ -1,19 +1,19 @@
 import React from "react";
 import { Dimensions, StyleSheet, Text, View } from "react-native";
+import Mark from "../assets/Mark";
 import Button from "../components/input/Button";
 import ButtonLight from "../components/input/ButtonLight";
-import MarkIcon from "../components/withdraw/MarkIcon";
 import { colors } from "../utils/colors";
 
 export default function SuccessfulScreen({ route }) {
-  const { amount, type, crypto, cryptoValue } = route?.params || {};
+  const { amount, type, crypto, cryptoValue, name } = route?.params || {};
 
   const handePress = () => {};
   return (
     <View style={styles.wrapper}>
       <View style={styles.container}>
         <View style={styles.centeredBox}>
-          <MarkIcon width="50" height="50" />
+          <Mark />
 
           {crypto === "btc" && (
             <View>
@@ -48,6 +48,14 @@ export default function SuccessfulScreen({ route }) {
               <Text style={styles.successMessage}>have been successfully {"\n"} Swaped</Text>
             </View>
           )}
+
+          {type === "transfer" && (
+            <View>
+              <Text style={styles.amountStyle}>${amount}</Text>
+              <Text style={styles.successMessage}>have been successfully {"\n"} sent to</Text>
+              <Text style={styles.recipientName}>{name}</Text>
+            </View>
+          )}
         </View>
       </View>
 
@@ -59,6 +67,15 @@ export default function SuccessfulScreen({ route }) {
             backgroundColor={colors.primaryLight}
           />
         )}
+
+        {crypto && (
+          <ButtonLight
+            title="View Details"
+            onPress={handePress}
+            backgroundColor={colors.primaryLight}
+          />
+        )}
+
         <Button title="Ok, thanks" onPress={handePress} />
       </View>
     </View>
@@ -104,6 +121,13 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     textAlign: "center",
     marginVertical: "10%",
+    color: colors.primary,
+  },
+  recipientName: {
+    fontWeight: "700",
+    fontSize: 14,
+    textAlign: "center",
+    marginTop: 20,
     color: colors.primary,
   },
 });

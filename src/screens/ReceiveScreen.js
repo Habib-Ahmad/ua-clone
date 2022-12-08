@@ -1,45 +1,55 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import BTC from "../assets/BTC";
 import Copy from "../assets/Copy";
+import qrCode from "../assets/qr-code.png";
 import ShareButton from "../assets/ShareButton";
-import BTCIcon from "../components/currency/BTCIcon";
-import ScreenHeaderWithoutLogo from "../components/ScreenHeaderWithoutLogo";
+import ScreenHeader from "../components/ScreenHeader";
 import { colors } from "../utils/colors";
 
 export default function ReceiveScreen() {
   const navigation = useNavigation();
   return (
-    <View>
-      <ScreenHeaderWithoutLogo {...navigation} heading={"Receive"} />
-      <View style={styles.box}>
-        <View>
-          <BTCIcon width={80} height={80} />
+    <View style={styles.container}>
+      <ScreenHeader {...navigation} heading={"Receive"} />
+      <ScrollView>
+        <View style={styles.box}>
+          <View>
+            <BTC width={100} height={100} />
+          </View>
+          <Text style={styles.heading}>BTC</Text>
+          <Text style={styles.paragraph}>Available balance: $280,00.0</Text>
+          <Image source={qrCode} style={styles.qrCodeStylle} />
+          <Text style={styles.address}>0x995da37d0d08bab79779731ae275.....</Text>
         </View>
-        <Text style={styles.heading}>BTC</Text>
-        <Text style={styles.paragraph}>Available balance: $280,00.0</Text>
-        <Text style={styles.address}>0x995da37d0d08bab79779731ae275.....</Text>
-      </View>
-      <View style={styles.flexRow}>
-        <TouchableOpacity activeOpacity={0.6}>
-          <Copy width={"60"} height={"60"} />
-        </TouchableOpacity>
+        <View style={styles.flexRow}>
+          <TouchableOpacity activeOpacity={0.6} style={styles.flexOne}>
+            <Copy width={"60"} height={"60"} />
+            <Text style={styles.copyText}>Copy</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity activeOpacity={0.6}>
-          <ShareButton width={"60"} height={"60"} />
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity activeOpacity={0.6} style={styles.flexTwo}>
+            <ShareButton width={"60"} height={"60"} />
+            <Text style={styles.shareText}>Share</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   flexRow: {
     flexDirection: "row",
     width: "50%",
     justifyContent: "space-around",
     alignSelf: "center",
     marginTop: "10%",
+    paddingBottom: "5%",
   },
   box: {
     alignItems: "center",
@@ -61,5 +71,25 @@ const styles = StyleSheet.create({
     color: colors.textLight,
     marginTop: "5%",
     marginBottom: "7%",
+  },
+  qrCodeStylle: {
+    width: "100%",
+    height: 300,
+  },
+  flexOne: {
+    alignItems: "center",
+  },
+  flexTwo: {
+    alignItems: "center",
+  },
+  copyText: {
+    fontSize: 14,
+    fontWeight: "500",
+    marginTop: 10,
+  },
+  shareText: {
+    fontSize: 14,
+    fontWeight: "500",
+    marginTop: 10,
   },
 });
