@@ -11,12 +11,6 @@ import { colors } from "../utils/colors";
 export default function SwapDetailsScreen() {
   const navigation = useNavigation();
 
-  // const handleConfirm = () => {
-  //   navigation.navigate("SuccessfulScreen", {
-  //     type: "swap",
-  //   });
-  // };
-
   const handleConfirm = () => {
     navigation.navigate("EnterPinScreen");
   };
