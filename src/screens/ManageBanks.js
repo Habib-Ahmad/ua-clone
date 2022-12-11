@@ -42,7 +42,7 @@ export default function ManageBanks() {
         />
       </View>
 
-      <View style={styles.button__style}>
+      <View style={styles.buttonStyle}>
         <ButtonLight title="Add Bank" backgroundColor={colors.primaryLight} />
       </View>
     </View>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
   },
-  button__style: {
+  buttonStyle: {
     position: "absolute",
     bottom: 10,
     left: 0,
