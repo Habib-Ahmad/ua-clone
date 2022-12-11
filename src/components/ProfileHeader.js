@@ -1,7 +1,7 @@
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import { colors } from "../utils/colors";
 
-var width = Dimensions.get("window").width;
+const width = Dimensions.get("window").width;
 
 const ProfileHeader = ({ heading, paragraph }) => {
   return (
