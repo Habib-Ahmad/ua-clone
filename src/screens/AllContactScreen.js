@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   wrapper: {
-    // alignItems: "center",
     paddingHorizontal: "5%",
     marginTop: "5%",
   },
