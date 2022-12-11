@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import TopupBlue from "../assets/TopBlue";
+import TopupBlue from "../assets/TopupBlue";
 import Button from "../components/input/Button";
 import Input from "../components/input/Input";
 import ScreenHeader from "../components/ScreenHeader";

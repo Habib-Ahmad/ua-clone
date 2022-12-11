@@ -20,6 +20,9 @@ import TransferScreen from "../screens/TransferScreen";
 import WithdrawScreen from "../screens/WithdrawScreen";
 import BottomTabs from "./BottomTabs";
 import ContactTabs from "./ContactTabs";
+import TopupScreen from "../screens/TopupScreen";
+import BottomTabs from "./BottomTabs";
+
 
 const MainStack = createStackNavigator();
 

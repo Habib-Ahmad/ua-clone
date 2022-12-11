@@ -86,7 +86,11 @@ const HomeScreen = ({ navigation }) => {
 
         {expanded && (
           <Animated.View style={styles.headerBottom}>
-            {activeTab === "crypto" ? <CryptoActions /> : <MoneyActions />}
+            {activeTab === "crypto" ? (
+              <CryptoActions {...navigation} />
+            ) : (
+              <MoneyActions {...navigation} />
+            )}
           </Animated.View>
         )}
       </View>

@@ -3,7 +3,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import History from "../assets/History";
 import Home from "../assets/Home";
 import Profile from "../assets/Profile";
-import HistoryScreen from "../screens/HistoryScreen";
+import HistoryScreen from "../screens/history/HistoryScreen";
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import { colors } from "../utils/colors";
@@ -48,3 +48,4 @@ const BottomTabs = () => {
 };
 
 export default BottomTabs;
+
