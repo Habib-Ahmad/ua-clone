@@ -1,9 +1,9 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import ProfileHeader from "../components/ProfileHeader";
-import ScreenHeader from "../components/ScreenHeader";
-import { colors } from "../utils/colors";
+import ProfileHeader from "../../components/ProfileHeader";
+import ScreenHeader from "../../components/ScreenHeader";
+import { colors } from "../../utils/colors";
 
 const ProfileScreen = ({ navigation }) => {
   const handlePersonalInfo = () => {
@@ -36,7 +36,7 @@ const ProfileScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <ScreenHeader {...navigation} heading="Profile" />
+        <ScreenHeader heading="Profile" />
 
         <ProfileHeader heading="Savannah Nguyen" paragraph="SavannahNguyen180" />
 

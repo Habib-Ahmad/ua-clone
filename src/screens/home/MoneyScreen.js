@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { colors } from "../utils/colors";
+import { colors } from "../../utils/colors";
 
-const CryptoScreen = ({ wallets, setActive, setActiveTab, isFocused }) => {
+const MoneyScreen = ({ wallets, setActive, setActiveTab, isFocused }) => {
   useEffect(() => {
     if (isFocused) {
-      setActiveTab("crypto");
+      setActiveTab("money");
       setActive();
     }
   }, [isFocused, setActive, setActiveTab]);
@@ -18,7 +18,7 @@ const CryptoScreen = ({ wallets, setActive, setActiveTab, isFocused }) => {
             key={item.wallet}
             style={styles.wallet}
             onPress={() =>
-              setActive(`${item.balance.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ${item.currency}`)
+              setActive(`${item.symbol}${item.balance.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`)
             }
           >
             <Text style={styles.symbol}>{item.symbol}</Text>
@@ -26,10 +26,10 @@ const CryptoScreen = ({ wallets, setActive, setActiveTab, isFocused }) => {
             <Text style={styles.walletName}>{item.wallet}</Text>
 
             <View style={styles.balanceWrapper}>
-              <Text style={styles.balance}>{`${item.balance.replace(
+              <Text style={styles.balance}>{`${item.symbol}${item.balance.replace(
                 /\B(?=(\d{3})+(?!\d))/g,
                 ","
-              )} ${item.currency}`}</Text>
+              )}`}</Text>
               <Text style={styles.percentage}>{item.percentage}</Text>
             </View>
           </TouchableOpacity>
@@ -39,7 +39,7 @@ const CryptoScreen = ({ wallets, setActive, setActiveTab, isFocused }) => {
   );
 };
 
-export default CryptoScreen;
+export default MoneyScreen;
 
 const styles = StyleSheet.create({
   container: {

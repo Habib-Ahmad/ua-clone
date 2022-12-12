@@ -7,6 +7,7 @@ import { colors } from "../utils/colors";
 
 const MoneyActions = () => {
   const navigation = useNavigation();
+
   const handleWithdraw = () => {
     navigation.navigate("WithdrawScreen");
   };

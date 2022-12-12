@@ -1,13 +1,13 @@
 import React from "react";
 import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import avatar from "../assets/avatar.jpg";
-import BTC from "../assets/BTC";
-import Shopping from "../assets/Shopping";
-import Button from "../components/input/Button";
-import ScreenHeader from "../components/ScreenHeader";
-import Icon from "../components/withdraw/Icon";
-import { colors } from "../utils/colors";
+import avatar from "../../assets/avatar.jpg";
+import BTC from "../../assets/BTC";
+import Shopping from "../../assets/Shopping";
+import Button from "../../components/input/Button";
+import ScreenHeader from "../../components/ScreenHeader";
+import Icon from "../../components/withdraw/Icon";
+import { colors } from "../../utils/colors";
 
 export default function ReviewSummaryScreen({ route }) {
   const { crypto, withdraw, transfer, name, info } = route?.params || {};
@@ -38,7 +38,7 @@ export default function ReviewSummaryScreen({ route }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScreenHeader {...navigation} heading="Review Summary" />
+      <ScreenHeader heading="Review Summary" />
       <ScrollView>
         {withdraw && (
           <View style={styles.box}>
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: colors.primary
+    borderColor: colors.primary,
   },
 
   box: {

@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import AllContactScreen from "../screens/AllContactScreen";
-import FavoriteScreen from "../screens/FavoriteScreen";
+import AllContactScreen from "../screens/profile/AllContactScreen";
+import FavoriteScreen from "../screens/profile/FavoriteScreen";
 import { colors } from "../utils/colors";
 
 const ContactTabs = ({ transfer }) => {
@@ -18,25 +18,9 @@ const ContactTabs = ({ transfer }) => {
       }}
     >
       <Tab.Screen name="Contact" options={{ title: "All Contacts" }}>
-        {({ navigation }) => (
-          <AllContactScreen
-            // setActive={setActive}
-            // setActiveTab={setActiveTab}
-            isFocused={navigation.isFocused()}
-            transfer={transfer}
-          />
-        )}
+        {() => <AllContactScreen transfer={transfer} />}
       </Tab.Screen>
-      <Tab.Screen name="Favorites">
-        {({ navigation }) => (
-          <FavoriteScreen
-            // setActive={setActive}
-            // setActiveTab={setActiveTab}
-            isFocused={navigation.isFocused()}
-            transfer={transfer}
-          />
-        )}
-      </Tab.Screen>
+      <Tab.Screen name="Favorites">{() => <FavoriteScreen transfer={transfer} />}</Tab.Screen>
     </Tab.Navigator>
   );
 };

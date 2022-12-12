@@ -49,7 +49,6 @@ const ReasonScreen = ({ navigation }) => {
     <View style={styles.container}>
       <ScrollView>
         <ScreenHeaderWithLogo
-          {...navigation}
           heading="Reason"
           paragraph="We want to provide you with the best experience according to your need"
         />

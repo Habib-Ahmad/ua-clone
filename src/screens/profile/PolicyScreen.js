@@ -1,11 +1,11 @@
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
-import ScreenHeader from "../components/ScreenHeader";
+import ScreenHeader from "../../components/ScreenHeader";
 
-const PolicyScreen = ({ navigation }) => {
+const PolicyScreen = () => {
   return (
     <SafeAreaView styles={styles.container}>
       <ScrollView>
-        <ScreenHeader {...navigation} heading="Privacy Policy" />
+        <ScreenHeader heading="Privacy Policy" />
 
         <View style={styles.wrapper}>
           <Text style={styles.heading}>1. Types of data we collect</Text>

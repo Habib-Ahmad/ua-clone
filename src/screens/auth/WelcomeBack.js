@@ -25,7 +25,6 @@ const WelcomeBack = ({ navigation }) => {
       <View style={styles.content}>
         <ScrollView>
           <ScreenHeaderWithLogo
-            {...navigation}
             heading="Welcome back"
             paragraph="Enter your pin to log in to your account"
           />

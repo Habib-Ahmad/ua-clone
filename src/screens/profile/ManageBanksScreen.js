@@ -1,11 +1,10 @@
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import EmptyBank from "../components/bank/EmptyBank";
-import ManageBankCard from "../components/bank/ManageBankCard";
-import ButtonLight from "../components/input/ButtonLight";
-import ScreenHeader from "../components/ScreenHeader";
-import { colors } from "../utils/colors";
+import EmptyBank from "../../components/bank/EmptyBank";
+import ManageBankCard from "../../components/bank/ManageBankCard";
+import ButtonLight from "../../components/input/ButtonLight";
+import ScreenHeader from "../../components/ScreenHeader";
+import { colors } from "../../utils/colors";
 
 const DATA = [
   {
@@ -23,14 +22,12 @@ const DATA = [
 ];
 
 export default function ManageBanks() {
-  const navigation = useNavigation();
-
   const renderItem = ({ item }) => {
     return <ManageBankCard bank={item.name} accountNumber={item.accountNumber} />;
   };
   return (
     <View style={styles.wrapper}>
-      <ScreenHeader {...navigation} heading="Manage Banks" />
+      <ScreenHeader heading="Manage Banks" />
 
       <View style={styles.container}>
         <FlatList
@@ -42,7 +39,7 @@ export default function ManageBanks() {
         />
       </View>
 
-      <View style={styles.buttonStyle}>
+      <View style={styles.button__style}>
         <ButtonLight title="Add Bank" backgroundColor={colors.primaryLight} />
       </View>
     </View>
@@ -53,7 +50,7 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
   },
-  buttonStyle: {
+  button__style: {
     position: "absolute",
     bottom: 10,
     left: 0,

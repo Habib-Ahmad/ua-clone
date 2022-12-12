@@ -1,10 +1,10 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import BTC from "../assets/BTC";
-import Pen from "../assets/Pen";
-import Button from "../components/input/Button";
-import ScreenHeader from "../components/ScreenHeader";
-import { colors } from "../utils/colors";
+import BTC from "../../assets/BTC";
+import Pen from "../../assets/Pen";
+import Button from "../../components/input/Button";
+import ScreenHeader from "../../components/ScreenHeader";
+import { colors } from "../../utils/colors";
 
 const ConfirmSendCryptoScreen = ({ navigation }) => {
   return (
@@ -21,7 +21,7 @@ const ConfirmSendCryptoScreen = ({ navigation }) => {
 
         <Text style={styles.from}>From</Text>
         <View style={styles.info}>
-          <Image style={styles.icon} source={require("../assets/transaction-user.png")} />
+          <Image style={styles.icon} source={require("../../assets/transaction-user.png")} />
           <View>
             <Text>Adamu sherif</Text>
             <Text>0x995da37d0d08bab797797.....</Text>
@@ -30,7 +30,7 @@ const ConfirmSendCryptoScreen = ({ navigation }) => {
 
         <Text style={styles.from}>To</Text>
         <View style={styles.info}>
-          <Image style={styles.icon} source={require("../assets/transaction-user.png")} />
+          <Image style={styles.icon} source={require("../../assets/transaction-user.png")} />
           <Text>0x995da37d0d08bab797797.....</Text>
           <TouchableOpacity style={styles.edit} activeOpacity={0.6}>
             <Pen />

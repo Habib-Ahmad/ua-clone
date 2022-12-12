@@ -1,7 +1,7 @@
 import { FlatList, SafeAreaView, StyleSheet, View } from "react-native";
-import EmptyNotification from "../components/notification/EmptyNotification";
-import NotificationPanel from "../components/notification/NotificationPanel";
-import ScreenHeader from "../components/ScreenHeader";
+import EmptyNotification from "../../components/notification/EmptyNotification";
+import NotificationPanel from "../../components/notification/NotificationPanel";
+import ScreenHeader from "../../components/ScreenHeader";
 
 const DATA = [
   {
@@ -27,7 +27,7 @@ const DATA = [
   },
 ];
 
-const NotificationScreen = ({ navigation }) => {
+const NotificationScreen = () => {
   const renderItem = ({ item }) => {
     return (
       <NotificationPanel
@@ -41,7 +41,7 @@ const NotificationScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView styles={styles.container}>
-      <ScreenHeader {...navigation} heading="Notification" />
+      <ScreenHeader heading="Notification" />
       <View style={styles.wrapper}>
         <FlatList
           data={DATA}

@@ -2,11 +2,11 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import IDCard from "../assets/IDCard";
-import Button from "../components/input/Button";
-import Input from "../components/input/Input";
-import ScreenHeader from "../components/ScreenHeader";
-import { colors } from "../utils/colors";
+import IDCard from "../../assets/IDCard";
+import Button from "../../components/input/Button";
+import Input from "../../components/input/Input";
+import ScreenHeader from "../../components/ScreenHeader";
+import { colors } from "../../utils/colors";
 
 export default function KYCVerificationScreen() {
   const navigation = useNavigation();
@@ -18,7 +18,7 @@ export default function KYCVerificationScreen() {
   };
   return (
     <View style={styles.container}>
-      <ScreenHeader {...navigation} heading="Verify Identity" />
+      <ScreenHeader heading="Verify Identity" />
 
       <View style={styles.idCardBox}>
         <IDCard backgroundColor={colors.primaryLight} />

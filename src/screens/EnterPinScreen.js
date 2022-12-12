@@ -16,7 +16,7 @@ const EnterPinScreen = ({ navigation }) => {
   const ref3 = createRef();
   const ref4 = createRef();
 
-//   const { name, info } = route?.params || {};
+  //   const { name, info } = route?.params || {};
 
   const handlePress = () => {
     navigation.navigate("SucessfulScreen", {
@@ -29,7 +29,6 @@ const EnterPinScreen = ({ navigation }) => {
       <View style={styles.content}>
         <ScrollView>
           <ScreenHeaderWithLogo
-            {...navigation}
             heading="Enter pin"
             paragraph="Add a unique pin number to make your payment more secure"
           />

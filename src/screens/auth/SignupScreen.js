@@ -33,7 +33,7 @@ const SignupScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <ScreenHeaderWithLogo {...navigation} heading="Create account" />
+        <ScreenHeaderWithLogo heading="Create account" />
 
         <View style={styles.wrapper}>
           <View style={styles.flex}>

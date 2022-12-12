@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
-import BTC from "../assets/BTC";
-import Button from "../components/input/Button";
-import Input from "../components/input/Input";
-import ScreenHeader from "../components/ScreenHeader";
-import { colors } from "../utils/colors";
+import BTC from "../../assets/BTC";
+import Button from "../../components/input/Button";
+import Input from "../../components/input/Input";
+import ScreenHeader from "../../components/ScreenHeader";
+import { colors } from "../../utils/colors";
 
 const SendCryptoScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <ScreenHeader {...navigation} heading="Send (BTC)" />
+      <ScreenHeader heading="Send (BTC)" />
 
       <View style={styles.iconWrapper}>
         <BTC />

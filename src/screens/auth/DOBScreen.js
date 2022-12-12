@@ -37,7 +37,6 @@ const DOBScreen = ({ navigation }) => {
       <View style={styles.content}>
         <ScrollView>
           <ScreenHeaderWithLogo
-            {...navigation}
             heading="Date of birth"
             paragraph="Please provide your date of birth"
           />

@@ -18,7 +18,6 @@ const GenderScreen = ({ navigation }) => {
       <View style={styles.content}>
         <ScrollView>
           <ScreenHeaderWithLogo
-            {...navigation}
             heading="Gender"
             paragraph="To give you a better experience we need to know your gender"
           />

@@ -1,10 +1,13 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import BackArrow from "../assets/BackArrow";
 
-const ScreenHeader = ({ heading, goBack }) => {
+const ScreenHeader = ({ heading }) => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity activeOpacity={0.6} onPress={() => goBack()}>
+      <TouchableOpacity activeOpacity={0.6} onPress={() => navigation.goBack()}>
         <BackArrow />
       </TouchableOpacity>
 

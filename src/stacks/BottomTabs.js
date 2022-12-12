@@ -4,8 +4,8 @@ import History from "../assets/History";
 import Home from "../assets/Home";
 import Profile from "../assets/Profile";
 import HistoryScreen from "../screens/history/HistoryScreen";
-import HomeScreen from "../screens/HomeScreen";
-import ProfileScreen from "../screens/ProfileScreen";
+import HomeScreen from "../screens/home/HomeScreen";
+import ProfileScreen from "../screens/profile/ProfileScreen";
 import { colors } from "../utils/colors";
 
 const BottomTab = createMaterialBottomTabNavigator();
@@ -48,4 +48,3 @@ const BottomTabs = () => {
 };
 
 export default BottomTabs;
-

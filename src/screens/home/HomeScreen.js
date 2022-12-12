@@ -12,14 +12,14 @@ import {
   View,
 } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
-import BackArrowDark from "../assets/BackArrowDark";
-import Notification from "../assets/Notification";
-import Share from "../assets/Share";
-import Wave from "../assets/Wave";
-import CryptoActions from "../components/CryptoActions";
-import MoneyActions from "../components/MoneyActions";
-import HomeTabs from "../stacks/HomeTabs";
-import { colors } from "../utils/colors";
+import BackArrowDark from "../../assets/BackArrowDark";
+import Notification from "../../assets/Notification";
+import Share from "../../assets/Share";
+import Wave from "../../assets/Wave";
+import CryptoActions from "../../components/CryptoActions";
+import MoneyActions from "../../components/MoneyActions";
+import HomeTabs from "../../stacks/HomeTabs";
+import { colors } from "../../utils/colors";
 
 if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -61,7 +61,7 @@ const HomeScreen = ({ navigation }) => {
               <BackArrowDark />
             </TouchableOpacity>
           ) : (
-            <Image style={styles.logo} source={require("../assets/logo-white.png")} />
+            <Image style={styles.logo} source={require("../../assets/logo-white.png")} />
           )}
 
           <View style={styles.icons}>
@@ -86,11 +86,7 @@ const HomeScreen = ({ navigation }) => {
 
         {expanded && (
           <Animated.View style={styles.headerBottom}>
-            {activeTab === "crypto" ? (
-              <CryptoActions {...navigation} />
-            ) : (
-              <MoneyActions {...navigation} />
-            )}
+            {activeTab === "crypto" ? <CryptoActions /> : <MoneyActions />}
           </Animated.View>
         )}
       </View>

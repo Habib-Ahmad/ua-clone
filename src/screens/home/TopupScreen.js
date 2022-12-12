@@ -1,14 +1,14 @@
 import { StyleSheet, View } from "react-native";
-import TopupBlue from "../assets/TopupBlue";
-import Button from "../components/input/Button";
-import Input from "../components/input/Input";
-import ScreenHeader from "../components/ScreenHeader";
+import TopupBlue from "../../assets/TopupBlue";
+import Button from "../../components/input/Button";
+import Input from "../../components/input/Input";
+import ScreenHeader from "../../components/ScreenHeader";
 
-const TopupScreen = ({ navigation }) => {
+const TopupScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
-        <ScreenHeader heading="Top up" {...navigation} />
+        <ScreenHeader heading="Top up" />
 
         <View style={styles.iconWrapper}>
           <TopupBlue />
