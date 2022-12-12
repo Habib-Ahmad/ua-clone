@@ -33,4 +33,4 @@ export default function BTC() {
       </Defs>
     </Svg>
   );
-};
+}

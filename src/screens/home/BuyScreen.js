@@ -1,12 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-
 import { useNavigation } from "@react-navigation/native";
-import BTC from "../assets/BTC";
-import Button from "../components/input/Button";
-import Input from "../components/input/Input";
-import ScreenHeader from "../components/ScreenHeader";
-import { colors } from "../utils/colors";
+import BTC from "../../assets/BTC";
+import Button from "../../components/input/Button";
+import Input from "../../components/input/Input";
+import ScreenHeader from "../../components/ScreenHeader";
+import { colors } from "../../utils/colors";
 
 export default function BuyScreen() {
   const navigation = useNavigation();
@@ -17,7 +16,7 @@ export default function BuyScreen() {
 
   return (
     <View style={styles.container}>
-      <ScreenHeader {...navigation} heading={"Buy"} />
+      <ScreenHeader heading={"Buy"} />
 
       <View style={styles.wrapper}>
         <TouchableOpacity activeOpacity={0.6} style={styles.currencyButton}>

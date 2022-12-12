@@ -2,11 +2,11 @@ import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import BTC from "../assets/BTC";
-import Button from "../components/input/Button";
-import ScreenHeader from "../components/ScreenHeader";
-import Icon from "../components/withdraw/Icon";
-import { colors } from "../utils/colors";
+import BTC from "../../assets/BTC";
+import Button from "../../components/input/Button";
+import ScreenHeader from "../../components/ScreenHeader";
+import Icon from "../../components/withdraw/Icon";
+import { colors } from "../../utils/colors";
 
 export default function SwapDetailsScreen() {
   const navigation = useNavigation();
@@ -17,7 +17,7 @@ export default function SwapDetailsScreen() {
 
   return (
     <View style={styles.container}>
-      <ScreenHeader heading={"Swap"} {...navigation} />
+      <ScreenHeader heading={"Swap"} />
       <ScrollView>
         <View style={styles.wrapper}>
           <View style={styles.flexRow}>

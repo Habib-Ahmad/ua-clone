@@ -1,15 +1,15 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import Input from "../components/input/Input";
-import ScreenHeader from "../components/ScreenHeader";
-import ContactTabs from "../stacks/ContactTabs";
-import { colors } from "../utils/colors";
+import Input from "../../components/input/Input";
+import ScreenHeader from "../../components/ScreenHeader";
+import ContactTabs from "../../stacks/ContactTabs";
+import { colors } from "../../utils/colors";
 
-const ContactScreen = ({ navigation }) => {
+const ContactScreen = () => {
   return (
     <View style={styles.container}>
-      <ScreenHeader {...navigation} heading="Contacts" />
+      <ScreenHeader heading="Contacts" />
 
       <View style={styles.inputStyle}>
         <Input

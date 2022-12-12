@@ -24,7 +24,6 @@ const ConfirmPINScreen = ({ navigation }) => {
       <View style={styles.content}>
         <ScrollView>
           <ScreenHeaderWithLogo
-            {...navigation}
             heading="Repeat pin"
             paragraph="Add a unique pin number to make your payment more secure"
           />

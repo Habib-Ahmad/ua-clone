@@ -17,7 +17,6 @@ const GetStarted = ({ navigation }) => {
       <View style={styles.content}>
         <ScrollView style={styles.content}>
           <ScreenHeaderWithLogo
-            {...navigation}
             heading="Get Started"
             paragraph={`Welcome to ultra,${"\n"}please verify your phone number to continue`}
           />

@@ -1,7 +1,7 @@
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
-import ContactCard from "../components/contact/ContactCard";
-import EmptyContact from "../components/contact/EmptyContact";
+import ContactCard from "../../components/contact/ContactCard";
+import EmptyContact from "../../components/contact/EmptyContact";
 
 const DATA = [
   {
@@ -12,7 +12,7 @@ const DATA = [
   {
     name: "Savannah Nguyen",
     info: "curtis.weaver@example.com",
-    favorite: false,
+    favorite: true,
   },
   {
     name: "Aisha Abubakar",
@@ -21,7 +21,7 @@ const DATA = [
   },
 ];
 
-const AllContactScreen = ({ transfer }) => {
+const FavoriteScreen = ({ transfer }) => {
   const renderItem = ({ item }) => {
     return (
       <ContactCard name={item.name} info={item.info} favorite={item.favorite} transfer={transfer} />
@@ -35,13 +35,14 @@ const AllContactScreen = ({ transfer }) => {
           renderItem={renderItem}
           keyExtractor={(item, index) => index.toString()}
           ListEmptyComponent={() => <EmptyContact />}
+          style={styles.flatlistStyle}
         />
       </View>
     </View>
   );
 };
 
-export default AllContactScreen;
+export default FavoriteScreen;
 
 const styles = StyleSheet.create({
   container: {

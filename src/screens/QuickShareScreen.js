@@ -1,6 +1,5 @@
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import QuickShareCard from "../components/quickShare/QuickShareCard";
 import ScreenHeader from "../components/ScreenHeader";
 
@@ -33,14 +32,12 @@ const DATA = [
 ];
 
 export default function QuickShare() {
-  const navigation = useNavigation();
-
   const renderItem = ({ item }) => {
     return <QuickShareCard name={item.name} info={item.info} type={item.type} />;
   };
   return (
     <View>
-      <ScreenHeader {...navigation} heading="Quick Share" />
+      <ScreenHeader heading="Quick Share" />
 
       <View style={styles.wrapper}>
         <FlatList

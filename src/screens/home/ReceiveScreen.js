@@ -1,18 +1,16 @@
 import React from "react";
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import BTC from "../assets/BTC";
-import Copy from "../assets/Copy";
-import qrCode from "../assets/qr-code.png";
-import ShareButton from "../assets/ShareButton";
-import ScreenHeader from "../components/ScreenHeader";
-import { colors } from "../utils/colors";
+import BTC from "../../assets/BTC";
+import Copy from "../../assets/Copy";
+import qrCode from "../../assets/qr-code.png";
+import ShareButton from "../../assets/ShareButton";
+import ScreenHeader from "../../components/ScreenHeader";
+import { colors } from "../../utils/colors";
 
 export default function ReceiveScreen() {
-  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <ScreenHeader {...navigation} heading={"Receive"} />
+      <ScreenHeader heading={"Receive"} />
       <ScrollView>
         <View style={styles.box}>
           <View>

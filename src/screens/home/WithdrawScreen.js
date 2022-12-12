@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Dimensions, ScrollView, StyleSheet, Switch, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import Button from "../components/input/Button";
-import Input from "../components/input/Input";
-import ScreenHeader from "../components/ScreenHeader";
-import Icon from "../components/withdraw/Icon";
-import { colors } from "../utils/colors";
+import Button from "../../components/input/Button";
+import Input from "../../components/input/Input";
+import ScreenHeader from "../../components/ScreenHeader";
+import Icon from "../../components/withdraw/Icon";
+import { colors } from "../../utils/colors";
 
 export default function WithdrawScreen() {
   const navigation = useNavigation();
@@ -18,10 +18,10 @@ export default function WithdrawScreen() {
       withdraw: "true",
     });
   };
-  
+
   return (
     <View style={styles.container}>
-      <ScreenHeader {...navigation} heading="Withdraw" />
+      <ScreenHeader heading="Withdraw" />
 
       <ScrollView>
         <Icon width="80" height="80" type="bank" />

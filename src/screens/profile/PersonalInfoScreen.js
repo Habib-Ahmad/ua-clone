@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import moment from "moment";
-import Button from "../components/input/Button";
-import Input from "../components/input/Input";
-import ScreenHeader from "../components/ScreenHeader";
-import UploadImage from "../components/UploadImage";
-import { colors } from "../utils/colors";
+import Button from "../../components/input/Button";
+import Input from "../../components/input/Input";
+import ScreenHeader from "../../components/ScreenHeader";
+import UploadImage from "../../components/UploadImage";
+import { colors } from "../../utils/colors";
 
 const ProfileInfoScreen = ({ navigation }) => {
   const [currentDate, setCurrentDate] = useState("");
@@ -33,7 +33,7 @@ const ProfileInfoScreen = ({ navigation }) => {
   return (
     <SafeAreaView styles={styles.container}>
       <ScrollView>
-        <ScreenHeader {...navigation} heading="Personal Information" />
+        <ScreenHeader heading="Personal Information" />
 
         <View style={styles.editImageWrapper}>
           <UploadImage />
@@ -98,12 +98,7 @@ const ProfileInfoScreen = ({ navigation }) => {
 
           <View style={styles.space} />
 
-          <Input 
-            label="Gender" 
-            placeholder="Male" 
-            onChangeText={setGender} 
-            value={gender} 
-          />
+          <Input label="Gender" placeholder="Male" onChangeText={setGender} value={gender} />
         </View>
 
         <View style={styles.dateWrapper}>

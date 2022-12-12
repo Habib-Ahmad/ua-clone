@@ -21,7 +21,6 @@ const SigninScreen = ({ navigation }) => {
     <View style={styles.container}>
       <ScrollView>
         <ScreenHeaderWithLogo
-          {...navigation}
           heading="Sign In"
           paragraph="This is the name we will use to address you"
         />

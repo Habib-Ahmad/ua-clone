@@ -2,11 +2,11 @@ import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import avatar from "../assets/avatar.jpg";
-import Button from "../components/input/Button";
-import Input from "../components/input/Input";
-import ScreenHeader from "../components/ScreenHeader";
-import { colors } from "../utils/colors";
+import avatar from "../../assets/avatar.jpg";
+import Button from "../../components/input/Button";
+import Input from "../../components/input/Input";
+import ScreenHeader from "../../components/ScreenHeader";
+import { colors } from "../../utils/colors";
 
 export default function TransferDetailsScreen({ route }) {
   const { name, info } = route?.params || {};
@@ -19,7 +19,7 @@ export default function TransferDetailsScreen({ route }) {
 
   return (
     <View style={styles.container}>
-      <ScreenHeader {...navigation} heading="Transfer" />
+      <ScreenHeader heading="Transfer" />
 
       <View style={styles.wrapper}>
         <View style={styles.flexRow}>

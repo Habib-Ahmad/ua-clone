@@ -24,7 +24,6 @@ const CreatePINScreen = ({ navigation }) => {
       <View style={styles.content}>
         <ScrollView>
           <ScreenHeaderWithLogo
-            {...navigation}
             heading="Create new pin"
             paragraph="Add a unique pin number to make your payment more secure"
           />

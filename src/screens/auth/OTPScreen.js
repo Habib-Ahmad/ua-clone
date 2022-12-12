@@ -49,7 +49,6 @@ const OTPScreen = ({ route, navigation }) => {
       <View style={styles.content}>
         <ScrollView>
           <ScreenHeaderWithLogo
-            {...navigation}
             heading="OTP Verification"
             paragraph={phone && `Code has been sent to ${phone}`}
           />
