@@ -1,6 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import BuyScreen from "../screens/BuyScreen";
 import ColorSettingScreen from "../screens/ColorSettingScreen";
+import ConfirmSendCryptoScreen from "../screens/ConfirmSendCryptoScreen";
 import ContactScreen from "../screens/ContactScreen";
 import EnterPinScreen from "../screens/EnterPinScreen";
 import KYCVerificationScreen from "../screens/KYCVerificationScreen";
@@ -11,6 +12,7 @@ import PolicyScreen from "../screens/PolicyScreen";
 import QuickShareScreen from "../screens/QuickShareScreen";
 import ReceiveScreen from "../screens/ReceiveScreen";
 import ReviewSummaryScreen from "../screens/ReviewSummaryScreen";
+import SendCryptoScreen from "../screens/SendCryptoScreen";
 import SuccessfulScreen from "../screens/SuccessfulScreen";
 import SwapDetailsScreen from "../screens/SwapDetailsScreen";
 import SwapScreen from "../screens/SwapScreen";
@@ -31,6 +33,8 @@ const MainStackScreen = () => {
     <MainStack.Navigator screenOptions={{ headerShown: false }}>
       <MainStack.Screen name="Home" component={BottomTabs} />
       <MainStack.Screen name="TopupScreen" component={TopupScreen} />
+      <MainStack.Screen name="SendCryptoScreen" component={SendCryptoScreen} />
+      <MainStack.Screen name="ConfirmSendCryptoScreen" component={ConfirmSendCryptoScreen} />
       <MainStack.Screen name="PersonalInfoScreen" component={PersonalInfoScreen} />
       <MainStack.Screen name="ContactScreen" component={ContactScreen} />
       <MainStack.Screen name="NotificationScreen" component={NotificationScreen} />

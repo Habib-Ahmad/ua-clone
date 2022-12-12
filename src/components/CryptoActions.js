@@ -9,6 +9,10 @@ import { colors } from "../utils/colors";
 const CryptoActions = () => {
   const navigation = useNavigation();
 
+  const handleSend = () => {
+    navigation.navigate("SendCryptoScreen");
+  };
+  
   const handleReceive = () => {
     navigation.navigate("ReceiveScreen");
   };
@@ -20,9 +24,10 @@ const CryptoActions = () => {
   const handleSwap = () => {
     navigation.navigate("SwapScreen");
   };
+
   return (
     <>
-      <TouchableOpacity activeOpacity={0.6} onPress={() => {}}>
+      <TouchableOpacity activeOpacity={0.6} onPress={handleSend}>
         <Send />
         <Text style={styles.text}>Send</Text>
       </TouchableOpacity>
