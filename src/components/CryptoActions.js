@@ -9,21 +9,37 @@ import { colors } from "../utils/colors";
 const CryptoActions = () => {
   const navigation = useNavigation();
 
+  const handleSend = () => {
+    navigation.navigate("SendCryptoScreen");
+  };
+  
+  const handleReceive = () => {
+    navigation.navigate("ReceiveScreen");
+  };
+
+  const handleBuy = () => {
+    navigation.navigate("BuyScreen");
+  };
+
+  const handleSwap = () => {
+    navigation.navigate("SwapScreen");
+  };
+
   return (
     <>
-      <TouchableOpacity activeOpacity={0.6} onPress={() => navigation.navigate("SendCryptoScreen")}>
+      <TouchableOpacity activeOpacity={0.6} onPress={handleSend}>
         <Send />
         <Text style={styles.text}>Send</Text>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.6} onPress={() => {}}>
+      <TouchableOpacity activeOpacity={0.6} onPress={handleReceive}>
         <Receive />
         <Text style={styles.text}>Receive</Text>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.6} onPress={() => {}}>
+      <TouchableOpacity activeOpacity={0.6} onPress={handleBuy}>
         <Buy />
         <Text style={styles.text}>Buy</Text>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.6} onPress={() => {}}>
+      <TouchableOpacity activeOpacity={0.6} onPress={handleSwap}>
         <Swap />
         <Text style={styles.text}>Swap</Text>
       </TouchableOpacity>

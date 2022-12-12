@@ -11,4 +11,8 @@ export const colors = {
   greyLight: "#D3D3D3",
   red: "#CE395F",
   green: "#00786D",
+  blueTransparent: "#417FFE1A",
+  BTCColor: "#F2AA3F",
+  ETCColor: "#8D6DE5",
+  USDTColor: "#3B9E5C",
 };
