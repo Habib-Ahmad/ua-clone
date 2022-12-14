@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Platform, ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Calendar from "../../assets/Calendar";
 import Button from "../../components/input/Button";
@@ -22,10 +22,7 @@ const DOBScreen = ({ navigation }) => {
   };
 
   const showDatepicker = () => {
-    if (Platform.OS === "android") {
-      setShow(true);
-      // for iOS, add a button that closes the picker
-    }
+    setShow(true);
   };
 
   const handlePress = () => {
