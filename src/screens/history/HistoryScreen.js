@@ -24,10 +24,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: "relative",
+    paddingTop: 40,
   },
   headingWrapper: {
     position: "absolute",
-    top: 20,
+    top: 60,
     left: 0,
     right: 0,
     alignItems: "center",

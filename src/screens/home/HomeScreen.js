@@ -4,7 +4,6 @@ import {
   Image,
   LayoutAnimation,
   Platform,
-  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -12,6 +11,7 @@ import {
   View,
 } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
 import BackArrowDark from "../../assets/BackArrowDark";
 import Notification from "../../assets/Notification";
 import Share from "../../assets/Share";
@@ -52,7 +52,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      {isFocused && <StatusBar barStyle="light-content" backgroundColor={colors.primary} />}
+      {isFocused && <StatusBar style="light" backgroundColor={colors.primary} />}
 
       <View style={styles.header}>
         <View style={styles.headerTop}>
@@ -108,9 +108,10 @@ const styles = StyleSheet.create({
   header: {
     paddingHorizontal: 20,
     backgroundColor: colors.primary,
+    paddingTop: "10%",
   },
   wave: {
-    bottom: 5,
+    bottom: 7,
     left: 0,
     right: 0,
   },

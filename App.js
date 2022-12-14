@@ -1,5 +1,5 @@
-import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
 import ContextProvider from "./src/context/context";
 import AuthStackScreen from "./src/stacks/AuthStack";
 import MainStackScreen from "./src/stacks/MainStack";
@@ -10,7 +10,7 @@ const App = () => {
 
   return (
     <ContextProvider>
-      <StatusBar barStyle="dark-content" backgroundColor={colors.bg} />
+      <StatusBar style="dark" backgroundColor={colors.bg} />
 
       <NavigationContainer>
         {!loggedIn ? <AuthStackScreen /> : <MainStackScreen />}

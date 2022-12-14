@@ -30,7 +30,7 @@ export default ScreenHeaderWithLogo;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: "10%",
+    marginTop: "15%",
     position: "relative",
   },
   wrapper: {

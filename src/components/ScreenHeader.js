@@ -22,7 +22,7 @@ export default ScreenHeader;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: "5%",
+    marginTop: "15%",
     position: "relative",
     flexDirection: "row",
     alignItems: "center",
