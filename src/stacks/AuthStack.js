@@ -2,7 +2,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import ConfirmPINScreen from "../screens/auth/ConfirmPINScreen";
 import CreatePINScreen from "../screens/auth/CreatePINScreen";
 import DOBScreen from "../screens/auth/DOBScreen";
-import GenderScreen from "../screens/auth/GenderScreen";
 import GetStarted from "../screens/auth/GetStartedScreen";
 import OTPScreen from "../screens/auth/OTPScreen";
 import ReasonScreen from "../screens/auth/ReasonScreen";
@@ -22,7 +21,6 @@ const AuthStackScreen = () => {
       <AuthStack.Screen name="OTPScreen" component={OTPScreen} />
       <AuthStack.Screen name="ReasonScreen" component={ReasonScreen} />
       <AuthStack.Screen name="SignupScreen" component={SignupScreen} />
-      <AuthStack.Screen name="GenderScreen" component={GenderScreen} />
       <AuthStack.Screen name="DOBScreen" component={DOBScreen} />
       <AuthStack.Screen name="CreatePINScreen" component={CreatePINScreen} />
       <AuthStack.Screen name="ConfirmPINScreen" component={ConfirmPINScreen} />
