@@ -1,16 +1,25 @@
 import { createRef, useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useNavigationState } from "@react-navigation/native";
+import axios from "../../api/axios";
+import urls from "../../api/urls";
 import Button from "../../components/input/Button";
 import FourDigitInput from "../../components/input/FourDigitInput";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
+import actions from "../../context/actions";
+import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils/colors";
+import store from "../../utils/store";
 
 const OTPScreen = ({ route, navigation }) => {
-  const phone = route.params?.["phone"];
+  const {
+    state: { loading },
+    dispatch,
+  } = useGlobalContext();
+  const phoneNumber = route.params?.["phoneNumber"];
   const prevRoute = useNavigationState((state) => state.routes[state.routes.length - 2]).name;
 
-  const [timer, setTimer] = useState(30);
+  const [timer, setTimer] = useState(59);
   const [digit1, setDigit1] = useState();
   const [digit2, setDigit2] = useState();
   const [digit3, setDigit3] = useState();
@@ -32,15 +41,28 @@ const OTPScreen = ({ route, navigation }) => {
     return () => clearInterval(interval);
   }, []);
 
-  const resend = () => {
-    setTimer(30);
+  const resend = async () => {
+    axios.post(urls.auth.register, { phoneNumber }).then(() => {
+      navigation.navigate("OTPScreen", { phoneNumber });
+    });
+    setTimer(59);
   };
 
-  const handlePress = () => {
+  const handlePress = async () => {
+    dispatch({ type: actions.setLoading, payload: true });
     if (prevRoute === "ResetPINScreen") {
       navigation.navigate("CreatePINScreen");
     } else {
-      navigation.navigate("ReasonScreen");
+      await axios.post(urls.auth.verifyOTP, { phoneNumber, otp }).then(async (res) => {
+        dispatch({
+          type: actions.setAccessToken,
+          payload: { token: res.data.token.accessToken, expiry: res.data.token.accessExpiry },
+        });
+        dispatch({ type: actions.setLoading, payload: false });
+        await store.setRefreshToken(res.data.token.refreshToken);
+        await store.setRefreshExpiry(res.data.token.refreshExpiry);
+        navigation.navigate("ReasonScreen");
+      });
     }
   };
 
@@ -50,7 +72,7 @@ const OTPScreen = ({ route, navigation }) => {
         <ScrollView>
           <ScreenHeaderWithLogo
             heading="OTP Verification"
-            paragraph={phone && `Code has been sent to ${phone}`}
+            paragraph={phoneNumber && `Code has been sent to ${phoneNumber}`}
           />
 
           <FourDigitInput
@@ -81,7 +103,12 @@ const OTPScreen = ({ route, navigation }) => {
         </ScrollView>
       </View>
 
-      <Button title="Continue" onPress={handlePress} disabled={otp.length !== 4} />
+      <Button
+        title="Continue"
+        onPress={handlePress}
+        disabled={otp.length !== 4}
+        loading={loading}
+      />
     </View>
   );
 };

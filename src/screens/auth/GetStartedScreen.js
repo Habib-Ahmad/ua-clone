@@ -1,16 +1,51 @@
-import { useState } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from "react-native";
 import PhoneInput from "react-native-phone-input";
+import axios from "../../api/axios";
+import urls from "../../api/urls";
 import Button from "../../components/input/Button";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
+import actions from "../../context/actions";
+import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils/colors";
+import countries from "../../utils/countries";
 
 const GetStarted = ({ navigation }) => {
-  const [phone, setPhone] = useState("");
+  const {
+    state: { loading },
+    dispatch,
+  } = useGlobalContext();
+
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [countryList, setCountryList] = useState([]);
+
+  useEffect(() => {
+    const getValidCountries = async () => {
+      const _countries = await axios.get(urls.system.countries).then((res) => res.data.data);
+      const abbreviations = _countries.map((country) => country.abbreviation.toLowerCase());
+      const _countryList = [];
+
+      abbreviations.forEach((abb) => {
+        if (abb === "uk") abb = "gb";
+        const country = countries.find((country) => country.iso2 === abb);
+        _countryList.push(country);
+      });
+      setCountryList(_countryList);
+    };
+    getValidCountries();
+  }, []);
 
   const handlePress = async () => {
-    navigation.navigate("OTPScreen", { phone: phone });
+    dispatch({ type: actions.setLoading, payload: true });
+    await axios.post(urls.auth.register, { phoneNumber }).then(() => {
+      dispatch({ type: actions.setLoading, payload: false });
+      navigation.navigate("OTPScreen", { phoneNumber });
+    });
   };
+
+  if (!countryList.length) {
+    return <ActivityIndicator size={40} color={colors.primary} style={styles.activity} />;
+  }
 
   return (
     <View style={styles.container}>
@@ -26,8 +61,9 @@ const GetStarted = ({ navigation }) => {
             <PhoneInput
               style={styles.input}
               initialCountry="ng"
+              countriesList={countryList}
               textStyle={{ color: colors.textLight }}
-              onChangePhoneNumber={(e) => setPhone(e)}
+              onChangePhoneNumber={(e) => setPhoneNumber(e)}
             />
           </View>
 
@@ -38,7 +74,12 @@ const GetStarted = ({ navigation }) => {
         </ScrollView>
       </View>
 
-      <Button title="Send OTP" onPress={handlePress} disabled={!phone.length} />
+      <Button
+        title="Send OTP"
+        onPress={handlePress}
+        disabled={!phoneNumber.length}
+        loading={loading}
+      />
     </View>
   );
 };
@@ -87,5 +128,8 @@ const styles = StyleSheet.create({
   link: {
     color: colors.primary,
     textDecorationLine: "underline",
+  },
+  activity: {
+    flex: 1,
   },
 });

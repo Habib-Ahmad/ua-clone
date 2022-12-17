@@ -1,7 +1,7 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from "../../utils/colors";
 
-const Button = ({ title, disabled, backgroundColor, ...others }) => {
+const Button = ({ title, disabled, backgroundColor, loading, ...others }) => {
   return (
     <TouchableOpacity style={styles.container} activeOpacity={0.8} disabled={disabled} {...others}>
       <View
@@ -10,7 +10,11 @@ const Button = ({ title, disabled, backgroundColor, ...others }) => {
           { backgroundColor: disabled ? colors.greyLight : backgroundColor || colors.primary },
         ]}
       >
-        <Text style={styles.text}>{title}</Text>
+        {!loading ? (
+          <Text style={styles.text}>{title}</Text>
+        ) : (
+          <ActivityIndicator style={styles.activity} color={colors.white} size="large" />
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -38,5 +42,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     height: "100%",
     textAlignVertical: "center",
+  },
+  activity: {
+    height: "100%",
   },
 });
