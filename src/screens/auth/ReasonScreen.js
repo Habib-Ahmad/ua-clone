@@ -4,10 +4,14 @@ import Checkbox from "expo-checkbox";
 import Button from "../../components/input/Button";
 import Input from "../../components/input/Input";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
+import actions from "../../context/actions";
+import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils/colors";
 
 const ReasonScreen = ({ navigation }) => {
-  const [reasons, setReasons] = useState([
+  const { dispatch } = useGlobalContext();
+
+  const [reasonsState, setReasonsState] = useState([
     {
       reason: "Make online payments",
       isChecked: false,
@@ -31,17 +35,20 @@ const ReasonScreen = ({ navigation }) => {
   ]);
   const [otherReason, setOtherReason] = useState("");
 
-  const answer = reasons.find((item) => item.isChecked === true) || otherReason;
+  const reason = reasonsState.find((item) => item.isChecked === true) || otherReason;
+  const reasons = reasonsState.filter((item) => item.isChecked).map((item) => item.reason);
 
   const handleChange = (e, index) => {
-    setReasons((prev) => {
+    setReasonsState((prev) => {
       let current = [...prev];
       current[index].isChecked = e;
       return current;
     });
   };
 
-  const onPress = () => {
+  const onPress = async () => {
+    if (otherReason) reasons.push(otherReason);
+    dispatch({ type: actions.registeringUser.set, payload: { reasons } });
     navigation.navigate("SignupScreen");
   };
 
@@ -53,7 +60,7 @@ const ReasonScreen = ({ navigation }) => {
           paragraph="We want to provide you with the best experience according to your need"
         />
 
-        {reasons.map((reason, idx) => (
+        {reasonsState.map((reason, idx) => (
           <View key={idx} style={styles.section}>
             <Checkbox
               style={styles.checkbox}
@@ -70,7 +77,7 @@ const ReasonScreen = ({ navigation }) => {
         </View>
       </ScrollView>
 
-      <Button title="Continue" onPress={onPress} disabled={!answer} />
+      <Button title="Continue" onPress={onPress} disabled={!reason} />
     </View>
   );
 };

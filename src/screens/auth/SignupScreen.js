@@ -3,9 +3,13 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 import Button from "../../components/input/Button";
 import Input from "../../components/input/Input";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
+import actions from "../../context/actions";
+import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils/colors";
 
 const SignupScreen = ({ navigation }) => {
+  const { dispatch } = useGlobalContext();
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,18 +20,28 @@ const SignupScreen = ({ navigation }) => {
   const filledAllFields = firstName && lastName && email && password && confirmPassword;
 
   const handlePress = () => {
-    // eslint-disable-next-line no-useless-escape
-    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
-    if (reg.test(email) === false) {
-      setError("Email is Not Valid");
-      return;
-    }
+    setError("");
     if (password !== confirmPassword) {
       setError("Passwords must match");
       return;
     }
+    const reg = new RegExp("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
+    if (!reg.test(email.trim())) {
+      setError("Email is Not Valid");
+      return;
+    }
 
-    navigation.navigate("GenderScreen");
+    dispatch({
+      type: actions.registeringUser.set,
+      payload: {
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        email: email.trim(),
+        password: password.trim(),
+      },
+    });
+
+    navigation.navigate("DOBScreen");
   };
 
   return (

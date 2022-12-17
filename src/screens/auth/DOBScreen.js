@@ -1,12 +1,22 @@
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import axios from "../../api/axios";
+import urls from "../../api/urls";
 import Calendar from "../../assets/Calendar";
 import Button from "../../components/input/Button";
 import Input from "../../components/input/Input";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
+import actions from "../../context/actions";
+import { useGlobalContext } from "../../context/context";
+import { getPushNotificationToken } from "../../functions";
 
 const DOBScreen = ({ navigation }) => {
+  const {
+    state: { loading, registeringUser },
+    dispatch,
+  } = useGlobalContext();
+
   const [date, setDate] = useState(new Date());
   const [formattedDate, setFormattedDate] = useState();
   const [show, setShow] = useState(false);
@@ -25,8 +35,17 @@ const DOBScreen = ({ navigation }) => {
     setShow(true);
   };
 
-  const handlePress = () => {
-    navigation.navigate("CreatePINScreen");
+  const handlePress = async () => {
+    dispatch({ type: actions.setLoading, payload: true });
+    const token = await getPushNotificationToken();
+    registeringUser.deviceToken = token;
+    registeringUser.dateOfBirth = String(date);
+
+    await axios.post(urls.auth.details, { ...registeringUser }).then(() => {
+      dispatch({ type: actions.setLoading, payload: false });
+      dispatch({ type: actions.registeringUser.clear });
+      navigation.navigate("CreatePINScreen");
+    });
   };
 
   return (
@@ -58,7 +77,7 @@ const DOBScreen = ({ navigation }) => {
         </ScrollView>
       </View>
 
-      <Button title="Continue" onPress={handlePress} disabled={!formattedDate} />
+      <Button title="Continue" onPress={handlePress} disabled={!formattedDate} loading={loading} />
     </View>
   );
 };
