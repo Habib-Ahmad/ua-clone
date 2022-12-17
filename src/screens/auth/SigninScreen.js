@@ -1,11 +1,22 @@
 import { useState } from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import axios from "../../api/axios";
+import urls from "../../api/urls";
 import Button from "../../components/input/Button";
 import Input from "../../components/input/Input";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
+import actions from "../../context/actions";
+import { useGlobalContext } from "../../context/context";
+import { getPushNotificationToken } from "../../functions";
 import { colors } from "../../utils/colors";
+import store from "../../utils/store";
 
 const SigninScreen = ({ navigation }) => {
+  const {
+    state: { loading },
+    dispatch,
+  } = useGlobalContext();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // eslint-disable-next-line no-unused-vars
@@ -13,24 +24,49 @@ const SigninScreen = ({ navigation }) => {
 
   const filledAllFields = email && password;
 
-  const handlePress = () => {
-    navigation.navigate("HomeScreen");
+  const handlePress = async () => {
+    const deviceToken = await getPushNotificationToken();
+    await axios
+      .post(urls.auth.login, {
+        username: email.trim(),
+        password,
+        deviceToken,
+      })
+      .then(async (res) => {
+        dispatch({
+          type: actions.login,
+          payload: res.data.tokens,
+        });
+        await store.setRefreshToken(res.data.tokens.refreshToken);
+        await store.setRefreshExpiry(res.data.tokens.refreshExpiry);
+      });
   };
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <ScreenHeaderWithLogo
-          heading="Sign In"
-          paragraph="This is the name we will use to address you"
-        />
+      <ScreenHeaderWithLogo
+        heading="Sign In"
+        paragraph="This is the name we will use to address you"
+      />
 
+      <ScrollView>
         <View style={styles.wrapper}>
-          <Input label="E-mail" onChangeText={setEmail} value={email} />
+          <Input
+            label="E-mail"
+            onChangeText={setEmail}
+            value={email.trim()}
+            autoCapitalize="none"
+          />
 
           <View style={styles.space} />
 
-          <Input label="Password" secureTextEntry onChangeText={setPassword} value={password} />
+          <Input
+            label="Password"
+            secureTextEntry
+            onChangeText={setPassword}
+            value={password.trim()}
+            autoCapitalize="none"
+          />
 
           <TouchableOpacity
             style={styles.forgot}
@@ -41,7 +77,12 @@ const SigninScreen = ({ navigation }) => {
           {email && error ? <Text style={styles.error}>This email is invalid</Text> : null}
         </View>
       </ScrollView>
-      <Button title="Continue" onPress={handlePress} disabled={!filledAllFields} />
+      <Button
+        title="Continue"
+        onPress={handlePress}
+        disabled={!filledAllFields}
+        loading={loading}
+      />
     </View>
   );
 };
@@ -56,6 +97,7 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     paddingHorizontal: 20,
+    paddingTop: 20,
   },
   space: {
     width: 30,

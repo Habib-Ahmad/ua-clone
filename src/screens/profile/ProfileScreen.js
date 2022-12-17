@@ -1,11 +1,18 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import axios from "../../api/axios";
+import urls from "../../api/urls";
 import ProfileHeader from "../../components/ProfileHeader";
 import ScreenHeader from "../../components/ScreenHeader";
+import actions from "../../context/actions";
+import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils/colors";
+import store from "../../utils/store";
 
 const ProfileScreen = ({ navigation }) => {
+  const { dispatch } = useGlobalContext();
+
   const handlePersonalInfo = () => {
     navigation.navigate("PersonalInfoScreen");
   };
@@ -33,6 +40,15 @@ const ProfileScreen = ({ navigation }) => {
   const handleVerification = () => {
     navigation.navigate("KYCVerificationScreen");
   };
+
+  const logout = async () => {
+    const refreshToken = await store.getRefreshToken();
+    await axios.post(urls.auth.logout, { refreshToken });
+    await store.removeRefreshExpiry();
+    await store.removeRefreshToken();
+    dispatch({ type: actions.logout });
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -136,7 +152,7 @@ const ProfileScreen = ({ navigation }) => {
           <Text>Version 1.0</Text>
         </View>
 
-        <TouchableOpacity style={styles.card}>
+        <TouchableOpacity style={styles.card} onPress={logout}>
           <Icon name="logout" size={24} color={colors.red} />
 
           <Text style={styles.textName}>Log Out</Text>
