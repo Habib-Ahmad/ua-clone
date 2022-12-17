@@ -1,10 +1,23 @@
 import { createRef, useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import axios from "../../api/axios";
+import urls from "../../api/urls";
 import Button from "../../components/input/Button";
 import FourDigitInput from "../../components/input/FourDigitInput";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
+import actions from "../../context/actions";
+import { useGlobalContext } from "../../context/context";
+import { colors } from "../../utils/colors";
 
-const ConfirmPINScreen = ({ navigation }) => {
+const ConfirmPINScreen = ({ route, navigation }) => {
+  const value = route.params?.["value"];
+
+  const {
+    state: { loading },
+    dispatch,
+  } = useGlobalContext();
+
+  const [error, setError] = useState("");
   const [digit1, setDigit1] = useState();
   const [digit2, setDigit2] = useState();
   const [digit3, setDigit3] = useState();
@@ -16,9 +29,20 @@ const ConfirmPINScreen = ({ navigation }) => {
   const ref3 = createRef();
   const ref4 = createRef();
 
-  const handlePress = () => {
-    navigation.navigate("HomeScreen");
+  const handlePress = async () => {
+    dispatch({ type: actions.setLoading, payload: true });
+    setError("");
+    if (pin !== value) {
+      setError("Pin does not match");
+      return;
+    }
+
+    await axios.post(urls.auth.createPIN, { pin }).then(() => {
+      dispatch({ type: actions.setLoading, payload: false });
+    });
+    navigation.navigate("SigninScreen");
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -44,10 +68,17 @@ const ConfirmPINScreen = ({ navigation }) => {
               ref4,
             }}
           />
+
+          <Text style={styles.error}>{error}</Text>
         </ScrollView>
       </View>
 
-      <Button title="Continue" onPress={handlePress} disabled={pin.length !== 4} />
+      <Button
+        title="Continue"
+        onPress={handlePress}
+        disabled={pin.length !== 4}
+        loading={loading}
+      />
     </View>
   );
 };
@@ -61,5 +92,9 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
+  },
+  error: {
+    color: colors.red,
+    textAlign: "center",
   },
 });

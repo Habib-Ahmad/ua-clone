@@ -31,21 +31,25 @@ const FourDigitInput = ({
         sref={ref1}
         value={digit1}
         onChangeText={(value) => handleChange(value, setDigit1, ref2)}
+        secureTextEntry={true}
       />
       <DigitInput
         sref={ref2}
         value={digit2}
         onChangeText={(value) => handleChange(value, setDigit2, ref3)}
+        secureTextEntry={true}
       />
       <DigitInput
         sref={ref3}
         value={digit3}
         onChangeText={(value) => handleChange(value, setDigit3, ref4)}
+        secureTextEntry={true}
       />
       <DigitInput
         sref={ref4}
         value={digit4}
         onChangeText={(value) => handleChange(value, setDigit4)}
+        secureTextEntry={true}
       />
     </View>
   );

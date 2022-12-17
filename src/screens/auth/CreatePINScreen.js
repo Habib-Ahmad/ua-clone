@@ -17,8 +17,9 @@ const CreatePINScreen = ({ navigation }) => {
   const ref4 = createRef();
 
   const handlePress = () => {
-    navigation.navigate("ConfirmPINScreen");
+    navigation.navigate("ConfirmPINScreen", { value: pin });
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.content}>
