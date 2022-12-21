@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 1,
     marginTop: 10,
-    backgroundColor: colors.greyLight,
+    backgroundColor: colors.greyDark,
   },
   versionText: {
     alignItems: "center",

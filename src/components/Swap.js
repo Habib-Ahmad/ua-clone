@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: "3%",
     borderRadius: 10,
-    borderColor: colors.greyLight,
+    borderColor: colors.greyDark,
   },
 
   flexRow: {
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
 
   swapBox: {
     borderTopWidth: 1,
-    borderTopColor: colors.greyLight,
+    borderTopColor: colors.greyDark,
     marginVertical: "10%",
   },
   swapIconStyle: {

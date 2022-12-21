@@ -7,7 +7,7 @@ const ButtonLight = ({ title, disabled, backgroundColor, ...others }) => {
       <View
         style={[
           styles.button,
-          { backgroundColor: disabled ? colors.greyLight : backgroundColor || colors.primary },
+          { backgroundColor: disabled ? colors.greyDark : backgroundColor || colors.primary },
         ]}
       >
         <Text style={styles.text}>{title}</Text>

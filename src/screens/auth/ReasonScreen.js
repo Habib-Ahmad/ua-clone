@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   section: {
     borderWidth: 1,
-    borderColor: colors.greyLight,
+    borderColor: colors.greyDark,
     borderRadius: 8,
     flexDirection: "row",
     alignItems: "center",

@@ -7,7 +7,7 @@ const Button = ({ title, disabled, backgroundColor, loading, ...others }) => {
       <View
         style={[
           styles.button,
-          { backgroundColor: disabled ? colors.greyLight : backgroundColor || colors.primary },
+          { backgroundColor: disabled ? colors.greyDark : backgroundColor || colors.primary },
         ]}
       >
         {!loading ? (

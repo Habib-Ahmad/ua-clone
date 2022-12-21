@@ -8,10 +8,7 @@ const ProfileHeader = ({ heading, paragraph }) => {
     <View style={styles.container}>
       <View style={styles.wrapper}>
         <View>
-            <Image
-                style={styles.imgSize} 
-                source={require("../assets/avatar.jpg")}
-            />
+          <Image style={styles.imgSize} source={require("../assets/avatar.jpg")} />
         </View>
 
         <View style={styles.headingWrapper}>
@@ -58,13 +55,13 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   imgSize: {
-    width: 90, 
+    width: 90,
     height: 90,
-    borderRadius:999,
+    borderRadius: 999,
   },
   line: {
-    flex: 1, 
-    height: 1, 
-    backgroundColor: colors.greyLight
-  }
+    flex: 1,
+    height: 1,
+    backgroundColor: colors.greyDark,
+  },
 });
