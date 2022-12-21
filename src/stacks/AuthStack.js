@@ -2,13 +2,16 @@ import { createStackNavigator } from "@react-navigation/stack";
 import ConfirmPINScreen from "../screens/auth/ConfirmPINScreen";
 import CreatePINScreen from "../screens/auth/CreatePINScreen";
 import DOBScreen from "../screens/auth/DOBScreen";
+import ForgotPasswordScreen from "../screens/auth/ForgotPasswordScreen";
 import GetStarted from "../screens/auth/GetStartedScreen";
 import OTPScreen from "../screens/auth/OTPScreen";
 import ReasonScreen from "../screens/auth/ReasonScreen";
+import ResetPasswordScreen from "../screens/auth/ResetPasswordScreen";
 import ResetPINScreen from "../screens/auth/ResetPINScreen";
 import SigninScreen from "../screens/auth/SigninScreen";
 import SignupScreen from "../screens/auth/SignupScreen";
 import SplashScreen from "../screens/auth/SplashScreen";
+import SuccessScreen from "../screens/auth/SuccessScreen";
 import WelcomeBack from "../screens/auth/WelcomeBack";
 
 const AuthStack = createStackNavigator();
@@ -27,6 +30,9 @@ const AuthStackScreen = () => {
       <AuthStack.Screen name="WelcomeBack" component={WelcomeBack} />
       <AuthStack.Screen name="SigninScreen" component={SigninScreen} />
       <AuthStack.Screen name="ResetPINScreen" component={ResetPINScreen} />
+      <AuthStack.Screen name="ForgotPasswordScreen" component={ForgotPasswordScreen} />
+      <AuthStack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen} />
+      <AuthStack.Screen name="SuccessScreen" component={SuccessScreen} />
     </AuthStack.Navigator>
   );
 };

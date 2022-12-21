@@ -7,6 +7,8 @@ const urls = {
     createPIN: "/Identity/Pin",
     login: "/Identity/Login",
     logout: "/Identity/RevokeToken",
+    forgotPassword: "/Identity/ForgotPassword",
+    resetPassword: "/Identity/PasswordReset",
   },
   system: {
     countries: "/System/Countries",

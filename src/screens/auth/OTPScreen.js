@@ -49,21 +49,25 @@ const OTPScreen = ({ route, navigation }) => {
   };
 
   const handlePress = async () => {
-    dispatch({ type: actions.setLoading, payload: true });
     if (prevRoute === "ResetPINScreen") {
       navigation.navigate("CreatePINScreen");
-    } else {
-      await axios.post(urls.auth.verifyOTP, { phoneNumber, otp }).then(async (res) => {
-        dispatch({
-          type: actions.setAccessToken,
-          payload: { token: res.data.token.accessToken, expiry: res.data.token.accessExpiry },
-        });
-        dispatch({ type: actions.setLoading, payload: false });
-        await store.setRefreshToken(res.data.token.refreshToken);
-        await store.setRefreshExpiry(res.data.token.refreshExpiry);
-        navigation.navigate("ReasonScreen");
-      });
+      return;
     }
+
+    if (prevRoute === "ForgotPasswordScreen") {
+      navigation.navigate("ResetPasswordScreen", { phoneNumber, otp });
+      return;
+    }
+
+    await axios.post(urls.auth.verifyOTP, { phoneNumber, otp }).then(async (res) => {
+      dispatch({
+        type: actions.setAccessToken,
+        payload: { token: res.data.token.accessToken, expiry: res.data.token.accessExpiry },
+      });
+      await store.setRefreshToken(res.data.token.refreshToken);
+      await store.setRefreshExpiry(res.data.token.refreshExpiry);
+      navigation.navigate("ReasonScreen");
+    });
   };
 
   return (

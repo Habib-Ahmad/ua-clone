@@ -70,9 +70,9 @@ const SigninScreen = ({ navigation }) => {
 
           <TouchableOpacity
             style={styles.forgot}
-            onPress={() => navigation.navigate("ResetPINScreen")}
+            onPress={() => navigation.navigate("ForgotPasswordScreen")}
           >
-            <Text style={styles.forgotText}>Forgot pin?</Text>
+            <Text style={styles.forgotText}>Forgot password?</Text>
           </TouchableOpacity>
           {email && error ? <Text style={styles.error}>This email is invalid</Text> : null}
         </View>
