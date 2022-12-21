@@ -36,13 +36,11 @@ const DOBScreen = ({ navigation }) => {
   };
 
   const handlePress = async () => {
-    dispatch({ type: actions.setLoading, payload: true });
     const token = await getPushNotificationToken();
     registeringUser.deviceToken = token;
     registeringUser.dateOfBirth = String(date);
 
     await axios.post(urls.auth.details, { ...registeringUser }).then(() => {
-      dispatch({ type: actions.setLoading, payload: false });
       dispatch({ type: actions.registeringUser.clear });
       navigation.navigate("CreatePINScreen");
     });

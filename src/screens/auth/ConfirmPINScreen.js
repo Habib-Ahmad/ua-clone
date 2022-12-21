@@ -5,7 +5,6 @@ import urls from "../../api/urls";
 import Button from "../../components/input/Button";
 import FourDigitInput from "../../components/input/FourDigitInput";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
-import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils/colors";
 
@@ -14,7 +13,6 @@ const ConfirmPINScreen = ({ route, navigation }) => {
 
   const {
     state: { loading },
-    dispatch,
   } = useGlobalContext();
 
   const [error, setError] = useState("");
@@ -30,16 +28,13 @@ const ConfirmPINScreen = ({ route, navigation }) => {
   const ref4 = createRef();
 
   const handlePress = async () => {
-    dispatch({ type: actions.setLoading, payload: true });
     setError("");
     if (pin !== value) {
       setError("Pin does not match");
       return;
     }
 
-    await axios.post(urls.auth.createPIN, { pin }).then(() => {
-      dispatch({ type: actions.setLoading, payload: false });
-    });
+    await axios.post(urls.auth.createPIN, { pin });
     navigation.navigate("SigninScreen");
   };
 

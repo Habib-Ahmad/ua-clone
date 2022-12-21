@@ -5,7 +5,6 @@ import axios from "../../api/axios";
 import urls from "../../api/urls";
 import Button from "../../components/input/Button";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
-import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils/colors";
 import countries from "../../utils/countries";
@@ -13,7 +12,6 @@ import countries from "../../utils/countries";
 const GetStarted = ({ navigation }) => {
   const {
     state: { loading },
-    dispatch,
   } = useGlobalContext();
 
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -36,9 +34,7 @@ const GetStarted = ({ navigation }) => {
   }, []);
 
   const handlePress = async () => {
-    dispatch({ type: actions.setLoading, payload: true });
     await axios.post(urls.auth.register, { phoneNumber }).then(() => {
-      dispatch({ type: actions.setLoading, payload: false });
       navigation.navigate("OTPScreen", { phoneNumber });
     });
   };
