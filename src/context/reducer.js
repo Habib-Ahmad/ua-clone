@@ -1,9 +1,9 @@
 import actions from "./actions";
 
 export const initialState = {
-  isLoggedIn: false,
   accessToken: "",
   accessExpiry: "",
+  isRefreshTokenPresent: null,
   loading: false,
   registeringUser: {
     firstName: "",
@@ -25,6 +25,13 @@ export const defaultReducer = (state, action) => {
         ...state,
         accessToken: action.payload.token,
         accessExpiry: action.payload.expiry,
+      };
+    }
+
+    case actions.setIsRefreshTokenPresent: {
+      return {
+        ...state,
+        isRefreshTokenPresent: action.payload,
       };
     }
 
@@ -52,20 +59,13 @@ export const defaultReducer = (state, action) => {
       };
     }
 
-    case actions.setLoggedIn: {
-      return {
-        ...state,
-        isLoggedIn: true,
-      };
-    }
-
     case actions.login: {
       const { accessToken, accessExpiry } = action.payload;
       return {
         ...state,
-        isLoggedIn: true,
         accessToken: accessToken,
         accessExpiry: accessExpiry,
+        isRefreshTokenPresent: true,
       };
     }
 

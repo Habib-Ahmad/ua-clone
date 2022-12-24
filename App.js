@@ -7,15 +7,15 @@ import { colors } from "./src/utils/colors";
 
 const App = () => {
   return (
-    <ContextProvider>
+    <NavigationContainer>
       <StatusBar style="dark" backgroundColor={colors.bg} />
 
-      <NavigationContainer>
+      <ContextProvider>
         <AxiosInterceptor>
           <NavigationSelector />
         </AxiosInterceptor>
-      </NavigationContainer>
-    </ContextProvider>
+      </ContextProvider>
+    </NavigationContainer>
   );
 };
 

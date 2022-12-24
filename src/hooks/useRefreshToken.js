@@ -12,7 +12,7 @@ const useRefreshToken = () => {
   const { dispatch } = useGlobalContext();
 
   const refresh = async () => {
-    const refreshToken = store.getRefreshToken();
+    const refreshToken = await store.getRefreshToken();
     const response = await instance.post(urls.auth.refreshToken, { refreshToken });
 
     dispatch({

@@ -19,14 +19,12 @@ const SigninScreen = ({ navigation }) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // eslint-disable-next-line no-unused-vars
-  const [error, setError] = useState("");
 
   const filledAllFields = email && password;
 
   const handlePress = async () => {
     const deviceToken = await getPushNotificationToken();
-    await axios
+    axios
       .post(urls.auth.login, {
         username: email.trim(),
         password,
@@ -74,7 +72,6 @@ const SigninScreen = ({ navigation }) => {
           >
             <Text style={styles.forgotText}>Forgot password?</Text>
           </TouchableOpacity>
-          {email && error ? <Text style={styles.error}>This email is invalid</Text> : null}
         </View>
       </ScrollView>
       <Button
@@ -102,10 +99,6 @@ const styles = StyleSheet.create({
   space: {
     width: 30,
     height: 30,
-  },
-  error: {
-    color: colors.red,
-    marginLeft: 15,
   },
   forgot: {
     marginTop: 20,

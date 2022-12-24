@@ -43,10 +43,10 @@ const ProfileScreen = ({ navigation }) => {
 
   const logout = async () => {
     const refreshToken = await store.getRefreshToken();
-    await axios.post(urls.auth.logout, { refreshToken });
+    dispatch({ type: actions.logout });
     await store.removeRefreshExpiry();
     await store.removeRefreshToken();
-    dispatch({ type: actions.logout });
+    await axios.post(urls.auth.logout, { refreshToken });
   };
 
   return (

@@ -1,27 +1,25 @@
-import { useEffect } from "react";
-import actions from "../context/actions";
+import AuthContextProvider from "../context/authContext";
 import { useGlobalContext } from "../context/context";
 import AuthStackScreen from "../stacks/AuthStack";
 import MainStackScreen from "../stacks/MainStack";
-import store from "../utils/store";
+import FullScreenLoader from "./FullScreenLoader";
 
 const NavigationSelector = () => {
   const {
-    state: { isLoggedIn },
-    dispatch,
+    state: { isRefreshTokenPresent },
   } = useGlobalContext();
 
-  useEffect(() => {
-    const getToken = async () => {
-      const token = await store.getRefreshToken();
-      if (!token) return;
-      dispatch({ type: actions.setLoggedIn });
-    };
+  if (isRefreshTokenPresent === null) {
+    return <FullScreenLoader />;
+  }
 
-    getToken();
-  }, [dispatch]);
-
-  return isLoggedIn ? <MainStackScreen /> : <AuthStackScreen />;
+  return isRefreshTokenPresent ? (
+    <AuthContextProvider>
+      <MainStackScreen />
+    </AuthContextProvider>
+  ) : (
+    <AuthStackScreen />
+  );
 };
 
 export default NavigationSelector;
