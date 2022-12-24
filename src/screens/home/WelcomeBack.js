@@ -23,8 +23,8 @@ const WelcomeBack = ({ navigation }) => {
   const ref3 = createRef();
   const ref4 = createRef();
 
-  const handlePress = () => {
-    axios.post(urls.auth.verifyPIN, { pin }).then(() => {
+  const handlePress = async () => {
+    await axios.post(urls.auth.verifyPIN, { pin }).then(() => {
       dispatch({ type: actions.setLoggedIn });
       navigation.navigate("Home");
     });
@@ -56,6 +56,7 @@ const WelcomeBack = ({ navigation }) => {
               ref2,
               ref3,
               ref4,
+              secure: true,
             }}
           />
 

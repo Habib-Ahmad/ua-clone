@@ -66,11 +66,15 @@ export const defaultReducer = (state, action) => {
         accessToken: accessToken,
         accessExpiry: accessExpiry,
         isRefreshTokenPresent: true,
+        isLoggedIn: true,
       };
     }
 
     case actions.logout: {
-      return initialState;
+      return {
+        ...initialState,
+        isRefreshTokenPresent: false,
+      };
     }
 
     default: {

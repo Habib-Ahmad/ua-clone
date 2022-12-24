@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Toast from "react-native-root-toast";
 import actions from "../context/actions";
 import { useGlobalContext } from "../context/context";
 import useRefreshToken from "../hooks/useRefreshToken";
+import { colors } from "../utils/colors";
 import store from "../utils/store";
 
 const instance = axios.create({
@@ -47,11 +49,23 @@ const AxiosInterceptor = ({ children }) => {
     const responseInterceptor = instance.interceptors.response.use(
       (response) => {
         dispatch({ type: actions.setLoading, payload: false });
-        return { data: response.data };
+        return response;
       },
       (error) => {
         dispatch({ type: actions.setLoading, payload: false });
-        Promise.reject(error);
+        Toast.show(error.response.data.message, {
+          duration: Toast.durations.LONG,
+          position: Toast.positions.BOTTOM,
+          shadow: true,
+          animation: true,
+          hideOnPress: true,
+          keyboardAvoiding: true,
+          delay: 0,
+          opacity: 1,
+          backgroundColor: colors.pink,
+          textColor: colors.red,
+        });
+        return Promise.reject(error.response);
       }
     );
 
