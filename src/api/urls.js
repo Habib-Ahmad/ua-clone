@@ -5,10 +5,12 @@ const urls = {
     details: "/Identity/Basic",
     refreshToken: "/Identity/RefreshToken",
     createPIN: "/Identity/Pin",
+    verifyPIN: "/Identity/VerifyPin",
     login: "/Identity/Login",
     logout: "/Identity/RevokeToken",
     forgotPassword: "/Identity/ForgotPassword",
     resetPassword: "/Identity/PasswordReset",
+    resetPIN: "/Identity/ResetPin",
   },
   system: {
     countries: "/System/Countries",

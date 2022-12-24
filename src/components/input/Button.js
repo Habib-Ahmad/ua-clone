@@ -1,9 +1,15 @@
 import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from "../../utils/colors";
 
-const Button = ({ title, disabled, backgroundColor, loading, ...others }) => {
+const Button = ({ title, onPress, disabled, backgroundColor, loading, ...others }) => {
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.8} disabled={disabled} {...others}>
+    <TouchableOpacity
+      style={styles.container}
+      activeOpacity={0.8}
+      disabled={disabled}
+      onPress={disabled ? undefined : onPress}
+      {...others}
+    >
       <View
         style={[
           styles.button,

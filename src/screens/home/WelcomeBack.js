@@ -1,10 +1,17 @@
 import { createRef, useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import axios from "../../api/axios";
+import urls from "../../api/urls";
 import Button from "../../components/input/Button";
 import FourDigitInput from "../../components/input/FourDigitInput";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
+import actions from "../../context/actions";
+import { useAuthContext } from "../../context/authContext";
+import { colors } from "../../utils/colors";
 
 const WelcomeBack = ({ navigation }) => {
+  const { dispatch } = useAuthContext();
+
   const [digit1, setDigit1] = useState();
   const [digit2, setDigit2] = useState();
   const [digit3, setDigit3] = useState();
@@ -17,7 +24,10 @@ const WelcomeBack = ({ navigation }) => {
   const ref4 = createRef();
 
   const handlePress = () => {
-    navigation.navigate("HomeScreen");
+    axios.post(urls.auth.verifyPIN, { pin }).then(() => {
+      dispatch({ type: actions.setLoggedIn });
+      navigation.navigate("Home");
+    });
   };
 
   return (
@@ -25,6 +35,7 @@ const WelcomeBack = ({ navigation }) => {
       <View style={styles.content}>
         <ScrollView>
           <ScreenHeaderWithLogo
+            noBackButton
             heading="Welcome back"
             paragraph="Enter your pin to log in to your account"
           />
@@ -47,6 +58,13 @@ const WelcomeBack = ({ navigation }) => {
               ref4,
             }}
           />
+
+          <TouchableOpacity
+            style={styles.forgot}
+            onPress={() => navigation.navigate("ForgotPINScreen")}
+          >
+            <Text style={styles.forgotText}>Forgot pin?</Text>
+          </TouchableOpacity>
         </ScrollView>
       </View>
 
@@ -68,5 +86,13 @@ const styles = StyleSheet.create({
   space: {
     width: 30,
     height: 30,
+  },
+  forgot: {
+    marginTop: 20,
+    alignItems: "flex-end",
+    marginRight: 20,
+  },
+  forgotText: {
+    color: colors.primaryDark,
   },
 });

@@ -4,7 +4,9 @@ import Button from "../../components/input/Button";
 import FourDigitInput from "../../components/input/FourDigitInput";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
 
-const CreatePINScreen = ({ navigation }) => {
+const CreatePINScreen = ({ route, navigation }) => {
+  const otp = route.params?.["otp"];
+
   const [digit1, setDigit1] = useState();
   const [digit2, setDigit2] = useState();
   const [digit3, setDigit3] = useState();
@@ -17,7 +19,7 @@ const CreatePINScreen = ({ navigation }) => {
   const ref4 = createRef();
 
   const handlePress = () => {
-    navigation.navigate("ConfirmPINScreen", { value: pin });
+    navigation.navigate("ConfirmPINScreen", { value: pin, otp });
   };
 
   return (

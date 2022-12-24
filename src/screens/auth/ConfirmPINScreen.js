@@ -10,6 +10,7 @@ import { colors } from "../../utils/colors";
 
 const ConfirmPINScreen = ({ route, navigation }) => {
   const value = route.params?.["value"];
+  const otp = route.params?.["otp"];
 
   const {
     state: { loading },
@@ -31,6 +32,12 @@ const ConfirmPINScreen = ({ route, navigation }) => {
     setError("");
     if (pin !== value) {
       setError("Pin does not match");
+      return;
+    }
+
+    if (otp) {
+      await axios.post(urls.auth.resetPIN, { code: otp, pin: value });
+      navigation.navigate("SuccessScreen");
       return;
     }
 

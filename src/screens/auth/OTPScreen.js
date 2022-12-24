@@ -49,13 +49,13 @@ const OTPScreen = ({ route, navigation }) => {
   };
 
   const handlePress = async () => {
-    if (prevRoute === "ResetPINScreen") {
-      navigation.navigate("CreatePINScreen");
+    if (prevRoute === "ForgotPasswordScreen") {
+      navigation.navigate("ResetPasswordScreen", { phoneNumber, otp });
       return;
     }
 
-    if (prevRoute === "ForgotPasswordScreen") {
-      navigation.navigate("ResetPasswordScreen", { phoneNumber, otp });
+    if (prevRoute === "ForgotPINScreen") {
+      navigation.navigate("CreatePINScreen", { otp });
       return;
     }
 
