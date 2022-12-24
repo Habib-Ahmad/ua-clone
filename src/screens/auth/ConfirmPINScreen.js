@@ -68,6 +68,7 @@ const ConfirmPINScreen = ({ route, navigation }) => {
               ref2,
               ref3,
               ref4,
+              secure: true,
             }}
           />
 

@@ -42,12 +42,12 @@ const SigninScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ScreenHeaderWithLogo
-        heading="Sign In"
-        paragraph="This is the name we will use to address you"
-      />
-
       <ScrollView>
+        <ScreenHeaderWithLogo
+          heading="Sign In"
+          paragraph="This is the name we will use to address you"
+        />
+
         <View style={styles.wrapper}>
           <Input
             label="E-mail"
@@ -74,6 +74,7 @@ const SigninScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+
       <Button
         title="Continue"
         onPress={handlePress}
