@@ -3,14 +3,18 @@ import { useNavigation } from "@react-navigation/native";
 import BackArrow from "../assets/BackArrow";
 import { colors } from "../utils/colors";
 
-const ScreenHeaderWithLogo = ({ heading, paragraph }) => {
+const ScreenHeaderWithLogo = ({ heading, paragraph, noBackButton }) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
-        <TouchableOpacity activeOpacity={0.6} onPress={() => navigation.goBack()}>
-          <BackArrow />
-        </TouchableOpacity>
+        {noBackButton ? (
+          <View style={styles.space} />
+        ) : (
+          <TouchableOpacity activeOpacity={0.6} onPress={() => navigation.goBack()}>
+            <BackArrow />
+          </TouchableOpacity>
+        )}
 
         <View style={styles.headingWrapper}>
           <Text style={styles.heading}>{heading}</Text>
@@ -39,6 +43,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: "5%",
     marginBottom: 30,
   },
+  space: {
+    marginBottom: 30,
+  },
   headingWrapper: {
     position: "absolute",
     top: 0,
@@ -47,6 +54,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     justifyContent: "center",
     alignItems: "center",
+    minHeight: 30,
   },
   heading: {
     fontWeight: "600",

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from "react-native";
 import PhoneInput from "react-native-phone-input";
 import axios from "../../api/axios";
@@ -9,7 +9,7 @@ import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils/colors";
 import countries from "../../utils/countries";
 
-const GetStarted = ({ navigation }) => {
+const ForgotPasswordScreen = ({ navigation }) => {
   const {
     state: { loading },
   } = useGlobalContext();
@@ -34,7 +34,7 @@ const GetStarted = ({ navigation }) => {
   }, []);
 
   const handlePress = async () => {
-    await axios.post(urls.auth.register, { phoneNumber }).then(() => {
+    await axios.post(urls.auth.forgotPassword, { phoneNumber }).then(() => {
       navigation.navigate("OTPScreen", { phoneNumber });
     });
   };
@@ -46,10 +46,10 @@ const GetStarted = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <ScrollView style={styles.content}>
+        <ScrollView>
           <ScreenHeaderWithLogo
-            heading="Get Started"
-            paragraph={`Welcome to ultra,${"\n"}please verify your phone number to continue`}
+            heading="Forgot password"
+            paragraph="Enter your phone number to receive an OTP"
           />
 
           <View style={styles.inputWrapper}>
@@ -62,16 +62,11 @@ const GetStarted = ({ navigation }) => {
               onChangePhoneNumber={(e) => setPhoneNumber(e)}
             />
           </View>
-
-          <Text style={styles.policy}>
-            By continuing you accept our<Text style={styles.link}> Privacy Policy </Text>and
-            <Text style={styles.link}> Terms of Use </Text>
-          </Text>
         </ScrollView>
       </View>
 
       <Button
-        title="Send OTP"
+        title="Continue"
         onPress={handlePress}
         disabled={!phoneNumber.length}
         loading={loading}
@@ -80,7 +75,7 @@ const GetStarted = ({ navigation }) => {
   );
 };
 
-export default GetStarted;
+export default ForgotPasswordScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -112,18 +107,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,
-  },
-  policy: {
-    textAlign: "center",
-    fontSize: 14,
-    color: colors.textLight,
-    paddingHorizontal: "20%",
-    lineHeight: 24,
-    marginBottom: 50,
-  },
-  link: {
-    color: colors.primary,
-    textDecorationLine: "underline",
   },
   activity: {
     flex: 1,

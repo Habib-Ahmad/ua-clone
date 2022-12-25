@@ -14,14 +14,19 @@ const FourDigitInput = ({
   ref2,
   ref3,
   ref4,
+  secure,
 }) => {
-  const handleChange = (value, setState, nextRef) => {
+  const handleChange = (value, setState, nextRef, prevRef) => {
     setState(value);
     if (value) {
       if (nextRef) {
         nextRef.current.focus();
       } else {
         Keyboard.dismiss();
+      }
+    } else if (!value) {
+      if (prevRef) {
+        prevRef.current.focus();
       }
     }
   };
@@ -31,21 +36,25 @@ const FourDigitInput = ({
         sref={ref1}
         value={digit1}
         onChangeText={(value) => handleChange(value, setDigit1, ref2)}
+        secureTextEntry={secure}
       />
       <DigitInput
         sref={ref2}
         value={digit2}
-        onChangeText={(value) => handleChange(value, setDigit2, ref3)}
+        onChangeText={(value) => handleChange(value, setDigit2, ref3, ref1)}
+        secureTextEntry={secure}
       />
       <DigitInput
         sref={ref3}
         value={digit3}
-        onChangeText={(value) => handleChange(value, setDigit3, ref4)}
+        onChangeText={(value) => handleChange(value, setDigit3, ref4, ref2)}
+        secureTextEntry={secure}
       />
       <DigitInput
         sref={ref4}
         value={digit4}
-        onChangeText={(value) => handleChange(value, setDigit4)}
+        onChangeText={(value) => handleChange(value, setDigit4, null, ref3)}
+        secureTextEntry={secure}
       />
     </View>
   );

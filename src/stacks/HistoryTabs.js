@@ -12,7 +12,7 @@ const HistoryTabs = () => {
         tabBarStyle: styles.tabBarStyle,
         tabBarLabelStyle: styles.tabBarLabelStyle,
         tabBarIndicatorStyle: styles.tabBarIndicatorStyle,
-        tabBarInactiveTintColor: colors.greyLight,
+        tabBarInactiveTintColor: colors.greyDark,
         tabBarActiveTintColor: colors.primary,
         tabBarPressColor: colors.bg,
       }}

@@ -47,6 +47,7 @@ const EnterPinScreen = ({ navigation }) => {
               ref2,
               ref3,
               ref4,
+              secure: true,
             }}
           />
         </ScrollView>

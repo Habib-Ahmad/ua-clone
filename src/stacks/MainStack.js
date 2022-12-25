@@ -1,7 +1,12 @@
 import { createStackNavigator } from "@react-navigation/stack";
+import ConfirmPINScreen from "../screens/auth/ConfirmPINScreen";
+import CreatePINScreen from "../screens/auth/CreatePINScreen";
+import OTPScreen from "../screens/auth/OTPScreen";
+import SuccessScreen from "../screens/auth/SuccessScreen";
 import EnterPinScreen from "../screens/EnterPinScreen";
 import BuyScreen from "../screens/home/BuyScreen";
 import ConfirmSendCryptoScreen from "../screens/home/ConfirmSendCryptoScreen";
+import ForgotPINScreen from "../screens/home/ForgotPINScreen";
 import ReceiveScreen from "../screens/home/ReceiveScreen";
 import ReviewSummaryScreen from "../screens/home/ReviewSummaryScreen";
 import SendCryptoScreen from "../screens/home/SendCryptoScreen";
@@ -10,6 +15,7 @@ import SwapScreen from "../screens/home/SwapScreen";
 import TopupScreen from "../screens/home/TopupScreen";
 import TransferDetailsScreen from "../screens/home/TransferDetailsScreen";
 import TransferScreen from "../screens/home/TransferScreen";
+import WelcomeBack from "../screens/home/WelcomeBack";
 import WithdrawScreen from "../screens/home/WithdrawScreen";
 import ColorSettingScreen from "../screens/profile/ColorSettingScreen";
 import ContactScreen from "../screens/profile/ContactScreen";
@@ -29,6 +35,7 @@ const MainStackScreen = () => {
   return (
     <MainStack.Navigator screenOptions={{ headerShown: false }}>
       <MainStack.Screen name="Home" component={BottomTabs} />
+      <MainStack.Screen name="WelcomeBackScreen" component={WelcomeBack} />
       <MainStack.Screen name="TopupScreen" component={TopupScreen} />
       <MainStack.Screen name="SendCryptoScreen" component={SendCryptoScreen} />
       <MainStack.Screen name="ConfirmSendCryptoScreen" component={ConfirmSendCryptoScreen} />
@@ -51,6 +58,11 @@ const MainStackScreen = () => {
       <MainStack.Screen name="TransferScreen" component={TransferScreen} />
       <MainStack.Screen name="ContactTabs" component={ContactTabs} />
       <MainStack.Screen name="EnterPinScreen" component={EnterPinScreen} />
+      <MainStack.Screen name="ForgotPINScreen" component={ForgotPINScreen} />
+      <MainStack.Screen name="CreatePINScreen" component={CreatePINScreen} />
+      <MainStack.Screen name="ConfirmPINScreen" component={ConfirmPINScreen} />
+      <MainStack.Screen name="OTPScreen" component={OTPScreen} />
+      <MainStack.Screen name="SuccessScreen" component={SuccessScreen} />
     </MainStack.Navigator>
   );
 };
