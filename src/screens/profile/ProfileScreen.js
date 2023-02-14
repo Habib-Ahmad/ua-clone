@@ -1,8 +1,16 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import axios from "../../api/axios";
 import urls from "../../api/urls";
+import Card from "../../assets/Card";
+import Color from "../../assets/Color";
+import CombinedShape from "../../assets/CombinedShape";
+import Contact from "../../assets/Contact";
+import Invite from "../../assets/Invite";
+import Logout from "../../assets/Logout";
+import Notify from "../../assets/Notify";
+import Security from "../../assets/Security";
+import Stroke from "../../assets/Stroke";
+import IconTextRow from "../../components/IconTextRow";
 import ProfileHeader from "../../components/ProfileHeader";
 import ScreenHeader from "../../components/ScreenHeader";
 import actions from "../../context/actions";
@@ -37,8 +45,8 @@ const ProfileScreen = ({ navigation }) => {
     navigation.navigate("ManageBanksScreen");
   };
 
-  const handleVerification = () => {
-    navigation.navigate("KYCVerificationScreen");
+  const handleReport = () => {
+    navigation.navigate("ReportScreen");
   };
 
   const logout = async () => {
@@ -56,95 +64,75 @@ const ProfileScreen = ({ navigation }) => {
 
         <ProfileHeader heading="Savannah Nguyen" paragraph="SavannahNguyen180" />
 
-        <TouchableOpacity style={styles.card} onPress={handlePersonalInfo} activeOpacity={0.9}>
-          <Icon name="account-outline" size={24} color={colors.black} />
+        <IconTextRow
+          leftIcon={<CombinedShape/>}
+          textLeft={"Personal Info"}
+          rightIcon={<Stroke color={colors.black}/>}
+          onPress={handlePersonalInfo}
+        />
 
-          <Text style={styles.textName}>Personal Info</Text>
+        <IconTextRow
+          leftIcon={<Contact/>}
+          textLeft={"Contact"}
+          rightIcon={<Stroke color={colors.black}/>}
+          onPress={handleContact}
+        />
 
-          <View style={styles.iconWrapper}>
-            <AntDesign name="right" size={20} color={colors.black} />
-          </View>
-        </TouchableOpacity>
+        <IconTextRow
+          leftIcon={<Card/>}
+          textLeft={"Bank and Cards"}
+          rightIcon={<Stroke color={colors.black}/>}
+          onPress={handleBanks}
+        />
 
-        <TouchableOpacity style={styles.card} onPress={handleContact} activeOpacity={0.9}>
-          <Icon name="account-multiple-outline" size={24} color={colors.black} />
+        <IconTextRow
+          leftIcon={<Notify/>}
+          textLeft={"Notification"}
+          rightIcon={<Stroke color={colors.black}/>}
+          onPress={handleNotification}
+        />
 
-          <Text style={styles.textName}>Contacts</Text>
+        <IconTextRow
+          leftIcon={<Color/>}
+          textLeft={"Colour Settings"}
+          rightIcon={<Stroke color={colors.black}/>}
+          onPress={handleColor}
+        />
 
-          <View style={styles.iconWrapper}>
-            <AntDesign name="right" size={20} color={colors.black} />
-          </View>
-        </TouchableOpacity>
+        <IconTextRow
+          leftIcon={<Security color={colors.white}/>}
+          textLeft={"Become a Merchant"}
+          color={colors.white}
+          rightIcon={<Stroke color={colors.white}/>}
+          backgroundColor={colors.primary}
+        />
 
-        <TouchableOpacity style={styles.card} activeOpacity={0.9} onPress={handleBanks}>
-          <Icon name="credit-card-outline" size={24} color={colors.black} />
+        <IconTextRow
+          leftIcon={<Security color={colors.black}/>}
+          textLeft={"Change Pin"}
+          rightIcon={<Stroke color={colors.black}/>}
+        />
 
-          <Text style={styles.textName}>Bank and Cards</Text>
+        <IconTextRow
+          leftIcon={<Security color={colors.black}/>}
+          textLeft={"Report"}
+          rightIcon={<Stroke color={colors.black}/>}
+          onPress={handleReport}
+        />
 
-          <View style={styles.iconWrapper}>
-            <AntDesign name="right" size={20} color={colors.black} />
-          </View>
-        </TouchableOpacity>
+        <IconTextRow
+          leftIcon={<Security color={colors.black}/>}
+          textLeft={"Privacy Policy"}
+          rightIcon={<Stroke color={colors.black}/>}
+          onPress={handlePolicy}
+        />
 
-        <TouchableOpacity style={styles.card} onPress={handleNotification} activeOpacity={0.9}>
-          <Icon name="bell-outline" size={24} color={colors.black} />
-
-          <Text style={styles.textName}>Notification</Text>
-
-          <View style={styles.iconWrapper}>
-            <AntDesign name="right" size={20} color={colors.black} />
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.card} onPress={handleColor} activeOpacity={0.9}>
-          <Icon name="vector-triangle" size={24} color={colors.black} />
-
-          <Text style={styles.textName}>Colour Settings</Text>
-
-          <View style={styles.iconWrapper}>
-            <AntDesign name="right" size={20} color={colors.black} />
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.card} activeOpacity={0.9}>
-          <Icon name="shield-check-outline" size={24} color={colors.black} />
-
-          <Text style={styles.textName}>Change Pin</Text>
-
-          <View style={styles.iconWrapper}>
-            <AntDesign name="right" size={20} color={colors.black} />
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.card} onPress={handlePolicy} activeOpacity={0.9}>
-          <Icon name="shield-check-outline" size={24} color={colors.black} />
-
-          <Text style={styles.textName}>Privacy Policy</Text>
-
-          <View style={styles.iconWrapper}>
-            <AntDesign name="right" size={20} color={colors.black} />
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.card} onPress={handleVerification} activeOpacity={0.9}>
-          <Icon name="shield-check-outline" size={24} color={colors.black} />
-
-          <Text style={styles.textName}>KYC Verification</Text>
-
-          <View style={styles.iconWrapper}>
-            <AntDesign name="right" size={20} color={colors.black} />
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.card} activeOpacity={0.9}>
-          <Icon name="account-group-outline" size={24} color={colors.black} />
-
-          <Text style={styles.textName}>Invite Friends</Text>
-
-          <View style={styles.iconWrapper}>
-            <AntDesign name="right" size={20} color={colors.black} />
-          </View>
-        </TouchableOpacity>
+        <IconTextRow
+          leftIcon={<Invite/>}
+          textLeft={"Invite Friends"}
+          rightIcon={<Stroke color={colors.black}/>}
+          // onPress={handleVerification}
+        />
 
         <View style={styles.line} />
 
@@ -152,11 +140,12 @@ const ProfileScreen = ({ navigation }) => {
           <Text>Version 1.0</Text>
         </View>
 
-        <TouchableOpacity style={styles.card} onPress={logout}>
-          <Icon name="logout" size={24} color={colors.red} />
-
-          <Text style={styles.textName}>Log Out</Text>
-        </TouchableOpacity>
+        <IconTextRow
+          leftIcon={<Logout/>}
+          textLeft={"Logout"}
+          rightIcon={<Stroke color={colors.black}/>}
+          onPress={logout}
+        />
       </ScrollView>
     </View>
   );
@@ -168,22 +157,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingBottom: 20,
-  },
-  card: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 10,
-    marginTop: 20,
-    paddingHorizontal: 20,
-  },
-  textName: {
-    flex: 1,
-    paddingLeft: 15,
-    fontSize: 16,
-  },
-  iconWrapper: {
-    width: 30,
   },
   line: {
     flex: 1,

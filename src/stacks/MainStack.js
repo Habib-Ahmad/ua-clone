@@ -19,11 +19,11 @@ import WelcomeBack from "../screens/home/WelcomeBack";
 import WithdrawScreen from "../screens/home/WithdrawScreen";
 import ColorSettingScreen from "../screens/profile/ColorSettingScreen";
 import ContactScreen from "../screens/profile/ContactScreen";
-import KYCVerificationScreen from "../screens/profile/KYCVerificationScreen";
 import ManageBanksScreen from "../screens/profile/ManageBanksScreen";
 import NotificationScreen from "../screens/profile/NotificationScreen";
 import PersonalInfoScreen from "../screens/profile/PersonalInfoScreen";
 import PolicyScreen from "../screens/profile/PolicyScreen";
+import ReportScreen from "../screens/profile/ReportScreen";
 import QuickShareScreen from "../screens/QuickShareScreen";
 import SuccessfulScreen from "../screens/SuccessfulScreen";
 import BottomTabs from "./BottomTabs";
@@ -35,7 +35,7 @@ const MainStackScreen = () => {
   return (
     <MainStack.Navigator screenOptions={{ headerShown: false }}>
       <MainStack.Screen name="Home" component={BottomTabs} />
-      <MainStack.Screen name="WelcomeBackScreen" component={WelcomeBack} />
+      <MainStack.Screen name="WelcomeBack" component={WelcomeBack} />
       <MainStack.Screen name="TopupScreen" component={TopupScreen} />
       <MainStack.Screen name="SendCryptoScreen" component={SendCryptoScreen} />
       <MainStack.Screen name="ConfirmSendCryptoScreen" component={ConfirmSendCryptoScreen} />
@@ -44,7 +44,7 @@ const MainStackScreen = () => {
       <MainStack.Screen name="NotificationScreen" component={NotificationScreen} />
       <MainStack.Screen name="BuyScreen" component={BuyScreen} />
       <MainStack.Screen name="ColorSettingScreen" component={ColorSettingScreen} />
-      <MainStack.Screen name="KYCVerificationScreen" component={KYCVerificationScreen} />
+      <MainStack.Screen name="ReportScreen" component={ReportScreen} />
       <MainStack.Screen name="ManageBanksScreen" component={ManageBanksScreen} />
       <MainStack.Screen name="PolicyScreen" component={PolicyScreen} />
       <MainStack.Screen name="QuickShareScreen" component={QuickShareScreen} />
