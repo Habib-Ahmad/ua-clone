@@ -49,6 +49,10 @@ const ProfileScreen = ({ navigation }) => {
     navigation.navigate("ReportScreen");
   };
 
+  const handeMerchant = () => {
+    navigation.navigate("MerchantScreen");
+  };
+
   const logout = async () => {
     const refreshToken = await store.getRefreshToken();
     dispatch({ type: actions.logout });
@@ -105,6 +109,7 @@ const ProfileScreen = ({ navigation }) => {
           color={colors.white}
           rightIcon={<Stroke color={colors.white}/>}
           backgroundColor={colors.primary}
+          onPress={handeMerchant}
         />
 
         <IconTextRow

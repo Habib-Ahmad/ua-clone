@@ -17,4 +17,5 @@ export const colors = {
   BTCColor: "#F2AA3F",
   ETCColor: "#8D6DE5",
   USDTColor: "#3B9E5C",
+  active: "#00786D",
 };
