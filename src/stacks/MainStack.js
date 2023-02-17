@@ -40,7 +40,7 @@ const MainStackScreen = () => {
   return (
     <MainStack.Navigator screenOptions={{ headerShown: false }}>
       <MainStack.Screen name="Home" component={BottomTabs} />
-      <MainStack.Screen name="WelcomeBack" component={WelcomeBack} />
+      <MainStack.Screen name="WelcomeBackScreen" component={WelcomeBack} />
       <MainStack.Screen name="TopupScreen" component={TopupScreen} />
       <MainStack.Screen name="SendCryptoScreen" component={SendCryptoScreen} />
       <MainStack.Screen name="ConfirmSendCryptoScreen" component={ConfirmSendCryptoScreen} />

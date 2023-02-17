@@ -1,48 +1,49 @@
 import React from "react";
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from "../utils/colors";
 
 const IconHeader = ({ data, onPress }) => {
-  const renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.itemContainer} onPress={() => onPress(item)} activeOpacity={0.8}>
-      <View style={styles.iconContainer}>{item.icon}</View>
-      <Text style={styles.text}>{item.text}</Text>
-    </TouchableOpacity>
-  );
-
   return (
-    <FlatList
-      data={data}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.key}
-      contentContainerStyle={styles.flatList}
-      horizontal={true}
-    />
+    <View style={styles.wrapper}>
+      {data.map((item, index) => {
+        return (
+          <TouchableOpacity
+            style={styles.itemContainer}
+            onPress={() => onPress(item)}
+            activeOpacity={0.8}
+            key={index}
+          >
+            <View>{item.icon}</View>
+            <Text style={styles.text}>{item.text}</Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
   );
 };
 
 export default IconHeader;
 
 const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: "5%",
+    borderWidth: 0.5,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderColor: colors.greyDark,
+    marginTop: 20,
+  },
   itemContainer: {
     alignItems: "center",
-    marginRight: 20,
+    width: "22%",
   },
-  iconContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.greyLight,
-    borderRadius: 100,
-    height: 70,
-    width: 70,
-  },
+
   text: {
     fontWeight: "500",
     fontSize: 12,
     marginTop: 10,
-  },
-  flatList: {
-    marginTop: "10%",
-    paddingHorizontal: 20,
   },
 });

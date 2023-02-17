@@ -1,21 +1,48 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import DisplayCard from "../../components/DisplayCard";
-import ScreenHeader from "../../components/ScreenHeader";
-import { colors } from "../../utils/colors";
+import DisplayCard from "../../../components/DisplayCard";
+import { colors } from "../../../utils/colors";
 
-export default function RequestScreen({ route }) {
-  const { data } = route?.params || "";
+const requests = [
+  {
+    id: 1,
+    name: "Wade Warren",
+    email: "nevaeh.simmons@example.com",
+    type: "Withdrawal",
+    amount: "₦20,000",
+    status: "Completed",
+    date: "20th Aug 2023  9:30am",
+  },
+  {
+    id: 1,
+    name: "Wade Jude",
+    email: "nevaeh.simmons@example.com",
+    type: "Withdrawal",
+    amount: "₦20,000",
+    status: "Completed",
 
+    date: "20th Aug 2023  9:30am",
+  },
+  {
+    id: 1,
+    name: "Tunde Hammed",
+    email: "nevaeh.simmons@example.com",
+    type: "Withdrawal",
+    amount: "₦20,000",
+    status: "Completed",
+
+    date: "20th Aug 2023  9:30am",
+  },
+];
+
+const WithdrawalScreen = () => {
   return (
     <View style={styles.container}>
-      <ScreenHeader heading="Requests" />
-
-      {data.map((item, index) => {
+      {requests.map((item, index) => {
         return (
           <DisplayCard key={index} onPress={() => {}}>
             <View>
-              <Image source={require("../../assets/avatar.jpg")} style={styles.imageStyle} />
+              <Image source={require("../../../assets/avatar.jpg")} style={styles.imageStyle} />
             </View>
             <View style={styles.infoWrapper}>
               <Text style={styles.heading}>{item.name}</Text>
@@ -24,6 +51,9 @@ export default function RequestScreen({ route }) {
               <Text style={styles.paragraph}>
                 Amount: <Text style={{ color: colors.primary }}>{item.amount}</Text>
               </Text>
+              <Text style={styles.paragraph}>
+                Status: <Text style={{ color: colors.primary }}>{item.status}</Text>
+              </Text>
               <Text style={styles.paragraph}>Date: {item.date}</Text>
             </View>
           </DisplayCard>
@@ -31,7 +61,9 @@ export default function RequestScreen({ route }) {
       })}
     </View>
   );
-}
+};
+
+export default WithdrawalScreen;
 
 const styles = StyleSheet.create({
   container: {
