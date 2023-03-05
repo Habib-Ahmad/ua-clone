@@ -11,7 +11,7 @@ const DATA = [
   },
   {
     name: "Top up wallet",
-    info: "0104674762  Sterlin Bank",
+    info: "0104674762  Sterling Bank",
     type: "topup",
   },
   {

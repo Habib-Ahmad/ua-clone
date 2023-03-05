@@ -10,6 +10,7 @@ export const colors = {
   blackTransparent: "#e9f0ff26",
   greyLight: "#00000008",
   greyDark: "#D3D3D3",
+  grey: "#414141",
   red: "#CE395F",
   green: "#00786D",
   pink: "#FFC0CB",
@@ -17,4 +18,5 @@ export const colors = {
   BTCColor: "#F2AA3F",
   ETCColor: "#8D6DE5",
   USDTColor: "#3B9E5C",
+  active: "#00786D",
 };

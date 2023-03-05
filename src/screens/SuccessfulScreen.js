@@ -35,10 +35,10 @@ export default function SuccessfulScreen({ route }) {
             </View>
           )}
 
-          {type === "verification" && (
+          {type === "report" && (
             <View>
-              <Text style={styles.successText}>Success</Text>
-              <Text style={styles.successMessage}>Your account has been {"\n"} verified</Text>
+              <Text style={styles.successText}>Report Sent</Text>
+              <Text style={styles.successMessage}>We will get back to you {"\n"} shortly. Thank you for {"\n"} your understanding</Text>
             </View>
           )}
 
@@ -87,8 +87,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    justifyContent: "center", //Centered horizontally
-    alignItems: "center", //Centered vertically
+    justifyContent: "center", 
+    alignItems: "center", 
     flex: 1,
   },
   centeredBox: {

@@ -19,11 +19,16 @@ import WelcomeBack from "../screens/home/WelcomeBack";
 import WithdrawScreen from "../screens/home/WithdrawScreen";
 import ColorSettingScreen from "../screens/profile/ColorSettingScreen";
 import ContactScreen from "../screens/profile/ContactScreen";
-import KYCVerificationScreen from "../screens/profile/KYCVerificationScreen";
 import ManageBanksScreen from "../screens/profile/ManageBanksScreen";
+import MerchantHistoryScreen from "../screens/profile/MerchantHistoryScreen";
+import MerchantScreen from "../screens/profile/MerchantScreen";
 import NotificationScreen from "../screens/profile/NotificationScreen";
 import PersonalInfoScreen from "../screens/profile/PersonalInfoScreen";
 import PolicyScreen from "../screens/profile/PolicyScreen";
+import RatingScreen from "../screens/profile/RatingScreen";
+import ReportScreen from "../screens/profile/ReportScreen";
+import RequestScreen from "../screens/profile/RequestScreen";
+import TradeScreen from "../screens/profile/TradeScreen";
 import QuickShareScreen from "../screens/QuickShareScreen";
 import SuccessfulScreen from "../screens/SuccessfulScreen";
 import BottomTabs from "./BottomTabs";
@@ -44,7 +49,7 @@ const MainStackScreen = () => {
       <MainStack.Screen name="NotificationScreen" component={NotificationScreen} />
       <MainStack.Screen name="BuyScreen" component={BuyScreen} />
       <MainStack.Screen name="ColorSettingScreen" component={ColorSettingScreen} />
-      <MainStack.Screen name="KYCVerificationScreen" component={KYCVerificationScreen} />
+      <MainStack.Screen name="ReportScreen" component={ReportScreen} />
       <MainStack.Screen name="ManageBanksScreen" component={ManageBanksScreen} />
       <MainStack.Screen name="PolicyScreen" component={PolicyScreen} />
       <MainStack.Screen name="QuickShareScreen" component={QuickShareScreen} />
@@ -63,6 +68,11 @@ const MainStackScreen = () => {
       <MainStack.Screen name="ConfirmPINScreen" component={ConfirmPINScreen} />
       <MainStack.Screen name="OTPScreen" component={OTPScreen} />
       <MainStack.Screen name="SuccessScreen" component={SuccessScreen} />
+      <MainStack.Screen name="MerchantScreen" component={MerchantScreen} />
+      <MainStack.Screen name="RequestScreen" component={RequestScreen} />
+      <MainStack.Screen name="MerchantHistoryScreen" component={MerchantHistoryScreen} />
+      <MainStack.Screen name="TradeScreen" component={TradeScreen} />
+      <MainStack.Screen name="RatingScreen" component={RatingScreen} />
     </MainStack.Navigator>
   );
 };
