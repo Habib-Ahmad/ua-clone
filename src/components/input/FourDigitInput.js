@@ -17,43 +17,50 @@ const FourDigitInput = ({
   secure,
 }) => {
   const handleChange = (value, setState, nextRef, prevRef) => {
-    setState(value);
-    if (value) {
-      if (nextRef) {
-        nextRef.current.focus();
+    setState((prevState) => {
+      if (value !== "Backspace") {
+        if (nextRef) {
+          nextRef.current.focus();
+          return value;
+        } else {
+          Keyboard.dismiss();
+          return value;
+        }
       } else {
-        Keyboard.dismiss();
+        if (prevState) return null;
+
+        if (prevRef) {
+          prevRef.current.focus();
+          return "";
+        }
       }
-    } else if (!value) {
-      if (prevRef) {
-        prevRef.current.focus();
-      }
-    }
+    });
   };
+
   return (
     <View style={styles.container}>
       <DigitInput
         sref={ref1}
         value={digit1}
-        onChangeText={(value) => handleChange(value, setDigit1, ref2)}
+        onKeyPress={({ nativeEvent }) => handleChange(nativeEvent.key, setDigit1, ref2)}
         secureTextEntry={secure}
       />
       <DigitInput
         sref={ref2}
         value={digit2}
-        onChangeText={(value) => handleChange(value, setDigit2, ref3, ref1)}
+        onKeyPress={({ nativeEvent }) => handleChange(nativeEvent.key, setDigit2, ref3, ref1)}
         secureTextEntry={secure}
       />
       <DigitInput
         sref={ref3}
         value={digit3}
-        onChangeText={(value) => handleChange(value, setDigit3, ref4, ref2)}
+        onKeyPress={({ nativeEvent }) => handleChange(nativeEvent.key, setDigit3, ref4, ref2)}
         secureTextEntry={secure}
       />
       <DigitInput
         sref={ref4}
         value={digit4}
-        onChangeText={(value) => handleChange(value, setDigit4, null, ref3)}
+        onKeyPress={({ nativeEvent }) => handleChange(nativeEvent.key, setDigit4, null, ref3)}
         secureTextEntry={secure}
       />
     </View>

@@ -64,8 +64,15 @@ const GetStarted = ({ navigation }) => {
           </View>
 
           <Text style={styles.policy}>
-            By continuing you accept our<Text style={styles.link}> Privacy Policy </Text>and
-            <Text style={styles.link}> Terms of Use </Text>
+            By continuing you accept our
+            <Text style={styles.link} onPress={() => navigation.navigate("")}>
+              {" "}
+              Privacy Policy
+            </Text>
+            <Text> and </Text>
+            <Text style={styles.link} onPress={() => navigation.navigate("")}>
+              Terms of Use
+            </Text>
           </Text>
         </ScrollView>
       </View>
@@ -122,6 +129,7 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
   link: {
+    paddingHorizontal: 20,
     color: colors.primary,
     textDecorationLine: "underline",
   },
