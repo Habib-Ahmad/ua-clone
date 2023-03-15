@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-nati
 import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils/colors";
 
-const MoneyScreen = ({ setActive, setActiveTab, isFocused }) => {
+const MoneyScreen = ({ navigation, setActive, setActiveTab, isFocused }) => {
   const {
     state: {
       balance: {
@@ -21,7 +21,7 @@ const MoneyScreen = ({ setActive, setActiveTab, isFocused }) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={styles.scrollview} showsVerticalScrollIndicator={false}>
         {wallets.map((item) => (
           <TouchableOpacity
             key={item.id}
@@ -50,6 +50,16 @@ const MoneyScreen = ({ setActive, setActiveTab, isFocused }) => {
           </TouchableOpacity>
         ))}
       </ScrollView>
+
+      <View>
+        <TouchableOpacity
+          style={styles.add}
+          activeOpacity={0.6}
+          onPress={() => navigation.navigate("AddFiatWalletScreen")}
+        >
+          <Text style={styles.plus}>+</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -59,6 +69,10 @@ export default MoneyScreen;
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 10,
+    flex: 1,
+  },
+  scrollview: {
+    flex: 1,
   },
   wallet: {
     flexDirection: "row",
@@ -98,5 +112,21 @@ const styles = StyleSheet.create({
     width: 60,
     fontSize: 12,
     marginLeft: "auto",
+  },
+  add: {
+    position: "absolute",
+    backgroundColor: colors.primary,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    elevation: 5,
+    right: 10,
+    bottom: 35,
+  },
+  plus: {
+    color: colors.white,
+    fontSize: 36,
+    flex: 1,
+    alignSelf: "center",
   },
 });

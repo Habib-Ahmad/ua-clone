@@ -4,6 +4,7 @@ import CreatePINScreen from "../screens/auth/CreatePINScreen";
 import OTPScreen from "../screens/auth/OTPScreen";
 import SuccessScreen from "../screens/auth/SuccessScreen";
 import EnterPinScreen from "../screens/EnterPinScreen";
+import AddFiatWalletScreen from "../screens/home/AddFiatWalletScreen";
 import BuyScreen from "../screens/home/BuyScreen";
 import ConfirmSendCryptoScreen from "../screens/home/ConfirmSendCryptoScreen";
 import ForgotPINScreen from "../screens/home/ForgotPINScreen";
@@ -73,6 +74,7 @@ const MainStackScreen = () => {
       <MainStack.Screen name="MerchantHistoryScreen" component={MerchantHistoryScreen} />
       <MainStack.Screen name="TradeScreen" component={TradeScreen} />
       <MainStack.Screen name="RatingScreen" component={RatingScreen} />
+      <MainStack.Screen name="AddFiatWalletScreen" component={AddFiatWalletScreen} />
     </MainStack.Navigator>
   );
 };

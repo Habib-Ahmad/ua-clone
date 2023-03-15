@@ -42,6 +42,8 @@ const HomeScreen = ({ navigation }) => {
   const [expanded, setExpanded] = useState(false);
   const [total, setTotal] = useState("0");
 
+  const isFocused = useIsFocused();
+
   const handleNotification = () => {
     navigation.navigate("NotificationScreen");
   };
@@ -75,8 +77,8 @@ const HomeScreen = ({ navigation }) => {
       );
     };
 
-    getData();
-  }, [dispatch]);
+    isFocused && getData();
+  }, [dispatch, isFocused]);
 
   useEffect(() => {
     setTotal(() => {
@@ -85,8 +87,6 @@ const HomeScreen = ({ navigation }) => {
       return "5999";
     });
   }, [activeTab, fiat.symbol, fiat.worth]);
-
-  const isFocused = useIsFocused();
 
   return (
     <View style={styles.container}>

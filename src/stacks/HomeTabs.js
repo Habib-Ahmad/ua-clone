@@ -20,6 +20,7 @@ const HomeTabs = ({ setActive, setActiveTab }) => {
       <Tab.Screen name="Money">
         {({ navigation }) => (
           <MoneyScreen
+            navigation={navigation}
             setActive={setActive}
             setActiveTab={setActiveTab}
             isFocused={navigation.isFocused()}
