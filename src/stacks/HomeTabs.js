@@ -20,7 +20,6 @@ const HomeTabs = ({ setActive, setActiveTab }) => {
       <Tab.Screen name="Money">
         {({ navigation }) => (
           <MoneyScreen
-            wallets={moneyWalllets}
             setActive={setActive}
             setActiveTab={setActiveTab}
             isFocused={navigation.isFocused()}
@@ -67,43 +66,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const moneyWalllets = [
-  {
-    wallet: "Naira (NGN)",
-    symbol: "₦‎",
-    balance: "5221008",
-    percentage: "2.2%",
-  },
-  {
-    wallet: "Pounds (GBP)",
-    symbol: "£",
-    balance: "5221008",
-    percentage: "2.2%",
-  },
-  {
-    wallet: "Canadian Dollars (CAD)",
-    symbol: "$",
-    balance: "5221008",
-    percentage: "2.2%",
-  },
-  {
-    wallet: "Euros (EUR)",
-    symbol: "€",
-    balance: "5221008",
-    percentage: "2.2%",
-  },
-  {
-    wallet: "Dollars (USD)",
-    symbol: "$",
-    balance: "5221008",
-    percentage: "2.2%",
-  },
-];
-
 const cryptoWalllets = [
   {
     wallet: "Bitcoin",
-    currency: "BTC‎",
+    currency: "BTC",
     symbol: "B",
     balance: "0.259",
     percentage: "2.2%",

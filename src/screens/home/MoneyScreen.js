@@ -1,8 +1,17 @@
 import { useEffect } from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils/colors";
 
-const MoneyScreen = ({ wallets, setActive, setActiveTab, isFocused }) => {
+const MoneyScreen = ({ setActive, setActiveTab, isFocused }) => {
+  const {
+    state: {
+      balance: {
+        fiat: { wallets },
+      },
+    },
+  } = useGlobalContext();
+
   useEffect(() => {
     if (isFocused) {
       setActiveTab("money");
@@ -13,24 +22,30 @@ const MoneyScreen = ({ wallets, setActive, setActiveTab, isFocused }) => {
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {wallets?.map((item) => (
+        {wallets.map((item) => (
           <TouchableOpacity
-            key={item.wallet}
+            key={item.id}
             style={styles.wallet}
             onPress={() =>
-              setActive(`${item.symbol}${item.balance.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`)
+              setActive(
+                `${item?.currency?.symbol}${String(item?.balance).replace(
+                  /\B(?=(\d{3})+(?!\d))/g,
+                  ","
+                )}`
+              )
             }
           >
-            <Text style={styles.symbol}>{item.symbol}</Text>
+            <Text style={styles.symbol}>{item?.currency?.symbol.slice(0, 1)}</Text>
 
-            <Text style={styles.walletName}>{item.wallet}</Text>
+            <Text style={styles.walletName}>
+              {item?.currency?.name} {`(${item?.currency.symbol})`}
+            </Text>
 
             <View style={styles.balanceWrapper}>
-              <Text style={styles.balance}>{`${item.symbol}${item.balance.replace(
-                /\B(?=(\d{3})+(?!\d))/g,
-                ","
-              )}`}</Text>
-              <Text style={styles.percentage}>{item.percentage}</Text>
+              <Text style={styles.balance}>{`${item?.currency?.symbol}${String(
+                item?.balance
+              ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}</Text>
+              <Text style={styles.percentage}>{"100%"}</Text>
             </View>
           </TouchableOpacity>
         ))}
@@ -72,6 +87,7 @@ const styles = StyleSheet.create({
     textAlign: "right",
     fontWeight: "600",
     color: colors.primary,
+    fontSize: 16,
   },
   percentage: {
     textAlign: "right",
@@ -80,6 +96,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.greenLight,
     borderRadius: 12,
     width: 60,
+    fontSize: 12,
     marginLeft: "auto",
   },
 });

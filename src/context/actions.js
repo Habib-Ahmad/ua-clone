@@ -9,6 +9,8 @@ const actions = {
   logout: "LOGOUT",
   login: "LOGIN",
   setLoggedIn: "SET_LOGGED_IN",
+  setFiatWorth: "SET_FIAT_WORTH",
+  setFiatWallets: "SET_FIAT_WALLETS",
 };
 
 export default actions;

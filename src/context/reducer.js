@@ -17,6 +17,13 @@ export const initialState = {
     address: "",
     appId: "",
   },
+  balance: {
+    fiat: {
+      worth: "",
+      symbol: "",
+      wallets: [],
+    },
+  },
 };
 
 export const defaultReducer = (state, action) => {
@@ -75,6 +82,33 @@ export const defaultReducer = (state, action) => {
       return {
         ...initialState,
         isRefreshTokenPresent: false,
+      };
+    }
+
+    case actions.setFiatWorth: {
+      return {
+        ...state,
+        balance: {
+          ...state.balance,
+          fiat: {
+            ...state.balance.fiat,
+            worth: action.payload.worth,
+            symbol: action.payload.currency.symbol,
+          },
+        },
+      };
+    }
+
+    case actions.setFiatWallets: {
+      return {
+        ...state,
+        balance: {
+          ...state.balance,
+          fiat: {
+            ...state.balance.fiat,
+            wallets: action.payload,
+          },
+        },
       };
     }
 
