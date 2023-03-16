@@ -12,12 +12,16 @@ import {
 } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
+import axios from "../../api/axios";
+import urls from "../../api/urls";
 import BackArrowDark from "../../assets/BackArrowDark";
 import Notification from "../../assets/Notification";
 import Share from "../../assets/Share";
 import Wave from "../../assets/Wave";
 import CryptoActions from "../../components/CryptoActions";
 import MoneyActions from "../../components/MoneyActions";
+import actions from "../../context/actions";
+import { useGlobalContext } from "../../context/context";
 import HomeTabs from "../../stacks/HomeTabs";
 import { colors } from "../../utils/colors";
 
@@ -26,9 +30,19 @@ if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental
 }
 
 const HomeScreen = ({ navigation }) => {
+  const {
+    state: {
+      balance: { fiat },
+    },
+    dispatch,
+  } = useGlobalContext();
+
   const [active, setActive] = useState();
   const [activeTab, setActiveTab] = useState("money");
   const [expanded, setExpanded] = useState(false);
+  const [total, setTotal] = useState("0");
+
+  const isFocused = useIsFocused();
 
   const handleNotification = () => {
     navigation.navigate("NotificationScreen");
@@ -47,8 +61,32 @@ const HomeScreen = ({ navigation }) => {
     }
   }, [active]);
 
-  const total = 50000000;
-  const isFocused = useIsFocused();
+  useEffect(() => {
+    const getData = async () => {
+      await Promise.all([axios.get(urls.fiat.worth), axios.get(urls.fiat.baseUrl)]).then(
+        ([res1, res2]) => {
+          dispatch({
+            type: actions.setFiatWorth,
+            payload: res1.data.data,
+          });
+          dispatch({
+            type: actions.setFiatWallets,
+            payload: res2.data.data,
+          });
+        }
+      );
+    };
+
+    isFocused && getData();
+  }, [dispatch, isFocused]);
+
+  useEffect(() => {
+    setTotal(() => {
+      if (activeTab === "money") return `${fiat.symbol}${fiat.worth}`;
+
+      return "5999";
+    });
+  }, [activeTab, fiat.symbol, fiat.worth]);
 
   return (
     <View style={styles.container}>
@@ -78,7 +116,7 @@ const HomeScreen = ({ navigation }) => {
         <View style={styles.headerMiddle}>
           <View>
             <Text style={styles.balance}>
-              {active || `₦‎${String(total).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+              {active || `${String(total).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
             </Text>
             <Text style={styles.balanceText}>Balance Available</Text>
           </View>

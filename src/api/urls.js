@@ -12,6 +12,10 @@ const urls = {
     resetPassword: "/Identity/PasswordReset",
     resetPIN: "/Identity/ResetPin",
   },
+  fiat: {
+    baseUrl: "/Fiat",
+    worth: "/Fiat/Worth",
+  },
   system: {
     countries: "/System/Countries",
   },
