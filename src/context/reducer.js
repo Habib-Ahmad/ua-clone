@@ -15,6 +15,7 @@ export const initialState = {
     dateOfBirth: "",
     referralCode: "",
     address: "",
+    appId: "",
   },
 };
 

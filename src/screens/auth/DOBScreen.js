@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import * as SecureStore from "expo-secure-store";
+import { v4 as uuidv4 } from "uuid";
 import axios from "../../api/axios";
 import urls from "../../api/urls";
 import Calendar from "../../assets/Calendar";
@@ -10,6 +12,7 @@ import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
 import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
 import { getPushNotificationToken } from "../../functions";
+import "react-native-get-random-values";
 
 const DOBScreen = ({ navigation }) => {
   const {
@@ -35,8 +38,18 @@ const DOBScreen = ({ navigation }) => {
     setShow(true);
   };
 
+  const getAppId = async () => {
+    const uuid = uuidv4();
+    await SecureStore.setItemAsync("secure_deviceid", JSON.stringify(uuid));
+    const fetchUUID = await SecureStore.getItemAsync("secure_deviceid");
+    return fetchUUID;
+  };
+
   const handlePress = async () => {
+    const appId = await getAppId();
     const token = await getPushNotificationToken();
+
+    registeringUser.appId = appId;
     registeringUser.deviceToken = token;
     registeringUser.dateOfBirth = String(date);
 

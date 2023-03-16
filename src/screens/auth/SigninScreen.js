@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useEffect, useState } from "react";
+import { BackHandler, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useNavigationState } from "@react-navigation/native";
+import * as SecureStore from "expo-secure-store";
 import axios from "../../api/axios";
 import urls from "../../api/urls";
 import Button from "../../components/input/Button";
@@ -16,19 +18,30 @@ const SigninScreen = ({ navigation }) => {
     state: { loading },
     dispatch,
   } = useGlobalContext();
+  const prevRoute =
+    useNavigationState((state) => state.routes[state.routes.length - 2])?.name || "";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (prevRoute !== "ConfirmPINScreen") return;
+
+    const backHandler = BackHandler.addEventListener("hardwareBackPress", () => true);
+    return () => backHandler.remove();
+  }, [prevRoute]);
 
   const filledAllFields = email && password;
 
   const handlePress = async () => {
     const deviceToken = await getPushNotificationToken();
+    const appId = await SecureStore.getItemAsync("secure_deviceid");
     axios
       .post(urls.auth.login, {
         username: email.trim(),
         password,
         deviceToken,
+        appId,
       })
       .then(async (res) => {
         dispatch({
@@ -46,6 +59,7 @@ const SigninScreen = ({ navigation }) => {
         <ScreenHeaderWithLogo
           heading="Sign In"
           paragraph="This is the name we will use to address you"
+          noBackButton={prevRoute === "ConfirmPINScreen"}
         />
 
         <View style={styles.wrapper}>

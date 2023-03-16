@@ -5,9 +5,11 @@ import MainStackScreen from "../stacks/MainStack";
 import FullScreenLoader from "./FullScreenLoader";
 
 const NavigationSelector = () => {
-  const {
-    state: { isRefreshTokenPresent },
-  } = useGlobalContext();
+  // const {
+  //   state: { isRefreshTokenPresent },
+  // } = useGlobalContext();
+
+  const isRefreshTokenPresent = true;
 
   if (isRefreshTokenPresent === null) {
     return <FullScreenLoader />;
