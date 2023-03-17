@@ -1,5 +1,6 @@
 const urls = {
   auth: {
+    baseUrl: "/Identity",
     register: "/Identity/Register",
     verifyOTP: "/Identity/VerifyOTP",
     details: "/Identity/Basic",
@@ -15,6 +16,9 @@ const urls = {
   fiat: {
     baseUrl: "/Fiat",
     worth: "/Fiat/Worth",
+  },
+  trader: {
+    baseUrl: "/Trader",
   },
   system: {
     countries: "/System/Countries",
