@@ -7,10 +7,14 @@ import FourDigitInput from "../../components/input/FourDigitInput";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
 import actions from "../../context/actions";
 import { useAuthContext } from "../../context/authContext";
+import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils/colors";
 
 const WelcomeBack = ({ navigation }) => {
   const { dispatch } = useAuthContext();
+  const {
+    state: { loading },
+  } = useGlobalContext();
 
   const [digit1, setDigit1] = useState();
   const [digit2, setDigit2] = useState();
@@ -69,7 +73,7 @@ const WelcomeBack = ({ navigation }) => {
         </ScrollView>
       </View>
 
-      <Button title="Login" onPress={handlePress} disabled={pin.length !== 4} />
+      <Button title="Login" onPress={handlePress} disabled={pin.length !== 4} loading={loading} />
     </View>
   );
 };

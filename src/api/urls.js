@@ -20,6 +20,9 @@ const urls = {
   trader: {
     baseUrl: "/Trader",
   },
+  kyc: {
+    baseUrl: "Kyc",
+  },
   system: {
     countries: "/System/Countries",
   },

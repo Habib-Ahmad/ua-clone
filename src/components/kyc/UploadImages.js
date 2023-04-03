@@ -1,17 +1,32 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import Trash from "../../assets/Trash";
 import { colors } from "../../utils/colors";
 
-const UploadImages = ({ formState, setFormState, setCameraOn, setId }) => {
-  const { photo, documentFront, documentBack } = formState;
+const imgs = [
+  {
+    name: "documentFront",
+    text1: "Upload document front",
+    text2: "Please provide a clear image of the front of the document",
+  },
+  {
+    name: "documentBack",
+    text1: "Upload document back (optional)",
+    text2: "Please provide a clear image of the back of the document",
+  },
+  {
+    name: "photo",
+    text1: "Upload selfie",
+    text2: "Please provide a clear image of yourself",
+  },
+];
 
+const UploadImages = ({ base64, setBase64, setCameraOn, setId }) => {
   const handlePress = async (id) => {
     setCameraOn(true);
     setId(id);
   };
 
   const handleDelete = (id) => {
-    setFormState((prev) => ({
+    setBase64((prev) => ({
       ...prev,
       [id]: "",
     }));
@@ -21,99 +36,34 @@ const UploadImages = ({ formState, setFormState, setCameraOn, setId }) => {
     <ScrollView style={styles.container}>
       <Text style={styles.heading}>Upload</Text>
 
-      <View style={styles.document}>
-        <View style={styles.header}>
-          <View style={styles.textWrapper}>
-            <Text style={styles.text1}>Upload document front</Text>
-            <Text style={styles.text2}>
-              Please provide a clear image of the front of the document
-            </Text>
+      {imgs.map((img) => (
+        <View style={styles.document} key={img.name}>
+          <View style={styles.header}>
+            <View style={styles.textWrapper}>
+              <Text style={styles.text1}>{img.text1}</Text>
+              <Text style={styles.text2}>{img.text2}</Text>
+            </View>
+
+            {base64[img.name] ? (
+              <Text style={[styles.status, styles.uploaded]}>uploaded</Text>
+            ) : (
+              <Text style={styles.status}>Not uploaded</Text>
+            )}
           </View>
 
-          {documentFront ? (
-            <Text style={[styles.status, styles.uploaded]}>uploaded</Text>
-          ) : (
-            <Text style={styles.status}>Not uploaded</Text>
-          )}
-        </View>
-
-        <View style={styles.body}>
-          {documentFront ? (
-            <Text>image.png</Text>
-          ) : (
-            <TouchableOpacity style={styles.btn} onPress={() => handlePress("documentFront")}>
-              <Text>Upload image</Text>
-            </TouchableOpacity>
-          )}
-          {documentFront && (
-            <TouchableOpacity onPress={() => handleDelete("documentFront")}>
-              <Trash />
-            </TouchableOpacity>
-          )}
-        </View>
-      </View>
-
-      <View style={styles.document}>
-        <View style={styles.header}>
-          <View style={styles.textWrapper}>
-            <Text style={styles.text1}>Upload document back</Text>
-            <Text style={styles.text2}>
-              Please provide a clear image of the back of the document if necessary
-            </Text>
+          <View style={styles.body}>
+            {base64[img.name] ? (
+              <TouchableOpacity onPress={() => handleDelete(img.name)} activeOpacity={0.6}>
+                <Text style={styles.remove}>Remove</Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity style={styles.btn} onPress={() => handlePress(img.name)}>
+                <Text>Upload image</Text>
+              </TouchableOpacity>
+            )}
           </View>
-
-          {documentBack ? (
-            <Text style={[styles.status, styles.uploaded]}>uploaded</Text>
-          ) : (
-            <Text style={styles.status}>Not uploaded</Text>
-          )}
         </View>
-
-        <View style={styles.body}>
-          {documentBack ? (
-            <Text>image.png</Text>
-          ) : (
-            <TouchableOpacity style={styles.btn} onPress={() => handlePress("documentBack")}>
-              <Text>Upload image</Text>
-            </TouchableOpacity>
-          )}
-          {documentBack && (
-            <TouchableOpacity onPress={() => handleDelete("documentBack")}>
-              <Trash />
-            </TouchableOpacity>
-          )}
-        </View>
-      </View>
-
-      <View style={styles.document}>
-        <View style={styles.header}>
-          <View style={styles.textWrapper}>
-            <Text style={styles.text1}>Upload selfie</Text>
-            {!photo && <Text style={styles.text2}>Please provide a clear image of yourself</Text>}
-          </View>
-
-          {photo ? (
-            <Text style={[styles.status, styles.uploaded]}>uploaded</Text>
-          ) : (
-            <Text style={styles.status}>Not uploaded</Text>
-          )}
-        </View>
-
-        <View style={styles.body}>
-          {photo ? (
-            <Text>image.png</Text>
-          ) : (
-            <TouchableOpacity style={styles.btn} onPress={() => handlePress("photo")}>
-              <Text>Upload image</Text>
-            </TouchableOpacity>
-          )}
-          {photo && (
-            <TouchableOpacity onPress={() => handleDelete("photo")}>
-              <Trash />
-            </TouchableOpacity>
-          )}
-        </View>
-      </View>
+      ))}
     </ScrollView>
   );
 };
@@ -168,5 +118,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 22,
+  },
+  remove: {
+    color: colors.red,
   },
 });

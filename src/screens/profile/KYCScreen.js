@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Alert, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import CustomCamera from "../../components/CustomCamera";
 import Button from "../../components/input/Button";
 import DocumentType from "../../components/kyc/DocumentType";
+import { uploadImages } from "../../components/kyc/functions";
 import KYCSuccess from "../../components/kyc/KYCSuccess";
 import UploadImages from "../../components/kyc/UploadImages";
 import ScreenHeader from "../../components/ScreenHeader";
@@ -14,6 +15,11 @@ const KYCScreen = ({ navigation }) => {
   const [step, setStep] = useState(1);
   const [id, setId] = useState("");
   const [loading, setLoading] = useState(false);
+  const [base64, setBase64] = useState({
+    photo: "",
+    documentFront: "",
+    documentBack: "",
+  });
   const [formState, setFormState] = useState({
     identityType: 0,
     photo: "",
@@ -21,40 +27,10 @@ const KYCScreen = ({ navigation }) => {
     documentBack: "",
   });
 
-  const uploadImages = async () => {
-    setLoading(true);
-    const base64Img = `data:image/jpg;base64,${formState.photo}`;
-    const apiUrl = "https://api.cloudinary.com/v1_1/dxp3qac0p/image/upload";
-    const data = {
-      file: base64Img,
-      upload_preset: "h0ectl3r",
-    };
-
-    fetch(apiUrl, {
-      body: JSON.stringify(data),
-      headers: {
-        "content-type": "application/json",
-      },
-      method: "POST",
-    })
-      .then(async (response) => {
-        setLoading(false);
-        const data = await response.json();
-        if (data.secure_url) {
-          setStep(3);
-          setLoading(false);
-        }
-      })
-      .catch((err) => {
-        setLoading(false);
-        Alert.alert("Cannot upload, something went wrong", err);
-      });
-  };
-
   const handlePress = async () => {
     if (step === 1) setStep(2);
 
-    if (step === 2) uploadImages();
+    if (step === 2) uploadImages(base64, formState, setFormState, setLoading, setStep, "userID");
 
     if (step === 3) navigation.navigate("ProfileScreen");
   };
@@ -63,7 +39,7 @@ const KYCScreen = ({ navigation }) => {
     return (
       <View style={styles.cameraContainer}>
         <StatusBar style="light" backgroundColor={colors.black} />
-        <CustomCamera {...{ setCameraOn, formState, setFormState, id }} />
+        <CustomCamera {...{ setCameraOn, setBase64, id }} />
       </View>
     );
   }
@@ -78,7 +54,7 @@ const KYCScreen = ({ navigation }) => {
         ) : step === 3 ? (
           <KYCSuccess />
         ) : (
-          <UploadImages {...{ formState, setFormState, setCameraOn, setId }} />
+          <UploadImages {...{ base64, setBase64, setCameraOn, setId }} />
         )}
       </View>
 

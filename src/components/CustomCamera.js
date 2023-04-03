@@ -7,7 +7,7 @@ import { colors } from "../utils/colors";
 const WINDOW_HEIGHT = Dimensions.get("window").height;
 const CAPTURE_SIZE = Math.floor(WINDOW_HEIGHT * 0.08);
 
-const CustomCamera = ({ setCameraOn, setFormState, id }) => {
+const CustomCamera = ({ setCameraOn, setBase64, id }) => {
   const cameraRef = useRef();
 
   const [hasPermission, setHasPermission] = useState(null);
@@ -106,10 +106,12 @@ const CustomCamera = ({ setCameraOn, setFormState, id }) => {
   };
 
   const onUse = async () => {
-    setFormState((prev) => ({
-      ...prev,
-      [id]: image,
-    }));
+    setBase64((prev) => {
+      return {
+        ...prev,
+        [id]: image,
+      };
+    });
     await cameraRef.current.resumePreview();
     setIsPreview(false);
     setCameraOn(false);
