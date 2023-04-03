@@ -9,7 +9,6 @@ import Invite from "../../assets/Invite";
 import Logout from "../../assets/Logout";
 import Notify from "../../assets/Notify";
 import Security from "../../assets/Security";
-import Stroke from "../../assets/Stroke";
 import IconTextRow from "../../components/IconTextRow";
 import ProfileHeader from "../../components/ProfileHeader";
 import ScreenHeader from "../../components/ScreenHeader";
@@ -18,40 +17,66 @@ import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils/colors";
 import store from "../../utils/store";
 
+const data = [
+  {
+    name: "Personal Info",
+    to: "PersonalInfoScreen",
+    icon: <CombinedShape />,
+  },
+  {
+    name: "Contact",
+    to: "ContactScreen",
+    icon: <Contact />,
+  },
+  {
+    name: "Bank and Cards",
+    to: "ManageBanksScreen",
+    icon: <Card />,
+  },
+  {
+    name: "Notification",
+    to: "NotificationScreen",
+    icon: <Notify />,
+  },
+  {
+    name: "Colour Settings",
+    to: "ColorSettingScreen",
+    icon: <Color />,
+  },
+  {
+    name: "Become a Merchant",
+    to: "BecomeAMerchantScreen",
+    icon: <Security color={colors.white} />,
+  },
+  {
+    name: "KYC Verification",
+    to: "KYCScreen",
+    icon: <Security />,
+  },
+  {
+    name: "Change Pin",
+    to: "",
+    icon: <Security />,
+  },
+  {
+    name: "Report",
+    to: "ReportScreen",
+    icon: <Security />,
+  },
+  {
+    name: "Privacy Policy",
+    to: "PolicyScreen",
+    icon: <Security />,
+  },
+  {
+    name: "Invite Friends",
+    to: "",
+    icon: <Invite />,
+  },
+];
+
 const ProfileScreen = ({ navigation }) => {
   const { dispatch } = useGlobalContext();
-
-  const handlePersonalInfo = () => {
-    navigation.navigate("PersonalInfoScreen");
-  };
-
-  const handleContact = () => {
-    navigation.navigate("ContactScreen");
-  };
-
-  const handleNotification = () => {
-    navigation.navigate("NotificationScreen");
-  };
-
-  const handleColor = () => {
-    navigation.navigate("ColorSettingScreen");
-  };
-
-  const handlePolicy = () => {
-    navigation.navigate("PolicyScreen");
-  };
-
-  const handleBanks = () => {
-    navigation.navigate("ManageBanksScreen");
-  };
-
-  const handleReport = () => {
-    navigation.navigate("ReportScreen");
-  };
-
-  const handeMerchant = () => {
-    navigation.navigate("MerchantScreen");
-  };
 
   const logout = async () => {
     const refreshToken = await store.getRefreshToken();
@@ -68,76 +93,15 @@ const ProfileScreen = ({ navigation }) => {
 
         <ProfileHeader heading="Savannah Nguyen" paragraph="SavannahNguyen180" />
 
-        <IconTextRow
-          leftIcon={<CombinedShape/>}
-          textLeft={"Personal Info"}
-          rightIcon={<Stroke color={colors.black}/>}
-          onPress={handlePersonalInfo}
-        />
-
-        <IconTextRow
-          leftIcon={<Contact/>}
-          textLeft={"Contact"}
-          rightIcon={<Stroke color={colors.black}/>}
-          onPress={handleContact}
-        />
-
-        <IconTextRow
-          leftIcon={<Card/>}
-          textLeft={"Bank and Cards"}
-          rightIcon={<Stroke color={colors.black}/>}
-          onPress={handleBanks}
-        />
-
-        <IconTextRow
-          leftIcon={<Notify/>}
-          textLeft={"Notification"}
-          rightIcon={<Stroke color={colors.black}/>}
-          onPress={handleNotification}
-        />
-
-        <IconTextRow
-          leftIcon={<Color/>}
-          textLeft={"Colour Settings"}
-          rightIcon={<Stroke color={colors.black}/>}
-          onPress={handleColor}
-        />
-
-        <IconTextRow
-          leftIcon={<Security color={colors.white}/>}
-          textLeft={"Become a Merchant"}
-          color={colors.white}
-          rightIcon={<Stroke color={colors.white}/>}
-          backgroundColor={colors.primary}
-          onPress={handeMerchant}
-        />
-
-        <IconTextRow
-          leftIcon={<Security color={colors.black}/>}
-          textLeft={"Change Pin"}
-          rightIcon={<Stroke color={colors.black}/>}
-        />
-
-        <IconTextRow
-          leftIcon={<Security color={colors.black}/>}
-          textLeft={"Report"}
-          rightIcon={<Stroke color={colors.black}/>}
-          onPress={handleReport}
-        />
-
-        <IconTextRow
-          leftIcon={<Security color={colors.black}/>}
-          textLeft={"Privacy Policy"}
-          rightIcon={<Stroke color={colors.black}/>}
-          onPress={handlePolicy}
-        />
-
-        <IconTextRow
-          leftIcon={<Invite/>}
-          textLeft={"Invite Friends"}
-          rightIcon={<Stroke color={colors.black}/>}
-          // onPress={handleVerification}
-        />
+        {data.map((item) => (
+          <IconTextRow
+            key={item.name}
+            leftIcon={item.icon}
+            text={item.name}
+            BAM={item.name === "Become a Merchant"}
+            onPress={() => navigation.navigate(item.to)}
+          />
+        ))}
 
         <View style={styles.line} />
 
@@ -145,12 +109,7 @@ const ProfileScreen = ({ navigation }) => {
           <Text>Version 1.0</Text>
         </View>
 
-        <IconTextRow
-          leftIcon={<Logout/>}
-          textLeft={"Logout"}
-          rightIcon={<Stroke color={colors.black}/>}
-          onPress={logout}
-        />
+        <IconTextRow leftIcon={<Logout />} text={"Logout"} onPress={logout} noArrow />
       </ScrollView>
     </View>
   );

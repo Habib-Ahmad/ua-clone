@@ -1,53 +1,47 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import RightArrow from "../assets/RightArrow";
+import { colors } from "../utils/colors";
 
-const IconTextRow = ({ textLeft, leftIcon, rightIcon, onPress, backgroundColor, color }) => {
-    const styles = StyleSheet.create({
-        rowContainer: {
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: 20,
-            paddingHorizontal: 10,
-            backgroundColor: backgroundColor
-        },
-        leftContainer: {
-            flex:1,
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            paddingHorizontal: 15
-        },
-        rightContainer:{
-            alignItems: "flex-end",
-        },
-        textLeft: {
-            fontSize: 14,
-            color: color,
-            fontWeight: "480"
-        },
-        iconWrapper: {
-            marginRight: 15
-        }
-    });
-
-    return (
-        <TouchableOpacity
-            style={styles.rowContainer}
-            onPress={onPress}
-            activeOpacity={1}
-        >
-            <View style={styles.leftContainer}>
-                <View style={styles.iconWrapper}>
-                    {leftIcon}
-                </View>
-                <Text style={styles.textLeft}>{textLeft}</Text>
-            </View>
-            <View style={styles.rightContainer}>
-                {rightIcon}
-            </View>
-        </TouchableOpacity>
-    );
+const IconTextRow = ({ text, leftIcon, onPress, BAM, noArrow }) => {
+  return (
+    <TouchableOpacity
+      style={[styles.container, { backgroundColor: BAM && colors.primary }]}
+      onPress={onPress}
+      activeOpacity={0.6}
+    >
+      <View style={styles.leftContainer}>
+        <View style={styles.iconWrapper}>{leftIcon}</View>
+        <Text style={[styles.text, { color: BAM && colors.white }]}>{text}</Text>
+      </View>
+      <View style={styles.rightContainer}>{noArrow || <RightArrow color={BAM && "white"} />}</View>
+    </TouchableOpacity>
+  );
 };
 
 export default IconTextRow;
 
-
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 20,
+    paddingHorizontal: 10,
+  },
+  leftContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    paddingHorizontal: 15,
+  },
+  rightContainer: {
+    alignItems: "flex-end",
+  },
+  text: {
+    fontSize: 14,
+    fontWeight: "480",
+  },
+  iconWrapper: {
+    marginRight: 15,
+  },
+});

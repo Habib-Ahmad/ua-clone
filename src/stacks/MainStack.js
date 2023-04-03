@@ -18,8 +18,10 @@ import TransferDetailsScreen from "../screens/home/TransferDetailsScreen";
 import TransferScreen from "../screens/home/TransferScreen";
 import WelcomeBack from "../screens/home/WelcomeBack";
 import WithdrawScreen from "../screens/home/WithdrawScreen";
+import BecomeAMerchantScreen from "../screens/profile/BecomeAMerchantScreen";
 import ColorSettingScreen from "../screens/profile/ColorSettingScreen";
 import ContactScreen from "../screens/profile/ContactScreen";
+import KYCScreen from "../screens/profile/KYCScreen";
 import ManageBanksScreen from "../screens/profile/ManageBanksScreen";
 import MerchantHistoryScreen from "../screens/profile/MerchantHistoryScreen";
 import MerchantScreen from "../screens/profile/MerchantScreen";
@@ -75,6 +77,8 @@ const MainStackScreen = () => {
       <MainStack.Screen name="TradeScreen" component={TradeScreen} />
       <MainStack.Screen name="RatingScreen" component={RatingScreen} />
       <MainStack.Screen name="AddFiatWalletScreen" component={AddFiatWalletScreen} />
+      <MainStack.Screen name="BecomeAMerchantScreen" component={BecomeAMerchantScreen} />
+      <MainStack.Screen name="KYCScreen" component={KYCScreen} />
     </MainStack.Navigator>
   );
 };
