@@ -23,9 +23,8 @@ const AddFiatWalletScreen = ({ navigation }) => {
       {
         text: "ok",
         onPress: async () =>
-          await axios.post(urls.fiat.baseUrl, { countryId: id }).then((res) => {
-            console.log(res);
-            // navigation.navigate("HomeScreen");
+          await axios.post(urls.fiat.baseUrl, { countryId: id }).then(() => {
+            navigation.navigate("HomeScreen");
           }),
       },
     ]);

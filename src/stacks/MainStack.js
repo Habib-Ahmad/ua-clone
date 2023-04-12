@@ -16,6 +16,7 @@ import ReviewSummaryScreen from "../screens/home/ReviewSummaryScreen";
 import SendCryptoScreen from "../screens/home/SendCryptoScreen";
 import SwapDetailsScreen from "../screens/home/SwapDetailsScreen";
 import SwapScreen from "../screens/home/SwapScreen";
+import TopupMethodScreen from "../screens/home/TopupMethodScreen";
 import TopupScreen from "../screens/home/TopupScreen";
 import TransferDetailsScreen from "../screens/home/TransferDetailsScreen";
 import TransferScreen from "../screens/home/TransferScreen";
@@ -61,6 +62,7 @@ const MainStackScreen = () => {
       <MainStack.Screen name="WelcomeBackScreen" component={WelcomeBack} />
       <MainStack.Screen name="Home" component={BottomTabs} />
       <MainStack.Screen name="TopupScreen" component={TopupScreen} />
+      <MainStack.Screen name="TopupMethodScreen" component={TopupMethodScreen} />
       <MainStack.Screen name="SendCryptoScreen" component={SendCryptoScreen} />
       <MainStack.Screen name="ConfirmSendCryptoScreen" component={ConfirmSendCryptoScreen} />
       <MainStack.Screen name="PersonalInfoScreen" component={PersonalInfoScreen} />

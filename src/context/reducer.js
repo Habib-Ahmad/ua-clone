@@ -18,6 +18,9 @@ export const initialState = {
     address: "",
     appId: "",
   },
+  topup: {
+    amount: "",
+  },
   balance: {
     fiat: {
       worth: "",
@@ -115,6 +118,16 @@ export const defaultReducer = (state, action) => {
             ...state.balance.fiat,
             wallets: action.payload,
           },
+        },
+      };
+    }
+
+    case actions.topup.setAmount: {
+      return {
+        ...state,
+        topup: {
+          ...state.topup,
+          amount: action.payload,
         },
       };
     }

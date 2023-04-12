@@ -11,6 +11,9 @@ const actions = {
   setLoggedIn: "SET_LOGGED_IN",
   setFiatWorth: "SET_FIAT_WORTH",
   setFiatWallets: "SET_FIAT_WALLETS",
+  topup: {
+    setAmount: "SET_AMOUNT",
+  },
 };
 
 export default actions;
