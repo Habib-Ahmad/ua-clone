@@ -44,15 +44,17 @@ const MainStack = createStackNavigator();
 
 const MainStackScreen = () => {
   const {
-    state: { accessToken },
+    state: { accessToken, isLoggedIn },
   } = useGlobalContext();
   const navigation = useNavigation();
 
   useEffect(() => {
-    if (!accessToken) return;
-
-    navigation.navigate("Home");
-  }, [accessToken, navigation]);
+    if (accessToken && isLoggedIn) {
+      navigation.navigate("Home");
+    } else {
+      navigation.navigate("WelcomeBackScreen");
+    }
+  }, [accessToken, isLoggedIn, navigation]);
 
   return (
     <MainStack.Navigator screenOptions={{ headerShown: false }}>

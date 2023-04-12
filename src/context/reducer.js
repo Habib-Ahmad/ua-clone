@@ -3,6 +3,7 @@ import actions from "./actions";
 export const initialState = {
   accessToken: "",
   accessExpiry: "",
+  isLoggedIn: false,
   isReturningUser: null,
   loading: false,
   registeringUser: {
@@ -32,6 +33,13 @@ export const defaultReducer = (state, action) => {
       return {
         ...state,
         isReturningUser: action.payload,
+      };
+    }
+
+    case actions.setLoggedIn: {
+      return {
+        ...state,
+        isLoggedIn: action.payload,
       };
     }
 

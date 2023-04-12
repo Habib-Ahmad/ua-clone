@@ -5,12 +5,14 @@ import urls from "../../api/urls";
 import Button from "../../components/input/Button";
 import FourDigitInput from "../../components/input/FourDigitInput";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
+import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils/colors";
 
 const WelcomeBack = ({ navigation }) => {
   const {
     state: { loading },
+    dispatch,
   } = useGlobalContext();
 
   const [digit1, setDigit1] = useState();
@@ -26,7 +28,7 @@ const WelcomeBack = ({ navigation }) => {
 
   const handlePress = async () => {
     await axios.post(urls.auth.verifyPIN, { pin }).then(() => {
-      navigation.navigate("Home");
+      dispatch({ type: actions.setLoggedIn, payload: true });
     });
   };
 
