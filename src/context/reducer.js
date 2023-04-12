@@ -3,7 +3,7 @@ import actions from "./actions";
 export const initialState = {
   accessToken: "",
   accessExpiry: "",
-  isRefreshTokenPresent: null,
+  isReturningUser: null,
   loading: false,
   registeringUser: {
     firstName: "",
@@ -28,18 +28,18 @@ export const initialState = {
 
 export const defaultReducer = (state, action) => {
   switch (action.type) {
+    case actions.setIsReturningUser: {
+      return {
+        ...state,
+        isReturningUser: action.payload,
+      };
+    }
+
     case actions.setAccessToken: {
       return {
         ...state,
         accessToken: action.payload.token,
         accessExpiry: action.payload.expiry,
-      };
-    }
-
-    case actions.setIsRefreshTokenPresent: {
-      return {
-        ...state,
-        isRefreshTokenPresent: action.payload,
       };
     }
 
@@ -73,15 +73,14 @@ export const defaultReducer = (state, action) => {
         ...state,
         accessToken: accessToken,
         accessExpiry: accessExpiry,
-        isRefreshTokenPresent: true,
-        isLoggedIn: true,
+        isReturningUser: true,
       };
     }
 
     case actions.logout: {
       return {
         ...initialState,
-        isRefreshTokenPresent: false,
+        isReturningUser: false,
       };
     }
 

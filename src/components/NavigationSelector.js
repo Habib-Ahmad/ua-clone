@@ -1,4 +1,3 @@
-import AuthContextProvider from "../context/authContext";
 import { useGlobalContext } from "../context/context";
 import AuthStackScreen from "../stacks/AuthStack";
 import MainStackScreen from "../stacks/MainStack";
@@ -6,20 +5,14 @@ import FullScreenLoader from "./FullScreenLoader";
 
 const NavigationSelector = () => {
   const {
-    state: { isRefreshTokenPresent },
+    state: { isReturningUser },
   } = useGlobalContext();
 
-  if (isRefreshTokenPresent === null) {
+  if (isReturningUser === null) {
     return <FullScreenLoader />;
   }
 
-  return isRefreshTokenPresent ? (
-    <AuthContextProvider>
-      <MainStackScreen />
-    </AuthContextProvider>
-  ) : (
-    <AuthStackScreen />
-  );
+  return isReturningUser ? <MainStackScreen /> : <AuthStackScreen />;
 };
 
 export default NavigationSelector;

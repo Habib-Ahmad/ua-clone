@@ -1,6 +1,6 @@
 const actions = {
   setAccessToken: "SET_ACCESS_TOKEN",
-  setIsRefreshTokenPresent: "SET_IS_REFRESH_TOKEN_PRESENT",
+  setIsReturningUser: "SET_IS_RETURNING_USER",
   setLoading: "SET_LOADING",
   registeringUser: {
     set: "SET_REGISTERING_USER",
@@ -8,7 +8,6 @@ const actions = {
   },
   logout: "LOGOUT",
   login: "LOGIN",
-  setLoggedIn: "SET_LOGGED_IN",
   setFiatWorth: "SET_FIAT_WORTH",
   setFiatWallets: "SET_FIAT_WALLETS",
 };
