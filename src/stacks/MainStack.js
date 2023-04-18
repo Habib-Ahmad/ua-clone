@@ -11,6 +11,7 @@ import AddFiatWalletScreen from "../screens/home/AddFiatWalletScreen";
 import BuyScreen from "../screens/home/BuyScreen";
 import ConfirmSendCryptoScreen from "../screens/home/ConfirmSendCryptoScreen";
 import ForgotPINScreen from "../screens/home/ForgotPINScreen";
+import InitiatedTradeScreen from "../screens/home/InitiatedTradeScreen";
 import ReceiveScreen from "../screens/home/ReceiveScreen";
 import ReviewSummaryScreen from "../screens/home/ReviewSummaryScreen";
 import SendCryptoScreen from "../screens/home/SendCryptoScreen";
@@ -18,6 +19,7 @@ import SwapDetailsScreen from "../screens/home/SwapDetailsScreen";
 import SwapScreen from "../screens/home/SwapScreen";
 import TopupMethodScreen from "../screens/home/TopupMethodScreen";
 import TopupScreen from "../screens/home/TopupScreen";
+import TradesScreen from "../screens/home/TradesScreen";
 import TransferDetailsScreen from "../screens/home/TransferDetailsScreen";
 import TransferScreen from "../screens/home/TransferScreen";
 import WelcomeBack from "../screens/home/WelcomeBack";
@@ -63,6 +65,8 @@ const MainStackScreen = () => {
       <MainStack.Screen name="Home" component={BottomTabs} />
       <MainStack.Screen name="TopupScreen" component={TopupScreen} />
       <MainStack.Screen name="TopupMethodScreen" component={TopupMethodScreen} />
+      <MainStack.Screen name="TradesScreen" component={TradesScreen} />
+      <MainStack.Screen name="InitiatedTradeScreen" component={InitiatedTradeScreen} />
       <MainStack.Screen name="SendCryptoScreen" component={SendCryptoScreen} />
       <MainStack.Screen name="ConfirmSendCryptoScreen" component={ConfirmSendCryptoScreen} />
       <MainStack.Screen name="PersonalInfoScreen" component={PersonalInfoScreen} />
