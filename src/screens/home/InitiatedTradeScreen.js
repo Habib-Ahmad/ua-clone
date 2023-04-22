@@ -11,19 +11,20 @@ import { colors, formatTime } from "../../utils";
 
 const InitiatedTradeScreen = ({ route, navigation }) => {
   const { id, total, symbol, session, trade, tradeId } = route.params;
+  // console.log({ id, total, symbol, session, trade, tradeId });
 
   const [fetchedTrade, setFetchedTrade] = useState();
 
-  // useEffect(() => {
-  //   if (!trade) {
-  //     const fetchTrade = async () => {
-  //       await axios
-  //         .get(`${urls.trades.getTrade}/${id}`)
-  //         .then((res) => console.log("fetchedTrade: ", res));
-  //     };
-  //     fetchTrade();
-  //   }
-  // }, [id, trade]);
+  useEffect(() => {
+    if (!trade) {
+      const fetchTrade = async () => {
+        await axios
+          .get(`${urls.trades.getTrade}/${tradeId}`)
+          .then((res) => console.log("fetchedTrade: ", res));
+      };
+      fetchTrade();
+    }
+  }, [trade, tradeId]);
 
   const [timeLeft, setTimeLeft] = useState(20 * 60 * 1000);
   const [transferred, setTransferred] = useState(false);
@@ -46,7 +47,7 @@ const InitiatedTradeScreen = ({ route, navigation }) => {
   const handlePress = async () => {
     await axios
       .post(urls.payment.sent, {
-        tradeSessionId: session.sessionId || tradeId,
+        tradeSessionId: session?.sessionId || id,
       })
       .then(() => {
         setTransferred(true);
@@ -59,15 +60,19 @@ const InitiatedTradeScreen = ({ route, navigation }) => {
     <ScrollView style={styles.container}>
       <ScreenHeader heading="Trade Initiated" />
 
-      <Text style={styles.pay}>Pay the Trader</Text>
+      {!transferred && (
+        <>
+          <Text style={styles.pay}>Pay the Trader</Text>
 
-      <Text style={styles.amount}>
-        {session?.paymentCurrency.symbol || symbol}
-        {String(session?.total || total).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-      </Text>
+          <Text style={styles.amount}>
+            {session?.paymentCurrency.symbol || symbol}
+            {String(session?.totla || total).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          </Text>
 
-      <Text style={styles.pay}>within</Text>
-      <Text style={styles.timer}>{formatTime(timeLeft)}</Text>
+          <Text style={styles.pay}>within</Text>
+          <Text style={styles.timer}>{formatTime(timeLeft)}</Text>
+        </>
+      )}
 
       {transferred && (
         <View style={styles.waiting}>

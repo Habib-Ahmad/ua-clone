@@ -13,15 +13,12 @@ import {
 } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import axios from "../../api/axios";
-import urls from "../../api/urls";
 import BackArrowDark from "../../assets/BackArrowDark";
 import Notification from "../../assets/Notification";
 import Share from "../../assets/Share";
 import Wave from "../../assets/Wave";
 import CryptoActions from "../../components/CryptoActions";
 import MoneyActions from "../../components/MoneyActions";
-import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
 import HomeTabs from "../../stacks/HomeTabs";
 import { colors } from "../../utils";
@@ -34,8 +31,8 @@ const HomeScreen = ({ navigation }) => {
   const {
     state: {
       balance: { fiat },
+      activeTrades,
     },
-    dispatch,
   } = useGlobalContext();
 
   const [active, setActive] = useState();
@@ -64,51 +61,19 @@ const HomeScreen = ({ navigation }) => {
   }, [active]);
 
   useEffect(() => {
-    const getData = async () => {
-      await Promise.all([
-        axios.get(urls.fiat.worth),
-        axios.get(urls.fiat.baseUrl),
-        axios.get(urls.auth.baseUrl),
-        axios.get(`${urls.trades.getActiveTrades}?pageNumber=1&pageSize=10`),
-      ])
-        .then(([res1, res2, res3, res4]) => {
-          dispatch({
-            type: actions.setFiatWorth,
-            payload: res1.data.data,
-          });
-          dispatch({
-            type: actions.setFiatWallets,
-            payload: res2.data.data,
-          });
-          dispatch({
-            type: actions.setUser,
-            payload: res3.data.data,
-          });
-          const trades = res4.data.data;
-          if (trades.length > 0 && !hasRun) {
-            setHasRun(true);
-            Alert.alert("Trades active", "You have active trades, lets complete them", [
-              {
-                text: "View",
-                onPress: () => {
-                  dispatch({ type: actions.setActiveTrades, payload: trades });
-                  navigation.navigate("ActiveTradesScreen");
-                },
-              },
-            ]);
-          }
-        })
-        .catch(([res1, res2, res3, res4]) => {
-          console.log("res1:", res1);
-          console.log("res2:", res2);
-          console.log("res3:", res3);
-          console.log("res4:", res4);
-        });
-    };
-
-    isFocused && getData();
+    if (activeTrades.length > 0 && !hasRun) {
+      setHasRun(true);
+      Alert.alert("Trades active", "You have active trades, lets complete them", [
+        {
+          text: "View",
+          onPress: () => {
+            navigation.navigate("ActiveTradesScreen");
+          },
+        },
+      ]);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, isFocused]);
+  }, [activeTrades.length, hasRun]);
 
   useEffect(() => {
     setTotal(() => {
@@ -179,7 +144,7 @@ const styles = StyleSheet.create({
     paddingTop: "10%",
   },
   wave: {
-    bottom: 7,
+    bottom: 5,
     left: 0,
     right: 0,
   },

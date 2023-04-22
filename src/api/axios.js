@@ -4,7 +4,7 @@ import Toast from "react-native-root-toast";
 import actions from "../context/actions";
 import { useGlobalContext } from "../context/context";
 import useRefreshToken from "../hooks/useRefreshToken";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 import store from "../utils/store";
 
 const instance = axios.create({
@@ -51,8 +51,13 @@ const AxiosInterceptor = ({ children }) => {
         dispatch({ type: actions.setLoading, payload: false });
         return response;
       },
-      (error) => {
+      async (error) => {
         dispatch({ type: actions.setLoading, payload: false });
+        if (error.response.status === 401) {
+          dispatch({ type: actions.logout });
+          await store.removeRefreshToken();
+          await store.removeRefreshExpiry();
+        }
         {
           error.response &&
             Toast.show(error.response.data.message, {
