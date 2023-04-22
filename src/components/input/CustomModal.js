@@ -1,5 +1,5 @@
-import React from "react";
 import { Modal, StyleSheet, View } from "react-native";
+import { colors } from "../../utils/colors";
 
 const CustomModal = ({ modalVisible, setModalVisible, children }) => {
   return (
@@ -25,11 +25,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
+    alignSelf: "center",
+    marginHorizontal: "20%",
+    width: "100%",
   },
   modalView: {
     margin: "10%",
-    backgroundColor: "white",
+    backgroundColor: colors.bg,
     borderRadius: 20,
     padding: 35,
     alignItems: "center",

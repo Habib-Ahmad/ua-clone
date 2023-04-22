@@ -20,3 +20,5 @@ export const colors = {
   USDTColor: "#3B9E5C",
   active: "#00786D",
 };
+
+export default colors;

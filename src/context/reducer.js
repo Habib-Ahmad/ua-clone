@@ -6,6 +6,8 @@ export const initialState = {
   isLoggedIn: false,
   isReturningUser: null,
   loading: false,
+  user: {},
+  activeTrades: [],
   registeringUser: {
     firstName: "",
     lastName: "",
@@ -54,6 +56,13 @@ export const defaultReducer = (state, action) => {
       };
     }
 
+    case actions.setUser: {
+      return {
+        ...state,
+        user: action.payload,
+      };
+    }
+
     case actions.setLoading: {
       return {
         ...state,
@@ -85,6 +94,7 @@ export const defaultReducer = (state, action) => {
         accessToken: accessToken,
         accessExpiry: accessExpiry,
         isReturningUser: true,
+        isLoggedIn: true,
       };
     }
 
@@ -129,6 +139,13 @@ export const defaultReducer = (state, action) => {
           ...state.topup,
           amount: action.payload,
         },
+      };
+    }
+
+    case actions.setActiveTrades: {
+      return {
+        ...state,
+        activeTrades: action.payload,
       };
     }
 

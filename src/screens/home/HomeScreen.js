@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+  Alert,
   Animated,
   Image,
   LayoutAnimation,
@@ -23,7 +24,7 @@ import MoneyActions from "../../components/MoneyActions";
 import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
 import HomeTabs from "../../stacks/HomeTabs";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -41,6 +42,7 @@ const HomeScreen = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState("money");
   const [expanded, setExpanded] = useState(false);
   const [total, setTotal] = useState("0");
+  const [hasRun, setHasRun] = useState(false);
 
   const isFocused = useIsFocused();
 
@@ -63,8 +65,13 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
     const getData = async () => {
-      await Promise.all([axios.get(urls.fiat.worth), axios.get(urls.fiat.baseUrl)]).then(
-        ([res1, res2]) => {
+      await Promise.all([
+        axios.get(urls.fiat.worth),
+        axios.get(urls.fiat.baseUrl),
+        axios.get(urls.auth.baseUrl),
+        axios.get(`${urls.trades.getActiveTrades}?pageNumber=1&pageSize=10`),
+      ])
+        .then(([res1, res2, res3, res4]) => {
           dispatch({
             type: actions.setFiatWorth,
             payload: res1.data.data,
@@ -73,20 +80,43 @@ const HomeScreen = ({ navigation }) => {
             type: actions.setFiatWallets,
             payload: res2.data.data,
           });
-        }
-      );
+          dispatch({
+            type: actions.setUser,
+            payload: res3.data.data,
+          });
+          const trades = res4.data.data;
+          if (trades.length > 0 && !hasRun) {
+            setHasRun(true);
+            Alert.alert("Trades active", "You have active trades, lets complete them", [
+              {
+                text: "View",
+                onPress: () => {
+                  dispatch({ type: actions.setActiveTrades, payload: trades });
+                  navigation.navigate("ActiveTradesScreen");
+                },
+              },
+            ]);
+          }
+        })
+        .catch(([res1, res2, res3, res4]) => {
+          console.log("res1:", res1);
+          console.log("res2:", res2);
+          console.log("res3:", res3);
+          console.log("res4:", res4);
+        });
     };
 
     isFocused && getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, isFocused]);
 
   useEffect(() => {
     setTotal(() => {
-      if (activeTab === "money") return `${fiat.symbol}${fiat.worth}`;
+      if (activeTab === "money") return fiat.worth;
 
       return "5999";
     });
-  }, [activeTab, fiat.symbol, fiat.worth]);
+  }, [activeTab, fiat.worth]);
 
   return (
     <View style={styles.container}>
@@ -116,7 +146,7 @@ const HomeScreen = ({ navigation }) => {
         <View style={styles.headerMiddle}>
           <View>
             <Text style={styles.balance}>
-              {active || `${String(total).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+              {active || `${fiat.symbol}${String(total).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
             </Text>
             <Text style={styles.balanceText}>Balance Available</Text>
           </View>

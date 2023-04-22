@@ -53,19 +53,22 @@ const AxiosInterceptor = ({ children }) => {
       },
       (error) => {
         dispatch({ type: actions.setLoading, payload: false });
-        Toast.show(error.response.data.message, {
-          duration: Toast.durations.LONG,
-          position: Toast.positions.BOTTOM,
-          shadow: true,
-          animation: true,
-          hideOnPress: true,
-          keyboardAvoiding: true,
-          delay: 0,
-          opacity: 1,
-          backgroundColor: colors.pink,
-          textColor: colors.red,
-        });
-        return Promise.reject(error.response);
+        {
+          error.response &&
+            Toast.show(error.response.data.message, {
+              duration: Toast.durations.LONG,
+              position: Toast.positions.BOTTOM,
+              shadow: true,
+              animation: true,
+              hideOnPress: true,
+              keyboardAvoiding: true,
+              delay: 0,
+              opacity: 1,
+              backgroundColor: colors.pink,
+              textColor: colors.red,
+            });
+        }
+        return Promise.reject(error);
       }
     );
 

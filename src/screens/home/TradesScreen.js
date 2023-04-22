@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import axios from "../../api/axios";
 import urls from "../../api/urls";
-import CustomModal from "../../components/input/Modal";
+import CustomModal from "../../components/input/CustomModal";
 import ScreenHeader from "../../components/ScreenHeader";
 import Trade from "../../components/Trade";
+import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils/colors";
 
 const TradesScreen = ({ navigation }) => {
+  const { state } = useGlobalContext();
+
   const [trades, setTrades] = useState([]);
   const [selectedTrade, setSelectedTrade] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
@@ -27,20 +30,41 @@ const TradesScreen = ({ navigation }) => {
     setModalVisible(true);
   };
 
-  const initiateTrade = () => {
-    setModalVisible(false);
-    navigation.navigate("InitiatedTradeScreen", { trade: selectedTrade });
+  const initiateTrade = async () => {
+    if (selectedTrade.fiatTrade.fiatTradeRule.isVerified) {
+      Alert.alert(
+        "Must be verified",
+        "You have to be verified to trade with this merchant, please complete your KYC",
+        [
+          {
+            text: "Complete KYC",
+            onPress: () => navigation.navigate("KYCScreen"),
+          },
+          {
+            text: "Ok",
+          },
+        ]
+      );
+      return;
+    }
+
+    // if (selectedTrade.fiatTrade.fiatTradeRule.completed) {
+    // }
+
+    await axios
+      .post(urls.p2p.initiateTrade, {
+        fiatTradeId: selectedTrade.id,
+        paymentMethodId: selectedTrade.paymentMethods[0].id,
+        amount: state.topup.amount,
+      })
+      .then((response) => {
+        setModalVisible(false);
+        navigation.navigate("InitiatedTradeScreen", {
+          trade: selectedTrade,
+          session: response.data.data,
+        });
+      });
   };
-
-  if (!trades.length) {
-    return (
-      <View style={styles.container}>
-        <ScreenHeader heading="Available Trades" />
-
-        <ActivityIndicator size={40} color={colors.primary} />
-      </View>
-    );
-  }
 
   return (
     <View style={styles.container}>
@@ -48,7 +72,7 @@ const TradesScreen = ({ navigation }) => {
 
       <ScrollView style={styles.trades}>
         {trades?.map((trade) => (
-          <Trade key={trade.id} trade={trade} handlePress={handlePress} />
+          <Trade key={trade.id} trade={trade} handlePress={() => handlePress(trade)} />
         ))}
       </ScrollView>
 

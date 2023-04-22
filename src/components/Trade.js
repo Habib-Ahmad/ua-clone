@@ -1,11 +1,10 @@
-import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Avatar from "../assets/Avatar";
 import { colors } from "../utils/colors";
 
 const Trade = ({ trade, handlePress }) => {
   return (
-    <TouchableOpacity style={styles.trade} onPress={() => handlePress(trade)}>
+    <TouchableOpacity style={styles.trade} onPress={handlePress}>
       <Avatar />
 
       <View style={styles.details}>
@@ -38,6 +37,15 @@ const Trade = ({ trade, handlePress }) => {
           <Text style={styles.title}>Completed Trades:</Text>
           <Text style={styles.text}>{trade.user.tradeStatistic.completed}</Text>
         </View>
+        {trade.fiatTrade.fiatTradeRule.isVerified && (
+          <Text style={styles.verified}>Must be verified</Text>
+        )}
+        {trade.fiatTrade.fiatTradeRule.completed >= 0 && (
+          <View style={styles.detail}>
+            <Text style={styles.title}>Minimum trade requirement:</Text>
+            <Text style={styles.methodText}>{trade.fiatTrade.fiatTradeRule.completed}</Text>
+          </View>
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -78,5 +86,10 @@ const styles = StyleSheet.create({
   methodText: {
     fontSize: 15,
     maxWidth: "75%",
+  },
+  verified: {
+    color: colors.green,
+    fontWeight: "500",
+    fontSize: 16,
   },
 });

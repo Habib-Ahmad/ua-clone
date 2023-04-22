@@ -23,7 +23,7 @@ export default function ReceiveScreen() {
         </View>
         <View style={styles.flexRow}>
           <TouchableOpacity activeOpacity={0.6} style={styles.flexOne}>
-            <Copy width={"60"} height={"60"} />
+            <Copy />
             <Text style={styles.copyText}>Copy</Text>
           </TouchableOpacity>
 

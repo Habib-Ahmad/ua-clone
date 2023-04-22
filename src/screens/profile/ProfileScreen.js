@@ -53,6 +53,11 @@ const data = [
     icon: <Security />,
   },
   {
+    name: "Active Trades",
+    to: "ActiveTradesScreen",
+    icon: <Security />,
+  },
+  {
     name: "Change Pin",
     to: "",
     icon: <Security />,

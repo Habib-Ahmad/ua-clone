@@ -1,4 +1,5 @@
 import { Alert, Platform } from "react-native";
+import * as Clipboard from "expo-clipboard";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 
@@ -37,4 +38,8 @@ export const getPushNotificationToken = async () => {
       lightColor: "#FF231F7C",
     });
   }
+};
+
+export const copyToClipboard = async (text) => {
+  await Clipboard.setStringAsync(String(text));
 };

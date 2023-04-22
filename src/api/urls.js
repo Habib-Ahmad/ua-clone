@@ -19,9 +19,19 @@ const urls = {
   },
   p2p: {
     getLocalTrades: "/P2p/Fiat/Buy",
+    initiateTrade: "/P2p/Fiat/Buy",
   },
   trader: {
     baseUrl: "/Trader",
+  },
+  trades: {
+    getActiveTrades: "/Trades/Fiat/Requests",
+    getTrade: "/Trades/Fiat/Requests",
+  },
+  payment: {
+    sent: "/Payment/Sent",
+    initiateReceive: "/Payment/InitiateRecieve",
+    receive: "/Payment/Recieve",
   },
   kyc: {
     baseUrl: "Kyc",

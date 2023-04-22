@@ -6,6 +6,7 @@ const actions = {
     set: "SET_REGISTERING_USER",
     clear: "CLEAR_REGISTERING_USER",
   },
+  setUser: "SET_USER",
   logout: "LOGOUT",
   login: "LOGIN",
   setLoggedIn: "SET_LOGGED_IN",
@@ -14,6 +15,7 @@ const actions = {
   topup: {
     setAmount: "SET_AMOUNT",
   },
+  setActiveTrades: "SET_ACTIVE_TRADES",
 };
 
 export default actions;

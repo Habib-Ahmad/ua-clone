@@ -1,7 +1,6 @@
-import { useEffect } from "react";
-import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useGlobalContext } from "../context/context";
+import WithLoader from "../layout/WithLoader";
 import ConfirmPINScreen from "../screens/auth/ConfirmPINScreen";
 import CreatePINScreen from "../screens/auth/CreatePINScreen";
 import OTPScreen from "../screens/auth/OTPScreen";
@@ -24,6 +23,7 @@ import TransferDetailsScreen from "../screens/home/TransferDetailsScreen";
 import TransferScreen from "../screens/home/TransferScreen";
 import WelcomeBack from "../screens/home/WelcomeBack";
 import WithdrawScreen from "../screens/home/WithdrawScreen";
+import ActiveTradesScreen from "../screens/profile/ActiveTradesScreen";
 import BecomeAMerchantScreen from "../screens/profile/BecomeAMerchantScreen";
 import ColorSettingScreen from "../screens/profile/ColorSettingScreen";
 import ContactScreen from "../screens/profile/ContactScreen";
@@ -45,24 +45,20 @@ import ContactTabs from "./ContactTabs";
 
 const MainStack = createStackNavigator();
 
+const StackNavigator = WithLoader(MainStack);
+
 const MainStackScreen = () => {
   const {
     state: { accessToken, isLoggedIn },
   } = useGlobalContext();
-  const navigation = useNavigation();
-
-  useEffect(() => {
-    if (accessToken && isLoggedIn) {
-      navigation.navigate("Home");
-    } else {
-      navigation.navigate("WelcomeBackScreen");
-    }
-  }, [accessToken, isLoggedIn, navigation]);
 
   return (
-    <MainStack.Navigator screenOptions={{ headerShown: false }}>
-      <MainStack.Screen name="WelcomeBackScreen" component={WelcomeBack} />
-      <MainStack.Screen name="Home" component={BottomTabs} />
+    <StackNavigator>
+      {accessToken && isLoggedIn ? (
+        <MainStack.Screen name="Home" component={BottomTabs} />
+      ) : (
+        <MainStack.Screen name="WelcomeBackScreen" component={WelcomeBack} />
+      )}
       <MainStack.Screen name="TopupScreen" component={TopupScreen} />
       <MainStack.Screen name="TopupMethodScreen" component={TopupMethodScreen} />
       <MainStack.Screen name="TradesScreen" component={TradesScreen} />
@@ -101,7 +97,8 @@ const MainStackScreen = () => {
       <MainStack.Screen name="AddFiatWalletScreen" component={AddFiatWalletScreen} />
       <MainStack.Screen name="BecomeAMerchantScreen" component={BecomeAMerchantScreen} />
       <MainStack.Screen name="KYCScreen" component={KYCScreen} />
-    </MainStack.Navigator>
+      <MainStack.Screen name="ActiveTradesScreen" component={ActiveTradesScreen} />
+    </StackNavigator>
   );
 };
 
