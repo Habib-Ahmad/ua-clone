@@ -1,7 +1,7 @@
 import { Image, ImageBackground, StatusBar, StyleSheet, Text, View } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import Button from "../../components/input/Button";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const SplashScreen = ({ navigation }) => {
   const isFocused = useIsFocused();

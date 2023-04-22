@@ -6,7 +6,7 @@ import avatar from "../../assets/avatar.jpg";
 import Button from "../../components/input/Button";
 import Input from "../../components/input/Input";
 import ScreenHeader from "../../components/ScreenHeader";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 export default function TransferDetailsScreen({ route }) {
   const { name, info } = route?.params || {};

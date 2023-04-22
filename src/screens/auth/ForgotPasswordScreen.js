@@ -6,7 +6,7 @@ import urls from "../../api/urls";
 import Button from "../../components/input/Button";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
 import { useGlobalContext } from "../../context/context";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 import countries from "../../utils/countries";
 
 const ForgotPasswordScreen = ({ navigation }) => {

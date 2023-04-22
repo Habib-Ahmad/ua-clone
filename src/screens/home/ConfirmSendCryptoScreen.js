@@ -4,7 +4,7 @@ import BTC from "../../assets/BTC";
 import Pen from "../../assets/Pen";
 import Button from "../../components/input/Button";
 import ScreenHeader from "../../components/ScreenHeader";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const ConfirmSendCryptoScreen = ({ navigation }) => {
   return (

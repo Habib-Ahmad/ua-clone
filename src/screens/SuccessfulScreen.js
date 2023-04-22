@@ -3,7 +3,7 @@ import { Dimensions, StyleSheet, Text, View } from "react-native";
 import Mark from "../assets/Mark";
 import Button from "../components/input/Button";
 import ButtonLight from "../components/input/ButtonLight";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 
 export default function SuccessfulScreen({ route }) {
   const { amount, type, crypto, cryptoValue, name } = route?.params || {};
@@ -38,7 +38,9 @@ export default function SuccessfulScreen({ route }) {
           {type === "report" && (
             <View>
               <Text style={styles.successText}>Report Sent</Text>
-              <Text style={styles.successMessage}>We will get back to you {"\n"} shortly. Thank you for {"\n"} your understanding</Text>
+              <Text style={styles.successMessage}>
+                We will get back to you {"\n"} shortly. Thank you for {"\n"} your understanding
+              </Text>
             </View>
           )}
 
@@ -87,8 +89,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    justifyContent: "center", 
-    alignItems: "center", 
+    justifyContent: "center",
+    alignItems: "center",
     flex: 1,
   },
   centeredBox: {

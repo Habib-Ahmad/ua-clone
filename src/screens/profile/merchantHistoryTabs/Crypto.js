@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import DisplayCard from "../../../components/DisplayCard";
-import { colors } from "../../../utils/colors";
+import { colors } from "../../../utils";
 
 const requests = [
   {

@@ -1,4 +1,4 @@
-import { createRef, useState } from "react";
+import { useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import axios from "../../api/axios";
 import urls from "../../api/urls";
@@ -6,7 +6,7 @@ import Button from "../../components/input/Button";
 import FourDigitInput from "../../components/input/FourDigitInput";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
 import { useGlobalContext } from "../../context/context";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const ConfirmPINScreen = ({ route, navigation }) => {
   const value = route.params?.["value"];
@@ -17,16 +17,7 @@ const ConfirmPINScreen = ({ route, navigation }) => {
   } = useGlobalContext();
 
   const [error, setError] = useState("");
-  const [digit1, setDigit1] = useState();
-  const [digit2, setDigit2] = useState();
-  const [digit3, setDigit3] = useState();
-  const [digit4, setDigit4] = useState();
-  const pin = digit1 + digit2 + digit3 + digit4;
-
-  const ref1 = createRef();
-  const ref2 = createRef();
-  const ref3 = createRef();
-  const ref4 = createRef();
+  const [pin, setPin] = useState("");
 
   const handlePress = async () => {
     setError("");
@@ -54,23 +45,7 @@ const ConfirmPINScreen = ({ route, navigation }) => {
             paragraph="Add a unique pin number to make your payment more secure"
           />
 
-          <FourDigitInput
-            {...{
-              digit1,
-              digit2,
-              digit3,
-              digit4,
-              setDigit1,
-              setDigit2,
-              setDigit3,
-              setDigit4,
-              ref1,
-              ref2,
-              ref3,
-              ref4,
-              secure: true,
-            }}
-          />
+          <FourDigitInput setValue={setPin} secure />
 
           <Text style={styles.error}>{error}</Text>
         </ScrollView>

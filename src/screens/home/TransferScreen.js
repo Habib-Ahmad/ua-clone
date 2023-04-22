@@ -4,7 +4,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import Input from "../../components/input/Input";
 import ScreenHeader from "../../components/ScreenHeader";
 import ContactTabs from "../../stacks/ContactTabs";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const TransferScreen = () => {
   return (

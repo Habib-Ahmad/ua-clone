@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const CryptoScreen = ({ wallets, setActive, setActiveTab, isFocused }) => {
   useEffect(() => {

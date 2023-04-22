@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import RightArrow from "../assets/RightArrow";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 
 const IconTextRow = ({ text, leftIcon, onPress, BAM, noArrow }) => {
   return (

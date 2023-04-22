@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useGlobalContext } from "../../context/context";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const MoneyScreen = ({ navigation, setActive, setActiveTab, isFocused }) => {
   const {

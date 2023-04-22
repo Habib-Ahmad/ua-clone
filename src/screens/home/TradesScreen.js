@@ -6,7 +6,7 @@ import CustomModal from "../../components/input/CustomModal";
 import ScreenHeader from "../../components/ScreenHeader";
 import Trade from "../../components/Trade";
 import { useGlobalContext } from "../../context/context";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const TradesScreen = ({ navigation }) => {
   const { state } = useGlobalContext();

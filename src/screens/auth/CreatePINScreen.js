@@ -1,4 +1,4 @@
-import { createRef, useState } from "react";
+import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import Button from "../../components/input/Button";
 import FourDigitInput from "../../components/input/FourDigitInput";
@@ -7,16 +7,7 @@ import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
 const CreatePINScreen = ({ route, navigation }) => {
   const otp = route.params?.["otp"];
 
-  const [digit1, setDigit1] = useState();
-  const [digit2, setDigit2] = useState();
-  const [digit3, setDigit3] = useState();
-  const [digit4, setDigit4] = useState();
-  const pin = digit1 + digit2 + digit3 + digit4;
-
-  const ref1 = createRef();
-  const ref2 = createRef();
-  const ref3 = createRef();
-  const ref4 = createRef();
+  const [pin, setPin] = useState("");
 
   const handlePress = () => {
     navigation.navigate("ConfirmPINScreen", { value: pin, otp });
@@ -31,23 +22,7 @@ const CreatePINScreen = ({ route, navigation }) => {
             paragraph="Add a unique pin number to make your payment more secure"
           />
 
-          <FourDigitInput
-            {...{
-              digit1,
-              digit2,
-              digit3,
-              digit4,
-              setDigit1,
-              setDigit2,
-              setDigit3,
-              setDigit4,
-              ref1,
-              ref2,
-              ref3,
-              ref4,
-              secure: true,
-            }}
-          />
+          <FourDigitInput setValue={setPin} secure />
         </ScrollView>
       </View>
 

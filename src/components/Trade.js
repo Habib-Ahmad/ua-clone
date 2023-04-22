@@ -1,10 +1,10 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Avatar from "../assets/Avatar";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 
 const Trade = ({ trade, handlePress }) => {
   return (
-    <TouchableOpacity style={styles.trade} onPress={handlePress}>
+    <TouchableOpacity style={styles.trade} onPress={handlePress} activeOpacity={0.8}>
       <Avatar />
 
       <View style={styles.details}>

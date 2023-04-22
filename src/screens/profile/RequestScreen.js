@@ -2,7 +2,7 @@ import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import DisplayCard from "../../components/DisplayCard";
 import ScreenHeader from "../../components/ScreenHeader";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 export default function RequestScreen({ route }) {
   const { data } = route?.params || "";

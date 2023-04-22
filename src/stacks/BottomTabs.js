@@ -6,7 +6,7 @@ import Profile from "../assets/Profile";
 import HistoryScreen from "../screens/history/HistoryScreen";
 import HomeScreen from "../screens/home/HomeScreen";
 import ProfileScreen from "../screens/profile/ProfileScreen";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 
 const BottomTab = createMaterialBottomTabNavigator();
 const styles = StyleSheet.create({

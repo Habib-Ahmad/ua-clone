@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import BellRinging from "../../assets/BellRinging";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const NotificationPanel = ({ title, date, description, isNew }) => {
   return (

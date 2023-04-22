@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import BackArrow from "../assets/BackArrow";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 
 const ScreenHeaderWithLogo = ({ heading, paragraph, noBackButton }) => {
   const navigation = useNavigation();

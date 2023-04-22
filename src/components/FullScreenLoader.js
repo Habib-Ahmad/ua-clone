@@ -1,5 +1,5 @@
 import { ActivityIndicator, StyleSheet } from "react-native";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 
 const FullScreenLoader = () => {
   return <ActivityIndicator size={40} color={colors.primary} style={styles.activity} />;

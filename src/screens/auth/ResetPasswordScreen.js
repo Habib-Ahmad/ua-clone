@@ -5,7 +5,7 @@ import urls from "../../api/urls";
 import Button from "../../components/input/Button";
 import Input from "../../components/input/Input";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const ResetPasswordScreen = ({ route, navigation }) => {
   const phoneNumber = route.params?.["phoneNumber"];

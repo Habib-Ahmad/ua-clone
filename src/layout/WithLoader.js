@@ -1,6 +1,6 @@
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { useGlobalContext } from "../context/context";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 
 const withLoader = (Stack) => {
   const WithLoader = (props) => {

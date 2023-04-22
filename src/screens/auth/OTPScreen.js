@@ -1,4 +1,4 @@
-import { createRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useNavigationState } from "@react-navigation/native";
 import axios from "../../api/axios";
@@ -8,7 +8,7 @@ import FourDigitInput from "../../components/input/FourDigitInput";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
 import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 import store from "../../utils/store";
 
 const OTPScreen = ({ route, navigation }) => {
@@ -20,16 +20,7 @@ const OTPScreen = ({ route, navigation }) => {
   const prevRoute = useNavigationState((state) => state.routes[state.routes.length - 2]).name;
 
   const [timer, setTimer] = useState(59);
-  const [digit1, setDigit1] = useState();
-  const [digit2, setDigit2] = useState();
-  const [digit3, setDigit3] = useState();
-  const [digit4, setDigit4] = useState();
-  const otp = digit1 + digit2 + digit3 + digit4;
-
-  const ref1 = createRef();
-  const ref2 = createRef();
-  const ref3 = createRef();
-  const ref4 = createRef();
+  const [otp, setOtp] = useState("");
 
   useEffect(() => {
     let interval = setInterval(() => {
@@ -79,22 +70,7 @@ const OTPScreen = ({ route, navigation }) => {
             paragraph={phoneNumber && `Code has been sent to ${phoneNumber}`}
           />
 
-          <FourDigitInput
-            {...{
-              digit1,
-              digit2,
-              digit3,
-              digit4,
-              setDigit1,
-              setDigit2,
-              setDigit3,
-              setDigit4,
-              ref1,
-              ref2,
-              ref3,
-              ref4,
-            }}
-          />
+          <FourDigitInput setValue={setOtp} secure />
 
           <View style={styles.timer}>
             <TouchableOpacity style={styles.resend} onPress={resend}>

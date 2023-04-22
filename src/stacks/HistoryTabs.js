@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import CryptoHistoryScreen from "../screens/history/CryptoHistoryScreen";
 import MoneyHistoryScreen from "../screens/history/MoneyHistoryScreen";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 
 const HistoryTabs = () => {
   const Tab = createMaterialTopTabNavigator();

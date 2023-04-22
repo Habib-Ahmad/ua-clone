@@ -8,7 +8,7 @@ import { uploadImages } from "../../components/kyc/functions";
 import KYCSuccess from "../../components/kyc/KYCSuccess";
 import UploadImages from "../../components/kyc/UploadImages";
 import ScreenHeader from "../../components/ScreenHeader";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const KYCScreen = ({ navigation }) => {
   const [cameraOn, setCameraOn] = useState(false);

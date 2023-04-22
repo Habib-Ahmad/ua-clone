@@ -1,5 +1,5 @@
 import Svg, { Path, Rect } from "react-native-svg";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 
 export default function ShareButton({ width, height }) {
   return (

@@ -3,7 +3,7 @@ import { ActivityIndicator, Alert, StyleSheet, Text, TouchableOpacity, View } fr
 import axios from "../../api/axios";
 import urls from "../../api/urls";
 import ScreenHeader from "../../components/ScreenHeader";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const AddFiatWalletScreen = ({ navigation }) => {
   const [countries, setCountries] = useState([]);

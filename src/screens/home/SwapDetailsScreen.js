@@ -6,7 +6,7 @@ import BTC from "../../assets/BTC";
 import Button from "../../components/input/Button";
 import ScreenHeader from "../../components/ScreenHeader";
 import Icon from "../../components/withdraw/Icon";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 export default function SwapDetailsScreen() {
   const navigation = useNavigation();

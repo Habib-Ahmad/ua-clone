@@ -4,10 +4,10 @@ import axios from "../../api/axios";
 import urls from "../../api/urls";
 import RightArrow from "../../assets/RightArrow";
 import CustomModal from "../../components/input/CustomModal";
-import FourDigitInput2 from "../../components/input/FourDigitInput2";
+import FourDigitInput from "../../components/input/FourDigitInput";
 import ScreenHeader from "../../components/ScreenHeader";
 import { useGlobalContext } from "../../context/context";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 import { getDate } from "../../utils/dateAndTime";
 
 const ActiveTradesScreen = ({ navigation }) => {
@@ -28,7 +28,7 @@ const ActiveTradesScreen = ({ navigation }) => {
   const handlePress = (id, tradeId, amount, fee) => {
     if (isTrader) {
       setModalVisible(true);
-      setActiveTradeId(tradeId);
+      setActiveTradeId(id);
       return;
     }
 
@@ -68,6 +68,7 @@ const ActiveTradesScreen = ({ navigation }) => {
 
   const close = () => {
     setModalVisible4(false);
+    navigation.navigate("HomeScreen");
   };
 
   return (
@@ -129,7 +130,7 @@ const ActiveTradesScreen = ({ navigation }) => {
       <CustomModal modalVisible={modalVisible2} setModalVisible={setModalVisible2}>
         <View style={styles.otpWrapper}>
           <Text style={styles.modalHeading}>Enter PIN</Text>
-          <FourDigitInput2 setValue={setPin} secure />
+          <FourDigitInput setValue={setPin} secure />
           <Pressable style={styles.button} onPress={initiateReceive}>
             <Text style={styles.textStyle}>Submit</Text>
           </Pressable>
@@ -139,7 +140,7 @@ const ActiveTradesScreen = ({ navigation }) => {
       <CustomModal modalVisible={modalVisible3} setModalVisible={setModalVisible3}>
         <View style={styles.otpWrapper}>
           <Text style={styles.modalHeading}>Enter OTP</Text>
-          <FourDigitInput2 setValue={setOtp} />
+          <FourDigitInput setValue={setOtp} />
           <Pressable style={styles.button} onPress={receive}>
             <Text style={styles.textStyle}>Submit</Text>
           </Pressable>

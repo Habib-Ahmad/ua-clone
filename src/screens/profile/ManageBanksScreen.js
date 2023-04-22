@@ -4,7 +4,7 @@ import EmptyBank from "../../components/bank/EmptyBank";
 import ManageBankCard from "../../components/bank/ManageBankCard";
 import ButtonLight from "../../components/input/ButtonLight";
 import ScreenHeader from "../../components/ScreenHeader";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const DATA = [
   {

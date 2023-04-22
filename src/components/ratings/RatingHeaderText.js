@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
-export default function RatingHeaderText ({ headerText, bodyText }) {
+export default function RatingHeaderText({ headerText, bodyText }) {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{headerText}</Text>
@@ -14,18 +14,17 @@ export default function RatingHeaderText ({ headerText, bodyText }) {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    marginBottom: 10
+    marginBottom: 10,
   },
   header: {
     fontSize: 54,
     textAlign: "center",
     fontWeight: "900",
-    color: colors.primary
+    color: colors.primary,
   },
   body: {
     fontSize: 12,
     textAlign: "center",
-    fontWeight: "500"
+    fontWeight: "500",
   },
 });
-

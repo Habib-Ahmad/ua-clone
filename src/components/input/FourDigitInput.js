@@ -1,21 +1,22 @@
+import { createRef, useEffect, useState } from "react";
 import { Dimensions, Keyboard, StyleSheet, View } from "react-native";
 import DigitInput from "./DigitInput";
 
-const FourDigitInput = ({
-  digit1,
-  digit2,
-  digit3,
-  digit4,
-  setDigit1,
-  setDigit2,
-  setDigit3,
-  setDigit4,
-  ref1,
-  ref2,
-  ref3,
-  ref4,
-  secure,
-}) => {
+const FourDigitInput = ({ setValue, secure }) => {
+  const [digit1, setDigit1] = useState();
+  const [digit2, setDigit2] = useState();
+  const [digit3, setDigit3] = useState();
+  const [digit4, setDigit4] = useState();
+
+  const ref1 = createRef();
+  const ref2 = createRef();
+  const ref3 = createRef();
+  const ref4 = createRef();
+
+  useEffect(() => {
+    setValue(digit1 + digit2 + digit3 + digit4);
+  }, [digit1, digit2, digit3, digit4, setValue]);
+
   const handleChange = (value, setState, nextRef, prevRef) => {
     setState((prevState) => {
       if (value !== "Backspace") {
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    width: Dimensions.get("window").width,
+    maxWidth: Dimensions.get("window").width,
     paddingHorizontal: "5%",
     marginBottom: 40,
   },

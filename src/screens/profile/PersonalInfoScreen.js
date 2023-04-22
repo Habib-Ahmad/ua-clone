@@ -6,7 +6,7 @@ import Button from "../../components/input/Button";
 import Input from "../../components/input/Input";
 import ScreenHeader from "../../components/ScreenHeader";
 import UploadImage from "../../components/UploadImage";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const ProfileInfoScreen = ({ navigation }) => {
   const [currentDate, setCurrentDate] = useState("");

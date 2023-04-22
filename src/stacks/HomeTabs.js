@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import CryptoScreen from "../screens/home/CryptoScreen";
 import MoneyScreen from "../screens/home/MoneyScreen";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 
 const HomeTabs = ({ setActive, setActiveTab }) => {
   const Tab = createMaterialTopTabNavigator();

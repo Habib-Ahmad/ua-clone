@@ -1,5 +1,5 @@
 import { Modal, StyleSheet, View } from "react-native";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const CustomModal = ({ modalVisible, setModalVisible, children }) => {
   return (

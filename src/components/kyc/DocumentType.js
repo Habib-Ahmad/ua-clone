@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const docs = [
   {

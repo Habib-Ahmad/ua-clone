@@ -4,7 +4,7 @@ import { RootSiblingParent } from "react-native-root-siblings";
 import { AxiosInterceptor } from "./src/api/axios";
 import NavigationSelector from "./src/components/NavigationSelector";
 import ContextProvider from "./src/context/context";
-import { colors } from "./src/utils/colors";
+import { colors } from "./src/utils";
 
 const App = () => {
   return (

@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import Button from "../../components/input/Button";
 import Input from "../../components/input/Input";
 import ScreenHeader from "../../components/ScreenHeader";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 export default function ReportScreen() {
   const navigation = useNavigation();
@@ -20,12 +20,12 @@ export default function ReportScreen() {
       <ScreenHeader heading="Report" />
 
       <View style={styles.wrapper}>
-          <Input
-            label={"Enter your complaints here"}
-            numberOfLines={5}
-            placeholder={"I made a transaction and it failed to"}
-            icon={<MaterialIcons name="edit" size={20} color={colors.primary} />}
-          />
+        <Input
+          label={"Enter your complaints here"}
+          numberOfLines={5}
+          placeholder={"I made a transaction and it failed to"}
+          icon={<MaterialIcons name="edit" size={20} color={colors.primary} />}
+        />
       </View>
 
       <View style={styles.buttonBox}>

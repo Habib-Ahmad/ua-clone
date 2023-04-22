@@ -5,7 +5,7 @@ import Copy from "../../assets/Copy";
 import qrCode from "../../assets/qr-code.png";
 import ShareButton from "../../assets/ShareButton";
 import ScreenHeader from "../../components/ScreenHeader";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 export default function ReceiveScreen() {
   return (

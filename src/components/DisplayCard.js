@@ -1,6 +1,6 @@
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 
 const DisplayCard = ({ children, ...others }) => {
   return (
@@ -11,7 +11,7 @@ const DisplayCard = ({ children, ...others }) => {
           <FontAwesome name="angle-right" size={24} color={colors.grey} />
         </View>
       </TouchableOpacity>
-      <View style={styles.line}/>
+      <View style={styles.line} />
     </>
   );
 };
@@ -33,6 +33,6 @@ const styles = StyleSheet.create({
   },
   icon: {
     justifyContent: "center",
-    paddingHorizontal: 60
-  }
+    paddingHorizontal: 60,
+  },
 });
