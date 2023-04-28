@@ -6,28 +6,31 @@ import Copy from "../../assets/Copy";
 import Button from "../../components/input/Button";
 import ScreenHeader from "../../components/ScreenHeader";
 import Trade from "../../components/Trade";
+import actions from "../../context/actions";
+import { useGlobalContext } from "../../context/context";
 import { copyToClipboard } from "../../functions";
 import { colors, formatTime } from "../../utils";
 
 const InitiatedTradeScreen = ({ route, navigation }) => {
   const { id, total, symbol, session, trade, tradeId } = route.params;
-  // console.log({ id, total, symbol, session, trade, tradeId });
+
+  const { state, dispatch } = useGlobalContext();
 
   const [fetchedTrade, setFetchedTrade] = useState();
+  const [timeLeft, setTimeLeft] = useState(20 * 60 * 1000);
+  const [transferred, setTransferred] = useState(false);
+  const [tradeCompleted, setTradeCompleted] = useState(false);
 
   useEffect(() => {
     if (!trade) {
       const fetchTrade = async () => {
         await axios
-          .get(`${urls.trades.getTrade}/${tradeId}`)
-          .then((res) => console.log("fetchedTrade: ", res));
+          .get(`${urls.p2p.getTrade}/${tradeId}`)
+          .then((res) => setFetchedTrade(res.data.data));
       };
       fetchTrade();
     }
   }, [trade, tradeId]);
-
-  const [timeLeft, setTimeLeft] = useState(20 * 60 * 1000);
-  const [transferred, setTransferred] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -44,6 +47,36 @@ const InitiatedTradeScreen = ({ route, navigation }) => {
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    if (tradeCompleted) {
+      const updateWallet = async () => {
+        await Promise.all([axios.get(urls.fiat.worth), axios.get(urls.fiat.baseUrl)]).then(
+          ([res1, res2]) => {
+            dispatch({ type: actions.setFiatWorth, payload: res1.data.data });
+            dispatch({ type: actions.setFiatWallets, payload: res2.data.data });
+          }
+        );
+        navigation.navigate("SuccessScreen", {
+          text: "Trade completed",
+          route: "HomeScreen",
+        });
+      };
+      updateWallet();
+      return;
+    }
+
+    console.log({ sessionId: session?.sessionId, id });
+
+    const completedEvent = state.realTimeData.findIndex(
+      (item) =>
+        (item.event.label === "TradeCompleted" && item.data.sessionId === session?.sessionId) || id
+    );
+
+    if (completedEvent > -1) {
+      setTradeCompleted(true);
+    }
+  }, [dispatch, id, navigation, session?.sessionId, state.realTimeData, tradeCompleted]);
+
   const handlePress = async () => {
     await axios
       .post(urls.payment.sent, {
@@ -51,6 +84,17 @@ const InitiatedTradeScreen = ({ route, navigation }) => {
       })
       .then(() => {
         setTransferred(true);
+      });
+  };
+
+  const cancelTrade = async () => {
+    await axios
+      .post(urls.trades.cancel, {
+        tradeSessionId: session?.sessionId || id,
+        reason: "string",
+      })
+      .then(() => {
+        navigation.navigate("HomeScreen");
       });
   };
 
@@ -117,7 +161,7 @@ const InitiatedTradeScreen = ({ route, navigation }) => {
               title="Cancel"
               backgroundColor={colors.red}
               customStyles={styles.btn}
-              onPress={() => navigation.navigate("HomeScreen")}
+              onPress={cancelTrade}
             />
             <Button title="I have transfered" customStyles={styles.btn} onPress={handlePress} />
           </>

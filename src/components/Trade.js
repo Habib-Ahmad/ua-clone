@@ -73,18 +73,21 @@ const styles = StyleSheet.create({
   },
   title: {
     marginRight: 10,
-    fontSize: 15,
+    fontSize: 16,
+    color: colors.textLight,
   },
   text: {
-    fontSize: 15,
+    fontSize: 16,
+    color: colors.textLight,
   },
   rangeText: {
-    fontSize: 15,
+    fontSize: 16,
     color: colors.primary,
     fontWeight: "600",
   },
   methodText: {
-    fontSize: 15,
+    fontSize: 16,
+    color: colors.textLight,
     maxWidth: "75%",
   },
   verified: {

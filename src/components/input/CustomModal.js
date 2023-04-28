@@ -26,11 +26,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    marginHorizontal: "20%",
     width: "100%",
   },
   modalView: {
-    margin: "10%",
+    margin: "5%",
     backgroundColor: colors.bg,
     borderRadius: 20,
     padding: 35,

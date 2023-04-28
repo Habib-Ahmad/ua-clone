@@ -66,6 +66,11 @@ const TradesScreen = ({ navigation }) => {
       });
   };
 
+  const handleClose = () => {
+    navigation.goBack();
+    setSelectedTrade(null);
+  };
+
   return (
     <View style={styles.container}>
       <ScreenHeader heading="Available Trades" />
@@ -75,24 +80,20 @@ const TradesScreen = ({ navigation }) => {
           <Trade key={trade.id} trade={trade} handlePress={() => handlePress(trade)} />
         ))}
       </ScrollView>
-
       <CustomModal modalVisible={modalVisible} setModalVisible={setModalVisible}>
-        <>
+        <View style={styles.modal}>
           <Text style={styles.modalText}>
             You are about to initiate a trade with this trader, proceed?
           </Text>
           <View style={styles.buttonWrapper}>
-            <Pressable
-              style={[styles.button, styles.buttonNo]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
+            <Pressable style={[styles.button, styles.buttonNo]} onPress={handleClose}>
               <Text style={styles.textStyle}>No</Text>
             </Pressable>
             <Pressable style={[styles.button, styles.buttonYes]} onPress={initiateTrade}>
               <Text style={styles.textStyle}>Yes</Text>
             </Pressable>
           </View>
-        </>
+        </View>
       </CustomModal>
     </View>
   );
@@ -111,12 +112,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    width: "90%",
+    marginTop: 20,
   },
   button: {
     borderRadius: 8,
     paddingVertical: 10,
-    paddingHorizontal: 30,
+    paddingHorizontal: 18,
     elevation: 2,
   },
   buttonYes: {
@@ -129,9 +130,12 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontWeight: "600",
     textAlign: "center",
+    fontSize: 16,
   },
+  modal: {},
   modalText: {
-    marginBottom: 15,
     textAlign: "center",
+    fontSize: 18,
+    color: colors.textLight,
   },
 });

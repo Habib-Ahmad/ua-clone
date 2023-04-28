@@ -1,4 +1,6 @@
 import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
 import { useGlobalContext } from "../context/context";
 import { colors } from "../utils";
 
@@ -8,11 +10,14 @@ const withLoader = (Stack) => {
       state: { loading },
     } = useGlobalContext();
 
+    const isFocused = useIsFocused();
+
     return (
       <>
         <Stack.Navigator {...props} screenOptions={{ headerShown: false }} />
         {loading && (
           <View style={styles.container}>
+            {isFocused && <StatusBar backgroundColor={"rgba(0, 0, 0, 0.5)"} />}
             <ActivityIndicator size="large" color={colors.primary} />
           </View>
         )}

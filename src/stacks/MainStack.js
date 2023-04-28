@@ -4,7 +4,6 @@ import WithLoader from "../layout/WithLoader";
 import ConfirmPINScreen from "../screens/auth/ConfirmPINScreen";
 import CreatePINScreen from "../screens/auth/CreatePINScreen";
 import OTPScreen from "../screens/auth/OTPScreen";
-import SuccessScreen from "../screens/auth/SuccessScreen";
 import EnterPinScreen from "../screens/EnterPinScreen";
 import AddFiatWalletScreen from "../screens/home/AddFiatWalletScreen";
 import BuyScreen from "../screens/home/BuyScreen";
@@ -40,6 +39,7 @@ import RequestScreen from "../screens/profile/RequestScreen";
 import TradeScreen from "../screens/profile/TradeScreen";
 import QuickShareScreen from "../screens/QuickShareScreen";
 import SuccessfulScreen from "../screens/SuccessfulScreen";
+import SuccessScreen from "../screens/SuccessScreen";
 import BottomTabs from "./BottomTabs";
 import ContactTabs from "./ContactTabs";
 

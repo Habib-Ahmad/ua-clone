@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import axios from "../../api/axios";
 import urls from "../../api/urls";
@@ -6,6 +6,7 @@ import RightArrow from "../../assets/RightArrow";
 import CustomModal from "../../components/input/CustomModal";
 import FourDigitInput from "../../components/input/FourDigitInput";
 import ScreenHeader from "../../components/ScreenHeader";
+import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils";
 import { getDate } from "../../utils/dateAndTime";
@@ -13,6 +14,7 @@ import { getDate } from "../../utils/dateAndTime";
 const ActiveTradesScreen = ({ navigation }) => {
   const {
     state: { activeTrades, user },
+    dispatch,
   } = useGlobalContext();
 
   const [activeTradeId, setActiveTradeId] = useState();
@@ -22,6 +24,16 @@ const ActiveTradesScreen = ({ navigation }) => {
   const [modalVisible4, setModalVisible4] = useState(false);
   const [otp, setOtp] = useState();
   const [pin, setPin] = useState();
+
+  useEffect(() => {
+    const getTrades = async () => {
+      await axios.get(`${urls.trades.getActiveTrades}?pageNumber=1&pageSize=10`).then((res) => {
+        if (!res.data.data) return;
+        dispatch({ type: actions.setActiveTrades, payload: res.data.data });
+      });
+    };
+    getTrades();
+  }, [dispatch]);
 
   const isTrader = user.role === "Trader";
 

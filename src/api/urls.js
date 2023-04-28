@@ -19,6 +19,7 @@ const urls = {
   },
   p2p: {
     getLocalTrades: "/P2p/Fiat/Buy",
+    getTrade: "/P2p/Fiat",
     initiateTrade: "/P2p/Fiat/Buy",
   },
   trader: {
@@ -26,7 +27,7 @@ const urls = {
   },
   trades: {
     getActiveTrades: "/Trades/Fiat/Requests",
-    getTrade: "/Trades/Fiat/Requests",
+    cancel: "/Trades/Cancel",
   },
   payment: {
     sent: "/Payment/Sent",

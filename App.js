@@ -3,6 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { AxiosInterceptor } from "./src/api/axios";
 import NavigationSelector from "./src/components/NavigationSelector";
+import SignalConnection from "./src/components/SignalConnection";
 import ContextProvider from "./src/context/context";
 import { colors } from "./src/utils";
 
@@ -14,6 +15,7 @@ const App = () => {
 
         <ContextProvider>
           <AxiosInterceptor>
+            <SignalConnection />
             <NavigationSelector />
           </AxiosInterceptor>
         </ContextProvider>
