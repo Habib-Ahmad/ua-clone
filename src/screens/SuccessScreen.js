@@ -42,8 +42,9 @@ const styles = StyleSheet.create({
   },
   text: {
     marginTop: 40,
-    fontSize: 18,
+    fontSize: 21,
     textAlign: "center",
-    color: colors.grey,
+    color: colors.primary,
+    fontWeight: "600",
   },
 });

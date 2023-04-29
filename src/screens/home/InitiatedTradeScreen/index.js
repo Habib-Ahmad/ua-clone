@@ -12,7 +12,8 @@ import { cancelTrade, dispute, fetchTrade, transfer, updateWallet } from "./func
 import { useTimer } from "./hooks";
 
 const InitiatedTradeScreen = ({ route, navigation }) => {
-  const { id, total, symbol, session, trade, tradeId, status } = route.params;
+  const { id, total, symbol, session, trade, tradeId, status, bank } = route.params;
+  const accDetails = session.paymentMethodDto.bank || bank.paymentMethod.bank;
 
   const { state, dispatch } = useGlobalContext();
 
@@ -91,19 +92,21 @@ const InitiatedTradeScreen = ({ route, navigation }) => {
         <Text style={styles.noteText}>Make sure you transfer to the account details bellow</Text>
       </View>
 
-      <View style={styles.account}>
-        <Text style={styles.title}>Account name</Text>
-        <Text style={styles.detail}>John Doe</Text>
-        <Text style={styles.title}>Account number</Text>
-        <Text style={styles.detail}>
-          0104674762{" "}
-          <TouchableOpacity onPress={() => copyToClipboard(1234567890)}>
-            <Copy />
-          </TouchableOpacity>
-        </Text>
-        <Text style={styles.title}>Bank</Text>
-        <Text style={styles.detail}>Sterling Bank</Text>
-      </View>
+      {accDetails && (
+        <View style={styles.account}>
+          <Text style={styles.title}>Account name</Text>
+          <Text style={styles.detail}>{accDetails.accountName}</Text>
+          <Text style={styles.title}>Account number</Text>
+          <Text style={styles.detail}>
+            {accDetails.accountNumber}{" "}
+            <TouchableOpacity onPress={() => copyToClipboard(accDetails.accountNumber)}>
+              <Copy />
+            </TouchableOpacity>
+          </Text>
+          <Text style={styles.title}>Bank</Text>
+          <Text style={styles.detail}>{accDetails.bankName}</Text>
+        </View>
+      )}
 
       <View style={styles.btnWrapper}>
         {transferred ? (

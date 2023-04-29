@@ -17,6 +17,7 @@ const actions = {
   },
   setActiveTrades: "SET_ACTIVE_TRADES",
   setRealTimeData: "SET_REAL_TIME_DATA",
+  setActiveWallet: "SET_ACTIVE_WALLET",
 };
 
 export default actions;

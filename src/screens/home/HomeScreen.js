@@ -35,7 +35,7 @@ const HomeScreen = ({ navigation }) => {
     },
   } = useGlobalContext();
 
-  const [active, setActive] = useState();
+  const [balance, setBalance] = useState();
   const [activeTab, setActiveTab] = useState("money");
   const [expanded, setExpanded] = useState(false);
   const [total, setTotal] = useState("0");
@@ -53,12 +53,12 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    if (!active) {
+    if (!balance) {
       setExpanded(false);
     } else {
       setExpanded(true);
     }
-  }, [active]);
+  }, [balance]);
 
   useEffect(() => {
     if (activeTrades.length > 0 && !hasRun) {
@@ -89,8 +89,8 @@ const HomeScreen = ({ navigation }) => {
 
       <View style={styles.header}>
         <View style={styles.headerTop}>
-          {active ? (
-            <TouchableOpacity activeOpacity={0.6} onPress={() => setActive()}>
+          {balance ? (
+            <TouchableOpacity activeOpacity={0.6} onPress={() => setBalance()}>
               <BackArrowDark />
             </TouchableOpacity>
           ) : (
@@ -111,7 +111,7 @@ const HomeScreen = ({ navigation }) => {
         <View style={styles.headerMiddle}>
           <View>
             <Text style={styles.balance}>
-              {active || `${fiat.symbol}${String(total).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+              {balance || `${fiat.symbol}${String(total).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
             </Text>
             <Text style={styles.balanceText}>Balance Available</Text>
           </View>
@@ -127,7 +127,7 @@ const HomeScreen = ({ navigation }) => {
         <Wave fill={colors.primary} />
       </View>
 
-      <HomeTabs {...{ setActive, setActiveTab }} />
+      <HomeTabs {...{ setBalance, setActiveTab }} />
     </View>
   );
 };

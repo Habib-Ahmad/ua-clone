@@ -16,14 +16,17 @@ const TradesScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
+    const getTrades = async () => {
+      await axios
+        .get(
+          `${urls.p2p.getLocalTrades}?pageNumber=1&pageSize=10&currencyId=${state.activeWallet.currencyId}`
+        )
+        .then((res) => {
+          setTrades(res.data.data);
+        });
+    };
     getTrades();
-  }, []);
-
-  const getTrades = async () => {
-    await axios.get(`${urls.p2p.getLocalTrades}?pageNumber=1&pageSize=10`).then((res) => {
-      setTrades(res.data.data);
-    });
-  };
+  }, [state.activeWallet.currencyId]);
 
   const handlePress = (trade) => {
     setSelectedTrade(trade);

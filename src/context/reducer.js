@@ -8,6 +8,7 @@ export const initialState = {
   loading: false,
   user: {},
   activeTrades: [],
+  activeWallet: {},
   realTimeData: [],
   registeringUser: {
     firstName: "",
@@ -154,6 +155,13 @@ export const defaultReducer = (state, action) => {
       return {
         ...state,
         realTimeData: [...state.realTimeData, action.payload],
+      };
+    }
+
+    case actions.setActiveWallet: {
+      return {
+        ...state,
+        activeWallet: action.payload,
       };
     }
 

@@ -2,13 +2,13 @@ import { useEffect } from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from "../../utils";
 
-const CryptoScreen = ({ wallets, setActive, setActiveTab, isFocused }) => {
+const CryptoScreen = ({ wallets, setBalance, setActiveTab, isFocused }) => {
   useEffect(() => {
     if (isFocused) {
       setActiveTab("crypto");
-      setActive();
+      setBalance();
     }
-  }, [isFocused, setActive, setActiveTab]);
+  }, [isFocused, setBalance, setActiveTab]);
 
   return (
     <View style={styles.container}>
@@ -18,7 +18,7 @@ const CryptoScreen = ({ wallets, setActive, setActiveTab, isFocused }) => {
             key={item.wallet}
             style={styles.wallet}
             onPress={() =>
-              setActive(`${item.balance.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ${item.currency}`)
+              setBalance(`${item.balance.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ${item.currency}`)
             }
           >
             <Text style={styles.symbol}>{item.symbol}</Text>
