@@ -17,7 +17,7 @@ const withLoader = (Stack) => {
         <Stack.Navigator {...props} screenOptions={{ headerShown: false }} />
         {loading && (
           <View style={styles.container}>
-            {isFocused && <StatusBar backgroundColor={"rgba(0, 0, 0, 0.5)"} />}
+            {isFocused && <StatusBar />}
             <ActivityIndicator size="large" color={colors.primary} />
           </View>
         )}

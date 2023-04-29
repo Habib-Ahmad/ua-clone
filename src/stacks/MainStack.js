@@ -7,6 +7,7 @@ import OTPScreen from "../screens/auth/OTPScreen";
 import EnterPinScreen from "../screens/EnterPinScreen";
 import AddFiatWalletScreen from "../screens/home/AddFiatWalletScreen";
 import BuyScreen from "../screens/home/BuyScreen";
+import ChatScreen from "../screens/home/ChatScreen";
 import ConfirmSendCryptoScreen from "../screens/home/ConfirmSendCryptoScreen";
 import ForgotPINScreen from "../screens/home/ForgotPINScreen";
 import InitiatedTradeScreen from "../screens/home/InitiatedTradeScreen";
@@ -98,6 +99,7 @@ const MainStackScreen = () => {
       <MainStack.Screen name="BecomeAMerchantScreen" component={BecomeAMerchantScreen} />
       <MainStack.Screen name="KYCScreen" component={KYCScreen} />
       <MainStack.Screen name="ActiveTradesScreen" component={ActiveTradesScreen} />
+      <MainStack.Screen name="ChatScreen" component={ChatScreen} />
     </StackNavigator>
   );
 };

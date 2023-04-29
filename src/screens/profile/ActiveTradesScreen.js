@@ -37,7 +37,7 @@ const ActiveTradesScreen = ({ navigation }) => {
 
   const isTrader = user.role === "Trader";
 
-  const handlePress = (id, tradeId, amount, fee) => {
+  const handlePress = (id, tradeId, amount, fee, status) => {
     if (isTrader) {
       setModalVisible(true);
       setActiveTradeId(id);
@@ -46,7 +46,7 @@ const ActiveTradesScreen = ({ navigation }) => {
 
     const total = amount + fee;
 
-    navigation.navigate("InitiatedTradeScreen", { id, tradeId, total });
+    navigation.navigate("InitiatedTradeScreen", { id, tradeId, total, status });
   };
 
   const getLabel = (status) => {
@@ -93,7 +93,9 @@ const ActiveTradesScreen = ({ navigation }) => {
             <TouchableOpacity
               key={trade.id}
               style={styles.trade}
-              onPress={() => handlePress(trade.id, trade.tradeId, trade.amount, trade.fee)}
+              onPress={() =>
+                handlePress(trade.id, trade.tradeId, trade.amount, trade.fee, trade.state.label)
+              }
             >
               <View>
                 <View style={styles.detail}>

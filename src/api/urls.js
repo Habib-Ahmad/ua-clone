@@ -37,6 +37,10 @@ const urls = {
   kyc: {
     baseUrl: "Kyc",
   },
+  messaging: {
+    send: "/Messaging",
+    getSessionMessages: "/Messaging",
+  },
   system: {
     countries: "/System/Countries",
   },
