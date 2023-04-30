@@ -1,7 +1,7 @@
 import { Alert } from "react-native";
-import axios from "../../api/axios";
-import urls from "../../api/urls";
-import { uploadImageToCloudinary } from "../../functions";
+import axios from "../../../api/axios";
+import urls from "../../../api/urls";
+import { uploadImageToCloudinary } from "../../../functions";
 
 export const uploadImages = async (
   base64,

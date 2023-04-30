@@ -1,3 +1,4 @@
+import * as DocumentPicker from "expo-document-picker";
 import * as ImagePicker from "expo-image-picker";
 import axios from "../../../api/axios";
 import urls from "../../../api/urls";
@@ -61,6 +62,17 @@ export const uploadImage = async (setImage) => {
 
 export const cancelPreview = (setImage) => {
   setImage(null);
+};
+
+export const uploadFile = async (setFile) => {
+  let _file = await DocumentPicker.getDocumentAsync({
+    type: ["application/pdf"],
+    copyToCacheDirectory: false,
+    multiple: false,
+  });
+  if (!_file.cancelled) {
+    setFile(_file.uri);
+  }
 };
 
 export const getId = () => {

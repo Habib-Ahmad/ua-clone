@@ -7,7 +7,13 @@ import ScreenHeader from "../../../components/ScreenHeader";
 import { useGlobalContext } from "../../../context/context";
 import { colors } from "../../../utils";
 import { RenderItem, Send } from "./components";
-import { cancelPreview, sendImgMessage, sendTextMessage, uploadImage } from "./functions";
+import {
+  cancelPreview,
+  sendImgMessage,
+  sendTextMessage,
+  uploadFile,
+  uploadImage,
+} from "./functions";
 import { useGetMessages } from "./hooks";
 
 const ChatScreen = ({ route }) => {
@@ -20,6 +26,7 @@ const ChatScreen = ({ route }) => {
   const [messages, setMessages] = useState([]);
   const [localMessages, setLocalMessages] = useState([]);
   const [image, setImage] = useState(null);
+  const [file, setFile] = useState(null);
 
   useGetMessages(id, setLocalMessages, setMessages);
 
@@ -56,6 +63,26 @@ const ChatScreen = ({ route }) => {
         </View>
       )}
 
+      {file && (
+        <View style={styles.filePreview}>
+          <TouchableOpacity
+            onPress={() => cancelPreview(setImage)}
+            style={styles.closeButton}
+            activeOpacity={0.7}
+          >
+            <Ionicons name="close-outline" size={38} color="white" />
+          </TouchableOpacity>
+
+          <View style={styles.sendWrapper}>
+            <Send
+              messageText={messageText}
+              image={image}
+              onPress={() => sendImgMessage(id, user, image, setImage, setLocalMessages)}
+            />
+          </View>
+        </View>
+      )}
+
       <View style={styles.inputWrapper}>
         <View style={styles.inputContainer}>
           <TouchableOpacity>
@@ -73,9 +100,9 @@ const ChatScreen = ({ route }) => {
           />
 
           <View style={styles.iconContainer}>
-            <TouchableOpacity style={styles.icon} onPress={() => {}}>
+            {/* <TouchableOpacity style={styles.icon} onPress={() => uploadFile(setFile)}>
               <Attachment />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity style={styles.icon} onPress={() => uploadImage(setImage)}>
               <Attachment />
             </TouchableOpacity>
