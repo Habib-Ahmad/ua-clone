@@ -13,7 +13,7 @@ import { useTimer } from "./hooks";
 
 const InitiatedTradeScreen = ({ route, navigation }) => {
   const { id, total, symbol, session, trade, tradeId, status, bank } = route.params;
-  const accDetails = session.paymentMethodDto.bank || bank.paymentMethod.bank;
+  const accDetails = session?.paymentMethodDto.bank || bank?.paymentMethod.bank || null;
 
   const { state, dispatch } = useGlobalContext();
 

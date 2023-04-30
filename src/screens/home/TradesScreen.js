@@ -70,7 +70,7 @@ const TradesScreen = ({ navigation }) => {
   };
 
   const handleClose = () => {
-    navigation.goBack();
+    setModalVisible(false);
     setSelectedTrade(null);
   };
 
