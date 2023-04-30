@@ -1,25 +1,7 @@
-import { StyleSheet, Text, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { colors } from "../../utils";
-
-const docs = [
-  {
-    name: "National Identity Number",
-    value: 1,
-  },
-  {
-    name: "International Passport",
-    value: 2,
-  },
-  {
-    name: "Driver's Licence",
-    value: 3,
-  },
-  {
-    name: "Voter's Card",
-    value: 4,
-  },
-];
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { colors } from "../../../../utils";
+import { docs } from "../data";
 
 const DocumentType = ({ formState, setFormState }) => {
   const handlePress = (value) => {
@@ -30,8 +12,8 @@ const DocumentType = ({ formState, setFormState }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>Select Document Type</Text>
+    <View style={styles.container3}>
+      <Text style={styles.heading3}>Select Document Type</Text>
 
       {docs.map((doc) => (
         <TouchableOpacity
@@ -50,10 +32,10 @@ const DocumentType = ({ formState, setFormState }) => {
 export default DocumentType;
 
 const styles = StyleSheet.create({
-  container: {
+  container3: {
     flex: 1,
   },
-  heading: {
+  heading3: {
     fontWeight: "500",
     fontSize: 18,
     marginBottom: 30,

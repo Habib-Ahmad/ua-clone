@@ -1,23 +1,6 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { colors } from "../../utils";
-
-const imgs = [
-  {
-    name: "documentFront",
-    text1: "Upload document front",
-    text2: "Please provide a clear image of the front of the document",
-  },
-  {
-    name: "documentBack",
-    text1: "Upload document back (optional)",
-    text2: "Please provide a clear image of the back of the document",
-  },
-  {
-    name: "photo",
-    text1: "Upload selfie",
-    text2: "Please provide a clear image of yourself",
-  },
-];
+import { colors } from "../../../../utils";
+import { imgs } from "../data";
 
 const UploadImages = ({ base64, setBase64, setCameraOn, setId }) => {
   const handlePress = async (id) => {
