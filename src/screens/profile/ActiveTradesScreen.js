@@ -38,8 +38,7 @@ const ActiveTradesScreen = ({ navigation }) => {
   const isTrader = user.role === "Trader";
 
   const handlePress = (trade) => {
-    const { id, tradeId, amount, fee, status, paymentMethod } = trade;
-    // console.log(trade);
+    const { id, tradeId, amount, fee, state, paymentMethod } = trade;
 
     if (isTrader) {
       setModalVisible(true);
@@ -50,7 +49,7 @@ const ActiveTradesScreen = ({ navigation }) => {
     const total = amount + fee;
     const bank = paymentMethod?.bank;
 
-    navigation.navigate("InitiatedTradeScreen", { id, tradeId, total, status, bank });
+    navigation.navigate("InitiatedTradeScreen", { id, tradeId, total, status: state.label, bank });
   };
 
   const getLabel = (status) => {

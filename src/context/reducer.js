@@ -24,6 +24,7 @@ export const initialState = {
   },
   topup: {
     amount: "",
+    paymentCurrencyId: "",
   },
   balance: {
     fiat: {
@@ -140,6 +141,16 @@ export const defaultReducer = (state, action) => {
         topup: {
           ...state.topup,
           amount: action.payload,
+        },
+      };
+    }
+
+    case actions.topup.setPaymentCurrencyId: {
+      return {
+        ...state,
+        topup: {
+          amount: action.payload.amount,
+          paymentCurrencyId: action.payload.paymentCurrencyId,
         },
       };
     }

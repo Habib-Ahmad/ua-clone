@@ -14,6 +14,7 @@ const actions = {
   setFiatWallets: "SET_FIAT_WALLETS",
   topup: {
     setAmount: "SET_AMOUNT",
+    setPaymentCurrencyId: "SET_PAYMENT_CURRENCY_ID",
   },
   setActiveTrades: "SET_ACTIVE_TRADES",
   setRealTimeData: "SET_REAL_TIME_DATA",

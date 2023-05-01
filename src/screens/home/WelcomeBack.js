@@ -4,13 +4,17 @@ import axios from "../../api/axios";
 import urls from "../../api/urls";
 import Button from "../../components/input/Button";
 import FourDigitInput from "../../components/input/FourDigitInput";
+import Loader from "../../components/Loader";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
 import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils";
 
 const WelcomeBack = ({ navigation }) => {
-  const { dispatch } = useGlobalContext();
+  const {
+    state: { loading },
+    dispatch,
+  } = useGlobalContext();
 
   const [pin, setPin] = useState("");
 
@@ -37,6 +41,7 @@ const WelcomeBack = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Loader loading={loading} />
       <View style={styles.content}>
         <ScrollView>
           <ScreenHeaderWithLogo

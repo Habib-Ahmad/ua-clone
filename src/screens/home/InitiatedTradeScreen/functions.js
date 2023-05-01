@@ -39,5 +39,3 @@ export const updateWallet = async (dispatch, navigation) => {
     route: "HomeScreen",
   });
 };
-
-export const dispute = async () => {};

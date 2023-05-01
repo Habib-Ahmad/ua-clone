@@ -1,26 +1,27 @@
 import { useEffect, useState } from "react";
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Chat from "../../../assets/Chat";
 import Copy from "../../../assets/Copy";
 import Button from "../../../components/input/Button";
+import CustomModal from "../../../components/input/CustomModal";
 import ScreenHeader from "../../../components/ScreenHeader";
 import Trade from "../../../components/Trade";
 import { useGlobalContext } from "../../../context/context";
 import { copyToClipboard } from "../../../functions";
 import { colors, formatTime } from "../../../utils";
-import { cancelTrade, dispute, fetchTrade, transfer, updateWallet } from "./functions";
+import { cancelTrade, fetchTrade, transfer, updateWallet } from "./functions";
 import { useTimer } from "./hooks";
 
 const InitiatedTradeScreen = ({ route, navigation }) => {
   const { id, total, symbol, session, trade, tradeId, status, bank } = route.params;
   const accDetails = session?.paymentMethodDto.bank || bank?.paymentMethod.bank || null;
-
   const { state, dispatch } = useGlobalContext();
 
   const [fetchedTrade, setFetchedTrade] = useState();
   const [timeLeft, setTimeLeft] = useState(20 * 60 * 1000);
   const [transferred, setTransferred] = useState(false);
   const [tradeCompleted, setTradeCompleted] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     if (!trade) {
@@ -111,7 +112,11 @@ const InitiatedTradeScreen = ({ route, navigation }) => {
       <View style={styles.btnWrapper}>
         {transferred ? (
           <View style={styles.disputeWrapper}>
-            <Button title="Dispute" backgroundColor={colors.red} onPress={dispute} />
+            <Button
+              title="Dispute"
+              backgroundColor={colors.red}
+              onPress={() => setModalVisible(true)}
+            />
           </View>
         ) : (
           <>
@@ -129,6 +134,30 @@ const InitiatedTradeScreen = ({ route, navigation }) => {
           </>
         )}
       </View>
+
+      <CustomModal modalVisible={modalVisible} setModalVisible={setModalVisible}>
+        <View style={styles.modal}>
+          <Text style={styles.modalText}>
+            You need to upload the payment receipt to raise a dispute
+          </Text>
+          <View style={styles.buttonWrapper}>
+            <Pressable
+              style={[styles.button, styles.buttonNo]}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.textStyle}>Cancel</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.button, styles.buttonYes]}
+              onPress={() =>
+                navigation.navigate("ChatScreen", { id: session?.sessionId || id, isDispute: true })
+              }
+            >
+              <Text style={styles.textStyle}>Upload</Text>
+            </Pressable>
+          </View>
+        </View>
+      </CustomModal>
     </ScrollView>
   );
 };
@@ -222,5 +251,34 @@ const styles = StyleSheet.create({
   btn: {
     paddingHorizontal: 20,
     width: "100%",
+  },
+  modalText: {
+    textAlign: "center",
+    fontSize: 18,
+    color: colors.textLight,
+  },
+  buttonWrapper: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginTop: 20,
+  },
+  button: {
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 18,
+    elevation: 2,
+  },
+  buttonYes: {
+    backgroundColor: colors.primary,
+  },
+  buttonNo: {
+    backgroundColor: colors.greyDark,
+  },
+  textStyle: {
+    color: colors.white,
+    fontWeight: "600",
+    textAlign: "center",
+    fontSize: 16,
   },
 });

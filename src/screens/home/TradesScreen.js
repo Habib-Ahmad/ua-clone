@@ -3,6 +3,7 @@ import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from "react-nati
 import axios from "../../api/axios";
 import urls from "../../api/urls";
 import CustomModal from "../../components/input/CustomModal";
+import Loader from "../../components/Loader";
 import ScreenHeader from "../../components/ScreenHeader";
 import Trade from "../../components/Trade";
 import { useGlobalContext } from "../../context/context";
@@ -11,12 +12,16 @@ import { colors } from "../../utils";
 const TradesScreen = ({ navigation }) => {
   const { state } = useGlobalContext();
 
-  const [trades, setTrades] = useState([]);
+  const [trades, setTrades] = useState(null);
   const [selectedTrade, setSelectedTrade] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
 
+  const localWalletId = state.balance.fiat.wallets?.find((wallet) => wallet.isLocal).id;
+  const selectedWalletId = state.activeWallet.id;
+  const isLocalTopup = localWalletId === selectedWalletId;
+
   useEffect(() => {
-    const getTrades = async () => {
+    const getLocalTrades = async () => {
       await axios
         .get(
           `${urls.p2p.getLocalTrades}?pageNumber=1&pageSize=10&currencyId=${state.activeWallet.currencyId}`
@@ -25,8 +30,21 @@ const TradesScreen = ({ navigation }) => {
           setTrades(res.data.data);
         });
     };
-    getTrades();
-  }, [state.activeWallet.currencyId]);
+    const getSwapTrades = async () => {
+      await axios
+        .get(
+          `${urls.p2p.getSwapTrades}?pageNumber=1&pageSize=10&currencyId=${state.activeWallet.currencyId}`
+        )
+        .then((res) => {
+          setTrades(res.data.data);
+        });
+    };
+    if (isLocalTopup) {
+      getLocalTrades();
+    } else {
+      getSwapTrades();
+    }
+  }, [isLocalTopup, state.activeWallet.currencyId]);
 
   const handlePress = (trade) => {
     setSelectedTrade(trade);
@@ -78,11 +96,17 @@ const TradesScreen = ({ navigation }) => {
     <View style={styles.container}>
       <ScreenHeader heading="Available Trades" />
 
-      <ScrollView style={styles.trades}>
-        {trades?.map((trade) => (
-          <Trade key={trade.id} trade={trade} handlePress={() => handlePress(trade)} />
-        ))}
-      </ScrollView>
+      {!trades ? (
+        <Loader />
+      ) : !trades.length ? (
+        <Text style={styles.noTrade}>No available Trades</Text>
+      ) : (
+        <ScrollView style={styles.trades}>
+          {trades?.map((trade) => (
+            <Trade key={trade.id} trade={trade} handlePress={() => handlePress(trade)} />
+          ))}
+        </ScrollView>
+      )}
       <CustomModal modalVisible={modalVisible} setModalVisible={setModalVisible}>
         <View style={styles.modal}>
           <Text style={styles.modalText}>
@@ -110,6 +134,12 @@ const styles = StyleSheet.create({
   },
   trades: {
     flex: 1,
+  },
+  noTrade: {
+    fontSize: 16,
+    color: colors.textLight,
+    textAlign: "center",
+    marginTop: 40,
   },
   buttonWrapper: {
     flexDirection: "row",

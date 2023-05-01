@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FlatList, Image, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Attachment from "../../../assets/Attachment";
@@ -17,7 +17,7 @@ import {
 import { useGetMessages } from "./hooks";
 
 const ChatScreen = ({ route }) => {
-  const { id } = route.params;
+  const { id, isDispute } = route.params;
   const {
     state: { user },
   } = useGlobalContext();
@@ -27,6 +27,12 @@ const ChatScreen = ({ route }) => {
   const [localMessages, setLocalMessages] = useState([]);
   const [image, setImage] = useState(null);
   const [file, setFile] = useState(null);
+
+  useEffect(() => {
+    if (isDispute) {
+      uploadImage(setImage);
+    }
+  }, [isDispute]);
 
   useGetMessages(id, setLocalMessages, setMessages);
 
