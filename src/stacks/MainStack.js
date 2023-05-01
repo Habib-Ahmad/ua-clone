@@ -1,4 +1,7 @@
+import { useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { useGlobalContext } from "../context/context";
 import ConfirmPINScreen from "../screens/auth/ConfirmPINScreen";
 import CreatePINScreen from "../screens/auth/CreatePINScreen";
 import OTPScreen from "../screens/auth/OTPScreen";
@@ -40,10 +43,23 @@ import ContactTabs from "./ContactTabs";
 const MainStack = createStackNavigator();
 
 const MainStackScreen = () => {
+  const {
+    state: { accessToken, isLoggedIn },
+  } = useGlobalContext();
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    if (accessToken && isLoggedIn) {
+      navigation.navigate("Home");
+    } else {
+      navigation.navigate("WelcomeBackScreen");
+    }
+  }, [accessToken, isLoggedIn, navigation]);
+
   return (
     <MainStack.Navigator screenOptions={{ headerShown: false }}>
-      <MainStack.Screen name="Home" component={BottomTabs} />
       <MainStack.Screen name="WelcomeBackScreen" component={WelcomeBack} />
+      <MainStack.Screen name="Home" component={BottomTabs} />
       <MainStack.Screen name="TopupScreen" component={TopupScreen} />
       <MainStack.Screen name="SendCryptoScreen" component={SendCryptoScreen} />
       <MainStack.Screen name="ConfirmSendCryptoScreen" component={ConfirmSendCryptoScreen} />

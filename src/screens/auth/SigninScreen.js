@@ -44,12 +44,12 @@ const SigninScreen = ({ navigation }) => {
         appId,
       })
       .then(async (res) => {
+        await store.setRefreshToken(res.data.tokens.refreshToken);
+        await store.setRefreshExpiry(res.data.tokens.refreshExpiry);
         dispatch({
           type: actions.login,
           payload: res.data.tokens,
         });
-        await store.setRefreshToken(res.data.tokens.refreshToken);
-        await store.setRefreshExpiry(res.data.tokens.refreshExpiry);
       });
   };
 
@@ -58,7 +58,7 @@ const SigninScreen = ({ navigation }) => {
       <ScrollView>
         <ScreenHeaderWithLogo
           heading="Sign In"
-          paragraph="This is the name we will use to address you"
+          paragraph="Sign in into your Ultra Account"
           noBackButton={prevRoute === "ConfirmPINScreen"}
         />
 

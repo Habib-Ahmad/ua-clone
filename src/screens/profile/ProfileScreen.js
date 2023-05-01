@@ -11,7 +11,6 @@ import Notify from "../../assets/Notify";
 import Security from "../../assets/Security";
 import IconTextRow from "../../components/IconTextRow";
 import ProfileHeader from "../../components/ProfileHeader";
-import ScreenHeader from "../../components/ScreenHeader";
 import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils/colors";
@@ -89,7 +88,9 @@ const ProfileScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <ScreenHeader heading="Profile" />
+        <View style={styles.headingWrapper}>
+          <Text style={styles.heading}>Profile</Text>
+        </View>
 
         <ProfileHeader heading="Savannah Nguyen" paragraph="SavannahNguyen180" />
 
@@ -121,6 +122,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingBottom: 20,
+    paddingTop: 60,
+  },
+  headingWrapper: {
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  heading: {
+    fontWeight: "600",
+    fontSize: 18,
   },
   line: {
     flex: 1,

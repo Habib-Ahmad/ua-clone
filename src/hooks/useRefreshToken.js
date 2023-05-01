@@ -4,25 +4,30 @@ import actions from "../context/actions";
 import { useGlobalContext } from "../context/context";
 import store from "../utils/store";
 
-const instance = axios.create({
-  baseURL: "https://api-ultra.herokuapp.com",
-});
-
 const useRefreshToken = () => {
   const { dispatch } = useGlobalContext();
 
   const refresh = async () => {
-    const refreshToken = await store.getRefreshToken();
-    const response = await instance.post(urls.auth.refreshToken, { refreshToken });
+    try {
+      const refreshToken = await store.getRefreshToken();
+      const response = await axios.post(
+        `https://api-ultra.herokuapp.com${urls.auth.refreshToken}`,
+        { refreshToken }
+      );
 
-    dispatch({
-      type: actions.setAccessToken,
-      payload: {
-        token: response.data.tokens.accessToken,
-        expiry: response.data.tokens.tokenExpiry,
-      },
-    });
-    return response.data.tokens.accessToken;
+      dispatch({
+        type: actions.setAccessToken,
+        payload: {
+          token: response.data.tokens.accessToken,
+          expiry: response.data.tokens.tokenExpiry,
+        },
+      });
+      return response.data.tokens.accessToken;
+    } catch (error) {
+      Promise.reject(error.response);
+      await store.removeRefreshToken();
+      await store.removeRefreshExpiry();
+    }
   };
 
   return refresh;
