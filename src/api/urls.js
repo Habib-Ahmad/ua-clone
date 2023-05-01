@@ -19,6 +19,7 @@ const urls = {
   },
   p2p: {
     getLocalTrades: "/P2p/Fiat/Buy",
+    getSwapTrades: "/P2p/Fiat/SwapBuy",
     getTrade: "/P2p/Fiat",
     initiateTrade: "/P2p/Fiat/Buy",
   },
@@ -41,8 +42,13 @@ const urls = {
     send: "/Messaging",
     getSessionMessages: "/Messaging",
   },
+  notification: {
+    getAll: "/Notification",
+    markAsRead: "/Notification",
+  },
   system: {
     countries: "/System/Countries",
+    currencies: "/System/Currencies",
   },
 };
 

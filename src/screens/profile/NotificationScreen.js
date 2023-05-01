@@ -1,55 +1,54 @@
-import { FlatList, SafeAreaView, StyleSheet, View } from "react-native";
+import { useCallback, useEffect, useState } from "react";
+import { FlatList, SafeAreaView, StyleSheet } from "react-native";
+import axios from "../../api/axios";
+import urls from "../../api/urls";
+import Loader from "../../components/Loader";
 import EmptyNotification from "../../components/notification/EmptyNotification";
 import NotificationPanel from "../../components/notification/NotificationPanel";
 import ScreenHeader from "../../components/ScreenHeader";
-
-const DATA = [
-  {
-    title: "Security Updates!",
-    date: "Today I  09:24 AM",
-    description:
-      "Now ultra has a two factor authenticaton. try it now to make your account more secure",
-    isNew: true,
-  },
-  {
-    title: "Multiple card features!",
-    date: "Today I  09:24 AM",
-    description:
-      "Now ultra has a two factor authenticaton. try it now to make your account more secure",
-    isNew: true,
-  },
-  {
-    title: "New update availble!",
-    date: "Today I  09:24 AM",
-    description:
-      "Now ultra has a two factor authenticaton. try it now to make your account more secure",
-    isNew: false,
-  },
-];
+import { useGlobalContext } from "../../context/context";
 
 const NotificationScreen = () => {
-  const renderItem = ({ item }) => {
-    return (
-      <NotificationPanel
-        title={item.title}
-        date={item.date}
-        description={item.description}
-        isNew={item.isNew}
-      />
-    );
+  const {
+    state: { loading },
+  } = useGlobalContext();
+  const [notifications, setNotifications] = useState(null);
+
+  useEffect(() => {
+    getNotifications();
+  }, []);
+
+  useEffect(() => {
+    markAsRead();
+  }, [markAsRead]);
+
+  const unreadIds = notifications?.filter((item) => !item.isRead).map((item) => item.id);
+
+  const getNotifications = async () => {
+    await axios.get(`${urls.notification.getAll}?pageNumber=1&pageSize=10`).then((res) => {
+      setNotifications(res.data.data);
+    });
   };
 
+  const markAsRead = useCallback(async () => {
+    if (!unreadIds?.length) return;
+    await axios.post(urls.notification.markAsRead, { ids: unreadIds });
+  }, [unreadIds]);
+
   return (
-    <SafeAreaView styles={styles.container}>
-      <ScreenHeader heading="Notification" />
-      <View style={styles.wrapper}>
+    <SafeAreaView style={styles.container}>
+      <Loader loading={loading} />
+      <ScreenHeader heading="Notifications" />
+
+      {notifications && (
         <FlatList
-          data={DATA}
-          renderItem={renderItem}
-          keyExtractor={(item, index) => index.toString()}
+          data={notifications}
+          extraData={notifications}
+          renderItem={(props) => <NotificationPanel {...props.item} />}
+          keyExtractor={(item) => item.id}
           ListEmptyComponent={() => <EmptyNotification />}
         />
-      </View>
+      )}
     </SafeAreaView>
   );
 };

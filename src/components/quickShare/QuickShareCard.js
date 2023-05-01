@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import BTC from "../../assets/BTC";
+import BTCSmall from "../../assets/BTCSmall";
 import ETH from "../../assets/ETH";
 import QuickShareIcon from "../../assets/QuickShare";
 import USDT from "../../assets/USDT";
@@ -16,7 +16,7 @@ export default function QuickShareCard({ name, info, type }) {
 
           {type === "topup" && <Wallet width={"50"} height={"50"} />}
 
-          {type === "btc" && <BTC width={"50"} height={"50"} />}
+          {type === "btc" && <BTCSmall width={"50"} height={"50"} />}
           {type === "eth" && <ETH width={"50"} height={"50"} />}
           {type === "usdt" && <USDT width={"50"} height={"50"} />}
         </View>

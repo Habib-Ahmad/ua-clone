@@ -1,4 +1,3 @@
-import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import QuickShareCard from "../components/quickShare/QuickShareCard";
 import ScreenHeader from "../components/ScreenHeader";
@@ -35,6 +34,7 @@ export default function QuickShare() {
   const renderItem = ({ item }) => {
     return <QuickShareCard name={item.name} info={item.info} type={item.type} />;
   };
+
   return (
     <View>
       <ScreenHeader heading="Quick Share" />
