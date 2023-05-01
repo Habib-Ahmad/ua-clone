@@ -1,11 +1,16 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const Input = ({ label, icon, onIconPress, numberOfLines = 1, ...others }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-      <TextInput style={styles.input} {...others} multiline={numberOfLines > 1} numberOfLines={numberOfLines}/>
+      <TextInput
+        style={styles.input}
+        {...others}
+        multiline={numberOfLines > 1}
+        numberOfLines={numberOfLines}
+      />
       {icon && (
         <TouchableOpacity activeOpacity={1} style={styles.icon} onPress={onIconPress}>
           {icon}
@@ -40,8 +45,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   input: {
-    // width: "100%",
-    // height: "100%",
     padding: 20,
   },
   icon: {

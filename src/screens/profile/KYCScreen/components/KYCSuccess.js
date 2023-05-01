@@ -1,5 +1,6 @@
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Success from "../../assets/Success";
+import Success from "../../../../assets/Success";
 
 const KYCSuccess = () => {
   return (

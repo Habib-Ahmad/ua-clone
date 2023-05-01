@@ -1,7 +1,15 @@
 import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
-const Button = ({ title, onPress, disabled, backgroundColor, loading, ...others }) => {
+const Button = ({
+  title,
+  onPress,
+  disabled,
+  backgroundColor,
+  loading,
+  customStyles,
+  ...others
+}) => {
   return (
     <TouchableOpacity
       style={styles.container}
@@ -13,6 +21,7 @@ const Button = ({ title, onPress, disabled, backgroundColor, loading, ...others 
       <View
         style={[
           styles.button,
+          customStyles,
           { backgroundColor: disabled ? colors.greyDark : backgroundColor || colors.primary },
         ]}
       >

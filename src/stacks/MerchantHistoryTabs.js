@@ -4,7 +4,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import Crypto from "../screens/profile/merchantHistoryTabs/Crypto";
 import Topup from "../screens/profile/merchantHistoryTabs/Topup";
 import WithdrawalScreen from "../screens/profile/merchantHistoryTabs/Withdrawal";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 
 const MerchantHistoryTabs = () => {
   const Tab = createMaterialTopTabNavigator();

@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import BTC from "../assets/BTC";
 import SwapIcon from "../assets/Swap";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 import ButtonTransparent from "./input/ButtonTransparent";
 import Icon from "./withdraw/Icon";
 

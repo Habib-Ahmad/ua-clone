@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const ButtonLight = ({ title, disabled, backgroundColor, ...others }) => {
   return (

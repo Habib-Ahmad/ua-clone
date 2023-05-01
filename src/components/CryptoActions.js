@@ -4,7 +4,7 @@ import Buy from "../assets/Buy";
 import Receive from "../assets/Receive";
 import Send from "../assets/Send";
 import Swap from "../assets/Swap";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 
 const CryptoActions = () => {
   const navigation = useNavigation();
@@ -12,7 +12,7 @@ const CryptoActions = () => {
   const handleSend = () => {
     navigation.navigate("SendCryptoScreen");
   };
-  
+
   const handleReceive = () => {
     navigation.navigate("ReceiveScreen");
   };

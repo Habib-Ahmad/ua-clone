@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Times from "../../assets/Times";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 import Icon from "../withdraw/Icon";
 
 export default function ManageBankCard({ bank, accountNumber }) {

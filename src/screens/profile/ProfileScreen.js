@@ -13,7 +13,7 @@ import IconTextRow from "../../components/IconTextRow";
 import ProfileHeader from "../../components/ProfileHeader";
 import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 import store from "../../utils/store";
 
 const data = [
@@ -50,6 +50,11 @@ const data = [
   {
     name: "KYC Verification",
     to: "KYCScreen",
+    icon: <Security />,
+  },
+  {
+    name: "Active Trades",
+    to: "ActiveTradesScreen",
     icon: <Security />,
   },
   {

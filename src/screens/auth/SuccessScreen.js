@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import Success from "../../assets/Success";
 import Button from "../../components/input/Button";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 export default function SuccessScreen({ navigation }) {
   const handlePress = () => {

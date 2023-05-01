@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const MoneyHistoryScreen = ({ wallets }) => {
   return (

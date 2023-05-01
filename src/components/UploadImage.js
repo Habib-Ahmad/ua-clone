@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 import ImageButton from "./input/ImageButton";
 
 const UploadImage = () => {

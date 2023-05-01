@@ -9,15 +9,12 @@ import Input from "../../components/input/Input";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
 import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
-import { getPushNotificationToken } from "../../functions";
-import { colors } from "../../utils/colors";
+import { getFiatData, getPushNotificationToken } from "../../functions";
+import { colors } from "../../utils";
 import store from "../../utils/store";
 
 const SigninScreen = ({ navigation }) => {
-  const {
-    state: { loading },
-    dispatch,
-  } = useGlobalContext();
+  const { dispatch } = useGlobalContext();
   const prevRoute =
     useNavigationState((state) => state.routes[state.routes.length - 2])?.name || "";
 
@@ -44,12 +41,11 @@ const SigninScreen = ({ navigation }) => {
         appId,
       })
       .then(async (res) => {
+        dispatch({ type: actions.setLoading, payload: true });
         await store.setRefreshToken(res.data.tokens.refreshToken);
         await store.setRefreshExpiry(res.data.tokens.refreshExpiry);
-        dispatch({
-          type: actions.login,
-          payload: res.data.tokens,
-        });
+        await getFiatData(dispatch);
+        dispatch({ type: actions.login, payload: res.data.tokens });
       });
   };
 
@@ -89,12 +85,7 @@ const SigninScreen = ({ navigation }) => {
         </View>
       </ScrollView>
 
-      <Button
-        title="Continue"
-        onPress={handlePress}
-        disabled={!filledAllFields}
-        loading={loading}
-      />
+      <Button title="Continue" onPress={handlePress} disabled={!filledAllFields} />
     </View>
   );
 };

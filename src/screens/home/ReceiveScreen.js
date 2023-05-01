@@ -5,7 +5,7 @@ import Copy from "../../assets/Copy";
 import qrCode from "../../assets/qr-code.png";
 import ShareButton from "../../assets/ShareButton";
 import ScreenHeader from "../../components/ScreenHeader";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 export default function ReceiveScreen() {
   return (
@@ -23,7 +23,7 @@ export default function ReceiveScreen() {
         </View>
         <View style={styles.flexRow}>
           <TouchableOpacity activeOpacity={0.6} style={styles.flexOne}>
-            <Copy width={"60"} height={"60"} />
+            <Copy />
             <Text style={styles.copyText}>Copy</Text>
           </TouchableOpacity>
 

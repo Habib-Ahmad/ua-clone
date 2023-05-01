@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import CustomCamera from "../../components/CustomCamera";
-import Button from "../../components/input/Button";
-import DocumentType from "../../components/kyc/DocumentType";
-import { uploadImages } from "../../components/kyc/functions";
-import KYCSuccess from "../../components/kyc/KYCSuccess";
-import UploadImages from "../../components/kyc/UploadImages";
-import ScreenHeader from "../../components/ScreenHeader";
-import { colors } from "../../utils/colors";
+import CustomCamera from "../../../components/CustomCamera";
+import Button from "../../../components/input/Button";
+import ScreenHeader from "../../../components/ScreenHeader";
+import { colors } from "../../../utils";
+import { DocumentType, KYCSuccess, UploadImages } from "./components";
+import { uploadImages } from "./functions";
 
 const KYCScreen = ({ navigation }) => {
   const [cameraOn, setCameraOn] = useState(false);

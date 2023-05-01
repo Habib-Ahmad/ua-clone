@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 export default function EmptyContact() {
   return (

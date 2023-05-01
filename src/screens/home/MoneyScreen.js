@@ -1,40 +1,46 @@
 import { useEffect } from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
-const MoneyScreen = ({ navigation, setActive, setActiveTab, isFocused }) => {
+const MoneyScreen = ({ navigation, setBalance, setActiveTab, isFocused }) => {
   const {
     state: {
       balance: {
         fiat: { wallets },
       },
     },
+    dispatch,
   } = useGlobalContext();
 
   useEffect(() => {
     if (isFocused) {
       setActiveTab("money");
-      setActive();
+      setBalance();
     }
-  }, [isFocused, setActive, setActiveTab]);
+  }, [isFocused, setBalance, setActiveTab]);
+
+  const handlePress = (item) => {
+    setBalance(
+      `${item?.currency?.symbol}${String(item?.balance).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
+    );
+    dispatch({ type: actions.setActiveWallet, payload: item });
+  };
+
+  if (!wallets || !wallets.length) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.noWallet}>You have no wallets</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollview} showsVerticalScrollIndicator={false}>
         {wallets.map((item) => (
-          <TouchableOpacity
-            key={item.id}
-            style={styles.wallet}
-            onPress={() =>
-              setActive(
-                `${item?.currency?.symbol}${String(item?.balance).replace(
-                  /\B(?=(\d{3})+(?!\d))/g,
-                  ","
-                )}`
-              )
-            }
-          >
+          <TouchableOpacity key={item.id} style={styles.wallet} onPress={() => handlePress(item)}>
             <Text style={styles.symbol}>{item?.currency?.symbol.slice(0, 1)}</Text>
 
             <Text style={styles.walletName}>
@@ -128,5 +134,11 @@ const styles = StyleSheet.create({
     fontSize: 36,
     flex: 1,
     alignSelf: "center",
+  },
+  noWallet: {
+    textAlign: "center",
+    fontSize: 18,
+    color: colors.textLight,
+    marginTop: 20,
   },
 });

@@ -1,4 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
+import withLoader from "../layout/WithLoader";
 import ConfirmPINScreen from "../screens/auth/ConfirmPINScreen";
 import CreatePINScreen from "../screens/auth/CreatePINScreen";
 import DOBScreen from "../screens/auth/DOBScreen";
@@ -14,9 +15,11 @@ import SuccessScreen from "../screens/auth/SuccessScreen";
 
 const AuthStack = createStackNavigator();
 
+const StackNavigator = withLoader(AuthStack);
+
 const AuthStackScreen = () => {
   return (
-    <AuthStack.Navigator screenOptions={{ headerShown: false }}>
+    <StackNavigator screenOptions={{ headerShown: false }}>
       <AuthStack.Screen name="SplashScreen" component={SplashScreen} />
       <AuthStack.Screen name="GetStarted" component={GetStarted} />
       <AuthStack.Screen name="OTPScreen" component={OTPScreen} />
@@ -29,7 +32,7 @@ const AuthStackScreen = () => {
       <AuthStack.Screen name="ForgotPasswordScreen" component={ForgotPasswordScreen} />
       <AuthStack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen} />
       <AuthStack.Screen name="SuccessScreen" component={SuccessScreen} />
-    </AuthStack.Navigator>
+    </StackNavigator>
   );
 };
 

@@ -1,5 +1,5 @@
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 
 const width = Dimensions.get("window").width;
 

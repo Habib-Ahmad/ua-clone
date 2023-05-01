@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+  Alert,
   Animated,
   Image,
   LayoutAnimation,
@@ -12,18 +13,15 @@ import {
 } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import axios from "../../api/axios";
-import urls from "../../api/urls";
 import BackArrowDark from "../../assets/BackArrowDark";
 import Notification from "../../assets/Notification";
 import Share from "../../assets/Share";
 import Wave from "../../assets/Wave";
 import CryptoActions from "../../components/CryptoActions";
 import MoneyActions from "../../components/MoneyActions";
-import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
 import HomeTabs from "../../stacks/HomeTabs";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -33,14 +31,15 @@ const HomeScreen = ({ navigation }) => {
   const {
     state: {
       balance: { fiat },
+      activeTrades,
     },
-    dispatch,
   } = useGlobalContext();
 
-  const [active, setActive] = useState();
+  const [balance, setBalance] = useState();
   const [activeTab, setActiveTab] = useState("money");
   const [expanded, setExpanded] = useState(false);
   const [total, setTotal] = useState("0");
+  const [hasRun, setHasRun] = useState(false);
 
   const isFocused = useIsFocused();
 
@@ -54,39 +53,35 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    if (!active) {
+    if (!balance) {
       setExpanded(false);
     } else {
       setExpanded(true);
     }
-  }, [active]);
+  }, [balance]);
 
   useEffect(() => {
-    const getData = async () => {
-      await Promise.all([axios.get(urls.fiat.worth), axios.get(urls.fiat.baseUrl)]).then(
-        ([res1, res2]) => {
-          dispatch({
-            type: actions.setFiatWorth,
-            payload: res1.data.data,
-          });
-          dispatch({
-            type: actions.setFiatWallets,
-            payload: res2.data.data,
-          });
-        }
-      );
-    };
-
-    isFocused && getData();
-  }, [dispatch, isFocused]);
+    if (activeTrades.length > 0 && !hasRun) {
+      setHasRun(true);
+      Alert.alert("Trades active", "You have active trades, lets complete them", [
+        {
+          text: "View",
+          onPress: () => {
+            navigation.navigate("ActiveTradesScreen");
+          },
+        },
+      ]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTrades.length, hasRun]);
 
   useEffect(() => {
     setTotal(() => {
-      if (activeTab === "money") return `${fiat.symbol}${fiat.worth}`;
+      if (activeTab === "money") return fiat.worth;
 
       return "5999";
     });
-  }, [activeTab, fiat.symbol, fiat.worth]);
+  }, [activeTab, fiat.worth]);
 
   return (
     <View style={styles.container}>
@@ -94,8 +89,8 @@ const HomeScreen = ({ navigation }) => {
 
       <View style={styles.header}>
         <View style={styles.headerTop}>
-          {active ? (
-            <TouchableOpacity activeOpacity={0.6} onPress={() => setActive()}>
+          {balance ? (
+            <TouchableOpacity activeOpacity={0.6} onPress={() => setBalance()}>
               <BackArrowDark />
             </TouchableOpacity>
           ) : (
@@ -116,7 +111,7 @@ const HomeScreen = ({ navigation }) => {
         <View style={styles.headerMiddle}>
           <View>
             <Text style={styles.balance}>
-              {active || `${String(total).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+              {balance || `${fiat.symbol}${String(total).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
             </Text>
             <Text style={styles.balanceText}>Balance Available</Text>
           </View>
@@ -132,7 +127,7 @@ const HomeScreen = ({ navigation }) => {
         <Wave fill={colors.primary} />
       </View>
 
-      <HomeTabs {...{ setActive, setActiveTab }} />
+      <HomeTabs {...{ setBalance, setActiveTab }} />
     </View>
   );
 };
@@ -149,7 +144,7 @@ const styles = StyleSheet.create({
     paddingTop: "10%",
   },
   wave: {
-    bottom: 7,
+    bottom: 5,
     left: 0,
     right: 0,
   },

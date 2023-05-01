@@ -15,7 +15,7 @@ import DisplayCard from "../../components/DisplayCard";
 import IconHeader from "../../components/IconHeader";
 import MerchantProfile from "../../components/Merchantprofile";
 import ScreenHeader from "../../components/ScreenHeader";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const data = [
   { key: "request", icon: <Rating />, text: "Requests" },

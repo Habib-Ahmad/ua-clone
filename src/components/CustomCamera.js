@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Dimensions, Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { Camera, CameraType } from "expo-camera";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 
 const WINDOW_HEIGHT = Dimensions.get("window").height;
 const CAPTURE_SIZE = Math.floor(WINDOW_HEIGHT * 0.08);

@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 
 const IconHeader = ({ data, onPress }) => {
   return (

@@ -1,26 +1,28 @@
-import { useEffect } from "react";
-import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useGlobalContext } from "../context/context";
 import ConfirmPINScreen from "../screens/auth/ConfirmPINScreen";
 import CreatePINScreen from "../screens/auth/CreatePINScreen";
 import OTPScreen from "../screens/auth/OTPScreen";
-import SuccessScreen from "../screens/auth/SuccessScreen";
 import EnterPinScreen from "../screens/EnterPinScreen";
 import AddFiatWalletScreen from "../screens/home/AddFiatWalletScreen";
 import BuyScreen from "../screens/home/BuyScreen";
+import ChatScreen from "../screens/home/ChatScreen";
 import ConfirmSendCryptoScreen from "../screens/home/ConfirmSendCryptoScreen";
 import ForgotPINScreen from "../screens/home/ForgotPINScreen";
+import InitiatedTradeScreen from "../screens/home/InitiatedTradeScreen";
 import ReceiveScreen from "../screens/home/ReceiveScreen";
 import ReviewSummaryScreen from "../screens/home/ReviewSummaryScreen";
 import SendCryptoScreen from "../screens/home/SendCryptoScreen";
 import SwapDetailsScreen from "../screens/home/SwapDetailsScreen";
 import SwapScreen from "../screens/home/SwapScreen";
+import TopupMethodScreen from "../screens/home/TopupMethodScreen";
 import TopupScreen from "../screens/home/TopupScreen";
+import TradesScreen from "../screens/home/TradesScreen";
 import TransferDetailsScreen from "../screens/home/TransferDetailsScreen";
 import TransferScreen from "../screens/home/TransferScreen";
 import WelcomeBack from "../screens/home/WelcomeBack";
 import WithdrawScreen from "../screens/home/WithdrawScreen";
+import ActiveTradesScreen from "../screens/profile/ActiveTradesScreen";
 import BecomeAMerchantScreen from "../screens/profile/BecomeAMerchantScreen";
 import ColorSettingScreen from "../screens/profile/ColorSettingScreen";
 import ContactScreen from "../screens/profile/ContactScreen";
@@ -37,6 +39,7 @@ import RequestScreen from "../screens/profile/RequestScreen";
 import TradeScreen from "../screens/profile/TradeScreen";
 import QuickShareScreen from "../screens/QuickShareScreen";
 import SuccessfulScreen from "../screens/SuccessfulScreen";
+import SuccessScreen from "../screens/SuccessScreen";
 import BottomTabs from "./BottomTabs";
 import ContactTabs from "./ContactTabs";
 
@@ -46,21 +49,18 @@ const MainStackScreen = () => {
   const {
     state: { accessToken, isLoggedIn },
   } = useGlobalContext();
-  const navigation = useNavigation();
-
-  useEffect(() => {
-    if (accessToken && isLoggedIn) {
-      navigation.navigate("Home");
-    } else {
-      navigation.navigate("WelcomeBackScreen");
-    }
-  }, [accessToken, isLoggedIn, navigation]);
 
   return (
     <MainStack.Navigator screenOptions={{ headerShown: false }}>
-      <MainStack.Screen name="WelcomeBackScreen" component={WelcomeBack} />
-      <MainStack.Screen name="Home" component={BottomTabs} />
+      {accessToken && isLoggedIn ? (
+        <MainStack.Screen name="Home" component={BottomTabs} />
+      ) : (
+        <MainStack.Screen name="WelcomeBackScreen" component={WelcomeBack} />
+      )}
       <MainStack.Screen name="TopupScreen" component={TopupScreen} />
+      <MainStack.Screen name="TopupMethodScreen" component={TopupMethodScreen} />
+      <MainStack.Screen name="TradesScreen" component={TradesScreen} />
+      <MainStack.Screen name="InitiatedTradeScreen" component={InitiatedTradeScreen} />
       <MainStack.Screen name="SendCryptoScreen" component={SendCryptoScreen} />
       <MainStack.Screen name="ConfirmSendCryptoScreen" component={ConfirmSendCryptoScreen} />
       <MainStack.Screen name="PersonalInfoScreen" component={PersonalInfoScreen} />
@@ -95,6 +95,8 @@ const MainStackScreen = () => {
       <MainStack.Screen name="AddFiatWalletScreen" component={AddFiatWalletScreen} />
       <MainStack.Screen name="BecomeAMerchantScreen" component={BecomeAMerchantScreen} />
       <MainStack.Screen name="KYCScreen" component={KYCScreen} />
+      <MainStack.Screen name="ActiveTradesScreen" component={ActiveTradesScreen} />
+      <MainStack.Screen name="ChatScreen" component={ChatScreen} />
     </MainStack.Navigator>
   );
 };

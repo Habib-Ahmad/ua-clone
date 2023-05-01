@@ -1,5 +1,5 @@
 import Svg, { Path } from "react-native-svg";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 
 export default function Home({ color }) {
   const active = color === "#246BFD";

@@ -6,11 +6,19 @@ const actions = {
     set: "SET_REGISTERING_USER",
     clear: "CLEAR_REGISTERING_USER",
   },
+  setUser: "SET_USER",
   logout: "LOGOUT",
   login: "LOGIN",
   setLoggedIn: "SET_LOGGED_IN",
   setFiatWorth: "SET_FIAT_WORTH",
   setFiatWallets: "SET_FIAT_WALLETS",
+  topup: {
+    setAmount: "SET_AMOUNT",
+    setPaymentCurrencyId: "SET_PAYMENT_CURRENCY_ID",
+  },
+  setActiveTrades: "SET_ACTIVE_TRADES",
+  setRealTimeData: "SET_REAL_TIME_DATA",
+  setActiveWallet: "SET_ACTIVE_WALLET",
 };
 
 export default actions;

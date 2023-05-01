@@ -6,7 +6,7 @@ import Input from "../../components/input/Input";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
 import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const ReasonScreen = ({ navigation }) => {
   const { dispatch } = useGlobalContext();

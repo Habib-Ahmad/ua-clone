@@ -6,6 +6,10 @@ export const initialState = {
   isLoggedIn: false,
   isReturningUser: null,
   loading: false,
+  user: {},
+  activeTrades: [],
+  activeWallet: {},
+  realTimeData: [],
   registeringUser: {
     firstName: "",
     lastName: "",
@@ -17,6 +21,10 @@ export const initialState = {
     referralCode: "",
     address: "",
     appId: "",
+  },
+  topup: {
+    amount: "",
+    paymentCurrencyId: "",
   },
   balance: {
     fiat: {
@@ -51,6 +59,13 @@ export const defaultReducer = (state, action) => {
       };
     }
 
+    case actions.setUser: {
+      return {
+        ...state,
+        user: action.payload,
+      };
+    }
+
     case actions.setLoading: {
       return {
         ...state,
@@ -82,6 +97,7 @@ export const defaultReducer = (state, action) => {
         accessToken: accessToken,
         accessExpiry: accessExpiry,
         isReturningUser: true,
+        isLoggedIn: true,
       };
     }
 
@@ -116,6 +132,47 @@ export const defaultReducer = (state, action) => {
             wallets: action.payload,
           },
         },
+      };
+    }
+
+    case actions.topup.setAmount: {
+      return {
+        ...state,
+        topup: {
+          ...state.topup,
+          amount: action.payload,
+        },
+      };
+    }
+
+    case actions.topup.setPaymentCurrencyId: {
+      return {
+        ...state,
+        topup: {
+          amount: action.payload.amount,
+          paymentCurrencyId: action.payload.paymentCurrencyId,
+        },
+      };
+    }
+
+    case actions.setActiveTrades: {
+      return {
+        ...state,
+        activeTrades: action.payload,
+      };
+    }
+
+    case actions.setRealTimeData: {
+      return {
+        ...state,
+        realTimeData: [...state.realTimeData, action.payload],
+      };
+    }
+
+    case actions.setActiveWallet: {
+      return {
+        ...state,
+        activeWallet: action.payload,
       };
     }
 

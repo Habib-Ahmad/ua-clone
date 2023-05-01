@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import avatar from "../../assets/avatar.jpg";
 import Star from "../../assets/Star";
 import StarFill from "../../assets/StarFill";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 export default function ContactCard({ name, info, favorite, transfer }) {
   const naviation = useNavigation();

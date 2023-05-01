@@ -1,13 +1,14 @@
-import { createRef, useState } from "react";
+import { useState } from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import axios from "../../api/axios";
 import urls from "../../api/urls";
 import Button from "../../components/input/Button";
 import FourDigitInput from "../../components/input/FourDigitInput";
+import Loader from "../../components/Loader";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
 import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 const WelcomeBack = ({ navigation }) => {
   const {
@@ -15,25 +16,32 @@ const WelcomeBack = ({ navigation }) => {
     dispatch,
   } = useGlobalContext();
 
-  const [digit1, setDigit1] = useState();
-  const [digit2, setDigit2] = useState();
-  const [digit3, setDigit3] = useState();
-  const [digit4, setDigit4] = useState();
-  const pin = digit1 + digit2 + digit3 + digit4;
-
-  const ref1 = createRef();
-  const ref2 = createRef();
-  const ref3 = createRef();
-  const ref4 = createRef();
+  const [pin, setPin] = useState("");
 
   const handlePress = async () => {
-    await axios.post(urls.auth.verifyPIN, { pin }).then(() => {
+    await axios.post(urls.auth.verifyPIN, { pin }).then(async () => {
+      await getData();
       dispatch({ type: actions.setLoggedIn, payload: true });
+    });
+  };
+
+  const getData = async () => {
+    await Promise.all([
+      axios.get(urls.fiat.worth),
+      axios.get(urls.fiat.baseUrl),
+      axios.get(urls.auth.baseUrl),
+      axios.get(`${urls.trades.getActiveTrades}?pageNumber=1&pageSize=10`),
+    ]).then(([res1, res2, res3, res4]) => {
+      dispatch({ type: actions.setFiatWorth, payload: res1.data.data });
+      dispatch({ type: actions.setFiatWallets, payload: res2.data.data });
+      dispatch({ type: actions.setUser, payload: res3.data.data });
+      dispatch({ type: actions.setActiveTrades, payload: res4.data.data });
     });
   };
 
   return (
     <View style={styles.container}>
+      <Loader loading={loading} />
       <View style={styles.content}>
         <ScrollView>
           <ScreenHeaderWithLogo
@@ -44,23 +52,7 @@ const WelcomeBack = ({ navigation }) => {
 
           <View style={styles.space} />
 
-          <FourDigitInput
-            {...{
-              digit1,
-              digit2,
-              digit3,
-              digit4,
-              setDigit1,
-              setDigit2,
-              setDigit3,
-              setDigit4,
-              ref1,
-              ref2,
-              ref3,
-              ref4,
-              secure: true,
-            }}
-          />
+          <FourDigitInput setValue={setPin} secure />
 
           <TouchableOpacity
             style={styles.forgot}
@@ -71,7 +63,7 @@ const WelcomeBack = ({ navigation }) => {
         </ScrollView>
       </View>
 
-      <Button title="Login" onPress={handlePress} disabled={pin.length !== 4} loading={loading} />
+      <Button title="Login" onPress={handlePress} disabled={pin.length !== 4} />
     </View>
   );
 };

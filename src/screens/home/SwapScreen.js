@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import Button from "../../components/input/Button";
 import ScreenHeader from "../../components/ScreenHeader";
 import Swap from "../../components/Swap";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 export default function SwapScreen() {
   const navigation = useNavigation();

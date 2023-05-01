@@ -5,7 +5,7 @@ import BTC from "../../assets/BTC";
 import Button from "../../components/input/Button";
 import Input from "../../components/input/Input";
 import ScreenHeader from "../../components/ScreenHeader";
-import { colors } from "../../utils/colors";
+import { colors } from "../../utils";
 
 export default function BuyScreen() {
   const navigation = useNavigation();

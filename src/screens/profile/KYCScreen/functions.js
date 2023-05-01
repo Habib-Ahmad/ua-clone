@@ -1,32 +1,7 @@
 import { Alert } from "react-native";
-import { API_KEY, CLOUDINARY_SECRET } from "@env";
-import sha1 from "js-sha1";
-import axios from "../../api/axios";
-import urls from "../../api/urls";
-
-export const uploadImageToCloudinary = async (imageData, userId) => {
-  const apiUrl = "https://api.cloudinary.com/v1_1/dxp3qac0p/image/upload";
-  const base64Img = `data:image/jpg;base64,${imageData}`;
-  const timestamp = Math.floor(Date.now() / 1000);
-  const folderPath = `kyc_photos/${userId}`;
-  const paramsToSign = `folder=${folderPath}&timestamp=${timestamp}&upload_preset=hfvmvu2h${CLOUDINARY_SECRET}`;
-  const signature = sha1(paramsToSign);
-  const data = {
-    api_key: API_KEY,
-    file: base64Img,
-    upload_preset: "hfvmvu2h",
-    folder: folderPath,
-    timestamp: timestamp,
-    signature: signature,
-  };
-  return fetch(apiUrl, {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "content-type": "application/json",
-    },
-  }).then((response) => response.json());
-};
+import axios from "../../../api/axios";
+import urls from "../../../api/urls";
+import { uploadImageToCloudinary } from "../../../functions";
 
 export const uploadImages = async (
   base64,
@@ -43,10 +18,12 @@ export const uploadImages = async (
   }
   setLoading(true);
 
+  const folderPath = `kyc_photos/${userId}`;
+
   Promise.all([
-    uploadImageToCloudinary(base64.photo, userId),
-    uploadImageToCloudinary(base64.documentFront, userId),
-    uploadImageToCloudinary(base64.documentBack, userId),
+    uploadImageToCloudinary(base64.photo, folderPath),
+    uploadImageToCloudinary(base64.documentFront, folderPath),
+    uploadImageToCloudinary(base64.documentBack, folderPath),
   ])
     .then((results) => {
       setLoading(false);

@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import AllContactScreen from "../screens/profile/AllContactScreen";
 import FavoriteScreen from "../screens/profile/FavoriteScreen";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 
 const ContactTabs = ({ transfer }) => {
   const Tab = createMaterialTopTabNavigator();

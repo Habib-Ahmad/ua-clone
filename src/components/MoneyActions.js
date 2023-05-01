@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import Topup from "../assets/Topup";
 import Transfer from "../assets/Transfer";
 import Withdraw from "../assets/Withdraw";
-import { colors } from "../utils/colors";
+import { colors } from "../utils";
 
 const MoneyActions = () => {
   const navigation = useNavigation();
