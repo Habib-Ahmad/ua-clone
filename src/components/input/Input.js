@@ -45,8 +45,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   input: {
-    // width: "100%",
-    // height: "100%",
     padding: 20,
   },
   icon: {
