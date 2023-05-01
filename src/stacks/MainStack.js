@@ -1,6 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { useGlobalContext } from "../context/context";
-import WithLoader from "../layout/WithLoader";
 import ConfirmPINScreen from "../screens/auth/ConfirmPINScreen";
 import CreatePINScreen from "../screens/auth/CreatePINScreen";
 import OTPScreen from "../screens/auth/OTPScreen";
@@ -46,15 +45,13 @@ import ContactTabs from "./ContactTabs";
 
 const MainStack = createStackNavigator();
 
-const StackNavigator = WithLoader(MainStack);
-
 const MainStackScreen = () => {
   const {
     state: { accessToken, isLoggedIn },
   } = useGlobalContext();
 
   return (
-    <StackNavigator>
+    <MainStack.Navigator screenOptions={{ headerShown: false }}>
       {accessToken && isLoggedIn ? (
         <MainStack.Screen name="Home" component={BottomTabs} />
       ) : (
@@ -100,7 +97,7 @@ const MainStackScreen = () => {
       <MainStack.Screen name="KYCScreen" component={KYCScreen} />
       <MainStack.Screen name="ActiveTradesScreen" component={ActiveTradesScreen} />
       <MainStack.Screen name="ChatScreen" component={ChatScreen} />
-    </StackNavigator>
+    </MainStack.Navigator>
   );
 };
 
