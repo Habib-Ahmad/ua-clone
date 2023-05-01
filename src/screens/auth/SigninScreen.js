@@ -9,7 +9,7 @@ import Input from "../../components/input/Input";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
 import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
-import { getPushNotificationToken } from "../../functions";
+import { getFiatData, getPushNotificationToken } from "../../functions";
 import { colors } from "../../utils";
 import store from "../../utils/store";
 
@@ -44,23 +44,9 @@ const SigninScreen = ({ navigation }) => {
         dispatch({ type: actions.setLoading, payload: true });
         await store.setRefreshToken(res.data.tokens.refreshToken);
         await store.setRefreshExpiry(res.data.tokens.refreshExpiry);
-        await getData();
+        await getFiatData(dispatch);
         dispatch({ type: actions.login, payload: res.data.tokens });
       });
-  };
-
-  const getData = async () => {
-    await Promise.all([
-      axios.get(urls.fiat.worth),
-      axios.get(urls.fiat.baseUrl),
-      axios.get(urls.auth.baseUrl),
-      axios.get(`${urls.trades.getActiveTrades}?pageNumber=1&pageSize=10`),
-    ]).then(([res1, res2, res3, res4]) => {
-      dispatch({ type: actions.setFiatWorth, payload: res1.data.data });
-      dispatch({ type: actions.setFiatWallets, payload: res2.data.data });
-      dispatch({ type: actions.setUser, payload: res3.data.data });
-      dispatch({ type: actions.setActiveTrades, payload: res4.data.data });
-    });
   };
 
   return (

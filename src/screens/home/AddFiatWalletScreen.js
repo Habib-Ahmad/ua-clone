@@ -3,9 +3,12 @@ import { ActivityIndicator, Alert, StyleSheet, Text, TouchableOpacity, View } fr
 import axios from "../../api/axios";
 import urls from "../../api/urls";
 import ScreenHeader from "../../components/ScreenHeader";
+import { useGlobalContext } from "../../context/context";
+import { getFiatData } from "../../functions";
 import { colors } from "../../utils";
 
 const AddFiatWalletScreen = ({ navigation }) => {
+  const { dispatch } = useGlobalContext();
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
@@ -23,9 +26,14 @@ const AddFiatWalletScreen = ({ navigation }) => {
       {
         text: "ok",
         onPress: async () =>
-          await axios.post(urls.fiat.baseUrl, { countryId: id }).then(() => {
-            navigation.navigate("HomeScreen");
-          }),
+          await axios
+            .post(urls.fiat.baseUrl, { countryId: id })
+            .then(async () => {
+              await getFiatData(dispatch);
+            })
+            .then(() => {
+              navigation.navigate("HomeScreen");
+            }),
       },
     ]);
   };

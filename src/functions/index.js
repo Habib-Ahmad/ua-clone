@@ -4,6 +4,29 @@ import * as Clipboard from "expo-clipboard";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import sha1 from "js-sha1";
+import axios from "../api/axios";
+import urls from "../api/urls";
+import actions from "../context/actions";
+
+export const getFiatData = async (dispatch) => {
+  await Promise.all([
+    axios.get(urls.fiat.worth),
+    axios.get(urls.fiat.baseUrl),
+    axios.get(urls.auth.baseUrl),
+    axios.get(`${urls.trades.getActiveTrades}?pageNumber=1&pageSize=10`),
+  ]).then(([res1, res2, res3, res4]) => {
+    dispatch({ type: actions.setFiatWorth, payload: res1.data.data });
+    dispatch({ type: actions.setFiatWallets, payload: res2.data.data });
+    dispatch({ type: actions.setUser, payload: res3.data.data });
+    dispatch({ type: actions.setActiveTrades, payload: res4.data.data });
+  });
+};
+
+export const getCurrencies = async () => {
+  const result = await axios.get(urls.system.currencies);
+
+  return result.data.data;
+};
 
 export const getPushNotificationToken = async () => {
   if (Platform.OS === "android") {
