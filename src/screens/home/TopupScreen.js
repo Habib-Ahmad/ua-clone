@@ -79,7 +79,7 @@ const TopupScreen = ({ navigation }) => {
 
       <View style={styles.flex} />
 
-      <Button title="Continue" onPress={handlePress} disabled={!amount || !currency} />
+      <Button title="Continue" onPress={handlePress} disabled={!amount} />
     </ScrollView>
   );
 };

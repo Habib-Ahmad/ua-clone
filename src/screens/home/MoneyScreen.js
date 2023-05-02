@@ -57,14 +57,15 @@ const MoneyScreen = ({ navigation, setBalance, setActiveTab, isFocused }) => {
         ))}
       </ScrollView>
 
-      <View>
+      <View style={styles.add}>
         <TouchableOpacity
-          style={styles.add}
+          style={styles.addBtn}
           activeOpacity={0.6}
           onPress={() => navigation.navigate("AddFiatWalletScreen")}
         >
           <Text style={styles.plus}>+</Text>
         </TouchableOpacity>
+        <Text style={styles.addTxt}>Add wallet</Text>
       </View>
     </View>
   );
@@ -121,13 +122,22 @@ const styles = StyleSheet.create({
   },
   add: {
     position: "absolute",
+    right: 20,
+    bottom: 25,
+    alignItems: "center",
+  },
+  addBtn: {
     backgroundColor: colors.primary,
     width: 60,
     height: 60,
     borderRadius: 30,
     elevation: 5,
-    right: 10,
-    bottom: 35,
+  },
+  addTxt: {
+    color: colors.primary,
+    fontSize: 12,
+    fontWeight: "600",
+    marginTop: 5,
   },
   plus: {
     color: colors.white,
