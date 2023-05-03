@@ -102,7 +102,7 @@ const TransferScreen = ({ navigation }) => {
           </>
         )}
 
-        {!name && (
+        {name && (
           <>
             <View style={styles.space} />
 
