@@ -16,6 +16,8 @@ const urls = {
   fiat: {
     baseUrl: "/Fiat",
     worth: "/Fiat/Worth",
+    initiateTransfer: "/Fiat/InitiateTransfer",
+    transfer: "/Fiat/Transfer",
   },
   p2p: {
     getLocalTrades: "/P2p/Fiat/Buy",

@@ -25,7 +25,6 @@ export default Input;
 const styles = StyleSheet.create({
   container: {
     position: "relative",
-    height: 65,
     marginHorizontal: 5,
     flexShrink: 1,
     borderWidth: 1,
@@ -43,9 +42,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.bg,
     color: colors.primary,
     textAlign: "center",
+    zIndex: 10,
   },
   input: {
     padding: 20,
+    textAlignVertical: "top",
   },
   icon: {
     backgroundColor: colors.bg,
