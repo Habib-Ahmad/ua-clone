@@ -1,7 +1,11 @@
 import { Modal, StyleSheet, View } from "react-native";
+import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils";
+import Loader from "../Loader";
 
 const CustomModal = ({ modalVisible, setModalVisible, children }) => {
+  const { state } = useGlobalContext();
+
   return (
     <Modal
       animationType="slide"
@@ -12,6 +16,7 @@ const CustomModal = ({ modalVisible, setModalVisible, children }) => {
       }}
     >
       <View style={styles.centeredView}>
+        <Loader loading={state.loading} />
         <View style={styles.modalView}>{children}</View>
       </View>
     </Modal>
@@ -23,6 +28,7 @@ export default CustomModal;
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
+    position: "relative",
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",

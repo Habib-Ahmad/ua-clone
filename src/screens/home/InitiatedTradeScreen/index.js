@@ -4,6 +4,7 @@ import Chat from "../../../assets/Chat";
 import Copy from "../../../assets/Copy";
 import Button from "../../../components/input/Button";
 import CustomModal from "../../../components/input/CustomModal";
+import Loader from "../../../components/Loader";
 import ScreenHeader from "../../../components/ScreenHeader";
 import Trade from "../../../components/Trade";
 import { useGlobalContext } from "../../../context/context";
@@ -27,13 +28,10 @@ const InitiatedTradeScreen = ({ route, navigation }) => {
     if (!trade) {
       fetchTrade(tradeId, setFetchedTrade);
     }
-  }, [trade, tradeId]);
-
-  useEffect(() => {
     if (status === "PaymentMade") {
       setTransferred(true);
     }
-  }, [status]);
+  }, [status, trade, tradeId]);
 
   useTimer(setTimeLeft);
 
@@ -55,6 +53,7 @@ const InitiatedTradeScreen = ({ route, navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
+      <Loader loading={state.loading} />
       <ScreenHeader heading="Trade Initiated" />
 
       <TouchableOpacity

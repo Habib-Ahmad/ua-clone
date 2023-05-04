@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
-import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Alert,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import axios from "../../api/axios";
 import urls from "../../api/urls";
 import CustomModal from "../../components/input/CustomModal";
-import Loader from "../../components/Loader";
 import ScreenHeader from "../../components/ScreenHeader";
 import Trade from "../../components/Trade";
 import { useGlobalContext } from "../../context/context";
@@ -72,19 +79,35 @@ const TradesScreen = ({ navigation }) => {
     // if (selectedTrade.fiatTrade.fiatTradeRule.completed) {
     // }
 
-    await axios
-      .post(urls.p2p.initiateTrade, {
-        fiatTradeId: selectedTrade.id,
-        paymentMethodId: selectedTrade.paymentMethods[0].id,
-        amount: state.topup.amount,
-      })
-      .then((response) => {
-        setModalVisible(false);
-        navigation.navigate("InitiatedTradeScreen", {
-          trade: selectedTrade,
-          session: response.data.data,
+    if (isLocalTopup) {
+      await axios
+        .post(urls.p2p.initiateFiatBuy, {
+          fiatTradeId: selectedTrade.id,
+          paymentMethodId: selectedTrade.paymentMethods[0].id,
+          amount: state.topup.amount,
+        })
+        .then((response) => {
+          setModalVisible(false);
+          navigation.navigate("InitiatedTradeScreen", {
+            trade: selectedTrade,
+            session: response.data.data,
+          });
         });
-      });
+    } else {
+      await axios
+        .post(urls.p2p.initiateFiatBuySwap, {
+          fiatTradeId: selectedTrade.id,
+          paymentMethodId: selectedTrade.paymentMethods[0].id,
+          amount: state.topup.amount,
+        })
+        .then((response) => {
+          setModalVisible(false);
+          navigation.navigate("InitiatedTradeScreen", {
+            trade: selectedTrade,
+            session: response.data.data,
+          });
+        });
+    }
   };
 
   const handleClose = () => {
@@ -97,7 +120,7 @@ const TradesScreen = ({ navigation }) => {
       <ScreenHeader heading="Available Trades" />
 
       {!trades ? (
-        <Loader />
+        <ActivityIndicator size={40} color={colors.primary} />
       ) : !trades.length ? (
         <Text style={styles.noTrade}>No available Trades</Text>
       ) : (

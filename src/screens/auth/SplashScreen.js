@@ -20,8 +20,8 @@ const SplashScreen = ({ navigation }) => {
         <View style={styles.textWrapper}>
           <Text style={styles.heading}>Take control of your finances</Text>
           <Text style={styles.text}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sagittis enim purus sed
-            phasellus. Cursus ornare id scelerisque aliquam.
+            Say goodbye to financial stress, manage your money lika pro , and secure your financial
+            fiture to live the life you&apos;ve always wanted.
           </Text>
         </View>
 

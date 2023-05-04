@@ -21,7 +21,8 @@ const urls = {
     getLocalTrades: "/P2p/Fiat/Buy",
     getSwapTrades: "/P2p/Fiat/SwapBuy",
     getTrade: "/P2p/Fiat",
-    initiateTrade: "/P2p/Fiat/Buy",
+    initiateFiatBuy: "/P2p/Fiat/Buy",
+    initiateFiatBuySwap: "/P2p/Fiat/SwapBuy",
   },
   trader: {
     baseUrl: "/Trader",
