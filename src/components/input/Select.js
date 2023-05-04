@@ -2,7 +2,15 @@ import { StyleSheet, Text, View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { colors } from "../../utils";
 
-const Select = ({ label, options, value, setValue }) => {
+const Select = ({ label, options, value, setValue, placeholder, itemLabelKeys, itemValueKeys }) => {
+  const getItemLabel = (item) => {
+    return itemLabelKeys.reduce((acc, key) => acc[key], item);
+  };
+
+  const getItemValue = (item) => {
+    return itemValueKeys.reduce((acc, key) => acc[key], item);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
@@ -14,13 +22,13 @@ const Select = ({ label, options, value, setValue }) => {
       >
         <Picker.Item
           key="default"
-          label="Select payment currency"
+          label={placeholder || `Select ${label.toLowerCase()}`}
           value=""
           enabled={false}
           style={styles.defaultOption}
         />
         {options?.map((item) => (
-          <Picker.Item key={item.id} label={item.name} value={item.id} />
+          <Picker.Item key={item.id} label={getItemLabel(item)} value={getItemValue(item)} />
         ))}
       </Picker>
     </View>
