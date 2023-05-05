@@ -1,111 +1,54 @@
-import { useEffect, useState } from "react";
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
-import moment from "moment";
-import Button from "../../components/input/Button";
+import { Image, SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
+import AvatarBlueBig from "../../assets/AvatarBlueBig";
 import Input from "../../components/input/Input";
 import ScreenHeader from "../../components/ScreenHeader";
-import UploadImage from "../../components/UploadImage";
-import { colors } from "../../utils";
+import { useGlobalContext } from "../../context/context";
 
-const ProfileInfoScreen = ({ navigation }) => {
-  const [currentDate, setCurrentDate] = useState("");
-
-  useEffect(() => {
-    var date = moment().format("DD MMM YYYY hh:mmA");
-    setCurrentDate(date);
-  }, []);
-
-  const [username, setUsername] = useState("");
-  const [fullname, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [dateBirth, setDateBirth] = useState("");
-  const [gender, setGender] = useState("");
-
-  const filledAllFields = username && fullname && email && phone && address && dateBirth && gender;
-
-  const handlePress = () => {
-    navigation.navigate("HomeScreen");
-  };
+const ProfileInfoScreen = () => {
+  const { state } = useGlobalContext();
+  const { firstName, lastName, email, phoneNumber, role, country, photo } = state.user;
 
   return (
     <SafeAreaView styles={styles.container}>
       <ScrollView>
         <ScreenHeader heading="Personal Information" />
 
-        <View style={styles.editImageWrapper}>
-          <UploadImage />
-        </View>
+        {photo ? (
+          <Image
+            style={styles.image}
+            source={{
+              uri: photo,
+            }}
+          />
+        ) : (
+          <View style={styles.avatar}>
+            <AvatarBlueBig />
+          </View>
+        )}
 
         <View style={styles.wrapper}>
-          <Input
-            label="Username"
-            placeholder="Ultron"
-            onChangeText={setUsername}
-            value={username}
-            icon={<MaterialIcons name="edit" size={20} color={colors.primary} />}
-          />
+          <Input label="First name" value={firstName} disabled />
 
           <View style={styles.space} />
 
-          <Input
-            label="Full name"
-            placeholder="Savannah Nguyen"
-            onChangeText={setFullName}
-            value={fullname}
-          />
+          <Input label="Last name" value={lastName} disabled />
 
           <View style={styles.space} />
 
-          <Input
-            label="Email"
-            placeholder="shereefadamu001@gmail.com"
-            onChangeText={setEmail}
-            value={email}
-          />
+          <Input label="E-mail" value={email} disabled />
 
           <View style={styles.space} />
 
-          <Input
-            label="Phone"
-            placeholder="+2349031754067"
-            onChangeText={setPhone}
-            value={phone}
-            keyboardType="numeric"
-          />
+          <Input label="Phone" value={phoneNumber} disabled keyboardType="numeric" />
 
           <View style={styles.space} />
 
-          <Input
-            label="Address"
-            placeholder="406 Oladipo diya street, Abuja.."
-            onChangeText={setAddress}
-            value={address}
-            icon={<MaterialIcons name="edit" size={20} color={colors.primary} />}
-          />
+          <Input label="Role" value={role} disabled />
 
           <View style={styles.space} />
 
-          <Input
-            label="Date of Birth"
-            placeholder="07/01/1995"
-            onChangeText={setDateBirth}
-            value={dateBirth}
-            icon={<MaterialIcons name="edit" size={20} color={colors.primary} />}
-          />
-
-          <View style={styles.space} />
-
-          <Input label="Gender" placeholder="Male" onChangeText={setGender} value={gender} />
+          <Input label="Country" value={country} disabled />
         </View>
-
-        <View style={styles.dateWrapper}>
-          <Text>{currentDate}</Text>
-        </View>
-
-        <Button title="Submit" onPress={handlePress} disabled={!filledAllFields} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -116,22 +59,28 @@ export default ProfileInfoScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingBottom: 20,
+  },
+  image: {
+    height: 140,
+    width: 140,
+    alignSelf: "center",
+    marginTop: 20,
+    marginBottom: 60,
+    borderRadius: 120,
+    resizeMode: "contain",
+  },
+  avatar: {
+    alignSelf: "center",
+    marginTop: 20,
+    marginBottom: 60,
   },
   wrapper: {
     flex: 1,
     paddingHorizontal: 20,
+    paddingBottom: 40,
   },
   space: {
     width: 30,
     height: 30,
-  },
-  dateWrapper: {
-    alignItems: "center",
-    paddingTop: 20,
-  },
-  editImageWrapper: {
-    alignItems: "center",
-    paddingBottom: 20,
   },
 });
