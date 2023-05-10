@@ -8,6 +8,7 @@ import Loader from "../../components/Loader";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
 import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
+import { logout } from "../../functions";
 import { colors } from "../../utils";
 
 const WelcomeBack = ({ navigation }) => {
@@ -54,12 +55,15 @@ const WelcomeBack = ({ navigation }) => {
 
           <FourDigitInput setValue={setPin} secure />
 
-          <TouchableOpacity
-            style={styles.forgot}
-            onPress={() => navigation.navigate("ForgotPINScreen")}
-          >
-            <Text style={styles.forgotText}>Forgot pin?</Text>
-          </TouchableOpacity>
+          <View style={styles.wrapper}>
+            <TouchableOpacity onPress={() => logout(dispatch)}>
+              <Text style={styles.swicthText}>Switch user</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => navigation.navigate("ForgotPINScreen")}>
+              <Text style={styles.forgotText}>Forgot pin?</Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
       </View>
 
@@ -82,12 +86,15 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
-  forgot: {
-    marginTop: 20,
-    alignItems: "flex-end",
-    marginRight: 20,
+  wrapper: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginHorizontal: "5%",
   },
   forgotText: {
     color: colors.primaryDark,
+  },
+  swicthText: {
+    color: colors.red,
   },
 });

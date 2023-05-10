@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Checkbox from "expo-checkbox";
-import Building from "../../assets/Building";
+import BuildingSmall from "../../assets/BuildingSmall";
 import CardBig from "../../assets/CardBig";
 import TopupBlue from "../../assets/TopupBlue";
 import Button from "../../components/input/Button";
@@ -12,7 +12,7 @@ const data = [
   {
     id: 0,
     name: "P2P (Recommended)",
-    icon: Building,
+    icon: BuildingSmall,
     selected: false,
     available: true,
   },
@@ -79,7 +79,7 @@ const TopupMethodScreen = ({ navigation }) => {
           ))}
         </View>
 
-        <Button title="Continue" onPress={handlePress} disabled={!String(activeId)} />
+        <Button title="Continue" onPress={handlePress} disabled={!String(activeId).length} />
       </View>
     </View>
   );

@@ -45,7 +45,7 @@ const TransferScreen = ({ navigation }) => {
 
   const transfer = useCallback(async () => {
     await axios
-      .post(urls.fiat.initiateTransfer, {
+      .post(urls.fiat.transfer, {
         recipient,
         amount,
         walletId,
@@ -67,6 +67,7 @@ const TransferScreen = ({ navigation }) => {
       <View style={styles.inputContainer}>
         <Select
           label="Wallet"
+          placeholder="Select wallet"
           value={walletId}
           setValue={setWalletId}
           options={wallets}
@@ -125,7 +126,9 @@ const TransferScreen = ({ navigation }) => {
       </View>
 
       <CustomModal modalVisible={displayModal} setModalVisible={setDisplayModal}>
-        <EnterPin setPin={setPin} />
+        <View style={styles.modal}>
+          <EnterPin setPin={setPin} />
+        </View>
       </CustomModal>
     </ScrollView>
   );
@@ -144,5 +147,10 @@ const styles = StyleSheet.create({
   },
   space: {
     height: 40,
+  },
+  modal: {
+    // width: "90%",
+    // marginHorizontal: 10,
+    // padding: 60,
   },
 });

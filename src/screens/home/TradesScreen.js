@@ -31,7 +31,7 @@ const TradesScreen = ({ navigation }) => {
     const getLocalTrades = async () => {
       await axios
         .get(
-          `${urls.p2p.getLocalTrades}?pageNumber=1&pageSize=10&currencyId=${state.activeWallet.currencyId}`
+          `${urls.p2p.getLocalBuyTrades}?pageNumber=1&pageSize=10&currencyId=${state.activeWallet.currencyId}`
         )
         .then((res) => {
           setTrades(res.data.data);
@@ -40,7 +40,7 @@ const TradesScreen = ({ navigation }) => {
     const getSwapTrades = async () => {
       await axios
         .get(
-          `${urls.p2p.getSwapTrades}?pageNumber=1&pageSize=10&currencyId=${state.activeWallet.currencyId}`
+          `${urls.p2p.getBuySwapTrades}?pageNumber=1&pageSize=10&currencyId=${state.activeWallet.currencyId}`
         )
         .then((res) => {
           setTrades(res.data.data);
@@ -59,7 +59,7 @@ const TradesScreen = ({ navigation }) => {
   };
 
   const initiateTrade = async () => {
-    if (selectedTrade.fiatTrade.fiatTradeRule.isVerified) {
+    if (selectedTrade.fiatTrade.fiatTradeRule?.isVerified) {
       Alert.alert(
         "Must be verified",
         "You have to be verified to trade with this merchant, please complete your KYC",
@@ -76,8 +76,10 @@ const TradesScreen = ({ navigation }) => {
       return;
     }
 
-    // if (selectedTrade.fiatTrade.fiatTradeRule.completed) {
+    // if (selectedTrade.fiatTrade.fiatTradeRule?.completed) {
     // }
+
+    console.log(isLocalTopup);
 
     if (isLocalTopup) {
       await axios
@@ -164,6 +166,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 40,
   },
+  modal: {},
+  modalText: {
+    textAlign: "center",
+    fontSize: 18,
+    color: colors.textLight,
+  },
   buttonWrapper: {
     flexDirection: "row",
     justifyContent: "space-around",
@@ -187,11 +195,5 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     textAlign: "center",
     fontSize: 16,
-  },
-  modal: {},
-  modalText: {
-    textAlign: "center",
-    fontSize: 18,
-    color: colors.textLight,
   },
 });

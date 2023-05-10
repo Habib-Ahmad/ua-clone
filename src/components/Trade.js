@@ -17,7 +17,7 @@ const Trade = ({ trade, handlePress }) => {
         <View style={styles.detail}>
           <Text style={styles.title}>Method(s):</Text>
           <Text style={styles.methodText}>
-            {trade.paymentMethods.map((method, index) => (
+            {trade.paymentMethods?.map((method, index) => (
               <Text key={method.id}>
                 {method.name}
                 {trade.paymentMethods.length <= index ? ", " : ""}
@@ -37,10 +37,10 @@ const Trade = ({ trade, handlePress }) => {
           <Text style={styles.title}>Completed Trades:</Text>
           <Text style={styles.text}>{trade.user.tradeStatistic.completed}</Text>
         </View>
-        {trade.fiatTrade.fiatTradeRule.isVerified && (
+        {trade.fiatTrade.fiatTradeRule?.isVerified && (
           <Text style={styles.verified}>Must be verified</Text>
         )}
-        {trade.fiatTrade.fiatTradeRule.completed >= 0 && (
+        {trade.fiatTrade.fiatTradeRule?.completed >= 0 && (
           <View style={styles.detail}>
             <Text style={styles.title}>Minimum trade requirement:</Text>
             <Text style={styles.methodText}>{trade.fiatTrade.fiatTradeRule.completed}</Text>

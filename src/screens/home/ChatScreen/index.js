@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FlatList, Image, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import Attachment from "../../../assets/Attachment";
+import Camera from "../../../assets/Camera";
 import Emoji from "../../../assets/Emoji";
 import ScreenHeader from "../../../components/ScreenHeader";
 import { useGlobalContext } from "../../../context/context";
@@ -110,7 +110,7 @@ const ChatScreen = ({ route }) => {
               <Attachment />
             </TouchableOpacity> */}
             <TouchableOpacity style={styles.icon} onPress={() => uploadImage(setImage)}>
-              <Attachment />
+              <Camera />
             </TouchableOpacity>
           </View>
         </View>

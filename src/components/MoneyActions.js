@@ -5,18 +5,21 @@ import Transfer from "../assets/Transfer";
 import Withdraw from "../assets/Withdraw";
 import { colors } from "../utils";
 
-const MoneyActions = () => {
+const MoneyActions = ({ setBalance }) => {
   const navigation = useNavigation();
 
   const handleWithdraw = () => {
+    setBalance();
     navigation.navigate("WithdrawScreen");
   };
 
   const handleTopup = () => {
+    setBalance();
     navigation.navigate("TopupScreen");
   };
 
   const handleTransfer = () => {
+    setBalance();
     navigation.navigate("TransferScreen");
   };
 

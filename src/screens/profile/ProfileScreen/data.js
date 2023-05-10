@@ -14,9 +14,14 @@ export const data = [
     icon: <Avatar />,
   },
   {
-    name: "Contact",
+    name: "Contacts",
     to: "ContactScreen",
     icon: <Contact />,
+  },
+  {
+    name: "Banks",
+    to: "BanksScreen",
+    icon: <Card />,
   },
   // {
   //   name: "Bank and Cards",
@@ -45,7 +50,7 @@ export const data = [
   },
   {
     name: "Change Pin",
-    to: "",
+    to: "ForgotPINScreen",
     icon: <Security />,
   },
   // {
