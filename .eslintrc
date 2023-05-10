@@ -22,6 +22,7 @@
     "semi": ["error", "always"],
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
+    "import/no-named-as-default": 0,
     "no-console": "warn",
     "react-native/no-unused-styles": "warn",
     "react-native/no-inline-styles": "warn",
