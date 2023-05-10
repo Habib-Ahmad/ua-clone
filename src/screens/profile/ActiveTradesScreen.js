@@ -34,7 +34,6 @@ const ActiveTradesScreen = ({ navigation }) => {
     };
     getTrades();
   }, [dispatch]);
-  // console.log(activeTrades);
 
   const isTrader = user.role === "Trader";
 

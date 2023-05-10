@@ -7,7 +7,7 @@ const Loader = ({ loading }) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="light" />
+      <StatusBar style="" backgroundColor="#00000026" animated />
       <ActivityIndicator color={colors.primary} size={40} />
     </View>
   );

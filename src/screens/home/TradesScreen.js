@@ -79,8 +79,6 @@ const TradesScreen = ({ navigation }) => {
     // if (selectedTrade.fiatTrade.fiatTradeRule?.completed) {
     // }
 
-    console.log(isLocalTopup);
-
     if (isLocalTopup) {
       await axios
         .post(urls.p2p.initiateFiatBuy, {
