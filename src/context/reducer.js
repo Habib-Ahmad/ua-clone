@@ -26,6 +26,12 @@ export const initialState = {
     amount: "",
     paymentCurrencyId: "",
   },
+  withdrawal: {
+    amount: "",
+    paymentMethodId: "",
+    fiatTradeId: "",
+  },
+  banks: [],
   balance: {
     fiat: {
       worth: "",
@@ -155,6 +161,17 @@ export const defaultReducer = (state, action) => {
       };
     }
 
+    case actions.withdrawal.setAmount: {
+      return {
+        ...state,
+        withdrawal: {
+          ...state.withdrawal,
+          amount: action.payload.amount,
+          paymentMethodId: action.payload.paymentMethodId,
+        },
+      };
+    }
+
     case actions.setActiveTrades: {
       return {
         ...state,
@@ -173,6 +190,13 @@ export const defaultReducer = (state, action) => {
       return {
         ...state,
         activeWallet: action.payload,
+      };
+    }
+
+    case actions.setBanks: {
+      return {
+        ...state,
+        banks: action.payload,
       };
     }
 
