@@ -19,10 +19,7 @@ const ForgotPINScreen = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.content}>
         <ScrollView>
-          <ScreenHeaderWithLogo
-            heading="Forgot password"
-            paragraph="Request an OTP to reset your PIN"
-          />
+          <ScreenHeaderWithLogo heading="Forgot PIN" paragraph="Request an OTP to reset your PIN" />
         </ScrollView>
       </View>
 

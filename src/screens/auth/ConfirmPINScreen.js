@@ -28,7 +28,10 @@ const ConfirmPINScreen = ({ route, navigation }) => {
 
     if (otp) {
       await axios.post(urls.auth.resetPIN, { code: otp, pin: value });
-      navigation.navigate("SuccessScreen");
+      navigation.navigate("SuccessScreen", {
+        text: "PIN changed successfully",
+        route: "WelcomeBackScreen",
+      });
       return;
     }
 

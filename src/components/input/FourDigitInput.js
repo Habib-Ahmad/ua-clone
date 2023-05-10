@@ -1,5 +1,5 @@
 import { createRef, useEffect, useState } from "react";
-import { Dimensions, Keyboard, StyleSheet, View } from "react-native";
+import { Keyboard, StyleSheet, View } from "react-native";
 import DigitInput from "./DigitInput";
 
 const FourDigitInput = ({ setValue, secure }) => {
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    maxWidth: Dimensions.get("window").width,
+    maxWidth: "100%",
     paddingHorizontal: "5%",
     marginBottom: 40,
   },

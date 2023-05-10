@@ -2,21 +2,21 @@ import { StyleSheet, View } from "react-native";
 import FourDigitInput from "./input/FourDigitInput";
 import ScreenHeaderWithLogo from "./ScreenHeaderWithLogo";
 
-const EnterPin = ({ setPin }) => {
+const EnterOtp = ({ setOtp }) => {
   return (
     <View style={styles.container}>
       <ScreenHeaderWithLogo
-        heading="Enter pin"
-        paragraph="Enter your pin to complete the transaction"
+        heading="Enter OTP"
+        paragraph="Enter the four digit pin you recieved"
         noBackButton
       />
 
-      <FourDigitInput setValue={setPin} secure />
+      <FourDigitInput setValue={setOtp} />
     </View>
   );
 };
 
-export default EnterPin;
+export default EnterOtp;
 
 const styles = StyleSheet.create({
   container: {

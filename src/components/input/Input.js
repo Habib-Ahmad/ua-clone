@@ -25,6 +25,7 @@ export default Input;
 const styles = StyleSheet.create({
   container: {
     position: "relative",
+    height: 65,
     marginHorizontal: 5,
     flexShrink: 1,
     borderWidth: 1,
