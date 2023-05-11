@@ -7,6 +7,7 @@ import sha1 from "js-sha1";
 import axios from "../api/axios";
 import urls from "../api/urls";
 import actions from "../context/actions";
+import { store } from "../utils";
 
 export const getFiatData = async (dispatch) => {
   await Promise.all([
@@ -20,6 +21,14 @@ export const getFiatData = async (dispatch) => {
     dispatch({ type: actions.setUser, payload: res3.data.data });
     dispatch({ type: actions.setActiveTrades, payload: res4.data.data });
   });
+};
+
+export const logout = async (dispatch) => {
+  const refreshToken = await store.getRefreshToken();
+  dispatch({ type: actions.logout });
+  await store.removeRefreshExpiry();
+  await store.removeRefreshToken();
+  await axios.post(urls.auth.logout, { refreshToken });
 };
 
 export const getCurrencies = async () => {

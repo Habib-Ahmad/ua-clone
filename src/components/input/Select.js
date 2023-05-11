@@ -13,7 +13,7 @@ const Select = ({ label, options, value, setValue, placeholder, itemLabelKeys, i
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
+      {label && <Text style={styles.label}>{label}</Text>}
       <Picker
         style={styles.select}
         selectedValue={value}
@@ -22,7 +22,7 @@ const Select = ({ label, options, value, setValue, placeholder, itemLabelKeys, i
       >
         <Picker.Item
           key="default"
-          label={placeholder || `Select ${label.toLowerCase()}`}
+          label={placeholder}
           value=""
           enabled={false}
           style={styles.defaultOption}
@@ -65,5 +65,6 @@ const styles = StyleSheet.create({
   },
   defaultOption: {
     color: colors.textLight,
+    marginTop: 65,
   },
 });

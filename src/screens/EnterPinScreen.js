@@ -21,7 +21,7 @@ const EnterPinScreen = ({ navigation }) => {
         <ScrollView>
           <ScreenHeaderWithLogo
             heading="Enter pin"
-            paragraph="Add a unique pin number to make your payment more secure"
+            paragraph="Input your pin to complete the transaction"
           />
 
           <FourDigitInput setValue={setPin} secure />

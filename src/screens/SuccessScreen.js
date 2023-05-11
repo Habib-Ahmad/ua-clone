@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   logo: {
+    alignItems: "center",
     backgroundColor: colors.greyLight,
     borderRadius: 35,
     paddingTop: 60,

@@ -36,9 +36,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: "5%",
   },
   modalView: {
-    width: "100%",
+    maxWidth: "100%",
     backgroundColor: colors.bg,
     borderRadius: 20,
+    padding: 20,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
