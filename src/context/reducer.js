@@ -1,3 +1,4 @@
+import { colors } from "../utils";
 import actions from "./actions";
 
 export const initialState = {
@@ -10,6 +11,7 @@ export const initialState = {
   activeTrades: [],
   activeWallet: {},
   realTimeData: [],
+  statusBarColor: colors.bg,
   registeringUser: {
     firstName: "",
     lastName: "",

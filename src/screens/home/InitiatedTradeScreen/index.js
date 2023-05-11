@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
   },
   chat: {
     position: "absolute",
-    top: "10%",
+    top: "6%",
     right: "6%",
     backgroundColor: colors.primaryLight,
     padding: 10,

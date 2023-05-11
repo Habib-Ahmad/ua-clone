@@ -8,9 +8,10 @@ import Input from "../../components/input/Input";
 import Loader from "../../components/Loader";
 import ScreenHeader from "../../components/ScreenHeader";
 import { useGlobalContext } from "../../context/context";
+import { getUserBanks } from "../../functions";
 
 const AddBankScreen = ({ navigation }) => {
-  const { state } = useGlobalContext();
+  const { state, dispatch } = useGlobalContext();
 
   const [banks, setBanks] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -77,8 +78,9 @@ const AddBankScreen = ({ navigation }) => {
         accountName,
         accountNumber,
       })
-      .then(() => {
-        navigation.navigate("BanksScreen");
+      .then(async () => {
+        await getUserBanks(dispatch);
+        navigation.goBack();
       });
   };
 

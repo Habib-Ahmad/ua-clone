@@ -60,19 +60,36 @@ const SellFiatTradesScreen = ({ navigation }) => {
   };
 
   const initiateTrade = async () => {
-    await axios
-      .post(urls.p2p.initiateFiatSell, {
-        amount: Number(withdrawal.amount),
-        paymentMethodId: withdrawal.paymentMethodId,
-        // walletId: activeWallet.id,
-        fiatTradeId: selectedTrade.id,
-      })
-      .then((res) => {
-        navigation.navigate("FiatSellInitiatedScreen", {
-          trade: selectedTrade,
-          session: res.data.data,
+    if (isLocalWithdrawal) {
+      await axios
+        .post(urls.p2p.initiateFiatSell, {
+          amount: Number(withdrawal.amount),
+          paymentMethodId: withdrawal.paymentMethodId,
+          // walletId: activeWallet.id,
+          fiatTradeId: selectedTrade.id,
+        })
+        .then((res) => {
+          navigation.navigate("FiatSellInitiatedScreen", {
+            trade: selectedTrade,
+            session: res.data.data,
+          });
         });
-      });
+    } else {
+      await axios
+        .post(urls.p2p.initiateFiatSellSwap, {
+          amount: Number(withdrawal.amount),
+          paymentMethodId: withdrawal.paymentMethodId,
+          // walletId: activeWallet.id,
+          fiatTradeId: selectedTrade.id,
+        })
+        .then((res) => {
+          setModalVisible(false);
+          navigation.navigate("FiatSellInitiatedScreen", {
+            trade: selectedTrade,
+            session: res.data.data,
+          });
+        });
+    }
   };
 
   return (
@@ -115,6 +132,12 @@ export default SellFiatTradesScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  noTrade: {
+    fontSize: 16,
+    color: colors.textLight,
+    textAlign: "center",
+    marginTop: 40,
   },
   modal: {
     paddingVertical: 20,

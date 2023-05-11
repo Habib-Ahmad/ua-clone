@@ -7,9 +7,6 @@ const ScreenHeader = ({ heading, noBackButton }) => {
 
   return (
     <View style={styles.container}>
-      {/* <TouchableOpacity activeOpacity={0.6} onPress={() => navigation.goBack()}>
-        <BackArrow />
-      </TouchableOpacity> */}
       {noBackButton ? (
         <View style={styles.space} />
       ) : (

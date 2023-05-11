@@ -1,4 +1,3 @@
-import React from "react";
 import { StyleSheet, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import Input from "../../components/input/Input";

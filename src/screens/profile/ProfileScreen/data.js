@@ -13,11 +13,11 @@ export const data = [
     to: "PersonalInfoScreen",
     icon: <Avatar />,
   },
-  {
-    name: "Contacts",
-    to: "ContactScreen",
-    icon: <Contact />,
-  },
+  // {
+  //   name: "Contacts",
+  //   to: "ContactScreen",
+  //   icon: <Contact />,
+  // },
   {
     name: "Banks",
     to: "BanksScreen",

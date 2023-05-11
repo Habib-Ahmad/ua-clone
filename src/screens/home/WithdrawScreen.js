@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import axios from "../../api/axios";
 import urls from "../../api/urls";
@@ -10,17 +10,17 @@ import Loader from "../../components/Loader";
 import ScreenHeader from "../../components/ScreenHeader";
 import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
+import { getUserBanks } from "../../functions";
 import { colors } from "../../utils";
 
 const WithdrawScreen = ({ navigation }) => {
   const { state, dispatch } = useGlobalContext();
-  const { loading } = state;
+  const { loading, banks } = state;
 
   const [amount, setAmount] = useState("");
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [paymentMethodId, setPaymentMethodId] = useState(null);
-  const [banks, setBanks] = useState([]);
-  const [id, setId] = useState("");
+  const [bank, setBank] = useState();
 
   useEffect(() => {
     getPaymentMethods();
@@ -28,15 +28,9 @@ const WithdrawScreen = ({ navigation }) => {
 
   useEffect(() => {
     if (!banks.length) {
-      getBanksFromPaymentMethods();
+      getUserBanks(dispatch);
     }
-  }, [getBanksFromPaymentMethods, banks]);
-
-  const getBanksFromPaymentMethods = useCallback(async () => {
-    await axios.get(urls.trades.getPaymentMethods).then((res) => {
-      setBanks(res.data.data);
-    });
-  }, []);
+  }, [banks, dispatch]);
 
   const getPaymentMethods = async () => {
     await axios.get(urls.system.paymentMethods).then((res) => {
@@ -47,7 +41,7 @@ const WithdrawScreen = ({ navigation }) => {
   const handlePress = () => {
     dispatch({
       type: actions.withdrawal.setAmount,
-      payload: { amount, paymentMethodId: id },
+      payload: { amount, paymentMethodId: bank?.id },
     });
     navigation.navigate("SellFiatTradesScreen");
   };
@@ -91,12 +85,10 @@ const WithdrawScreen = ({ navigation }) => {
                 label="Bank"
                 placeholder="Select bank"
                 options={banks?.filter((bank) => bank.paymentMethod.id === paymentMethodId)}
-                value={id}
-                setValue={setId}
+                value={bank}
+                setValue={setBank}
                 itemLabelKeys={["bank", "bankName"]}
-                itemValueKeys={["id"]}
               />
-
               <TouchableOpacity
                 activeOpacity={0.7}
                 style={styles.add}
@@ -104,11 +96,23 @@ const WithdrawScreen = ({ navigation }) => {
               >
                 <Text style={styles.addText}>Add bank</Text>
               </TouchableOpacity>
+
+              {bank && (
+                <>
+                  <View style={styles.space} />
+
+                  <Input label="Account Number" value={bank.bank.accountNumber} editable={false} />
+
+                  <View style={styles.space} />
+
+                  <Input label="Account Name" value={bank.bank.accountName} editable={false} />
+                </>
+              )}
             </>
           )}
 
           <View style={styles.space} />
-          <Button title="Continue" onPress={handlePress} disabled={!amount || !id} />
+          <Button title="Continue" onPress={handlePress} disabled={!amount || !bank?.id} />
         </View>
       </ScrollView>
     </View>

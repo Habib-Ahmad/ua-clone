@@ -12,18 +12,22 @@ import { logout } from "../../functions";
 import { colors } from "../../utils";
 
 const WelcomeBack = ({ navigation }) => {
-  const {
-    state: { loading },
-    dispatch,
-  } = useGlobalContext();
+  const { dispatch } = useGlobalContext();
 
   const [pin, setPin] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handlePress = async () => {
-    await axios.post(urls.auth.verifyPIN, { pin }).then(async () => {
-      await getData();
-      dispatch({ type: actions.setLoggedIn, payload: true });
-    });
+    setLoading(true);
+    await axios
+      .post(urls.auth.verifyPIN, { pin })
+      .then(() => {
+        getData(dispatch);
+        dispatch({ type: actions.setLoggedIn, payload: true });
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   };
 
   const getData = async () => {
@@ -37,6 +41,7 @@ const WelcomeBack = ({ navigation }) => {
       dispatch({ type: actions.setFiatWallets, payload: res2.data.data });
       dispatch({ type: actions.setUser, payload: res3.data.data });
       dispatch({ type: actions.setActiveTrades, payload: res4.data.data });
+      setLoading(false);
     });
   };
 

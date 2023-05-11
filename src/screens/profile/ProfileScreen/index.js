@@ -1,4 +1,6 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
 import Logout from "../../../assets/Logout";
 import ScreenHeader from "../../../components/ScreenHeader";
 import { useGlobalContext } from "../../../context/context";
@@ -13,8 +15,12 @@ const ProfileScreen = ({ navigation }) => {
 
   const { firstName, lastName, tag, photo } = state.user;
 
+  const isFocused = useIsFocused();
+
   return (
     <View style={styles.container}>
+      {isFocused && <StatusBar style="dark" backgroundColor={colors.bg} />}
+
       <ScrollView>
         <ScreenHeader heading="Profile" noBackButton />
 

@@ -12,6 +12,8 @@ const urls = {
     forgotPassword: "/Identity/ForgotPassword",
     resetPassword: "/Identity/PasswordReset",
     resetPIN: "/Identity/ResetPin",
+    updateTag: "/Identity/Tag",
+    verifyTag: "/Identity/Tag",
   },
   fiat: {
     baseUrl: "/Fiat",
