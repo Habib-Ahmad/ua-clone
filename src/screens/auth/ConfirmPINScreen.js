@@ -5,16 +5,11 @@ import urls from "../../api/urls";
 import Button from "../../components/input/Button";
 import FourDigitInput from "../../components/input/FourDigitInput";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
-import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils";
 
 const ConfirmPINScreen = ({ route, navigation }) => {
   const value = route.params?.["value"];
   const otp = route.params?.["otp"];
-
-  const {
-    state: { loading },
-  } = useGlobalContext();
 
   const [error, setError] = useState("");
   const [pin, setPin] = useState("");
@@ -54,12 +49,7 @@ const ConfirmPINScreen = ({ route, navigation }) => {
         </ScrollView>
       </View>
 
-      <Button
-        title="Continue"
-        onPress={handlePress}
-        disabled={pin.length !== 4}
-        loading={loading}
-      />
+      <Button title="Continue" onPress={handlePress} disabled={pin.length !== 4} />
     </View>
   );
 };

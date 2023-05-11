@@ -77,12 +77,7 @@ const GetStarted = ({ navigation }) => {
         </ScrollView>
       </View>
 
-      <Button
-        title="Send OTP"
-        onPress={handlePress}
-        disabled={!phoneNumber.length}
-        loading={loading}
-      />
+      <Button title="Send OTP" onPress={handlePress} disabled={!phoneNumber.length} />
     </View>
   );
 };

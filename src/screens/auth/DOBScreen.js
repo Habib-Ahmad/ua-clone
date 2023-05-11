@@ -16,7 +16,7 @@ import "react-native-get-random-values";
 
 const DOBScreen = ({ navigation }) => {
   const {
-    state: { loading, registeringUser },
+    state: { registeringUser },
     dispatch,
   } = useGlobalContext();
 
@@ -88,7 +88,7 @@ const DOBScreen = ({ navigation }) => {
         </ScrollView>
       </View>
 
-      <Button title="Continue" onPress={handlePress} disabled={!formattedDate} loading={loading} />
+      <Button title="Continue" onPress={handlePress} disabled={!formattedDate} />
     </View>
   );
 };

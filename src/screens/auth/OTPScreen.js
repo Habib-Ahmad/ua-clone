@@ -12,10 +12,7 @@ import { colors } from "../../utils";
 import store from "../../utils/store";
 
 const OTPScreen = ({ route, navigation }) => {
-  const {
-    state: { loading },
-    dispatch,
-  } = useGlobalContext();
+  const { dispatch } = useGlobalContext();
   const phoneNumber = route.params?.["phoneNumber"];
   const prevRoute = useNavigationState((state) => state.routes[state.routes.length - 2]).name;
 
@@ -83,12 +80,7 @@ const OTPScreen = ({ route, navigation }) => {
         </ScrollView>
       </View>
 
-      <Button
-        title="Continue"
-        onPress={handlePress}
-        disabled={otp.length !== 4}
-        loading={loading}
-      />
+      <Button title="Continue" onPress={handlePress} disabled={otp.length !== 4} />
     </View>
   );
 };
