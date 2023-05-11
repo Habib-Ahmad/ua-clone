@@ -12,19 +12,26 @@ const urls = {
     forgotPassword: "/Identity/ForgotPassword",
     resetPassword: "/Identity/PasswordReset",
     resetPIN: "/Identity/ResetPin",
+    updateTag: "/Identity/Tag",
+    verifyTag: "/Identity/Tag",
   },
   fiat: {
     baseUrl: "/Fiat",
     worth: "/Fiat/Worth",
     initiateTransfer: "/Fiat/InitiateTransfer",
     transfer: "/Fiat/Transfer",
+    history: "/Fiat/Transactions",
   },
   p2p: {
-    getLocalTrades: "/P2p/Fiat/Buy",
-    getSwapTrades: "/P2p/Fiat/SwapBuy",
+    getLocalBuyTrades: "/P2p/Fiat/Buy",
+    getBuySwapTrades: "/P2p/Fiat/SwapBuy",
+    getLocalSellTrades: "/P2p/Fiat/Sell",
+    getSellSwapTrades: "/P2p/Fiat/SwapSell",
     getTrade: "/P2p/Fiat",
     initiateFiatBuy: "/P2p/Fiat/Buy",
     initiateFiatBuySwap: "/P2p/Fiat/SwapBuy",
+    initiateFiatSell: "/P2p/Fiat/Sell",
+    initiateFiatSellSwap: "/P2p/Fiat/SwapSell",
   },
   trader: {
     baseUrl: "/Trader",
@@ -32,6 +39,10 @@ const urls = {
   trades: {
     getActiveTrades: "/Trades/Fiat/Requests",
     cancel: "/Trades/Cancel",
+    addBank: "/Trades/Bank",
+    getBanks: "/Trades/Banks",
+    getPaymentMethods: "/Trades/PaymentMethods",
+    removeBank: "/Trades/Bank",
   },
   payment: {
     sent: "/Payment/Sent",
@@ -49,9 +60,14 @@ const urls = {
     getAll: "/Notification",
     markAsRead: "/Notification",
   },
+  monnify: {
+    banks: "/Monnify/Banks",
+    verifyBank: "/Monnify/verifyBank",
+  },
   system: {
     countries: "/System/Countries",
     currencies: "/System/Currencies",
+    paymentMethods: "/System/PaymentMethod",
   },
 };
 

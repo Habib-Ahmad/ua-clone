@@ -9,7 +9,7 @@ import Input from "../../components/input/Input";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
 import actions from "../../context/actions";
 import { useGlobalContext } from "../../context/context";
-import { getFiatData, getPushNotificationToken } from "../../functions";
+import { getFiatData, getPushNotificationToken, getUserData } from "../../functions";
 import { colors } from "../../utils";
 import store from "../../utils/store";
 
@@ -44,7 +44,8 @@ const SigninScreen = ({ navigation }) => {
         dispatch({ type: actions.setLoading, payload: true });
         await store.setRefreshToken(res.data.tokens.refreshToken);
         await store.setRefreshExpiry(res.data.tokens.refreshExpiry);
-        await getFiatData(dispatch);
+        getUserData(dispatch);
+        getFiatData(dispatch);
         dispatch({ type: actions.login, payload: res.data.tokens });
       });
   };

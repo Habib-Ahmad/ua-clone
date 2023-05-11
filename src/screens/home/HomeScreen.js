@@ -15,7 +15,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import BackArrowDark from "../../assets/BackArrowDark";
 import Notification from "../../assets/Notification";
-import Share from "../../assets/Share";
+// import Share from "../../assets/Share";
 import Wave from "../../assets/Wave";
 import CryptoActions from "../../components/CryptoActions";
 import MoneyActions from "../../components/MoneyActions";
@@ -47,9 +47,9 @@ const HomeScreen = ({ navigation }) => {
     navigation.navigate("NotificationScreen");
   };
 
-  const handleQuickShare = () => {
-    navigation.navigate("QuickShareScreen");
-  };
+  // const handleQuickShare = () => {
+  //   navigation.navigate("QuickShareScreen");
+  // };
 
   useEffect(() => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -98,9 +98,9 @@ const HomeScreen = ({ navigation }) => {
           )}
 
           <View style={styles.icons}>
-            <TouchableOpacity activeOpacity={0.6} onPress={handleQuickShare}>
+            {/* <TouchableOpacity activeOpacity={0.6} onPress={handleQuickShare}>
               <Share />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <View style={styles.space} />
             <TouchableOpacity activeOpacity={0.6} onPress={handleNotification}>
               <Notification />
@@ -119,7 +119,7 @@ const HomeScreen = ({ navigation }) => {
 
         {expanded && (
           <Animated.View style={styles.headerBottom}>
-            {activeTab === "crypto" ? <CryptoActions /> : <MoneyActions />}
+            {activeTab === "crypto" ? <CryptoActions /> : <MoneyActions setBalance={setBalance} />}
           </Animated.View>
         )}
       </View>

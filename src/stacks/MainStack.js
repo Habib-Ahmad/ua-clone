@@ -8,10 +8,12 @@ import AddFiatWalletScreen from "../screens/home/AddFiatWalletScreen";
 import BuyScreen from "../screens/home/BuyScreen";
 import ChatScreen from "../screens/home/ChatScreen";
 import ConfirmSendCryptoScreen from "../screens/home/ConfirmSendCryptoScreen";
+import FiatSellInitiatedScreen from "../screens/home/FiatSellInitiatedScreen";
 import ForgotPINScreen from "../screens/home/ForgotPINScreen";
 import InitiatedTradeScreen from "../screens/home/InitiatedTradeScreen";
 import ReceiveScreen from "../screens/home/ReceiveScreen";
 import ReviewSummaryScreen from "../screens/home/ReviewSummaryScreen";
+import SellFiatTradesScreen from "../screens/home/SellFiatTradesScreen";
 import SendCryptoScreen from "../screens/home/SendCryptoScreen";
 import SwapDetailsScreen from "../screens/home/SwapDetailsScreen";
 import SwapScreen from "../screens/home/SwapScreen";
@@ -23,6 +25,8 @@ import TransferScreen from "../screens/home/TransferScreen";
 import WelcomeBack from "../screens/home/WelcomeBack";
 import WithdrawScreen from "../screens/home/WithdrawScreen";
 import ActiveTradesScreen from "../screens/profile/ActiveTradesScreen";
+import AddBankScreen from "../screens/profile/AddBankScreen";
+import BanksScreen from "../screens/profile/BanksScreen";
 import BecomeAMerchantScreen from "../screens/profile/BecomeAMerchantScreen";
 import ColorSettingScreen from "../screens/profile/ColorSettingScreen";
 import ContactScreen from "../screens/profile/ContactScreen";
@@ -97,6 +101,10 @@ const MainStackScreen = () => {
       <MainStack.Screen name="KYCScreen" component={KYCScreen} />
       <MainStack.Screen name="ActiveTradesScreen" component={ActiveTradesScreen} />
       <MainStack.Screen name="ChatScreen" component={ChatScreen} />
+      <MainStack.Screen name="BanksScreen" component={BanksScreen} />
+      <MainStack.Screen name="AddBankScreen" component={AddBankScreen} />
+      <MainStack.Screen name="SellFiatTradesScreen" component={SellFiatTradesScreen} />
+      <MainStack.Screen name="FiatSellInitiatedScreen" component={FiatSellInitiatedScreen} />
     </MainStack.Navigator>
   );
 };

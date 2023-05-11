@@ -65,9 +65,12 @@ const TopupScreen = ({ navigation }) => {
 
             <Select
               label="Payment Currency"
+              placeholder="Select payment currency"
               options={currencies}
               value={currency}
               setValue={setCurrency}
+              itemLabelKeys={["name"]}
+              itemValueKeys={["id"]}
             />
 
             <Text style={styles.note}>

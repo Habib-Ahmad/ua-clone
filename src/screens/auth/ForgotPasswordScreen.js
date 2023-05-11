@@ -5,15 +5,10 @@ import axios from "../../api/axios";
 import urls from "../../api/urls";
 import Button from "../../components/input/Button";
 import ScreenHeaderWithLogo from "../../components/ScreenHeaderWithLogo";
-import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils";
 import countries from "../../utils/countries";
 
 const ForgotPasswordScreen = ({ navigation }) => {
-  const {
-    state: { loading },
-  } = useGlobalContext();
-
   const [phoneNumber, setPhoneNumber] = useState("");
   const [countryList, setCountryList] = useState([]);
 
@@ -65,12 +60,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
         </ScrollView>
       </View>
 
-      <Button
-        title="Continue"
-        onPress={handlePress}
-        disabled={!phoneNumber.length}
-        loading={loading}
-      />
+      <Button title="Continue" onPress={handlePress} disabled={!phoneNumber.length} />
     </View>
   );
 };

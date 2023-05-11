@@ -9,17 +9,21 @@ import urls from "../api/urls";
 import actions from "../context/actions";
 import { store } from "../utils";
 
+export const getUserData = async (dispatch) => {
+  await axios.get(urls.auth.baseUrl).then((res) => {
+    dispatch({ type: actions.setUser, payload: res.data.data });
+  });
+};
+
 export const getFiatData = async (dispatch) => {
   await Promise.all([
     axios.get(urls.fiat.worth),
     axios.get(urls.fiat.baseUrl),
-    axios.get(urls.auth.baseUrl),
     axios.get(`${urls.trades.getActiveTrades}?pageNumber=1&pageSize=10`),
-  ]).then(([res1, res2, res3, res4]) => {
+  ]).then(([res1, res2, res3]) => {
     dispatch({ type: actions.setFiatWorth, payload: res1.data.data });
     dispatch({ type: actions.setFiatWallets, payload: res2.data.data });
-    dispatch({ type: actions.setUser, payload: res3.data.data });
-    dispatch({ type: actions.setActiveTrades, payload: res4.data.data });
+    dispatch({ type: actions.setActiveTrades, payload: res3.data.data });
   });
 };
 
@@ -35,6 +39,12 @@ export const getCurrencies = async () => {
   const result = await axios.get(urls.system.currencies);
 
   return result.data.data;
+};
+
+export const getUserBanks = async (dispatch) => {
+  await axios.get(urls.trades.getPaymentMethods).then((res) => {
+    dispatch({ type: actions.setBanks, payload: res.data.data });
+  });
 };
 
 export const getPushNotificationToken = async () => {

@@ -2,23 +2,43 @@ import { StyleSheet, Text, View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { colors } from "../../utils";
 
-const Select = ({ label, options, value, setValue, placeholder, itemLabelKeys, itemValueKeys }) => {
+const Select = ({
+  label,
+  options,
+  value,
+  setValue,
+  placeholder,
+  itemLabelKeys,
+  itemValueKeys,
+  disabled,
+}) => {
   const getItemLabel = (item) => {
     return itemLabelKeys.reduce((acc, key) => acc[key], item);
   };
 
   const getItemValue = (item) => {
+    if (!itemValueKeys) return item;
+
     return itemValueKeys.reduce((acc, key) => acc[key], item);
   };
 
+  const enabled = disabled ? false : true;
+
   return (
-    <View style={styles.container}>
-      {label && <Text style={styles.label}>{label}</Text>}
+    <View
+      style={[styles.container, { borderColor: enabled ? colors.primary : colors.primaryLight }]}
+    >
+      {label && (
+        <Text style={[styles.label, { color: enabled ? colors.primary : colors.primaryLight }]}>
+          {label}
+        </Text>
+      )}
       <Picker
         style={styles.select}
         selectedValue={value}
         onValueChange={(itemValue) => setValue(itemValue)}
         mode="dropdown"
+        enabled={enabled}
       >
         <Picker.Item
           key="default"
@@ -45,7 +65,7 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     borderWidth: 1,
     borderRadius: 8,
-    borderColor: colors.primary,
+    // borderColor: colors.primary,
   },
   label: {
     position: "absolute",

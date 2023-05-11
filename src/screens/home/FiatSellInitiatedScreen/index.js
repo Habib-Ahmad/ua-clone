@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Chat from "../../../assets/Chat";
-import Copy from "../../../assets/Copy";
+import EnterOtp from "../../../components/EnterOtp";
+import EnterPin from "../../../components/EnterPin";
 import Button from "../../../components/input/Button";
 import CustomModal from "../../../components/input/CustomModal";
 import Loader from "../../../components/Loader";
 import ScreenHeader from "../../../components/ScreenHeader";
 import Trade from "../../../components/Trade";
 import { useGlobalContext } from "../../../context/context";
-import { copyToClipboard } from "../../../functions";
 import { colors, formatTime } from "../../../utils";
-import { cancelTrade, fetchTrade, transfer, updateWallet } from "./functions";
+import { cancelTrade, fetchTrade, initiateReceive, receive, updateWallet } from "./functions";
 import { useTimer } from "./hooks";
 
-const InitiatedTradeScreen = ({ route, navigation }) => {
-  const { id, total, symbol, session, trade, tradeId, status, bank } = route.params;
-  const accDetails = session?.paymentMethodDto.bank || bank?.paymentMethod.bank || null;
+const FiatSellInitiatedScreen = ({ route, navigation }) => {
+  const { id, total, symbol, session, trade, tradeId, status } = route.params;
 
   const { state, dispatch } = useGlobalContext();
 
@@ -23,7 +22,11 @@ const InitiatedTradeScreen = ({ route, navigation }) => {
   const [timeLeft, setTimeLeft] = useState(20 * 60 * 1000);
   const [transferred, setTransferred] = useState(false);
   const [tradeCompleted, setTradeCompleted] = useState(false);
+  const [pin, setPin] = useState("");
+  const [otp, setOtp] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible2, setModalVisible2] = useState(false);
+  const [modalVisible3, setModalVisible3] = useState(false);
 
   useEffect(() => {
     if (!trade) {
@@ -52,10 +55,23 @@ const InitiatedTradeScreen = ({ route, navigation }) => {
     }
   }, [dispatch, id, navigation, session?.sessionId, state.realTimeData, tradeCompleted]);
 
+  useEffect(() => {
+    if (pin.length === 4 && !transferred) {
+      initiateReceive(session, id, setTransferred, pin, setModalVisible2, setModalVisible3);
+    }
+  }, [id, pin, session, transferred]);
+
+  useEffect(() => {
+    if (otp.length === 4) {
+      receive(session, id, pin, otp, setModalVisible3, navigation, dispatch);
+    }
+  }, [dispatch, id, navigation, otp, pin, session]);
+
   return (
     <View style={styles.container}>
       <Loader loading={state.loading} />
-      <ScrollView contentContainerStyle={styles.scrollview}>
+
+      <ScrollView>
         <ScreenHeader heading="Trade Initiated" />
 
         <TouchableOpacity
@@ -68,7 +84,7 @@ const InitiatedTradeScreen = ({ route, navigation }) => {
 
         {!transferred && (
           <>
-            <Text style={styles.pay}>Pay the Trader</Text>
+            <Text style={styles.pay}>You will receive</Text>
 
             <Text style={styles.amount}>
               {session?.paymentCurrency.symbol || symbol}
@@ -80,60 +96,21 @@ const InitiatedTradeScreen = ({ route, navigation }) => {
           </>
         )}
 
-        {transferred && (
-          <View style={styles.waiting}>
-            <Text style={styles.waitingText}>Waiting for merchant</Text>
-          </View>
-        )}
-
         {trade && <Trade trade={trade} handlePress={() => {}} />}
         {fetchedTrade && <Trade trade={fetchedTrade} handlePress={() => {}} />}
 
-        <View style={styles.noteWrapper}>
-          <Text style={styles.note}>Note:</Text>
-          <Text style={styles.noteText}>Make sure you transfer to the account details bellow</Text>
-        </View>
-
-        {accDetails && (
-          <View style={styles.account}>
-            <Text style={styles.title}>Account name</Text>
-            <Text style={styles.detail}>{accDetails.accountName}</Text>
-            <Text style={styles.title}>Account number</Text>
-            <Text style={styles.detail}>
-              {accDetails.accountNumber}{" "}
-              <TouchableOpacity onPress={() => copyToClipboard(accDetails.accountNumber)}>
-                <Copy />
-              </TouchableOpacity>
-            </Text>
-            <Text style={styles.title}>Bank</Text>
-            <Text style={styles.detail}>{accDetails.bankName}</Text>
-          </View>
-        )}
-
         <View style={styles.btnWrapper}>
-          {transferred ? (
-            <View style={styles.disputeWrapper}>
-              <Button
-                title="Dispute"
-                backgroundColor={colors.red}
-                onPress={() => setModalVisible(true)}
-              />
-            </View>
-          ) : (
-            <>
-              <Button
-                title="Cancel"
-                backgroundColor={colors.red}
-                customStyles={styles.btn}
-                onPress={() => cancelTrade(session, id, navigation)}
-              />
-              <Button
-                title="I have transfered"
-                customStyles={styles.btn}
-                onPress={() => transfer(session, id, setTransferred)}
-              />
-            </>
-          )}
+          <Button
+            title="Cancel"
+            backgroundColor={colors.red}
+            customStyles={styles.btn}
+            onPress={() => cancelTrade(session, id, navigation)}
+          />
+          <Button
+            title="I have received"
+            customStyles={styles.btn}
+            onPress={() => setModalVisible2(true)}
+          />
         </View>
 
         <CustomModal modalVisible={modalVisible} setModalVisible={setModalVisible}>
@@ -162,18 +139,28 @@ const InitiatedTradeScreen = ({ route, navigation }) => {
             </View>
           </View>
         </CustomModal>
+
+        <CustomModal modalVisible={modalVisible2} setModalVisible={setModalVisible2}>
+          <View style={styles.modal}>
+            <EnterPin setPin={setPin} />
+          </View>
+        </CustomModal>
+
+        <CustomModal modalVisible={modalVisible3} setModalVisible={setModalVisible3}>
+          <View style={styles.modal}>
+            <EnterOtp setOtp={setOtp} />
+          </View>
+        </CustomModal>
       </ScrollView>
     </View>
   );
 };
 
-export default InitiatedTradeScreen;
+export default FiatSellInitiatedScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  scrollview: {
     position: "relative",
   },
   chat: {
@@ -194,15 +181,6 @@ const styles = StyleSheet.create({
     color: colors.primary,
     fontWeight: "600",
   },
-  waiting: {
-    backgroundColor: "red",
-    height: 60,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  waitingText: {
-    color: colors.white,
-  },
   timer: {
     fontSize: 32,
     textAlign: "center",
@@ -212,48 +190,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     paddingBottom: 40,
   },
-  noteWrapper: {
-    marginVertical: 20,
-    paddingHorizontal: 20,
-  },
-  note: {
-    color: colors.red,
-    fontWeight: "600",
-    fontSize: 18,
-  },
-  noteText: {
-    color: colors.red,
-  },
-  account: {
-    backgroundColor: colors.blueTransparent,
-    borderRadius: 32,
-    width: "80%",
-    alignSelf: "center",
-    paddingVertical: 20,
-    paddingHorizontal: 40,
-    marginVertical: 20,
-    marginBottom: 40,
-  },
-  title: {
-    color: colors.textLight,
-    marginBottom: 10,
-  },
-  detail: {
-    fontWeight: "600",
-    fontSize: 16,
-    marginBottom: 15,
-    flexDirection: "row",
-    alignItems: "center",
-  },
   btnWrapper: {
-    marginBottom: 40,
+    marginVertical: 40,
     paddingHorizontal: "10%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-  },
-  disputeWrapper: {
-    width: "100%",
   },
   btn: {
     paddingHorizontal: 20,

@@ -1,13 +1,5 @@
-import { useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  Alert,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { useCallback, useEffect, useState } from "react";
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import axios from "../../api/axios";
 import urls from "../../api/urls";
 import CustomModal from "../../components/input/CustomModal";
@@ -16,98 +8,50 @@ import Trade from "../../components/Trade";
 import { useGlobalContext } from "../../context/context";
 import { colors } from "../../utils";
 
-const TradesScreen = ({ navigation }) => {
+const SellFiatTradesScreen = ({ navigation }) => {
   const { state } = useGlobalContext();
+
+  const { activeWallet, balance, withdrawal } = state;
 
   const [trades, setTrades] = useState(null);
   const [selectedTrade, setSelectedTrade] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
 
-  const localWalletId = state.balance.fiat.wallets?.find((wallet) => wallet.isLocal).id;
-  const selectedWalletId = state.activeWallet.id;
-  const isLocalTopup = localWalletId === selectedWalletId;
+  const localWalletId = balance.fiat.wallets?.find((wallet) => wallet.isLocal).id;
+  const selectedWalletId = activeWallet.id;
+  const isLocalWithdrawal = localWalletId === selectedWalletId;
 
   useEffect(() => {
-    const getLocalTrades = async () => {
-      await axios
-        .get(
-          `${urls.p2p.getLocalBuyTrades}?pageNumber=1&pageSize=10&currencyId=${state.activeWallet.currencyId}`
-        )
-        .then((res) => {
-          setTrades(res.data.data);
-        });
-    };
-    const getSwapTrades = async () => {
-      await axios
-        .get(
-          `${urls.p2p.getBuySwapTrades}?pageNumber=1&pageSize=10&currencyId=${state.activeWallet.currencyId}`
-        )
-        .then((res) => {
-          setTrades(res.data.data);
-        });
-    };
-    if (isLocalTopup) {
+    if (isLocalWithdrawal) {
       getLocalTrades();
     } else {
       getSwapTrades();
     }
-  }, [isLocalTopup, state.activeWallet.currencyId]);
+  }, [getLocalTrades, getSwapTrades, isLocalWithdrawal]);
 
-  const handlePress = (trade) => {
+  const getLocalTrades = useCallback(async () => {
+    await axios
+      .get(
+        `${urls.p2p.getLocalSellTrades}?pageNumber=1&pageSize=10&currencyId=${activeWallet.currencyId}`
+      )
+      .then((res) => {
+        setTrades(res.data.data);
+      });
+  }, [activeWallet.currencyId]);
+
+  const getSwapTrades = useCallback(async () => {
+    await axios
+      .get(
+        `${urls.p2p.getSellSwapTrades}?pageNumber=1&pageSize=10&currencyId=${activeWallet.currencyId}`
+      )
+      .then((res) => {
+        setTrades(res.data.data);
+      });
+  }, [activeWallet.currencyId]);
+
+  const handleOpen = (trade) => {
     setSelectedTrade(trade);
     setModalVisible(true);
-  };
-
-  const initiateTrade = async () => {
-    if (selectedTrade.fiatTrade.fiatTradeRule?.isVerified) {
-      Alert.alert(
-        "Must be verified",
-        "You have to be verified to trade with this merchant, please complete your KYC",
-        [
-          {
-            text: "Complete KYC",
-            onPress: () => navigation.navigate("KYCScreen"),
-          },
-          {
-            text: "Ok",
-          },
-        ]
-      );
-      return;
-    }
-
-    // if (selectedTrade.fiatTrade.fiatTradeRule?.completed) {
-    // }
-
-    if (isLocalTopup) {
-      await axios
-        .post(urls.p2p.initiateFiatBuy, {
-          fiatTradeId: selectedTrade.id,
-          paymentMethodId: selectedTrade.paymentMethods[0].id,
-          amount: state.topup.amount,
-        })
-        .then((response) => {
-          setModalVisible(false);
-          navigation.navigate("InitiatedTradeScreen", {
-            trade: selectedTrade,
-            session: response.data.data,
-          });
-        });
-    } else {
-      await axios
-        .post(urls.p2p.initiateFiatBuySwap, {
-          fiatTradeId: selectedTrade.id,
-          paymentMethodId: selectedTrade.paymentMethods[0].id,
-          amount: state.topup.amount,
-        })
-        .then((response) => {
-          setModalVisible(false);
-          navigation.navigate("InitiatedTradeScreen", {
-            trade: selectedTrade,
-            session: response.data.data,
-          });
-        });
-    }
   };
 
   const handleClose = () => {
@@ -115,9 +59,42 @@ const TradesScreen = ({ navigation }) => {
     setSelectedTrade(null);
   };
 
+  const initiateTrade = async () => {
+    if (isLocalWithdrawal) {
+      await axios
+        .post(urls.p2p.initiateFiatSell, {
+          amount: Number(withdrawal.amount),
+          paymentMethodId: withdrawal.paymentMethodId,
+          // walletId: activeWallet.id,
+          fiatTradeId: selectedTrade.id,
+        })
+        .then((res) => {
+          navigation.navigate("FiatSellInitiatedScreen", {
+            trade: selectedTrade,
+            session: res.data.data,
+          });
+        });
+    } else {
+      await axios
+        .post(urls.p2p.initiateFiatSellSwap, {
+          amount: Number(withdrawal.amount),
+          paymentMethodId: withdrawal.paymentMethodId,
+          // walletId: activeWallet.id,
+          fiatTradeId: selectedTrade.id,
+        })
+        .then((res) => {
+          setModalVisible(false);
+          navigation.navigate("FiatSellInitiatedScreen", {
+            trade: selectedTrade,
+            session: res.data.data,
+          });
+        });
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <ScreenHeader heading="Available Trades" />
+      <ScreenHeader heading="Trades Screen" />
 
       {!trades ? (
         <ActivityIndicator size={40} color={colors.primary} />
@@ -126,10 +103,11 @@ const TradesScreen = ({ navigation }) => {
       ) : (
         <ScrollView style={styles.trades}>
           {trades?.map((trade) => (
-            <Trade key={trade.id} trade={trade} handlePress={() => handlePress(trade)} />
+            <Trade key={trade.id} trade={trade} handlePress={() => handleOpen(trade)} />
           ))}
         </ScrollView>
       )}
+
       <CustomModal modalVisible={modalVisible} setModalVisible={setModalVisible}>
         <View style={styles.modal}>
           <Text style={styles.modalText}>
@@ -149,13 +127,10 @@ const TradesScreen = ({ navigation }) => {
   );
 };
 
-export default TradesScreen;
+export default SellFiatTradesScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-  trades: {
     flex: 1,
   },
   noTrade: {
@@ -164,7 +139,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 40,
   },
-  modal: {},
+  modal: {
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+  },
   modalText: {
     textAlign: "center",
     fontSize: 18,

@@ -20,7 +20,7 @@ const NotificationScreen = () => {
 
   useEffect(() => {
     markAsRead();
-  }, [markAsRead]);
+  }, [markAsRead, unreadIds]);
 
   const unreadIds = notifications?.filter((item) => !item.isRead).map((item) => item.id);
 

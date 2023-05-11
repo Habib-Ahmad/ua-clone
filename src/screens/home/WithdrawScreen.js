@@ -1,106 +1,149 @@
-import React, { useState } from "react";
-import { Dimensions, ScrollView, StyleSheet, Switch, Text, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useEffect, useState } from "react";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import axios from "../../api/axios";
+import urls from "../../api/urls";
+import Building from "../../assets/Building";
 import Button from "../../components/input/Button";
 import Input from "../../components/input/Input";
+import Select from "../../components/input/Select";
+import Loader from "../../components/Loader";
 import ScreenHeader from "../../components/ScreenHeader";
-import Icon from "../../components/withdraw/Icon";
+import actions from "../../context/actions";
+import { useGlobalContext } from "../../context/context";
+import { getUserBanks } from "../../functions";
 import { colors } from "../../utils";
 
-export default function WithdrawScreen() {
-  const navigation = useNavigation();
+const WithdrawScreen = ({ navigation }) => {
+  const { state, dispatch } = useGlobalContext();
+  const { loading, banks } = state;
 
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(!isEnabled);
+  const [amount, setAmount] = useState("");
+  const [paymentMethods, setPaymentMethods] = useState([]);
+  const [paymentMethodId, setPaymentMethodId] = useState(null);
+  const [bank, setBank] = useState();
+
+  useEffect(() => {
+    getPaymentMethods();
+  }, []);
+
+  useEffect(() => {
+    if (!banks.length) {
+      getUserBanks(dispatch);
+    }
+  }, [banks, dispatch]);
+
+  const getPaymentMethods = async () => {
+    await axios.get(urls.system.paymentMethods).then((res) => {
+      setPaymentMethods(res.data.data);
+    });
+  };
 
   const handlePress = () => {
-    navigation.navigate("ReviewSummaryScreen", {
-      withdraw: "true",
+    dispatch({
+      type: actions.withdrawal.setAmount,
+      payload: { amount, paymentMethodId: bank?.id },
     });
+    navigation.navigate("SellFiatTradesScreen");
   };
 
   return (
     <View style={styles.container}>
-      <ScreenHeader heading="Withdraw" />
-
+      <Loader loading={loading} />
       <ScrollView>
-        <Icon width="80" height="80" type="bank" />
+        <ScreenHeader heading="Withdraw" />
+
+        <View style={styles.iconContainer}>
+          <Building />
+        </View>
 
         <View style={styles.wrapper}>
           <Input
             label="Amount"
             placeholder="Enter Amount"
-            // onChangeText={setUsername}
-            // value={username}
+            onChangeText={setAmount}
+            value={amount}
+            keyboardType="numeric"
           />
 
           <View style={styles.space} />
 
-          <Input
-            label="Choose Bank"
-            placeholder="Access bank"
-            // onChangeText={setUsername}
-            // value={username}
+          <Select
+            label="Payment method"
+            placeholder="Select payment method"
+            options={paymentMethods}
+            value={paymentMethodId}
+            setValue={setPaymentMethodId}
+            itemLabelKeys={["name"]}
+            itemValueKeys={["id"]}
           />
 
           <View style={styles.space} />
 
-          <Input
-            label="Account Number"
-            placeholder="Enter Account Number"
-            // onChangeText={setUsername}
-            // value={username}
-          />
-
-          <View style={styles.switchStyle}>
-            <View style={styles.saveBankBox}>
-              <Text style={styles.saveBank}>Save This Bank</Text>
-            </View>
-            <View>
-              <Switch
-                trackColor={{ false: colors.primaryLight, true: colors.primary }}
-                thumbColor={isEnabled ? colors.white : colors.primary}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={isEnabled}
+          {paymentMethodId && (
+            <>
+              <Select
+                label="Bank"
+                placeholder="Select bank"
+                options={banks?.filter((bank) => bank.paymentMethod.id === paymentMethodId)}
+                value={bank}
+                setValue={setBank}
+                itemLabelKeys={["bank", "bankName"]}
               />
-            </View>
-          </View>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                style={styles.add}
+                onPress={() => navigation.navigate("AddBankScreen")}
+              >
+                <Text style={styles.addText}>Add bank</Text>
+              </TouchableOpacity>
+
+              {bank && (
+                <>
+                  <View style={styles.space} />
+
+                  <Input label="Account Number" value={bank.bank.accountNumber} editable={false} />
+
+                  <View style={styles.space} />
+
+                  <Input label="Account Name" value={bank.bank.accountName} editable={false} />
+                </>
+              )}
+            </>
+          )}
+
+          <View style={styles.space} />
+          <Button title="Continue" onPress={handlePress} disabled={!amount || !bank?.id} />
         </View>
       </ScrollView>
-      <View style={styles.btn__style}>
-        <Button title="Continue" onPress={handlePress} />
-      </View>
     </View>
   );
-}
+};
+
+export default WithdrawScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingBottom: 20,
   },
   wrapper: {
     marginTop: 40,
-    paddingHorizontal: 10,
+    paddingHorizontal: "5%",
   },
   space: {
     marginBottom: 30,
   },
-  btn__style: {
-    position: "absolute",
-    width: Dimensions.get("screen").width,
-    bottom: 20,
+  iconContainer: {
+    alignSelf: "center",
+    marginBottom: 20,
   },
-  switchStyle: {
-    marginTop: 0,
-    marginLeft: 5,
-    flexDirection: "row",
+  add: {
+    alignSelf: "flex-end",
+    marginTop: 5,
+    marginRight: 10,
   },
-  saveBank: {
-    fontSize: 15,
-    fontWeight: "500",
-  },
-  saveBankBox: {
-    justifyContent: "center",
+  addText: {
+    fontWeight: "600",
+    color: colors.primaryDark,
   },
 });

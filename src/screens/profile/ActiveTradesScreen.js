@@ -38,7 +38,7 @@ const ActiveTradesScreen = ({ navigation }) => {
   const isTrader = user.role === "Trader";
 
   const handlePress = (trade) => {
-    const { id, tradeId, amount, fee, state, paymentMethod } = trade;
+    const { id, tradeId, amount, fee, state, paymentMethod, type } = trade;
 
     if (isTrader) {
       setModalVisible(true);
@@ -49,7 +49,23 @@ const ActiveTradesScreen = ({ navigation }) => {
     const total = amount + fee;
     const bank = paymentMethod?.bank;
 
-    navigation.navigate("InitiatedTradeScreen", { id, tradeId, total, status: state.label, bank });
+    if (type.label.toLowerCase() === "sell") {
+      navigation.navigate("FiatSellInitiatedScreen", {
+        id,
+        tradeId,
+        total,
+        status: state.label,
+        bank,
+      });
+    } else {
+      navigation.navigate("InitiatedTradeScreen", {
+        id,
+        tradeId,
+        total,
+        status: state.label,
+        bank,
+      });
+    }
   };
 
   const getLabel = (status) => {
@@ -108,6 +124,10 @@ const ActiveTradesScreen = ({ navigation }) => {
                 <View style={styles.detail}>
                   <Text style={styles.title}>Amount:</Text>
                   <Text style={styles.text}>{trade.amount + trade.fee}</Text>
+                </View>
+                <View style={styles.detail}>
+                  <Text style={styles.title}>Type:</Text>
+                  <Text style={styles.text}>{trade.type.label}</Text>
                 </View>
                 <View style={styles.detail}>
                   <Text style={styles.title}>Date initiated:</Text>
